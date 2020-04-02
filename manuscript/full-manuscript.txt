@@ -1,4 +1,4 @@
-**Abstract**
+# Abstract
 
 If you are in any way affiliated with network and virtual infrastructure
 troubleshooting and monitoring, you're going to like this book. If
@@ -34,7 +34,7 @@ Insight and discover hidden gems and secrets throughout the platform.
 This book will take you from beginner to a vRealize Network Insight
 Samurai and we'll have some fun along the way!
 
-Table of Contents {#table-of-contents .TOC-Heading}
+# Table of Contents
 =================
 
 [Introduction -- About the author 6](#introduction-about-the-author)
@@ -331,7 +331,7 @@ Table of Contents {#table-of-contents .TOC-Heading}
 
 [Tables 170](#tables)
 
-Introduction -- About the author
+# Introduction -- About the author
 ================================
 
 As I'm sitting in the airport, waiting for my flight after a team
@@ -397,7 +397,7 @@ Underlines = links
 
 search query = which can be placed in the Network Insight search engine
 
-Foreword by Shiv Agarwal
+# Foreword by Shiv Agarwal
 ========================
 
 *Founder of ArkinNet, currently Vice-President of Network Insight with
@@ -473,7 +473,7 @@ time. I hope the insights captured in his book will trigger in the mind
 of its readers a genuine thought about transforming their network and
 security operations.
 
-Pre-face
+# Pre-face
 ========
 
 This book is for people in jobs or interests related to networking and
@@ -514,8 +514,7 @@ and all the data that is gathered and do all kinds of neat things with
 it like filtering, grouping, sorting and perform other modifiers on it
 (more on that in the chapter []{.underline}
 
-[\
-Using the Search Engine]{.underline}).
+Using the Search Engine
 
 Apart from configuration and operational data, you can also send
 real-time network flow (NetFlow or sFlow) data to Network Insight to map
@@ -547,14 +546,14 @@ documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/index.
 but rather complement it. The specific technical details in this book
 will age, and rightly so.
 
-Introduction to Network Insight
+# Introduction to Network Insight
 ===============================
 
 With all that data the actual use cases for Network Insight are
 limitless, but there are four main use cases that will help you get
 started get an idea on what to use it for.
 
-Use Case -- Application Security Planning (Micro-segmentation)
+## Use Case -- Application Security Planning (Micro-segmentation)
 --------------------------------------------------------------
 
 Security in the data center is evolving and micro-segmentation is a
@@ -587,7 +586,7 @@ height="3.6458333333333335in"}
 []{#_Toc35170157 .anchor}Figure 2 -- Recommended Firewall Rules --
 Grouped by Application
 
-Use-Case -- Getting actual visibility into your environment
+## Use-Case -- Getting actual visibility into your environment
 -----------------------------------------------------------
 
 Besides using NetFlow data to provide insight into the traffic going
@@ -613,7 +612,7 @@ specific network path or using the search engine to look for network
 devices that are misbehaving or showing anomalies, your troubleshooting
 process can be much more efficient and quicker.
 
-Use-Case -- Doing the health check boogy
+## Use-Case -- Doing the health check boogy
 ----------------------------------------
 
 After getting all of this data from your virtual and physical
@@ -636,7 +635,7 @@ height="4.379166666666666in"}
 These health checks are a good way to keep your environment in check and
 configured as per the latest best practices.
 
-Use-Case -- Migrating to the Cloud (or anywhere)
+## Use-Case -- Migrating to the Cloud (or anywhere)
 ------------------------------------------------
 
 These days, it's not surprising to have a cloud-first strategy when it
@@ -685,7 +684,7 @@ retain application performance when doing migrations.
 A deep dive on this topic can be found in the chapter [Application
 Migration Planning]{.underline}.
 
-Use-Case -- Visibility for Containers
+## Use-Case -- Visibility for Containers
 -------------------------------------
 
 According to results of a survey that the Cloud Native Containers
@@ -730,7 +729,7 @@ directly to a running application.
 More on how to do this in the chapter [Application Security
 Planning]{.underline}
 
-vRealize Network Insight versus vRealize Network Insight Cloud (SaaS)
+## vRealize Network Insight versus vRealize Network Insight Cloud (SaaS)
 ---------------------------------------------------------------------
 
 When reading about Network Insight, you might come across two versions
@@ -784,7 +783,7 @@ user and/or application data.
 If you can make use of hosted version, it does save you a bunch of
 management effort by outsourcing that to VMware.
 
- Virtual Cloud Network
+## Virtual Cloud Network
 =====================
 
 Network Insight fits neatly into the Virtual Cloud Network (VCN) vision
@@ -858,7 +857,7 @@ reality. By broadening the insights to everything in and around the
 Virtual Cloud Network, it allows you to execute on this vision, while
 keeping it easy to operate and maintain.
 
-Application Security Planning 
+# Application Security Planning
 =============================
 
 The Security Planner (or micro-segmentation planner) inside Network
@@ -868,7 +867,7 @@ for an infrastructure and results are almost instant. Point it towards
 the infrastructure and turn on network flow collection, and it will
 provide insights in 1 to 2 hours after installation.
 
-Micro-Segmentation?
+## Micro-Segmentation?
 -------------------
 
 If you're never heard of micro-segmentation, you're succeeding in
@@ -1384,7 +1383,7 @@ will make sure they are applied to the services (or namespaces). This
 could be enforced by VMware NSX, or any of the other security tools that
 Kubernetes supports.
 
-#### Export as XML 
+#### Export as XML
 
 Lastly, there's the option to export the rules in an XML format. This
 export function will provide you with a zip bundle that contains all
@@ -3758,7 +3757,7 @@ This enrichment process also checks whether there have been any changes
 to this meta data (i.e. the virtual machine has vMotioned to another
 host) and updates it, if needed.
 
-#### Bandwidth Requirements for Flows 
+#### Bandwidth Requirements for Flows
 
 One of the most frequently asked questions is "how much bandwidth is
 this NetFlow thing going to use?" -- Which is a good question! It can
@@ -4345,7 +4344,7 @@ identifiers for the specific appliance you are currently configuring.
   INFO   When you configure syslog via the web interface, you only have the option to send out syslog over UDP, which is unencrypted. However, if you use the log-insight command to configure syslog to Log Insight; it will be encrypted by default.
   ------ -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Configuring a Proxy 
+Configuring a Proxy
 -------------------
 
 When using the Network Insight as a Service deployment model, there's a
@@ -5069,7 +5068,7 @@ Let's break it down and align it with the query structure.
 
 -   *"order by vCPUs"* is the order by clause (sorting).
 
-Entity Types 
+Entity Types
 ------------
 
 An entity type represents the type of object that we want to search for.
@@ -5132,7 +5131,7 @@ types
 **Note**: The last example will become more clear when we go through the
 [Property]{.underline} explanation.
 
-Meta Entity Types 
+Meta Entity Types
 -----------------
 
 The meta entity type can refer to multiple concrete types. For example,
@@ -5156,13 +5155,13 @@ you to search for firewall rule and let the underlaying tool figure out
 on which actual platform (whether it be NSX, a physical firewall, or the
 cloud (and then which cloud)) you need to be.
 
-Entity Property 
+Entity Property
 ---------------
 
 Properties on entities are the details you're typically interested in.
 These properties can be grouped into the following categories:
 
-### Configuration Property 
+### Configuration Property
 
 Configuration properties of entity is something that typically does not
 change that often. It would need an interaction on the infrastructure in
@@ -5349,7 +5348,7 @@ get specific information from your environment, dependent on that you
 know what you are looking for. This can be a specific object
 (troubleshooting a switch or VM), or specific metrics.
 
-### Count 
+### Count
 
 Mostly used when building pinboards, the Count projection can return the
 sum the number of objects in a search query result. It can be used to
@@ -5376,7 +5375,7 @@ Considering the result will be a number, these search queries are
 perfect to put on an auto refreshing pinboard that is glued to the wall
 of your office.
 
-### List 
+### List
 
 This is another interesting one. The list operator should be used
 whenever the filter condition cannot be applied or if it is related to
