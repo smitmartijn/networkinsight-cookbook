@@ -10,10 +10,10 @@ The hard part about micro-segmentation is where to get started. As a security pe
 Using the network flow data and workload information that is collected by Network Insight, it provides you with a jumping board to accelerate any micro-segmentation implementation. You’ll get clear views into the communication between workloads and applications and you have the ability to export recommended security policies that can be applied to VMware NSX.
 
 {caption: "Global numbers of Network Traffic movement"}
-![Global numbers of Network Traffic movement](media/image1.png)
+![Global numbers of Network Traffic movement](images/image1.png)
 
 {caption: "Recommended Firewall Rules Grouped by Application"}
-![Recommended Firewall Rules Grouped by Application](media/image2.png)
+![Recommended Firewall Rules Grouped by Application](images/image2.png)
 
 ## Use-Case -- Getting actual visibility into your environment
 
@@ -22,7 +22,7 @@ Besides using NetFlow data to provide insight into the traffic going through you
 When it comes to troubleshooting, that is where the gold is. Network Insight provides a holistic view of your entire environment, which means you can quickly and easy find root-causes to any issues you’re having.
 
 {caption: "Topology chart: gluing physical and virtual together"}
-![Topology chart: gluing physical and virtual together](./media/image3.png)
+![Topology chart: gluing physical and virtual together](./images/image3.png)
 
 Using the network topology maps, you can quickly determine issues on a specific network path or using the search engine to look for network devices that are misbehaving or showing anomalies, your troubleshooting process can be much more efficient and quicker.
 
@@ -33,7 +33,7 @@ After getting all of this data from your virtual and physical environment, Netwo
 These problems will be categorized into severities: Critical, Moderate, Warning & Info and example might be that it has discovered an MTU mismatch (important when using an overlay) on the physical networking equipment or if high availability on an NSX Edge is not enabled and you’re at risk for downtime when it needs a fail over.
 
 {caption: "Health Check and Health Alerts"}
-![Health Check and Health Alerts](media/image4.png)
+![Health Check and Health Alerts](images/image4.png)
 
 These health checks are a good way to keep your environment in check and configured as per the latest best practices.
 
@@ -59,7 +59,7 @@ A deep dive on this topic can be found in the chapter Application Migration Plan
 According to results of a survey that the Cloud Native Containers Foundation did in 2018, the main concerns around moving containerized applications into production (and keeping them there & healthy) is around **Complexity**, **Monitoring**, **Networking** and **Security**.
 
 {caption: "CNCF 2018 Survey results"}
-![CNCF 2018 Survey results](media/image5.tiff)
+![CNCF 2018 Survey results](images/image5.tiff)
 
 VMware has seen these challenges and is taking them on in several ways. One of those ways is through NSX Data Center for Containers, where network virtualization is delivering simplicity, flexibility and security up to the container level. Operations engineers can use the same security controls over containers as they can over VMs and make sure the applications are put into production safely -- whether the application is hosted on-premises or in the public cloud. That's **Networking** and **Security** covered.
 
@@ -96,7 +96,7 @@ Networking itself is not new to VMware. They have been doing virtual networking 
 Since then, NSX has turned into a platform for networking & security that extends throughout the entire enterprise network. With NSX Data Center providing services for applications hosted in the data center, NSX Cloud that integrates natively into public clouds to allow the same security policies everywhere (instead of point-solutions per cloud), NSX SD-WAN by VeloCloud to bridge the gap between branch locations and the data centers and clouds, AppDefense for zero trust application security on the operating system level, to NSX Hybrid Connect (HCX) that makes it possible to migrate workloads between the different places where these workloads can live.
 
 {caption: "VMware NSX Portfolio"}
-![VMware NSX Portfolio](media/image6.tiff)
+![VMware NSX Portfolio](images/image6.tiff)
 
 This translates to uniform networking & security policies and services that can be delivered anyplace that can run software (so, everywhere). As application workloads keep spreading out from the data center towards more locations to be either close to their data and operating spaces (IoT is really becoming a thing), or locations that have specialized services (AI/ML as a Server, Function as a Service, things like that), we can keep the same network & security policies in place, we can deliver the required networking services on all locations, and we can do that without having to learn the platform specific networking components.
 
@@ -107,6 +107,6 @@ Network Insight is at the center of these developments, integrating tightly with
 Network Insight is used for planning purposes to determine what dependencies there are in order to migrate applications between locations and determine what impact such an operation has on network performance. The same insights can be used to properly plan security policies for the applications living inside the network, making sure you can secure your applications -- where ever they might go.
 
 {caption: "VMware Virtual Cloud Network"}
-![VMware Virtual Cloud Network](media/image7.tiff)
+![VMware Virtual Cloud Network](images/image7.tiff)
 
 Network Insight is the key to making the Virtual Cloud Network vision a reality. By broadening the insights to everything in and around the Virtual Cloud Network, it allows you to execute on this vision, while keeping it easy to operate and maintain.
