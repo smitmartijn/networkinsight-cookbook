@@ -59,7 +59,7 @@ A deep dive on this topic can be found in the chapter Application Migration Plan
 According to results of a survey that the Cloud Native Containers Foundation did in 2018, the main concerns around moving containerized applications into production (and keeping them there & healthy) is around **Complexity**, **Monitoring**, **Networking** and **Security**.
 
 {caption: "CNCF 2018 Survey results"}
-![CNCF 2018 Survey results](images/image5.tiff)
+![CNCF 2018 Survey results](images/image5.png)
 
 VMware has seen these challenges and is taking them on in several ways. One of those ways is through NSX Data Center for Containers, where network virtualization is delivering simplicity, flexibility and security up to the container level. Operations engineers can use the same security controls over containers as they can over VMs and make sure the applications are put into production safely -- whether the application is hosted on-premises or in the public cloud. That's **Networking** and **Security** covered.
 
@@ -96,7 +96,7 @@ Networking itself is not new to VMware. They have been doing virtual networking 
 Since then, NSX has turned into a platform for networking & security that extends throughout the entire enterprise network. With NSX Data Center providing services for applications hosted in the data center, NSX Cloud that integrates natively into public clouds to allow the same security policies everywhere (instead of point-solutions per cloud), NSX SD-WAN by VeloCloud to bridge the gap between branch locations and the data centers and clouds, AppDefense for zero trust application security on the operating system level, to NSX Hybrid Connect (HCX) that makes it possible to migrate workloads between the different places where these workloads can live.
 
 {caption: "VMware NSX Portfolio"}
-![VMware NSX Portfolio](images/image6.tiff)
+![VMware NSX Portfolio](images/image6.png)
 
 This translates to uniform networking & security policies and services that can be delivered anyplace that can run software (so, everywhere). As application workloads keep spreading out from the data center towards more locations to be either close to their data and operating spaces (IoT is really becoming a thing), or locations that have specialized services (AI/ML as a Server, Function as a Service, things like that), we can keep the same network & security policies in place, we can deliver the required networking services on all locations, and we can do that without having to learn the platform specific networking components.
 
@@ -107,6 +107,6 @@ Network Insight is at the center of these developments, integrating tightly with
 Network Insight is used for planning purposes to determine what dependencies there are in order to migrate applications between locations and determine what impact such an operation has on network performance. The same insights can be used to properly plan security policies for the applications living inside the network, making sure you can secure your applications -- where ever they might go.
 
 {caption: "VMware Virtual Cloud Network"}
-![VMware Virtual Cloud Network](images/image7.tiff)
+![VMware Virtual Cloud Network](images/image7.png)
 
 Network Insight is the key to making the Virtual Cloud Network vision a reality. By broadening the insights to everything in and around the Virtual Cloud Network, it allows you to execute on this vision, while keeping it easy to operate and maintain.
