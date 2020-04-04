@@ -1,2 +1,3 @@
 ch-introduction-to-vrni.md
+ch-application-security-planning.md
 full-manuscript.txt
