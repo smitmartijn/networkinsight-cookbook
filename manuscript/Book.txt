@@ -5,4 +5,5 @@ ch-public-cloud.md
 ch-architecture.md
 ch-cli.md
 ch-analytics.md
+ch-search-engine.md
 full-manuscript.txt
