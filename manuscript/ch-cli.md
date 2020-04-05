@@ -13,7 +13,7 @@ Then there's the support username. This one brings you straight to the underlayi
 I'll be focusing on the vRNI CLI functionality, which has a fair amount of commands:
 
 {caption: "Command line list of commands"}
-![](./media/image62.png)
+![](images/image62.png)
 
 While the same commands exist on both of the appliances, there are some specific commands that only apply to the Collector. Run those on the Platform and it will simply output that it will only work on the Collector. For now, let's focus on the commands that will work on both.
 
@@ -24,14 +24,14 @@ When something's wrong; it's DNS. Or NTP. Always. But just to be sure all bases 
 If the Network Insight appliance is misbehaving; the web interface is not responding, connections are timing out, the Platform is not seeing a Collector and is saying it's offline; any and all issues that have to do with connectivity or reachability, here's where you start.
 
 {caption: "Restarting services via CLI"}
-![](./media/image63.png)
+![](images/image63.png)
 
 Start with **show-service-status**, which will give you an overview of all critical services and their respective status. If a service is not running, you can get more information on the reason why it's not running by running **show-service-status \--debug**. This command will reach out to the service and do a few extra checks on the service and its log files.
 
 Attempt to correct a not running service, by using **services start \<service-name\>** and see if the service stays online. If it does not, move on to checking the networking services of the appliance:
 
 {caption: "CLI Output for show-connectivity-status"}
-![](./media/image65.png)
+![](images/image65.png)
 
 Running the show-connectivity-status command will take a few seconds, but it will save you time in the end because it combines a few other commands into a single command. It will show you the networking configuration, so you can check whether it's configured properly, NTP status (and if it's in sync or not), and it will test connectivity to the online upgrade and support services in VMwares' cloud. Basically, the entire networking stack is tested using this command.
 
@@ -46,7 +46,7 @@ When the network settings and NTP checks out, it's time to dive into the logs. T
 There are 2 relevant components you can look at, whilst doing your own troubleshooting: **saasservice** and **restapilayer**. These 2 services are pretty much the most important services in the Platform appliance. All data is received via the **saasservice** (the Collector sends updates via it) and the **restapilayer** is the internal API service that provides the web interface with data. If you're having issues with data collection or presentation, this is where I would start.
 
 {caption: "Listing available log components and following the saasservice"}
-![](./media/image66.png)
+![](images/image66.png)
 
 Using **log-trace list components**, a list of available components is presented, and you can use these components to **grep** from or **follow**. In the above screenshot, you can see the list of components on the Platform appliance and the beginning of a **follow** on the **saasservice** components. For those who know their way around Linux/Unix; **follow** is essentially a **tail -f** alias.
 
@@ -55,7 +55,7 @@ You can see a bunch of errors in the above screenshot, related to a rogue Collec
 If you're looking errors that might have occurred at a specific date and time, you can either open up the right log file using **log-trace display** and look for errors manually; or you can search the logs using **log-trace grep**:
 
 {caption: "Searching in logs"}
-![](./media/image67.png)
+![](images/image67.png)
 
 If you're still lost and have not found an indicator for what's causing your issue; it is now time to open a VMware support case and provide them with the support bundles and open up the support tunnel for them to have a looksie.
 
@@ -64,7 +64,7 @@ If you're still lost and have not found an indicator for what's causing your iss
 All Network Insight appliances have a vRealize Log Insight agent installed, which will forward logs to a syslog server. However, it's not enabled or configured by default. I highly recommend enabling syslog on all appliances so there's a central place to look at the logs. Both of the Network Insight appliance types do keep a history of logs, but they get rotated away. Busy systems will only keep a few days' worth of logs. When all logs are forwarded to a central log repository; you can decide how long to keep them.
 
 {caption: "Configuring the vRealize Log Insight agent"}
-![](./media/image68.png)
+![](images/image68.png)
 
 The above command is pretty straightforward; supply the IP address or fully qualified domain name of the Log Insight instance, provide an optional port number if the CFAPI protocol is not running on its default port (9543) and provide optional tags.
 
@@ -79,7 +79,7 @@ These tags are interesting if you would like to pass on extra information in the
 When using the Network Insight as a Service deployment model, there's a chance that the Collector, that is deployed inside your data center, has to connect out to the Network Insight service via a web proxy. This is commonly done for security reasons, where outgoing HTTP and HTTPS connections need to be screened and secured by this proxy service. As the Platform has outgoing connections towards the VMware cloud to check for updates and initiate a support tunnel (which goes over HTTPS) on demand, the Platform could also require a web proxy. In any case, the web proxy configuration is a per appliance configuration (it needs to be done on each appliance separately) and only available via the CLI command **set-web-proxy**.
 
 {caption: "Enabling web proxy"}
-![](./media/image69.png)
+![](images/image69.png)
 
   ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   INFO   In the on-premises deployment, communication between the Collector and Platform will not go through the web proxy. Only connections to the upgrade and support tunnel services will be proxied. In the Network Insight as a Service deployment, communication between the Collector and Platform will go through the web proxy (as the Platform in the SaaS deployment is external).
@@ -106,7 +106,7 @@ A Network Insight cluster can be moved between networks and change IP addresses,
 After executing these steps on all Platform nodes in the cluster, it will continue normal operation. If you have a bigger cluster, such as with 5 or 10 nodes, the same steps apply; just multiply by the number of nodes are there.
 
 {caption: "Changing the IP address of a clustered node"}
-![](./media/image70.png)
+![](images/image70.png)
 
 In above screenshot, you can see an example where a Platform was moved from IP address **10.79.41.179** to **10.79.41.180**. This command was executed on a different Platform and after the changed Platform had its IP address changed via the **change-network-settings** command.
 
@@ -119,7 +119,7 @@ In above screenshot, you can see an example where a Platform was moved from IP a
 There are only 2 commands that are specifically relevant to the Collector appliance: **set-proxy-shared-secret** and **vrni-proxy**. It can happen that you have to move a collector between different Platform appliances, or if the Platform appliance went belly up for some reason (got deleted and needed to be redeployed). You can move an existing collector that had a previous relation to a Platform, to another Platform using these commands:
 
 {caption: "Moving a Collector between Platforms"}
-![](./media/image71.png)
+![](images/image71.png)
 
 First, generate a shared secret by adding a new Collector VM using the web interface, under **Settings** and **Install and Support** page. Copy and paste the newly generated shared secret to the set-proxy-shared-secret command to that it will be trusted by the new Platform. Then update the IP address or fully qualified domain name of the Platform that this Collector this be reporting to using **vrni-proxy set-platform \--ip-or-fqdn \<ip/fqdn\>**. After a few minutes, you will see the Collector show up in the web interface and it will be ready to use.
 
