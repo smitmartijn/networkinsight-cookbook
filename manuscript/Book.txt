@@ -3,4 +3,5 @@ ch-application-security-planning.md
 ch-application-migration-planning.md
 ch-public-cloud.md
 ch-architecture.md
+ch-cli.md
 full-manuscript.txt
