@@ -2,4 +2,5 @@ ch-introduction-to-vrni.md
 ch-application-security-planning.md
 ch-application-migration-planning.md
 ch-public-cloud.md
+ch-architecture.md
 full-manuscript.txt
