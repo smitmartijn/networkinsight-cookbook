@@ -1,3 +1,4 @@
 ch-introduction-to-vrni.md
 ch-application-security-planning.md
+ch-application-migration-planning.md
 full-manuscript.txt
