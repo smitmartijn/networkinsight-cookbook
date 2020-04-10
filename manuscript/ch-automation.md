@@ -46,9 +46,7 @@ Officially (as not all APIs adhere to this), REST APIs should use JavaScript Obj
 
 This book isn't about teaching you about these standards and technologies and for the rest of this chapter, I'm going to assume you have a basic grasp of REST calls and JSON. I'm also not going through all API calls and functionalities but will give you enough information to get started. Complement this chapter by reading the vRealize Network Insight API Guide.
 
-  ------ -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   Currently, Network Insight rate limits the amount of API calls per second to 20. When doing API calls, rate limit your own script to not overload the API. You will be throttled, and the API will start giving out error code **429**.
-  ------ -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> Currently, Network Insight rate limits the amount of API calls per second to 20. When doing API calls, rate limit your own script to not overload the API. You will be throttled, and the API will start giving out error code **429**.
 
 ### API Explorer
 
@@ -288,9 +286,7 @@ This blueprint design relates directly to an application construct within Networ
 
 Inside vRA, there's an Event Broker which you can use to kick off workflows during specific stages of a deployment. You can create a subscription on the event that signals that a deployment is done, and all virtual machines have been deployed. This subscription also indicates which vRO workflow should be started.
 
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   The vRO workflow and a step by step guidance of how to install it, can be [found on my blog](http://lostdomain.org/2018/11/08/integrating-vrealize-automation-with-network-insight/). The actual code is not the point of this chapter; I'm giving you an example of how it can work with vRA, but this can be applied with any and all infrastructure automation & orchestration systems.
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> The vRO workflow and a step by step guidance of how to install it, can be [found on my blog](http://lostdomain.org/2018/11/08/integrating-vrealize-automation-with-network-insight/). The actual code is not the point of this chapter; I'm giving you an example of how it can work with vRA, but this can be applied with any and all infrastructure automation & orchestration systems.
 
 Here's a graphical overview of how the process works, so you can translate it to your own system.
 

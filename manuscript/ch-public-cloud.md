@@ -61,9 +61,7 @@ There are not many. Firstly, an account with read access on the account, EC2 ins
 
 Secondly, the collector appliance which will poll AWS, will need to be able to access the AWS API over the internet (so, open up the firewall). If you're using vRealize Network Insight Cloud, the connection will go from the VMware Cloud to the AWS API, no local connections needed.
 
-  ------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   When adding an AWS account for Network Insight, make sure it has programmatic access. You'll need the generated access key and secret access key, to add it to Network Insight.
-  ------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> When adding an AWS account for Network Insight, make sure it has programmatic access. You'll need the generated access key and secret access key, to add it to Network Insight.
 
 **Enable VPC Flow Logs**
 
@@ -89,9 +87,7 @@ During the process of adding the AWS master access as a data source, you can spe
 
 The above [Figure 39]{.underline} depicts the screen that allows you to add an AWS account. Select a collector appliance that will connect to the AWS API (over internet), supply the access key and secret access key, and hit the Validate button. The collector will now go out to the AWS API and validate the credentials. If it succeeds, the rest of the options will be made available.
 
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   vRealize Network Insight Cloud has a shared collector for public cloud discovery. You don't have to set up a collector to add a public cloud, meaning you don't have to select the collector in the above process.
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> vRealize Network Insight Cloud has a shared collector for public cloud discovery. You don't have to set up a collector to add a public cloud, meaning you don't have to select the collector in the above process.
 
 If you're adding a master account and would like to collect all linked accounts, tick the first checkbox.
 
@@ -143,9 +139,7 @@ You can request paths between EC2 instances, or between an EC2 instance and a vS
 
 The above Figure 43 shows a network topology coming from an on-premises vSphere VM behind VMware NSX for vSphere, with a NSX Edge connecting with a layer-3 VPN to a Virtual Private Gateway on AWS.
 
-  ------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   Drawing network topologies into and from AWS is currently only supported with layer-3 VPN tunnels, except for connections going to the internet (as that uses the AWS internet gateway).
-  ------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> Drawing network topologies into and from AWS is currently only supported with layer-3 VPN tunnels, except for connections going to the internet (as that uses the AWS internet gateway).
 
 Because AWS is pretty restrictive in how you configure the network components that might show up in the network topology, there's not a whole lot to keep in mind. Just make sure connectivity is actually online, and Network Insight will be able to discover the topology. If a path does not show, it is most likely because there's an actual problem on the connectivity and Network Insight will indicate where that problem might be.
 
@@ -214,9 +208,7 @@ All IDs will look something like this: *77fb6532-da95-4a50-b00f-190ae836b2d8*
 
 Just like with AWS; the collector appliance which is selected, needs internet connectivity to go to the Azure API and collect data. Make sure the firewall(s) are opened up to allow it to connect. When using vRealize Network Insight Cloud, the collector will be the cloud-based collector -- in which case you do not have to deploy one yourself.
 
-  ------ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   When using vRealize Network Insight Cloud, it is only supported to use the shared collector with public clouds. In theory you can deploy a collector and configure AWS or Azure on that collector, but keep in mind that that is not supported.
-  ------ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> When using vRealize Network Insight Cloud, it is only supported to use the shared collector with public clouds. In theory you can deploy a collector and configure AWS or Azure on that collector, but keep in mind that that is not supported.
 
 ### Inventory Collection
 
@@ -260,9 +252,7 @@ Inside Azure, there are two kinds of security groups; Network Security Groups (N
 
 In some interviews with organizations that are using Azure constructs, it seems as though the way to go is: use application security groups to allow everything the application itself needs (i.e. API access to an internet service, incoming web traffic to the web servers, etc.), and use network security groups to set global security rules (i.e. everything is allowed to use DNS, to be contacted by an internal IP range, etc.), and internal application micro-segmentation, if needed.
 
-  ------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   The effective firewall rules for an Azure VM can be a combination of Network- and applied Security Rules to Application Security Groups. It's wise to create a security rule design and designate rule priority ranges to NSGs and ASGs.
-  ------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> The effective firewall rules for an Azure VM can be a combination of Network- and applied Security Rules to Application Security Groups. It's wise to create a security rule design and designate rule priority ranges to NSGs and ASGs.
 
 Although Azure does a good job at presenting the applicable firewall rules on the VM dashboards, it hard to find out what changed at a certain time. The time line functionality in Network Insight gives all Azure the same version history as any other object. This allows you to get notifications when security groups change, and to look at a time line of changes when you're troubleshooting a connectivity issue.
 
@@ -279,9 +269,7 @@ The fact that it's almost the same as an on-premises SDDC, makes it behave the e
 
 SDDC Type can be used in searches and will be displayed on dashboards. For example, to get a list of all VMs that are running on VMC, execute this search query: VMs where SDDC Type = VMC
 
-  ------ ---------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   Multiple VMware Cloud on AWS SDDCs can be added to Network Insight, converging all inventory, network flows, and other metrics into a single interface.
-  ------ ---------------------------------------------------------------------------------------------------------------------------------------------------------
+I> Multiple VMware Cloud on AWS SDDCs can be added to Network Insight, converging all inventory, network flows, and other metrics into a single interface.
 
 Everything else within Network Insight is exactly the same as an on-premises SDDC. There's one exception, which is how you add VMC as a data source. Let's take a look in the next chapter.
 
@@ -323,9 +311,7 @@ In any case, you want to make sure the NetFlow does not go over the internet and
 
 While retrieving the networking configuration from NSX inside VMC, Network Insight also constructs a view of the network topologies that are available within AWS, and also any VPN connectivity that connects back to an on-premises (or any of the other platforms that is supported by Network Insight) infrastructure.
 
-  ------ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   Direct Connect is currently not supported as of version 5.0. Network Insight will get all the NSX networking & security configuration but will not be able to draw a network topology from VMC to on-premises via a Direct Connect.
-  ------ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> Direct Connect is currently not supported as of version 5.0. Network Insight will get all the NSX networking & security configuration but will not be able to draw a network topology from VMC to on-premises via a Direct Connect.
 
 VMware Cloud on AWS is hosted on AWS (duh), meaning we do not have full access to the actual hardware network appliances that are being used in their infrastructure. Network Insight will not be able to pull data from appliances like the top-of-rack switch, or core routers that connect your SDDC to the internet. However, everything inside the SDDC is fair game.
 

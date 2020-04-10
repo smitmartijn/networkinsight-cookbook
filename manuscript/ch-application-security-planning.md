@@ -57,18 +57,7 @@ IPFIX is a spinoff from NetFlow (version 10) where devices can put custom inform
 
 sFlow is short for sampled-flow, which means it stores 1 out of *N* packets. Standards for *N* are in the range of 200, 500 or even 2000. The higher you go, the lower the completeness will be of the incoming data. This is done to ensure scalability of the protocol and to make sure the network device is not overloaded. Most devices that only support sFlow, don't have a lot of processing power for anything other than forwarding traffic.
 
-+------+--------------------------------------------------------------+
-| INFO | There's much more to these protocols that I'll share here.   |
-|      | If you want to get a deep dive (including what the headers   |
-|      | look like), their Wikipedia pages are a good start:          |
-|      |                                                              |
-|      | NetFlow: <https://en.wikipedia.org/wiki/NetFlow>             |
-|      |                                                              |
-|      | IPFIX:                                                       |
-|      | <https://en.wikipedia.org/wiki/IP_Flow_Information_Export>   |
-|      |                                                              |
-|      | sFlow: <https://en.wikipedia.org/wiki/SFlow>                 |
-+------+--------------------------------------------------------------+
+I> There's much more to these protocols that I'll share here. If you want to get a deep dive (including what the headers look like), their Wikipedia pages are a good start: [NetFlow](https://en.wikipedia.org/wiki/NetFlow), [IPFIX](https://en.wikipedia.org/wiki/IP_Flow_Information_Export), and [sFlow](https://en.wikipedia.org/wiki/SFlow)
 
 An important note is that you cannot use sampling if you want to capture the right flows. Sampling means that just a sample of the data is reported, for example 1 out of 10 flows. Considering Network Insight will recommend firewall rules to be applied on an application, you don't want to have 10% of the required firewall rules, you want 100%. If your network device cannot do non-sampled flows, find another way to get full visibility.
 
@@ -96,9 +85,7 @@ This has to be a separate Collector VM and cannot be a Collector where other dat
 
 Ingesting and processing network flows is the most resource intensive a Collector can do.
 
-  ------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   In order to receive NetFlow and/or sFlow from physical devices (not vCenter or NSX), you need a dedicated Collector appliance for that specific purpose. You will only be able to add a flow data source on a Collector that's not already used by other data sources.
-  ------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> In order to receive NetFlow and/or sFlow from physical devices (not vCenter or NSX), you need a dedicated Collector appliance for that specific purpose. You will only be able to add a flow data source on a Collector that's not already used by other data sources.
 
 ## Analyzing Network Flows
 
@@ -136,15 +123,11 @@ You will also see a "Flow Type" select box, where the integration with VMware NS
 
 This means you can easily see any unprotected flows, which are not protected by any firewall rules, and create sort of a 'to-do' diagram of network flows you still need to micro-segment.
 
-  ------ ------------------------------------------------------------------------------------------------------------
-  INFO   In order to see protected, unprotected and blocked flows, you need to enable IPFIX on the NSX Data Source.
-  ------ ------------------------------------------------------------------------------------------------------------
+I> In order to see protected, unprotected and blocked flows, you need to enable IPFIX on the NSX Data Source.
 
 At the time of writing Network Insight does not run intelligence over the discovered firewall rules from either NSX or other virtual or physical firewall to determine whether a network flow 'could' hit a specific firewall. The flow output of NSX is the only that contains an actual firewall rule ID which the flow is hitting, making it definitive that it's using that specified rule. For other network flow sources, Network Insight would have to deduce which firewall rule would overlap with which firewall rule to say, 'it *might* be hitting rule x' as there's no definitive proof it's hitting those rules. The Network Insight has currently opted for certainty in this feature.
 
-  --------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  PRO-TIP   When working to micro-segment your environment, use the unprotected flow type to see your progress and use it to export the missing recommended firewall rules that you need to finish securing your applications.
-  --------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+T> When working to micro-segment your environment, use the unprotected flow type to see your progress and use it to export the missing recommended firewall rules that you need to finish securing your applications.
 
 ## Recommended Firewall Rules
 
@@ -187,9 +170,7 @@ When the environment gets a little bigger and the firewall rules grow, this meth
 
 At the top right of every donut or table that shows the network flow data, is a menu. Three dots represent that menu and can be opened to reveal a few options. Exporting options include exporting as comma separated values (CSV), extensible markup language (XML) and YAML (YAML Ain't Markup Language).
 
-  ------ -----------------------------------------------------------------------------------------------------------------------------------------
-  INFO   Currently, only exporting of recommended firewall rules is supported when you group by application, application tier or security group.
-  ------ -----------------------------------------------------------------------------------------------------------------------------------------
+I> Currently, only exporting of recommended firewall rules is supported when you group by application, application tier or security group.
 
 I'll go through each option below.
 
@@ -434,18 +415,8 @@ In the example above I've selected the first group as the match, and you can see
 
 The Pattern Builder is there to make your life a bit easier. I know what you're thinking though; "You saved this for \*after\* the crash course on complicated regular expressions?!?". Why, yes! And on purpose. You should know what's going on with these regular expressions, even though if you're using the Pattern Builder in the end; understand what the result means. There's a lot of other places where knowledge on regular expressions will be of use.
 
-+------+--------------------------------------------------------------+
-| INFO | Starting vRealize Network Insight 5.1, you can use different |
-|      | metadata as the discovery method for the application name    |
-|      | and tier name. For example, you can extract the application  |
-|      | name from a workload name and use the content of a tag as    |
-|      | the tier name.                                               |
-|      |                                                              |
-|      | Also, in version 5.1, is the ability to use **Security       |
-|      | Groups** and **Security Tags** the same way as the naming    |
-|      | conventions; extracting parts of the security group or tag   |
-|      | to use as an application and/or tier name.                   |
-+------+--------------------------------------------------------------+
+I> Starting vRealize Network Insight 5.1, you can use different metadata as the discovery method for the application name and tier name. For example, you can extract the application name from a workload name and use the content of a tag as the tier name.
+I> Also, in version 5.1, is the ability to use **Security Groups** and **Security Tags** the same way as the naming conventions; extracting parts of the security group or tag to use as an application and/or tier name.
 
 ### CMDB (ServiceNow)
 

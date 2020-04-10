@@ -31,9 +31,7 @@ It starts by configuring an outlier configuration that has all the aspects of th
 
 Grouping (2 & 3) is done based on application tiers or security groups. The security groups can be NSX-v, NSX-T, VMware Cloud on AWS, or native AWS security groups; anything that has the security group concept. While security groups can be used to indicate tiers in an application, they are typically used for wildly different purposes as well. Security groups can be used to segment tenants or departments from each other, or segmentation between different applications, and so on. That's why I prefer the use of application tiers for outlier groups. Your application constructs should already exist inside Network Insight for the application dashboard, security planning, etc.
 
-  ------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   Make sure a group with a minimum of 3 VMs or physical IP addresses is selected, as that is the minimum for an outlier group. It's not possible to have good results with outlier detection on just 2 members.
-  ------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> Make sure a group with a minimum of 3 VMs or physical IP addresses is selected, as that is the minimum for an outlier group. It's not possible to have good results with outlier detection on just 2 members.
 
 Outlier detection uses the data from network flows, where traffic rate, number of packets, or the number of flow sessions can be used to base the outliers on (4). Take note that the metrics on **Total Flow Traffic** and **Network Traffic Rate** are based on the same data; the only difference is that total flow traffic is the total amount of bytes and the network traffic rate is the average (basically, the bandwidth graph) traffic rate. The other options are self-explanatory.
 
@@ -43,9 +41,7 @@ Apart from the traffic direction, the type of traffic (6) is also an option. Onl
 
 At number 7, we have the option to limit outlier detection on a specific network port. By default, every network port that is detected coming in and going out from the members are used for detection. But if you're only interested in web traffic or another application that uses a specific port; you're free to select these. Fun fact: the configuration page will detect which network ports are in use for the group you've selected and will show them.
 
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   Another reason for selecting the ports, is that an outlier group currently supports a maximum of 20 ports to monitor simultaneously. A warning will trigger when there are over 20 ports detected when 'All Ports'
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> Another reason for selecting the ports, is that an outlier group currently supports a maximum of 20 ports to monitor simultaneously. A warning will trigger when there are over 20 ports detected when 'All Ports'
 
 Lastly, the sensitivity (8) can be selected: low, medium or high. The high sensitivity will trigger more quickly, and the low sensitivity will trigger less quickly.
 
@@ -104,9 +100,7 @@ Besides the VM search, the scope can also be set to Flows. This allows you to se
 
 Lastly, the scope can also be set to an **Application**. These are the applications that explained in the chapter [Application Constructs]{.underline}.
 
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   Typically, the Application scope setting is used to monitor workloads running specific applications. The Flow scope setting is mostly used in cases where specific network traffic has to be monitored (like internet traffic or inter-data center traffic).
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> Typically, the Application scope setting is used to monitor workloads running specific applications. The Flow scope setting is mostly used in cases where specific network traffic has to be monitored (like internet traffic or inter-data center traffic).
 
 While select the scope, there's a handy reference (2) to see how many VMs and/or Physical IP addresses are seen in this scope. Physical IPs can show up in applications and or flow searches, VMs will show up in any of the scope options (if applicable, of course).
 
@@ -145,9 +139,7 @@ Moving on to the options that determine when the threshold will be breached. Fir
 
 Selecting **any value** will simply monitor the traffic and create an alert when it crosses the threshold. If there are a lot of spikes in the network, this could lead to false positives. That's why there's also **the average** option, which can take the last **30** or **60** minutes into account when monitoring, grab the average of that time and use that average as the threshold. This smoothens out the spikes and reduces alerts.
 
-  ------ -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   When selecting **any value** (and not the average of 30/60 minutes), Network Insight will take the average of max value of the last 5 minutes to trigger upon. To be specific, **max network traffic** rate and **total network traffic** take the max value of the last 5 minutes. The rest of the metrics take the average value of the last 5 minutes.
-  ------ -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> When selecting **any value** (and not the average of 30/60 minutes), Network Insight will take the average of max value of the last 5 minutes to trigger upon. To be specific, **max network traffic** rate and **total network traffic** take the max value of the last 5 minutes. The rest of the metrics take the average value of the last 5 minutes.
 
 Then, select whether you want to create the alert when the metric **exceeds** the threshold upper bound, or if it **drops below** the lower bound, or **is outside the range** of a lower and upper bound, or **deviates from past behavior**. The upper and lower bounds are something you'll be able to configure at the bottom of the condition and the fields will change, depending on which option is selected. When **deviates from past behavior** is selected, the threshold becomes dynamic and Network Insight will figure out the right threshold values. More on that later.
 

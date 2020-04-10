@@ -70,9 +70,7 @@ The above command is pretty straightforward; supply the IP address or fully qual
 
 These tags are interesting if you would like to pass on extra information in the log messages. They will be recognized by Log Insight and you will be able to search and filter on, think of them as identifiers for the specific appliance you are currently configuring.
 
-  ------ -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   When you configure syslog via the web interface, you only have the option to send out syslog over UDP, which is unencrypted. However, if you use the log-insight command to configure syslog to Log Insight; it will be encrypted by default.
-  ------ -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> When you configure syslog via the web interface, you only have the option to send out syslog over UDP, which is unencrypted. However, if you use the log-insight command to configure syslog to Log Insight; it will be encrypted by default.
 
 ## Configuring a Proxy
 
@@ -81,9 +79,7 @@ When using the Network Insight as a Service deployment model, there's a chance t
 {caption: "Enabling web proxy"}
 ![](images/image69.png)
 
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   In the on-premises deployment, communication between the Collector and Platform will not go through the web proxy. Only connections to the upgrade and support tunnel services will be proxied. In the Network Insight as a Service deployment, communication between the Collector and Platform will go through the web proxy (as the Platform in the SaaS deployment is external).
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> In the on-premises deployment, communication between the Collector and Platform will not go through the web proxy. Only connections to the upgrade and support tunnel services will be proxied. In the Network Insight as a Service deployment, communication between the Collector and Platform will go through the web proxy (as the Platform in the SaaS deployment is external).
 
 ## Platform Specific Commands
 
@@ -110,9 +106,7 @@ After executing these steps on all Platform nodes in the cluster, it will contin
 
 In above screenshot, you can see an example where a Platform was moved from IP address **10.79.41.179** to **10.79.41.180**. This command was executed on a different Platform and after the changed Platform had its IP address changed via the **change-network-settings** command.
 
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   Warning: the update-IP-change command does not check whether the new IP address is actually valid and the right Platform appliance. Make sure you enter the correct new IP address and that it is up and running before you execute!
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> Warning: the update-IP-change command does not check whether the new IP address is actually valid and the right Platform appliance. Make sure you enter the correct new IP address and that it is up and running before you execute!
 
 ## Collector Specific Commands
 

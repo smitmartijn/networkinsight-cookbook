@@ -79,9 +79,7 @@ You can strategically place the Collectors as well. It does a couple of things t
 
 Networking management is usually as locked down as possible to protect the management interfaces of your network devices. It makes sense to provide access to Network Insight for people that do not have any business connecting directly to networking devices, so you would want to segment those. In this instance, you would put a Collector inside the networking management segment and only permit it to connect to the Platform. The Collector would connect directly to the Data Sources inside the secure segment and you don't have to allow incoming communication from outside the secure segment.
 
-  ------ -------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   You can have multiple Collectors reporting up to a single Platform. Data Sources cannot be shared and have a one-on-one mapping to a Collector.
-  ------ -------------------------------------------------------------------------------------------------------------------------------------------------
+I> You can have multiple Collectors reporting up to a single Platform. Data Sources cannot be shared and have a one-on-one mapping to a Collector.
 
 ### Collector Services
 
@@ -119,9 +117,7 @@ Attached to each flow, the processor stores a reporter value and any NSX firewal
 
 The reporter IP address is stored so that you can relate to where the flows come from, which would typically be the IP of the vCenter (and ESXi hosts) or physical network device.
 
-  ------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   By neglecting for source port, Network Insight typically assumes that you'll be using a stateful firewall when it generates the recommended firewall rules. In this day and age that should be a safe assumption but be aware of this.
-  ------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> By neglecting for source port, Network Insight typically assumes that you'll be using a stateful firewall when it generates the recommended firewall rules. In this day and age that should be a safe assumption but be aware of this.
 
 The metrics of the flow records (bytes sent, number of packets and session count) are also split from the flow itself and put into a new record, specifically used for showing a bandwidth graph with each flow.
 
@@ -145,19 +141,17 @@ It's not a simple calculation and it'll vary per application landscape. However,
 
 A NetFlow version 5 packet is 48 bytes and each outgoing packet holds an average of 20 flow records, with 24 bytes of overhead per packet. That is 984 bytes per second for 20 flow records.
 
-  ------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   For 20.000 flow records per second, we can use the following calculation for the bandwidth required: (48 \* 20) + 24 = 984 bytes for a packet with 20 records. Multiply that by 1.000 for 20.000 flow records per second, and we get 984.000 bytes per second and 7.872.000 bits, or 7.8Mbit per second.
-  ------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> For 20.000 flow records per second, we can use the following calculation for the bandwidth required: (48 \* 20) + 24 = 984 bytes for a packet with 20 records. Multiply that by 1.000 for 20.000 flow records per second, and we get 984.000 bytes per second and 7.872.000 bits, or 7.8Mbit per second.
 
 However, when the question is; "how many flows will a specific amount of application bandwidth produce?" -- it becomes a bit more complex. On average a flow is around 200Kbit per second[^6], based on monitoring networks of the likes of Google and Facebook (data on enterprise networks is understandably lacking). This means monitoring 1Gbit of traffic would produce around 5.242 flows per second, meaning around 2Mbit per second of flow records would be sent from that original 1Gbit traffic.
 
-+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| INFO | To turn 1Gbit of traffic into a number that represents the bandwidth generated by flows, we can use the following calculation:                                                                |
-|      |                                                                                                                                                                                               |
-|      | 1Gbit = 1024 \* 1024 = 1.048.576 Kbit / 200Kbit for 1 flow = 5.242 flows / 20 flow records per packet = 262 packets with flow records = 257.906 bytes = 2.063.251 bits = 2.06Mbit per second. |
-|      |                                                                                                                                                                                               |
-|      | In other words; generated flow traffic is about 0.2% of the actual traffic.                                                                                                                   |
-+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+{aside, class: information}
+To turn 1Gbit of traffic into a number that represents the bandwidth generated by flows, we can use the following calculation:
+
+1Gbit = 1024 \* 1024 = 1.048.576 Kbit / 200Kbit for 1 flow = 5.242 flows / 20 flow records per packet = 262 packets with flow records = 257.906 bytes = 2.063.251 bits = 2.06Mbit per second.
+
+In other words; generated flow traffic is about 0.2% of the actual traffic.
+{/aside}
 
 Now, this data is based on user and application traffic. When you dive into the data center, there are a lot of variants. For instance, a single host talking to a NAS and sending multiple terabytes to that NAS, is likely to only produce a single flow, which will only be updated with the amount of bandwidth that flow is consuming. High size transfers in a single session will generate less flows than low size transfers by 1000s of users.
 
@@ -189,9 +183,7 @@ Polling happens on an interval between 5 and 15 minutes, depending on the type o
 
 SNMP polling happens every 5 minutes on every data source. Of course, these intervals can change when a new Network Insight version is released; always double check in the documentation for the exact intervals. This is just to give you an idea.
 
-  ------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   Polling happens independently per data source and on an interval timer. There is no persistent connection being left open to the data sources; no permanent SSH connection. It will reconnect each time.
-  ------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> Polling happens independently per data source and on an interval timer. There is no persistent connection being left open to the data sources; no permanent SSH connection. It will reconnect each time.
 
 There are a few built-in protection systems to protect the data sources from being overwhelmed by the polling and stressing them out. This protects them if they are already stressed for some reason, so the Collector does not push them over the edge and impact the operations of the device.
 
@@ -211,9 +203,7 @@ Previously, I mentioned that the communication between the Platform and Collecto
 
 SSL encryption is being used to send data from the Collector to the Platform. This is done using certificates that are exchanged during the setup of the Collector, when it first connects to the Platform. The Platform saves the presented Collector certificate and then proceeds to verify every future connection and make sure it's verified and secure. This makes man-in-the-middle attacks on the connection much harder (nothing is impossible to hack, except for a stone brick).
 
-  ------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   The certificate that is used for a specific Collector, is also used to encrypt the data source credentials. This is why you have to re-enter the credentials when moving a data source between Collectors.
-  ------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> The certificate that is used for a specific Collector, is also used to encrypt the data source credentials. This is why you have to re-enter the credentials when moving a data source between Collectors.
 
 #### Data Compression
 
@@ -239,11 +229,11 @@ I'll go through both offline caches below and try to give you an idea of how lon
 
 The network flow cache has a maximum size of **15GB**. If you recall, a packet with 20 NetFlow records is around **984** bytes. To fill up the caching, it would take around **335.544.320** flow records. Here's how I got there:
 
-+------+---------------------------------------------------------------------------------------------------------------------------------------+
-| INFO | To fill up the network flow cache of 15GB;                                                                                            |
-|      |                                                                                                                                       |
-|      | 15GB = 15 \* 1024 \* 1024 \* 1024 = 16.106.127.360 bytes / 960 bytes for 20 flows = 16.777.216 \* 20 flows = 335.544.320 total flows. |
-+------+---------------------------------------------------------------------------------------------------------------------------------------+
+{aside, class: information}
+To fill up the network flow cache of 15GB:
+
+15GB = 15 \* 1024 \* 1024 \* 1024 = 16.106.127.360 bytes / 960 bytes for 20 flows = 16.777.216 \* 20 flows = 335.544.320 total flows.
+{/aside}
 
 It depends on how much flows the Collector is receiving, but the offline cache for flows can last a pretty long time! Let's say it's receiving **5.000** flows per second (roughly 1Gbit p/s of real traffic), that **15G**B will last for about **18,5** hours.
 
@@ -287,6 +277,4 @@ Think of it like this; with Network Insight as-a-Service, VMware hosts and maint
 {caption: "Architecture for Network Insight as a Service"}
 ![](images/image61.png)
 
-  ------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   When using Network Insight as-a-Service, you only have to deploy the Collector in your environment. It requires connectivity to the Platform, which means internet connectivity is required for the Collector.
-  ------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> When using Network Insight as-a-Service, you only have to deploy the Collector in your environment. It requires connectivity to the Platform, which means internet connectivity is required for the Collector.
