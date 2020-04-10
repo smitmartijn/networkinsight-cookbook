@@ -1,4 +1,4 @@
-**Abstract**
+# Abstract
 
 If you are in any way affiliated with network and virtual infrastructure troubleshooting and monitoring, you're going to like this book. If you're driven crazy by having to overlap multiple tools to get the information needed to troubleshoot an issue in your environment, you're going to love this book.
 
@@ -16,8 +16,7 @@ You will be guided through the components and architecture of Network Insight an
 
 
 
-Introduction -- About the author
-================================
+# Introduction -- About the Author
 
 As I'm sitting in the airport, waiting for my flight after a team building exercise with the Networking & Security Business Unit within VMware, the thought going through my head is: why? Why on earth are you starting another big project that's going to take up a ton of time? The reason is simple: Hi, I'm Martijn Smit and I'm an information sharing addict (echo's: "hi Martijn!").
 
@@ -44,8 +43,7 @@ Underlines = links
 
 search query = which can be placed in the Network Insight search engine
 
-Foreword by Shiv Agarwal
-========================
+# Foreword by Shiv Agarwal
 
 *Founder of ArkinNet, currently Vice-President of Network Insight with VMware*
 
@@ -59,8 +57,7 @@ Over the next few years, we see the operational silos breaking at a rapid pace a
 
 I am very happy and excited to be writing this foreword for Martijns book on VMware vRealize Network Insight. Martijn has been the technical face and flag bearer of Network Insight in the EMEA region for a long time. I hope the insights captured in his book will trigger in the mind of its readers a genuine thought about transforming their network and security operations.
 
-Pre-face
-========
+# Pre-face
 
 This book is for people in jobs or interests related to networking and security in private, hybrid and/or public clouds. Managing these networks and security policies becomes a much easier job with Network Insight and this book will try to explain best how to go about managing those networks and how Network Insight itself is positioned to do so.
 
@@ -80,8 +77,7 @@ Using the Search Engine]{.underline}).
 Apart from configuration and operational data, you can also send real-time network flow (NetFlow or sFlow) data to Network Insight to map out which workloads in your environment talk to each other. Because all data is correlated, the network flow data is linked to the source or destination workload (virtual machine or physical host) and you can see the name of the workload related to the flow, instead of just seeing that **10.0.0.10** talks to **10.0.1.11** over port **80**.
 
 
-{class: information}
-B> **Configuration data** is meant as the configuration of the data source (i.e. show running-configuration on a physical Cisco device and the inventory of a VMware vCenter, etc.). **Operational data** is meant as dynamic, changing data on data sources (i.e. the route and mac tables on a network device, IP addresses of virtual machines, etc.).
+I> **Configuration data** is meant as the configuration of the data source (i.e. show running-configuration on a physical Cisco device and the inventory of a VMware vCenter, etc.). **Operational data** is meant as dynamic, changing data on data sources (i.e. the route and mac tables on a network device, IP addresses of virtual machines, etc.).
 
 
 {class: discussion}
@@ -107,6 +103,22 @@ B> This is an exercise blurb.
 
 {class: tip}
 W> This is a tip blurb, not a warning blurb.
+
+D> This is a discussion blurb.
+
+E> This is an error blurb.
+
+I> This is an information blurb.
+
+Q> This is a question blurb.
+
+T> This is a tip blurb.
+
+W> This is a warning blurb.
+
+X> This is an exercise blurb.
+
+
 
 A> This is a short aside.
 
