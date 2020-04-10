@@ -1,3 +1,4 @@
+intro.md
 ch-introduction-to-vrni.md
 ch-application-security-planning.md
 ch-application-migration-planning.md
@@ -6,4 +7,4 @@ ch-architecture.md
 ch-cli.md
 ch-analytics.md
 ch-search-engine.md
-full-manuscript.txt
+end.md

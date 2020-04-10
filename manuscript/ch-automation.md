@@ -1,103 +1,4 @@
-**Abstract**
-
-If you are in any way affiliated with network and virtual infrastructure troubleshooting and monitoring, you're going to like this book. If you're driven crazy by having to overlap multiple tools to get the information needed to troubleshoot an issue in your environment, you're going to love this book.
-
-As the title suggests, this book will give you a deep dive look at VMware's holistic networking and virtual infrastructure monitoring & troubleshooting product; vRealize Network Insight.
-
-Network Insight is famous for a couple reasons:
-
-1.  It has the capability to kickstart your way to a secure segmented network by creating visibility into what actually happens on your network.
-
-2.  It sucks up all the operational and configuration data of your virtual (vSphere, Kubernetes, Bare metal), public cloud (AWS & Azure), SD-WAN, and physical network environment and allows you to overlay the two to create a holistic view of your entire environment and use that to significantly reduce time spent troubleshooting and gathering data from your environment.
-
-3.  Analytics that go over all the data that's pulled into Network Insight, provide a great deal of useful information; from "who is using my applications?", to "are there any abnormalities in the network behavior?", to all the way to "how much is this cloud egress bandwidth costing me?".
-
-You will be guided through the components and architecture of Network Insight and discover hidden gems and secrets throughout the platform. This book will take you from beginner to a vRealize Network Insight Samurai and we'll have some fun along the way!
-
-
-
-Introduction -- About the author
-================================
-
-As I'm sitting in the airport, waiting for my flight after a team building exercise with the Networking & Security Business Unit within VMware, the thought going through my head is: why? Why on earth are you starting another big project that's going to take up a ton of time? The reason is simple: Hi, I'm Martijn Smit and I'm an information sharing addict (echo's: "hi Martijn!").
-
-I'm proud to be Dutch and proud to be in the industry I'm in. My career started at a hosting company, in which I spent 8 years moving from the webhosting help desk to colocation & dedicated server support, to managing the internet-network and helping to build a new datacenter from the ground up. After leaving this provider, I joined a value-added reseller company, with which I spent 5 years designing and deploying data center infrastructures, including storage, compute, networking and virtualization. I was also in the innovation group that brought the last two together to support virtual networking; Software-Defined Networking (SDN).
-
-I currently work at VMware in Technical Marketing for vRealize Network Insight, as I fully believe in the way Network Insight is approaching Networking & Security troubleshooting and monitoring and want to spread the word. My previous role was to guide customers to the world of virtual networking; NSBU Solutions Engineer. Having said that; don't worry, this book is not going to be a sales pitch but hardcore technical information (just as I like it. ;-)).
-
-Apart from my passion for technology, I believe in a healthy balance and taking care of yourself, so often take 2 to 3-hour bike rides, exercise every day and eat proper food. One of my favorite hobbies is spending time on doing elaborate meals using my Kamado Egg barbecue. I also tear through books and have a goal to read at least 30 books yearly. As mentioned before, I'm an information sharing addict and mostly do so by giving talks and doing technical blogs.
-
-If you would like to see more of my rants, you can follow me on twitter on [\@smitmartijn](https://twitter.com/smitmartijn) or on my blog at <https://lostdomain.org>
-
-Back to this book; so, I have been dealing with the entire data center stack for years. One of the things that always annoyed me was that there was no good solution to troubleshoot and monitor that entire stack; it was always separate solutions for each layer. In 2014, I came across a company called ArkinNet, which had an amazing product which could collect data from multiple layers (storage, compute and networking) and present this data in a holistic way. After doing some due diligence, I immediately started talks to include Arkin into our product portfolio and I've been in love with the product ever since.
-
-Arkin was later acquired in June of 2016 by VMware and it is now known as vRealize Network Insight.
-
-Let's dive in!
-
-P.S: I've written this book on personal title, not as a VMware employee. Any opinions in here are my own and not per se the opinion of VMware.
-
-Syntax(?) to-do
-===============
-
-Underlines = links
-
-search query = which can be placed in the Network Insight search engine
-
-Foreword by Shiv Agarwal
-========================
-
-*Founder of ArkinNet, currently Vice-President of Network Insight with VMware*
-
-VMware vRealize Network Insight (or vRNI, or Network Insight) has seen a massive adoption in VMware customer base helping our customers get end-to-end visibility and operational simplicity as they embrace a software defined approach to networking and security. Network Insight completes VMware's Virtual Cloud Network vision and story by providing seamlessly visibility and converged network operations across the data center (virtual and physical) and hybrid cloud as well as branch offices and remote sites (via SD-WAN integration).
-
-Jogging down the memory lane, Network Insight came into VMware through the Arkin (ArkinNet) acquisition. As it happens so often in Silicon Valley, my co-founder and I were at VMware before we went out and started Arkin (in 2013). We had joined VMware (in 2008) as part of the Blue Lane acquisition. At Blue Lane, we had built a virtual firewall which became the first-generation virtual firewall (VMware NSX DFW) inside VMware. During our first tenure at VMware (2008-2013), NSX was in its infancy. We saw enterprise customers struggling to operate their virtual networking stack. They were trying to use their existing legacy processes and toolset. Their people's mindset was geared and tuned to managing physical networks. Virtualization was new to the network operators. That's when my cofounder and I got the idea of starting Arkin. You start a company with a big vision, ours was to transform how networks are operated. Idea was to bring consumer grade simplicity to managing networks. We wanted to challenge the status quo. Our first set of use cases was to help customers implement micro-segmentation and operationalize NSX. NSX was becoming the dominant network virtualization stack and we betted on it. We got the first product out in 18 months with some of the marquee NSX customers using it in production and were acquired by VMware in 36 months. At VMware, it was like a match made in heaven. Thanks to the NSX sales team, the two products together (NSX and Network Insight) started flying off the shelf! It's been fun! I tell my team often that the acquisition by VMware was a mere pit stop in our journey, which, at the time of writing this foreword, is still continuing.
-
-We continue to build. Network Insights expanded charter and scope now includes end-to-end network operations - monitoring, troubleshooting and optimization. By combining the different types of network data (flows, packets, metrics, config, streaming, etc.), we have provided a unique platform for our customers to converge their traditionally silo-ed visibility and realize a multitude of use cases around next generation networking and security. We have also created a unique advantage for ourselves by adding a strong application context to network and security dataset. Applications are the lifeline of an enterprise and Network Insight's powerful application discovery and planning feature enables our customers to see their network and security data through the lens of their applications. We are thus elevating IT and empowering them to have a more business-oriented conversation with their line of businesses.
-
-Over the next few years, we see the operational silos breaking at a rapid pace and a lot of automation happening, ultimately leading to self-driving networks. That's the future. Silos create inefficiency and finger pointing. Our vision is to bring a high degree of efficiency in network operations through convergence, consumer grade experience and analytical insights. We continue to deliver upon our vision by investing in new areas. Recently, we acquired a company, Veriflow, which has pioneered the area of network verification in software. This technique is used in many mission critical industries where failure can be catastrophic such as airlines and space. Networking is mission critical for our customers. With this acquisition, we will be arming our customers with network modeling and prediction and significantly push the frontier of network operations in the enterprises.
-
-I am very happy and excited to be writing this foreword for Martijns book on VMware vRealize Network Insight. Martijn has been the technical face and flag bearer of Network Insight in the EMEA region for a long time. I hope the insights captured in his book will trigger in the mind of its readers a genuine thought about transforming their network and security operations.
-
-Pre-face
-========
-
-This book is for people in jobs or interests related to networking and security in private, hybrid and/or public clouds. Managing these networks and security policies becomes a much easier job with Network Insight and this book will try to explain best how to go about managing those networks and how Network Insight itself is positioned to do so.
-
-Sometimes it's not all in the name. This is also true for Network Insight, as it gives you not just insight into your network, but your compute, storage and network layers.
-
-With Network Insight, you can take the guesswork out of deploying micro-segmentation with comprehensive network flow analytics to map out real-time traffic and model security groups and firewall rules to successfully implement micro-segmentation security policies. It also helps to improve performance and availability of the infrastructure by combining and correlating virtual and physical compute, storage and networking components to provide a clear and full picture of the infrastructure.
-
-It does not discriminate between virtual machines or physical servers, provides detailed information about the smallest workloads (containers), has integrations with the VMware Virtual Cloud Network vision and everything that runs beneath the Virtual Cloud Network.
-
-Network Insight collects data from data sources like VMware vSphere, VMware NSX, Physical network devices (switches, routers, load balancers, and firewalls), Physical converged systems, IPAM systems and log collectors. All this information is put in a structured database, correlated and available via the intuitive user interface and API. The way this converged information is disclosed with the user interface is what makes Network Insight unique and such a pleasure to work with.
-
-It\'s all about the fundamentals of the platform, as it's designed from the ground up to be as open as possible. This means you can retrieve any and all the data that is gathered and do all kinds of neat things with it like filtering, grouping, sorting and perform other modifiers on it (more on that in the chapter []{.underline}
-
-[\
-Using the Search Engine]{.underline}).
-
-Apart from configuration and operational data, you can also send real-time network flow (NetFlow or sFlow) data to Network Insight to map out which workloads in your environment talk to each other. Because all data is correlated, the network flow data is linked to the source or destination workload (virtual machine or physical host) and you can see the name of the workload related to the flow, instead of just seeing that **10.0.0.10** talks to **10.0.1.11** over port **80**.
-
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   **Configuration data** is meant as the configuration of the data source (i.e. show running-configuration on a physical Cisco device and the inventory of a VMware vCenter, etc.). **Operational data** is meant as dynamic, changing data on data sources (i.e. the route and mac tables on a network device, IP addresses of virtual machines, etc.).
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-This network flow data is typically generated by the vSphere Distributed Switch or a physical network device.
-
-Due to the technical and sometimes very specific nature of this book, it's advised to have a Network Insight instance ready to go while you are reading; so, you can try things out with data from your own infrastructure!
-
-The content of this book is based on Network Insight 5.0 (with some small nuggets on 5.1, because I took too long to write it). Considering the product team is an innovation engine and moves really quickly (delivers major features every 3 months), you need to doublecheck the details when you're using a newer version. This book also does not intend to replace the [official documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/index.html), but rather complement it. The specific technical details in this book will age, and rightly so.
-
-
-
-
-
-
-
-
-Automating Network Insight
-==========================
+# Automating Network Insight
 
 We've now come to a topic that's very close to my heart: automation. Because deep, deep, deep down I'm really lazy. But mostly because I don't like having to do repetitive tasks.
 
@@ -107,8 +8,7 @@ In the data center world, we're usually talking about deploying application stac
 
 Now I hear you wondering, "What does that have to do with a troubleshooting & monitoring tool?". Well, a lot!
 
-Pushing Data In
----------------
+## Pushing Data In
 
 There are a few reasons to push data into Network Insight. They all have to do with providing more context or pushing in configuration data. Let's start with the context reason first.
 
@@ -116,8 +16,7 @@ As you've learned in the chapter **Application Security Planning**, application 
 
 The other reason to push data into Network Insight is to keep configuration synchronized. Data sources is a good example of this configuration. If you have a lot of physical switches, routers or firewalls deployed in the infrastructure and new ones are added regularly, you could automate the creation of those devices in Network Insight when they are added to the network. That way, they will be instantly monitored and available for troubleshooting exercises, without having to add them manually.
 
-Pulling Data Out
-----------------
+## Pulling Data Out
 
 At the other end of the spectrum, pulling data out of Network Insight for other systems is another reason to start automating. It is a treasure trove of information and other systems you might have put in place could benefit from it.
 
@@ -131,8 +30,7 @@ I could go on with examples but seeing the range of things you can do should spa
 
 Automation makes it all possible.
 
-API
----
+## API
 
 Now that we've covered why you would want to automate Network Insight, let's take a look at how. Network Insight has a private and public REST API hosted on the Platform appliance.
 
@@ -230,17 +128,15 @@ Using Network Insight to get a list of VMs might be useful if you have a large e
 
 First, we need to find the right API call to get this list. Turn to the API Explorer and you will find a call to the endpoint **/entities/vms**. This has the description "List vms", so it's probably the one we're looking for. If you then look at the available parameters, this is what shows:
 
-![](./media/image98.png){width="6.263888888888889in" height="1.1784722222222221in"}
-
-[]{#_Toc35170250 .anchor}Figure 92 -- Parameters for API endpoint /entities/vms
+{caption: "Parameters for API endpoint /entities/vms"}
+![](./media/image98.png)
 
 For all the Entity endpoints, you'll see that the parameters are pretty much the same. There is a **size** parameter for the amount of results returned on a page, a **cursor** parameter to indicate from which page you want to start getting results and a **start\_time** and **end\_time**, which can be used to go back in time. Remember that there is a timeline to show historical data? Using **start\_time** and **end\_time** can get the list of VMs that existed a week ago, including the ones that have been deleted since.
 
 The **cursor** is important to get full results. By default, the results for returned entities are paged in pages of the indicated **size** (default 10 results) and with every returned page, there'll also be a next **cursor** value in there, which you can use to request the next page. Have a look at this example:
 
-![](./media/image99.png){width="6.263888888888889in" height="3.3222222222222224in"}
-
-[]{#_Toc35170251 .anchor}Figure 93 -- Using Postman to execute API endpoint /entities/vms
+{caption: "Using Postman to execute API endpoint /entities/vms"}
+![](./media/image99.png)
 
 In this example, I'm using Postman to get a list of VMs, limited by 2 results. The first thing you'll notice is that there are actually any VM attributes listed in the results, just **entity\_id**s. This works the same with all entities; it returns a list of references to entities. You can take the **entity\_id** and get detailed information by using the specific entity type API endpoint. In the case of the first result this will be **/entities/vms/17603:1:1010454414**, but we'll get to that.
 
@@ -266,9 +162,8 @@ In the API Explorer, there's an entire section devoted to application management
 
 Creating an application via /groups/application (POST) doesn't require much; just an application name. The result will contain the **entity\_id** that it has given the new application. Store that for the next call. Here's an example using the name **My-New-Application**. The top text area is the body that is being sent to the API and the bottom text area is the result that the API returns:
 
-![](./media/image100.png){width="6.263888888888889in" height="3.3243055555555556in"}
-
-[]{#_Toc35170252 .anchor}Figure 94 -- Using Postman to create an application via the API
+{caption: "Using Postman to create an application via the API"}
+![](./media/image100.png)
 
 You now have an empty application without any tiers. Let's add some!
 
@@ -276,9 +171,8 @@ Here's where the previously saved **entity\_id** comes in handy, as the API endp
 
 The body of this endpoint is a bit more elaborate though, as it needs not only a name but also a filter to determine which workloads will be added to this tier. The filter is basically a search query, so you can filter on any logical object (tags, VM names, folders, etc.) to get the right VMs in the tier. In this example, I'll use a simple search based on VM name. Here's the formatted API call:
 
-![](./media/image101.png){width="6.263888888888889in" height="3.3243055555555556in"}
-
-[]{#_Toc35170253 .anchor}Figure 95 -- Using Postman to create an application tier via the API
+{caption: "Using Postman to create an application tier via the API"}
+![](./media/image101.png)
 
 As you can see, there is a **name** field (which is the name the new tier is given) in the body and an array called **group\_membership\_criteria**. This is where you define the search query that looks for workloads to put into the tier.
 
@@ -291,8 +185,7 @@ The result of creating the application tier is the tier definition echoed back p
 
 You now have a new application with a single tier with 2 VMs in it. If you need multiple tiers, rinse and repeat the second call.
 
-Using PowerShell (PowervRNI)
-----------------------------
+## Using PowerShell (PowervRNI)
 
 Moving on from using raw APIs, there are tools available to get you faster up and running. When you're integrating with an existing automation or orchestration platform, you might need to use the API directly, but if you just want to execute a simple script to speed up a task; abstraction tools are the way to go. With these, you can simply fire a command and it handles the API endpoint calls for you. Just focus on the bare minimum input and get on with the results.
 
@@ -370,8 +263,7 @@ There are two ways to handle the credentials. You can input the username and pas
 
 If the connection was a success, you will see the authentication token being returned which is stored and used for subsequent API calls.
 
-Automation Use Cases
---------------------
+## Automation Use Cases
 
 Now that we've covered the **how** of automation with Network Insight in the previous chapters, let's focus on the **why**.
 
@@ -389,9 +281,8 @@ vRealize Automation (vRA) is an infrastructure lifecycle management and automati
 
 As an example, I'll be using a 3-tiered application blueprint that contains a web server, application server, and database server tier. Of the web and application tiers, there can be multiple VMs deployed but there's just one database server. They are linked to vSphere templates which will be cloned when a deployment is requested.
 
-![http://lostdomain.org/wp-content/uploads/2018/11/vrni-vra-blueprint-tiers-1024x550.png](./media/image102.png){width="6.263888888888889in" height="3.3618055555555557in"}
-
-[]{#_Toc35170254 .anchor}Figure 96 -- Example vRealize Automation 3-tiered Application Blueprint
+{caption: "Example vRealize Automation 3-tiered Application Blueprint"}
+![](./media/image102.png)
 
 This blueprint design relates directly to an application construct within Network Insight, using the blueprint name as application name and the different types of machine deployments (Web, App, DB) as the names for the tiers. When this blueprint is deployed by someone, vRA will deploy the virtual machines, networks, storage and the software packages on the newly created virtual machines. After that work is done, we can insert a custom vRealize Orchestrator (vRO, the octopus' engine) workflow that will take this newly created application and creates the application context inside Network Insight.
 
@@ -403,9 +294,8 @@ Inside vRA, there's an Event Broker which you can use to kick off workflows duri
 
 Here's a graphical overview of how the process works, so you can translate it to your own system.
 
-![](./media/image103.tiff){width="6.263888888888889in" height="2.4131944444444446in"}
-
-[]{#_Toc35170255 .anchor}Figure 97 -- Push Applications from Automation workflow
+{caption: "Push Applications from Automation workflow"}
+![](./media/image103.tiff)
 
 ### Importing Applications from Configuration Management Databases
 
@@ -415,9 +305,8 @@ If it has an API; good! You can set up a periodical synchronization between the 
 
 Here's a visual representation of this workflow:
 
-![](./media/image104.tiff){width="6.263888888888889in" height="3.1930555555555555in"}
-
-[]{#_Toc35170256 .anchor}Figure 98 -- Import Applications from CMDB workflow
+{caption: "Import Applications from CMDB workflow"}
+![](./media/image104.tiff)
 
 #### Example
 
@@ -476,337 +365,8 @@ The field **aggregations.value** is the number of bytes that matches the filter.
 
 You can find the PowervRNI example script here: <https://github.com/PowervRNI/powervrni/blob/master/examples/get-bandwidth-usage-per-ip.ps1>
 
-Automation Conclusion
----------------------
+## Automation Conclusion
 
 I hope the examples in the previous pages have been helpful to get your imagination going on what is possible when you start automating Network Insight. These examples have just scraped the surface of what's possible, and there's a whole integration ecosystem possible that takes advantage of the data.
 
 If you have any other use-cases that you are building -- please do reach out to me via any of my communication channels; I'd like to learn from you!
-
-Shout Outs
-==========
-
-This book wouldn't be possible without the amazing team behind Network Insight. From providing me with insights what's going on behind the scenes to putting up with my incessive stream of questions, these people stood by me and have credit in making this book happen. Let me introduce them:
-
-Shiv Agarwal
-
-Abhijit Sharma
-
-Rohit Reja
-
-Dave Overbeek
-
-Manish Virat
-
-Karthic Kumar
-
-Naveen Chaudhary
-
-Taruna Gandhi
-
-Thank you for your support and putting up with my continuous stream of questions.
-
-Keyword Index
-=============
-
-**API Endpoint** URL of an API that calls a specific function (i.e. /api/ni/groups/applications)
-
-**Cloud** A collection of computers that are not your own. Typically paid for per usage.
-
-**CMDB** Configuration Management DataBase
-
-**CSP** Cloud Services Portal -- VMwares' management portal for their cloud services
-
-**DBA** DataBase Administrator
-
-**DFW** VMware NSX Data Center -- Distributed Firewall
-
-**DMZ** De-Militarized Zone
-
-**East-West** Network traffic that stays within the boundary of the data center.
-
-**EC2** Elastic Compute Cloud -- virtual machines in AWS.
-
-**ENI** Elastic Network Interface -- virtual network interface, typically attached to an
-
-EC2 instance
-
-**REST API** A REpresentational State Transfer API is an application program interface
-
-> (API) that uses HTTP requests to GET, PUT, POST and DELETE data.
-
-**JSON** JavaScript Object Notation
-
-**PII** Personally Identifiable Information
-
-**S3** Simple Storage Service -- AWS object storage services. Delivered in buckets.
-
-**SDDC** Software Defined Data Center
-
-**SDK** Software Development Kit
-
-**SDN** Software Defined Networking
-
-**SIEM** Security Information and Event Management
-
-**NI** Network Insight
-
-**North-South** Network traffic that goes beyond the boundary of the data center. Usually
-
-> internet traffic.
-
-**VPC** Virtual Private Cloud -- AWS container for compute resources
-
-**vRA** vRealize Automation
-
-**vRNI** vRealize Network Insight
-
-**vRO** vRealize Orchestrator
-
-**PKS** Pivotal Container Service
-
-**Workload** Something that runs an application: VM, container, cloud instance or
-
-> physical server.
-
-Figures
-=======
-
-[Figure 1 - Global numbers of Network Traffic movement 12](#_Toc35170156)
-
-[Figure 2 -- Recommended Firewall Rules -- Grouped by Application 13](#_Toc35170157)
-
-[Figure 3 - Topology chart: gluing physical and virtual together 14](#_Toc35170158)
-
-[Figure 4 - Health Check and Health Alerts 15](#_Toc35170159)
-
-[Figure 5 -- CNCF 2018 Survey results 17](#_Toc35170160)
-
-[Figure 6 -- VMware NSX Portfolio 20](#_Toc35170161)
-
-[Figure 7 -- VMware Virtual Cloud Network 21](#_Toc35170162)
-
-[Figure 8 -- Micro-Segmention; logical security boundaries between applications. 23](#_Toc35170163)
-
-[Figure 9 -- Enabling NetFlow on a vCenter data source 26](#_Toc35170164)
-
-[Figure 10 -- Adding a Physical Flow Collector data source 26](#_Toc35170165)
-
-[Figure 11 -- High level overview of network traffic behaviour 27](#OLE_LINK3)
-
-[*Figure 12 -- Micro-Segmentation Planner; the donut of joy* 28](#_Toc35170167)
-
-[Figure 13 -- Recommended Firewall Rules grouped by Application 30](#_Toc35170168)
-
-[Figure 13 -- Recommended Firewall Rules YAML export 32](#_Toc35170169)
-
-[Figure 14 -- Recommended Firewall Rules grouped by Tier 35](#_Toc35170170)
-
-[Figure 15 -- Example application construct 38](#_Toc35170171)
-
-[Figure 16 -- vCenter Custom Attribute definition 40](#_Toc35170172)
-
-[Figure 17 -- Custom Attributes on a VM 40](#_Toc35170173)
-
-[Figure 18 -- Application Discovery using Tags 41](#_Toc35170174)
-
-[Figure 19 -- Application Discovery Results 43](#_Ref13144669)
-
-[Figure 20 -- Application Discovery Results - Form 44](#_Toc35170176)
-
-[Figure 21 -- Application Discovery with a Naming Convention 47](#_Toc35170177)
-
-[Figure 22 -- Application Discovery -- Pattern Builder 47](#_Toc35170178)
-
-[Figure 23 -- Application Discovery -- ServiceNow Application Map 49](#_Toc35170179)
-
-[Figure 24 -- Application Discovery -- ServiceNow Result 50](#_Toc35170180)
-
-[Figure 25 -- Application Migration Planning -- Dependency mapping 52](#_Ref29044160)
-
-[Figure 26 -- Application Migration Planning -- Application Details 53](#_Ref29044197)
-
-[Figure 27 -- Application Migration Planning -- Traffic per Country 54](#_Toc35170183)
-
-[Figure 28 -- Application Migration Planning -- Egress traffic per Country 55](#_Ref29045562)
-
-[Figure 29 -- Application Migration Planning -- Egress traffic total 55](#_Ref29045561)
-
-[Figure 30 -- Application Migration Planning -- All application traffic 56](#_Toc35170186)
-
-[Figure 31 -- Application Migration Planning -- Migration Wave Dependency Mapping 59](#_Toc35170187)
-
-[Figure 32 -- Application Migration Planning -- CPU & Memory requirements 60](#_Toc35170188)
-
-[Figure 33 -- Application Migration Planning -- Internet Traffic of Migrate Wave 1 61](#_Toc35170189)
-
-[Figure 34 -- Application Migration Planning -- Peak internet Traffic of Migrate Wave 1 61](#_Toc35170190)
-
-[Figure 35 -- Application Migration Planning -- Flow Types 62](#_Toc35170191)
-
-[Figure 36 -- Application Migration Planning -- Internet Packets p/s of Migrate Wave 1 62](#_Toc35170192)
-
-[Figure 34 -- Application Migration Planning -- Peak internet packets p/s of Migrate Wave 1 63](#_Toc35170193)
-
-[Figure 34 -- Application Migration Planning -- Validate Application with the Time Machine 63](#_Toc35170194)
-
-[Figure 37 -- AWS Master account link diagram 68](#_Toc35170195)
-
-[Figure 38 -- AWS: Setting up VPC Flow Logs 69](#_Toc35170196)
-
-[Figure 39 -- Adding AWS Account 70](#_Ref24444888)
-
-[Figure 40 -- AWS Search options 71](#_Toc35170198)
-
-[Figure 41 -- AWS CloudWatch listing network flow logs 72](#_Toc35170199)
-
-[Figure 42 -- AWS Network topology between two VMs in different VPCs 73](#_Toc35170200)
-
-[Figure 43 -- AWS Network topology between on-premises and an AWS VPC 73](#_Ref24463962)
-
-[Figure 44 -- Adding an Azure data source 77](#_Toc35170202)
-
-[Figure 45 -- Azure Search options 78](#_Toc35170203)
-
-[Figure 46 -- Azure flow logs structure 79](#_Toc35170204)
-
-[Figure 47 -- VMware Cloud on AWS -- spanning networking & security across clouds 81](#_Toc35170205)
-
-[Figure 48 -- VMware Cloud on AWS -- Adding the vCenter 82](#_Toc35170206)
-
-[Figure 49 -- VMware Cloud on AWS -- Adding the NSX Manager 83](#_Toc35170207)
-
-[Figure 50 -- VMware Cloud on AWS -- Hybrid Path 85](#_Toc35170208)
-
-[Figure 51 - Platform Architecture Diagram 86](#_Toc35170209)
-
-[Figure 52 - Platform VM Internal Architecture 87](#_Toc35170210)
-
-[Figure 53 - Private API in action 88](#_Toc35170211)
-
-[Figure 54 - Searching your data center 88](#_Toc35170212)
-
-[Figure 55 - Platform & Collector relationships 90](#_Toc35170213)
-
-[Figure 56 - Collector VM internal architecture 91](#_Toc35170214)
-
-[Figure 57 - Collector NetFlow processing 92](#_Toc35170215)
-
-[Figure 58 -- Architecture for Network Insight as a Service 101](#_Toc35170216)
-
-[Figure 59 -- Command line list of commands 103](#_Toc35170217)
-
-[Figure 60 -- Restarting services via CLI 104](#_Toc35170218)
-
-[Figure 61 -- CLI Output for show-connectivity-status 104](#_Toc35170219)
-
-[Figure 62 -- Listing available log components and following the saasservice 105](#_Toc35170220)
-
-[Figure 63 -- Searching in logs 106](#_Toc35170221)
-
-[Figure 64 -- Configuring the vRealize Log Insight agent 107](#_Toc35170222)
-
-[Figure 65 -- Enabling web proxy 108](#_Toc35170223)
-
-[Figure 66 -- Changing the IP address of a clustered node 109](#_Toc35170224)
-
-[Figure 67 -- Moving a Collector between Platforms 109](#_Toc35170225)
-
-[Figure 68 -- Outlier configuration options 113](#_Toc35170226)
-
-[Figure 69 -- Outlier detection result 115](#_Toc35170227)
-
-[Figure 70 -- Outlier detection event 116](#_Toc35170228)
-
-[Figure 71 -- Creating a threshold 118](#_Toc35170229)
-
-[Figure 72 -- Search query & results example 124](#_Toc35170230)
-
-[Figure 73 -- Search query structure 125](#_Toc35170231)
-
-[Figure 74 -- Search help: find all supported properties 126](#_Ref22480916)
-
-[Figure 75 -- Search for a meta entity type and get all included entity types 126](#_Toc35170233)
-
-[Figure 76 -- Search Metric Properties: example on switch port 127](#_Ref22484064)
-
-[Figure 77 -- Search filters; condition and comparison operators 129](#_Toc35170235)
-
-[Figure 78 -- Searching with property projection 130](#_Toc35170236)
-
-[Figure 79 -- Searching with property projection, including metrics 131](#_Toc35170237)
-
-[Figure 80 -- Searching with a count operator 132](#_Toc35170238)
-
-[Figure 81 -- Searching with a list operator 132](#_Toc35170239)
-
-[Figure 82 -- Searching with a max operator 133](#_Toc35170240)
-
-[Figure 83 -- Searching with a sum operator 133](#_Toc35170241)
-
-[Figure 84 -- Searching with an avg operator 134](#OLE_LINK9)
-
-[Figure 85 -- Search; using the series() projection to combine metrics 135](#OLE_LINK15)
-
-[Figure 86 -- Search; using multiple series() projections to combine metrics 135](#OLE_LINK11)
-
-[Figure 87 -- Search; using the group by operator 136](#OLE_LINK17)
-
-[Figure 88 -- Search; using the group by operator and aggregate functions for L2 traffic 136](#OLE_LINK21)
-
-[Figure 89 -- Search; using the group by operator and aggregate functions for AWS rules 137](#OLE_LINK35)
-
-[Figure 90 -- Search; time control in the web interface 139](#_Ref24291822)
-
-[Figure 91 -- Built in API Explorer 143](#_Toc35170249)
-
-[Figure 92 -- Parameters for API endpoint /entities/vms 147](#_Toc35170250)
-
-[Figure 93 -- Using Postman to execute API endpoint /entities/vms 148](#_Toc35170251)
-
-[Figure 94 -- Using Postman to create an application via the API 150](#_Toc35170252)
-
-[Figure 95 -- Using Postman to create an application tier via the API 151](#_Toc35170253)
-
-[Figure 96 -- Example vRealize Automation 3-tiered Application Blueprint 158](#_Toc35170254)
-
-[Figure 97 -- Push Applications from Automation workflow 159](#_Toc35170255)
-
-[Figure 98 -- Import Applications from CMDB workflow 160](#_Toc35170256)
-
-Tables
-======
-
-[Table 1 -- PCI Dashboard; PCI sections explained 37](#_Toc35170257)
-
-[Table 2 -- CLI Commands reference 110](#_Toc35170258)
-
-[Table 3 -- Threshold metric options 119](#_Toc35170259)
-
-[Table 4 -- Search examples, mapping out entity types 126](#_Toc35170260)
-
-[Table 5 -- Search filter condition examples 130](#_Toc35170261)
-
-[^1]: <https://www.cncf.io/blog/2018/08/29/cncf-survey-use-of-cloud-native-technologies-in-production-has-grown-over-200-percent/>
-
-[^2]: <https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/support/product-lifecycle-matrix.pdf>
-
-[^3]: <https://en.wikipedia.org/wiki/Regular_expression>
-
-[^4]: In 2018, according to Gartner: <https://www.gartner.com/en/newsroom/press-releases/2019-07-29-gartner-says-worldwide-iaas-public-cloud-services-market-grew-31point3-percent-in-2018>
-
-[^5]: In 2018, according to Gartner: <https://www.gartner.com/en/newsroom/press-releases/2019-07-29-gartner-says-worldwide-iaas-public-cloud-services-market-grew-31point3-percent-in-2018>
-
-[^6]: Online Flow Size Prediction for Improved Network Routing: <https://cs.uwaterloo.ca/~pjaini/downloads/main.pdf>
-
-[^7]: This guide is currently not available publicly; ask your VMware representative for it.
-
-[^8]: <https://dictionary.cambridge.org/dictionary/english/outlier>
-
-[^9]: <https://en.wikipedia.org/wiki/Median_absolute_deviation>
-
-[^10]: <https://en.wikipedia.org/wiki/Packet_loss>
-
-[^11]: <https://en.wikipedia.org/wiki/Mean>
-
-[^12]: <https://en.wikipedia.org/wiki/Standard_deviation>
