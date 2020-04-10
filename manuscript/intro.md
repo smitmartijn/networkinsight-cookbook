@@ -79,9 +79,9 @@ Using the Search Engine]{.underline}).
 
 Apart from configuration and operational data, you can also send real-time network flow (NetFlow or sFlow) data to Network Insight to map out which workloads in your environment talk to each other. Because all data is correlated, the network flow data is linked to the source or destination workload (virtual machine or physical host) and you can see the name of the workload related to the flow, instead of just seeing that **10.0.0.10** talks to **10.0.1.11** over port **80**.
 
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   **Configuration data** is meant as the configuration of the data source (i.e. show running-configuration on a physical Cisco device and the inventory of a VMware vCenter, etc.). **Operational data** is meant as dynamic, changing data on data sources (i.e. the route and mac tables on a network device, IP addresses of virtual machines, etc.).
-  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+{class: information}
+B> **Configuration data** is meant as the configuration of the data source (i.e. show running-configuration on a physical Cisco device and the inventory of a VMware vCenter, etc.). **Operational data** is meant as dynamic, changing data on data sources (i.e. the route and mac tables on a network device, IP addresses of virtual machines, etc.).
 
 
 {class: discussion}
