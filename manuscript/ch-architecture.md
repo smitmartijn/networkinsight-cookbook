@@ -20,7 +20,7 @@ There are a lot of things happening in both layers, which I'll go further into i
 
 When you log into Network Insight via your browser and look at all the marvelous data that has been collected, you're looking at the interface of the Platform. It is the doorway into Network Insight and houses the data that is collected from your environment. Data collection happens at the Collector layer, but the Platform keeps the data persistently, where the Collector only has temporary data.
 
-There are a few options to vertically scale, meaning there's a t-shirt size to the resources that a single appliance will consume. At the time of this writing, you've got the option between **medium**, **large** or **extra-large**. You can also scale out the Platform layer horizontally to support storing more data, but more on that in chapter [Scalability and Availability (Clustering)]{#ch-clustering}. In any case, always consult the most recent [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/index.html) on which t-shirt size you need to pick and to determine whether you need to build a cluster to provide support for the size of the environment it's going to monitor.
+There are a few options to vertically scale, meaning there's a t-shirt size to the resources that a single appliance will consume. At the time of this writing, you've got the option between **medium**, **large** or **extra-large**. You can also scale out the Platform layer horizontally to support storing more data, but more on that in chapter [Scalability and Availability (Clustering)](#ch-clustering). In any case, always consult the most recent [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/index.html) on which t-shirt size you need to pick and to determine whether you need to build a cluster to provide support for the size of the environment it's going to monitor.
 
 The Platform layer can have multiple Collectors from which it receives data from. Communication between the Platform and Collector only happens one-way, from the Collector to the Platform. This means there does not have to be direct connectivity from the Platform towards the Collectors, which can be put behind a NAT boundary. As long as the Collector can reach the Platform, you're good to go.
 
@@ -35,7 +35,7 @@ Here is a representation of the service layers that live inside a Platform:
 
 The User-Interface (UI), REST API and Search Engine services are responsible for the presentation of data to the user, whether it via a browser or an API output. The function of the UI is pretty straightforward; present an interface to any browser that connects. In turn, the UI uses the API to retrieve data and configure any setting you're changing.
 
-The REST API is split up into two sections: a private API and a public API. More on the public API can be found in the chapter on [Automating Network Insight]{#ch-automating} -- but the primary goal of the public API is to let you, or your automation and/or orchestration systems talk to Network Insight and retrieve data from it.
+The REST API is split up into two sections: a private API and a public API. More on the public API can be found in the chapter on [Automating Network Insight](#ch-automating) -- but the primary goal of the public API is to let you, or your automation and/or orchestration systems talk to Network Insight and retrieve data from it.
 
 All UI interactions with data is done via the private API. As the name suggests, this part should be not used by any automation work that you would like to build. The format and output are likely to change throughout different versions.
 
@@ -51,7 +51,7 @@ While the search engine is worth a whole separate chapter, in this context is it
 
 Talking to a backend powered by Elastic Search, it takes search queries in technical natural language. It searches through configuration data, events, performance stats and can do so in a time machine to get results for a specific time frame. Unlike the open source database backends, the search engine is a service entirely built by the Network Insight team.
 
-More details on the search engine (and how to use it) in chapter [Using the Search Engine]{#ch-search} Engine.
+More details on the search engine (and how to use it) in chapter [Using the Search Engine](#ch-search) Engine.
 
 ### Data Service Layer
 

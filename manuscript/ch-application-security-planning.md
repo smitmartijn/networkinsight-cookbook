@@ -64,7 +64,7 @@ An important note is that you cannot use sampling if you want to capture the rig
 
 While sFlow is supported, I generally would not recommend using it if you have the choice between NetFlow and sFlow. If you only have the option for sFlow, try to get a non-sampled data stream and be more vigilant in determining whether the recommended firewall rules are complete.
 
-More information on how Network Insight ingests and processes incoming network flows, is described in the chapter [Flow Processor]{#ch-flow-processor}, which is under [Architecture]{#ch-architecture}.
+More information on how Network Insight ingests and processes incoming network flows, is described in the chapter [Flow Processor](#ch-flow-processor), which is under [Architecture](#ch-architecture).
 
 ## Configuring Data Sources for NetFlow, IPFIX & sFlow
 
@@ -163,7 +163,7 @@ These Recommended Firewall Rules can be the basis for your micro-segmentation pr
 
 First thing which you should decide is how the source and destination groups will be determined. As you might recall, the source and destination groups are decided by the Group By option. Only by necessity should you use different groupings in different firewall rules, otherwise it will quickly get very confusing. So, first decide on what your micro-segmentation will be based on.
 
-This will also depend on what technology is used to do the actual micro-segmentation. VMware NSX Data Center would be a natural choice, but Network Insight is not biased in providing the right information (except for the NSX targeted export, more on that in [Export as XML]{#ch-export-as-xml}). If you can group workloads into applications and effect firewall rules on that level, do so. Otherwise you can choose the lowest applicable grouping to get the rules that you can use in your security solution.
+This will also depend on what technology is used to do the actual micro-segmentation. VMware NSX Data Center would be a natural choice, but Network Insight is not biased in providing the right information (except for the NSX targeted export, more on that in [Export as XML](#ch-export-as-xml)). If you can group workloads into applications and effect firewall rules on that level, do so. Otherwise you can choose the lowest applicable grouping to get the rules that you can use in your security solution.
 
 #### Export by 'Looking at it' ™
 

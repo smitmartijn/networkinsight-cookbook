@@ -40,7 +40,7 @@ Find all applications that are talking to the application 3TierApp02 and display
 
 The cool part about the search engine is, is that all results and searches are reusable. You can create pinboards from different searches, personalizing these pinboards completely. You can also create search-based events and get alerts whenever the result of a search changes (get notified whenever firewall rule changes happen) or when there are no results (get notified when something is deleted).
 
-Search is also exposed via the public APIs for automation, making it possible to programmatically execute searches and get back the results for further processing. Considering all data inside Network Insight is available via the search, this means that you can export and process any and all information for your own purposes. Organizations have built automation processes around Network Insight to import data into Security Event & Information Management (SIEM) systems, Security Operation Centers (SOC) get notified on any firewall rule changes and verify them against the change management trackers, service providers pull network bandwidth calculations to use for billing purposes, the list goes on. More information on how to automate with Network Insight and examples in the chapter [Automating Network Insight]{#ch-automating}.
+Search is also exposed via the public APIs for automation, making it possible to programmatically execute searches and get back the results for further processing. Considering all data inside Network Insight is available via the search, this means that you can export and process any and all information for your own purposes. Organizations have built automation processes around Network Insight to import data into Security Event & Information Management (SIEM) systems, Security Operation Centers (SOC) get notified on any firewall rule changes and verify them against the change management trackers, service providers pull network bandwidth calculations to use for billing purposes, the list goes on. More information on how to automate with Network Insight and examples in the chapter [Automating Network Insight](#ch-automating).
 
 ## Building Searches
 
@@ -96,7 +96,7 @@ To give you a few more examples of how to spot what the entity type is, the tabl
 |  `Flows where Source Application = CRM`                     | Flows |
 |  `Network Rate of Switch Ports order by Network Rate`       | Switch Ports |
 
-**Note**: The last example will become clearer when we go through the [Property]{#ch-property} explanation.
+**Note**: The last example will become clearer when we go through the [Property](#ch-property) explanation.
 
 {id: ch-meta-entity-types}
 ## Meta Entity Types
@@ -124,7 +124,7 @@ These are rather interesting. Objects inside Network Insight get correlated to o
 
 These reference properties will appear as a link when looking at an object. On the VM dashboard, or when looking at VM search results, you will notice that you can click on a bunch of properties and get taken to their dashboard. Those are reference properties.
 
-You can also use these reference properties in searches, but more on that in [Reference Traversal Queries]{#ch-reference-traversal-queries}.
+You can also use these reference properties in searches, but more on that in [Reference Traversal Queries](#ch-reference-traversal-queries).
 
 ### Metric Property
 
@@ -137,7 +137,7 @@ To get an idea of what metric properties are available for an entity type, head 
 
 ### Meta Property
 
-Remember the [Meta Entity Types]{#ch-meta-entity-types}? Meta properties are the same thing, only attached to another entity. This is a group of properties that's consolidated under a single property.
+Remember the [Meta Entity Types](#ch-meta-entity-types)? Meta properties are the same thing, only attached to another entity. This is a group of properties that's consolidated under a single property.
 
 For example, the Flow entity has a meta property called VM. This refers to both Source VM and Destination VM. Here's an example:
 
@@ -258,7 +258,7 @@ In this case, a list of Hypervisors is returned that host any VM that has a high
 
 The object inside the list operator needs to be directly associated with the object in the filter, and not indirectly associated. Meaning you can get a list of Hosts from VMs, Datastores from Hosts (and VMs), Switch Ports from Hosts, etc. However, you cannot get a list of Switch Ports from VMs, as the direct association of Switch Ports will be with Hosts.
 
-Alternatively, you can use reference queries, which can go deeper (and do indirect associations), but also have more overhead. More on that in the chapter [Reference Traversal Queries]{#ch-reference-traversal-queries}.
+Alternatively, you can use reference queries, which can go deeper (and do indirect associations), but also have more overhead. More on that in the chapter [Reference Traversal Queries](#ch-reference-traversal-queries).
 
 ### Aggregate Functions
 
@@ -432,7 +432,7 @@ This can be done from the time indicator that is on the right of the search quer
 {caption: "Search; time control in the web interface", id: "fig-time-control"}
 ![](images/image94.png)
 
-As shown in the [figure 90]{#fig-time-control} above, it's easy to jump from the current time to some most used points, such as **Yesterday**, **Last 3 Days**, etc. You can also use the **At** option to jump to a very specific time, used for getting to know the exact configuration at that time. Then there's the **Between** option, where you can specific a time range; mostly used for metrics to show graphs of a specific time period.
+As shown in the [figure 90](#fig-time-control) above, it's easy to jump from the current time to some most used points, such as **Yesterday**, **Last 3 Days**, etc. You can also use the **At** option to jump to a very specific time, used for getting to know the exact configuration at that time. Then there's the **Between** option, where you can specific a time range; mostly used for metrics to show graphs of a specific time period.
 
 You can also specify the time control inside a search query, by using the following syntax:
 

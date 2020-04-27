@@ -67,7 +67,7 @@ It does not discriminate between virtual machines or physical servers, provides 
 
 Network Insight collects data from data sources like VMware vSphere, VMware NSX, Physical network devices (switches, routers, load balancers, and firewalls), Physical converged systems, IPAM systems and log collectors. All this information is put in a structured database, correlated and available via the intuitive user interface and API. The way this converged information is disclosed with the user interface is what makes Network Insight unique and such a pleasure to work with.
 
-It\'s all about the fundamentals of the platform, as it's designed from the ground up to be as open as possible. This means you can retrieve any and all the data that is gathered and do all kinds of neat things with it like filtering, grouping, sorting and perform other modifiers on it (more on that in the chapter [Using the Search Engine]{#ch-search}.
+It\'s all about the fundamentals of the platform, as it's designed from the ground up to be as open as possible. This means you can retrieve any and all the data that is gathered and do all kinds of neat things with it like filtering, grouping, sorting and perform other modifiers on it (more on that in the chapter [Using the Search Engine](#ch-search).
 
 Apart from configuration and operational data, you can also send real-time network flow (NetFlow or sFlow) data to Network Insight to map out which workloads in your environment talk to each other. Because all data is correlated, the network flow data is linked to the source or destination workload (virtual machine or physical host) and you can see the name of the workload related to the flow, instead of just seeing that **10.0.0.10** talks to **10.0.1.11** over port **80**.
 

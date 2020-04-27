@@ -96,7 +96,7 @@ Save the authentication token to a variable that you can reuse inside the script
 
 **Network Insight as a Service Authentication**
 
-As you may remember from the chapter [Hosted Architecture (SaaS)]{#ch-hosted-architecture}), there is a difference in authentication between the on-premises Network Insight and the one that's delivered in the VMware Cloud. There is a single-sign-on platform in place for all VMware Cloud Services (CSP) products, meaning there is no user management within Network Insight, and you'll need to go through CSP to get an authentication token to use in the Network Insight API calls.
+As you may remember from the chapter [Hosted Architecture (SaaS)](#ch-hosted-architecture)), there is a difference in authentication between the on-premises Network Insight and the one that's delivered in the VMware Cloud. There is a single-sign-on platform in place for all VMware Cloud Services (CSP) products, meaning there is no user management within Network Insight, and you'll need to go through CSP to get an authentication token to use in the Network Insight API calls.
 
 CSP works with so-called refresh tokens as a way of authentication. When using the API, you need to exchange a refresh token for an authentication token and use that when talking to the Network Insight API (or any other Cloud Service).
 
@@ -174,7 +174,7 @@ The body of this endpoint is a bit more elaborate though, as it needs not only a
 
 As you can see, there is a **name** field (which is the name the new tier is given) in the body and an array called **group\_membership\_criteria**. This is where you define the search query that looks for workloads to put into the tier.
 
-I've used an **entity\_type** called **BaseVirtualMachine** and a filter that looks for the names **VM01** and **VM02**. The filter can be formatted using the search query logic (throwback to chapter [Using the Search Engine]{#ch-search}) and the you can find the **entity\_type** options in the OpenAPI specification under the \"definitions\" structure (examples are: Cluster, SecurityTag, EC2SecurityGroup, etc., etc.).
+I've used an **entity\_type** called **BaseVirtualMachine** and a filter that looks for the names **VM01** and **VM02**. The filter can be formatted using the search query logic (throwback to chapter [Using the Search Engine](#ch-search)) and the you can find the **entity\_type** options in the OpenAPI specification under the \"definitions\" structure (examples are: Cluster, SecurityTag, EC2SecurityGroup, etc., etc.).
 
 The result of creating the application tier is the tier definition echoed back plus the newly assigned **entity\_id** along with a reference to the parent application.
 
@@ -248,7 +248,7 @@ In the previous chapters, you've learned about the way Network Insight handles a
 
 There are two cmdlets to connect a Network Insight instance. There's **Connect-vRNIServer** to connect to vRealize Network Insight (the on-prem variant) and there's **Connect-NIServer** to connect to the Network Insight as a Service variant.
 
-**Connect-NIServer** is extremely simple to use and only required the Refresh Token that you have created in chapter [Authentication]{#ch-authentication}.
+**Connect-NIServer** is extremely simple to use and only required the Refresh Token that you have created in chapter [Authentication](#ch-authentication).
 
 This exchanged the Refresh Token for an authentication token and that will be used for subsequent API calls and you are now free to use the rest of the cmdlets inside PowervRNI.
 

@@ -67,7 +67,7 @@ Network Insight comes in to provide clarity of the container environment, reduci
 
 Network Insight can also be used to plan out the security for these container workloads. Due to the tight integration with NSX Data Center for Containers, Network Insight gains the same network flow visibility as with VMs. This means the same security planner can be used to map out network connectivity between the different levels of the containerized application and the best part is that Network Insight can generate recommended firewall rules based on those real-time network flows. Oh, and it also allows these recommended firewall rules to be exported in a format that Kubernetes understands (YAML). Applying these rules is as simple as performance the export and using kubectl to apply them directly to a running application.
 
-More on how to do this in the chapter [Application Security Planning]{#ch-application-security-planning}
+More on how to do this in the chapter [Application Security Planning](#ch-application-security-planning)
 
 ## vRealize Network Insight versus vRealize Network Insight Cloud (SaaS)
 
@@ -75,11 +75,11 @@ When reading about Network Insight, you might come across two versions of the na
 
 In 2018, VMware came out with a SaaS version which is hosted on their Cloud Services (<https://cloud.vmware.com>) infrastructure. The reasons for this are to simplify deployments and unburden organizations with upgrades or availability of the platform. VMware takes care of the upgrades and availability and you can simply consume the product. Capability-wise, the 2 are equal; they have the same features and same interface. Everything in this book pertains to both versions.
 
-The architectural components in the on-premises version and SaaS version are similar, they're only hosted in different locations. The chapter [Architecture]{#ch-architecture} goes deeply into the architecture of both versions, but here's a sneak peek: Network Insight consists out of collector nodes and platform nodes. The collectors talk to your infrastructure endpoints to collect data and the platform is the central data repository and it is your entry point (the user-interface).
+The architectural components in the on-premises version and SaaS version are similar, they're only hosted in different locations. The chapter [Architecture](#ch-architecture) goes deeply into the architecture of both versions, but here's a sneak peek: Network Insight consists out of collector nodes and platform nodes. The collectors talk to your infrastructure endpoints to collect data and the platform is the central data repository and it is your entry point (the user-interface).
 
 In the on-premises version, both components run on your own infrastructure (which can even be air-gapped) and you keep everything local. With the SaaS version, the collectors run locally (in order for them to connect to your infrastructure) and they send their data towards the cloud hosted platform nodes.
 
-This usually brings up 2 security questions; how is the data transferred and what exactly is stored in the cloud? Stay tuned for details on the transfer in the [Architecture]{#ch-architecture} chapter, but let's have a look at what data is stored inside the platform.
+This usually brings up 2 security questions; how is the data transferred and what exactly is stored in the cloud? Stay tuned for details on the transfer in the [Architecture](#ch-architecture) chapter, but let's have a look at what data is stored inside the platform.
 
 Collectors look at data center infrastructure equipment (switches, routers & firewalls) configuration like firewall rules and switchport configurations, virtual workload environments for virtual machines, network traffic flow data (optional but valuable) where source, destination and protocol are recorded. Of the virtual machines the metadata is recorded (network settings, hostname, OS type, etc.) and cross-linking is done between the different data types. For instance, a network flow can have a VM tagged to it if the VM was either the source or destination of the flow.
 
