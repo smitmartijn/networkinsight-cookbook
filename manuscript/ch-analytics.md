@@ -130,9 +130,9 @@ The number of packets. This can be useful to detect denial of service attacks th
 The number of packets that are dropped. There are mechanisms in place (TCP has this built-in) to recover from dropped packets, and it's pretty common for packet drops to occur. Especially over the internet. Don't put the value at 1 -- you'll go crazy with alerts.
 
 #### network packet drop percent
-The number of packets that are dropped in percentage form. This is a better option for when looking at packet drops. When network traffic goes up, the packet drops do as well; they usually scale up with the amount of traffic. Packet drops over 5% will impact traffic significantly and between 1 and 2.5% is 'acceptable'. [^10]
+The number of packets that are dropped in percentage form. This is a better option for when looking at packet drops. When network traffic goes up, the packet drops do as well; they usually scale up with the amount of traffic. Packet drops over 5% will impact traffic significantly and between 1 and 2.5% is 'acceptable'. [^packetloss-reference]
 
-[^10]: https://en.wikipedia.org/wiki/Packet_loss
+[^packetloss-reference]: https://en.wikipedia.org/wiki/Packet_loss
 
 ### Aggregation
 

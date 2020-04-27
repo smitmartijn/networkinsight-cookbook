@@ -252,18 +252,16 @@ As audits are not only geared towards technical configurations, this data is not
 
 The PCI Compliance Dashboard currently helps by displaying the following data behind these PCI sections:
 
-  PCI Section   Description                                                                                                                                        How Network Insight helps
-  ------------- -------------------------------------------------------------------------------------------------------------------------------------------------- --------------------------------------------------------------------------------
-  1.1.1         *A formal process for approving and testing all network connections and changes to the firewall and router configurations.*                        Shows all firewall rules applicable, network config changes and network flows.
-  1.1.2         *Network diagram that identifies all connections between the data environment and other networks.*                                                 Shows network topology maps & inter- and intra-application network flows.
-  1.1.3         *Network diagram that shows all data flows across systems and networks.*                                                                           Shows network flows in donut and raw form.
-  1.1.4         *Requirements for a firewall at each Internet connection and between any demilitarized zone (DMZ) and the internal network zone.*                  Shows firewall rules applicable to workloads, to determine DMZ-yness.
-  1.3.1         *Implement a DMZ to limit inbound traffic to only system components that provide authorized publicly accessible services, protocols, and ports.*   Same as above.
-  2.3           *Encrypt all non-console administrative access using strong cryptography.*                                                                         Shows all network flows that are using known unencrypted protocols.
-  6.4           *Follow change control processes and procedures for all changes to system components.*                                                             Shows all security changes (firewall rules, security groups, tags & policies).
-
-[]{#_Toc35170257 .anchor}Table 1 -- PCI Dashboard; PCI sections
-explained
+{caption: "PCI Dashboard; PCI sections explained"}
+| PCI Section |  Description | How Network Insight Helps |
+| :--- | :--- | :--- |
+| 1.1.1 | *A formal process for approving and testing all network connections and changes to the firewall and router configurations.* | Shows all firewall rules applicable, network config changes and network flows. |
+| 1.1.2 | *Network diagram that identifies all connections between the data environment and other networks.* | Shows network topology maps & inter- and intra-application network flows. |
+| 1.1.3 | *Network diagram that shows all data flows across systems and networks.* | Shows network flows in donut and raw form. |
+| 1.1.4 | *Requirements for a firewall at each Internet connection and between any demilitarized zone (DMZ) and the internal network zone.* | Shows firewall rules applicable to workloads, to determine DMZ-yness. |
+| 1.3.1 | *Implement a DMZ to limit inbound traffic to only system components that provide authorized publicly accessible services, protocols, and ports.* | Same as above. |
+| 2.3 | *Encrypt all non-console administrative access using strong cryptography.* | Shows all network flows that are using known unencrypted protocols. |
+| 6.4 | *Follow change control processes and procedures for all changes to system components.* | Shows all security changes (firewall rules, security groups, tags & policies). |
 
 ## Application Discovery
 
