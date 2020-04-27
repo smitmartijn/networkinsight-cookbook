@@ -1,3 +1,4 @@
+{id: ch-public-cloud}
 # Network Insight into Public Clouds
 
 The concept of a cloud is nothing new. Organizations have been hosting their applications on other people's computers for ages. We were running vCloud Director 1.5 at a data center service provider that was renting out VMs to customers (Infrastructure as a Service), back in 2011. Before using vSphere VMs and a portal like vCloud Director, we were using FreeBSD jails and Virtuozzo (based on CentOS) to deliver VPSs (Virtual Private Server). These services were mostly contained to Infrastructure as a Service (IaaS) and added manual services (monitoring, backups, pro-active maintenance, etc.). Fun times!
@@ -87,10 +88,10 @@ In that case, you might want to have different instances of Network Insight, in 
 
 During the process of adding the AWS master access as a data source, you can specify from which AWS regions Network Insight is allowed to collect information from. It will leave the unselected regions alone.
 
-{caption: "Adding AWS Account"}
+{caption: "Adding AWS Account", id: "fig-adding-aws-account"}
 ![](images/image42.png)
 
-The above [Figure 39]{.underline} depicts the screen that allows you to add an AWS account. Select a collector appliance that will connect to the AWS API (over internet), supply the access key and secret access key, and hit the Validate button. The collector will now go out to the AWS API and validate the credentials. If it succeeds, the rest of the options will be made available.
+The above [Figure "Adding AWS Account"]{#fig-adding-aws-account} depicts the screen that allows you to add an AWS account. Select a collector appliance that will connect to the AWS API (over internet), supply the access key and secret access key, and hit the Validate button. The collector will now go out to the AWS API and validate the credentials. If it succeeds, the rest of the options will be made available.
 
 I> vRealize Network Insight Cloud has a shared collector for public cloud discovery. You don't have to set up a collector to add a public cloud, meaning you don't have to select the collector in the above process.
 
@@ -120,9 +121,9 @@ When flow logging is configured on a VPC to log towards CloudWatch, the network 
 {caption: "AWS CloudWatch listing network flow logs"}
 ![](images/image44.png)
 
-What Network Insight does with the flow logs and how they are processed, is similar for both AWS and Azure -- and it is described in the chapter [AWS & Azure Flow Processing]{.underline}, which is located in the chapter about the [Architecture]{.underline}.
+What Network Insight does with the flow logs and how they are processed, is similar for both AWS and Azure -- and it is described in the chapter [AWS & Azure Flow Processing]{#ch-aws-azure-flow-processing}, which is located in the chapter about the [Architecture]{#ch-architecture}.
 
-When network flows are retrieved from CloudWatch, AWS entities will show up in the [Application Security Planning]{.underline}. Flow visibility will be there throughout Network Insight and you'll be able to generate recommended firewall rules that can be applied onto AWS security groups.
+When network flows are retrieved from CloudWatch, AWS entities will show up in the [Application Security Planning]{#ch-application-security-planning}. Flow visibility will be there throughout Network Insight and you'll be able to generate recommended firewall rules that can be applied onto AWS security groups.
 
 ### Network Path Visibility
 
@@ -198,7 +199,7 @@ Although the network & security troubleshooting tooling is relatively complete, 
 
 ### Adding Azure to Network Insight
 
-Before adding Azure as a data source, make sure the Network Security Group (NSG) flow logs are configured and sending network flow logs to a storage account. More on that later in [Network Flows]{.underline}.
+Before adding Azure as a data source, make sure the Network Security Group (NSG) flow logs are configured and sending network flow logs to a storage account. More on that later in [Network Flows]{#ch-Network Flows}.
 
 Network Insight uses an application identity registration in order to get access to the Azure APIs. Application registrations can span a single or multiple Azure accounts, allowing it to see collect data from all Azure accounts under an organization. This application registration will have separate permissions, which can be managed for the sole purpose to let Network Insight collect data.
 
@@ -306,7 +307,7 @@ In short, Network Insight talks to the CSP API in order to get network & securit
 
 Because NSX-T powers the virtual networking of VMware Cloud on AWS, Network Insight uses the same method to ingest network flows from the VMC networks; the NSX-T Distributed Firewall generates NetFlow (IPFIX) and sends it to the Network Insight collector appliance. The flows that arrive at the collector, get processed (correlated against objects like VMs, virtual network, geolocation, etc.), and then get send to the platform appliance **every 10 minutes**.
 
-Connectivity to the vCenter and NSX Manager is something to take into account when designing your environment. As opposed to AWS and Azure, the network flows from VMC come from actual NetFlow (IPFIX), and not from log files existing out of purely text. This has to be a consideration in where the collector appliance is placed, as NetFlow takes up more bandwidth over flow log polling with AWS & Azure. Calculations as to how much traffic you can expect, are in the [Bandwidth Requirements for Flows]{.underline} chapter.
+Connectivity to the vCenter and NSX Manager is something to take into account when designing your environment. As opposed to AWS and Azure, the network flows from VMC come from actual NetFlow (IPFIX), and not from log files existing out of purely text. This has to be a consideration in where the collector appliance is placed, as NetFlow takes up more bandwidth over flow log polling with AWS & Azure. Calculations as to how much traffic you can expect, are in the [Bandwidth Requirements for Flows]{#ch-bandwidth-requirements-for-flows} chapter.
 
 It's not only more bandwidth usage, NetFlow is transmitted in UDP and clear text; which is not something you want to send over the internet. The best course of action is to place the collector appliance for VMC on the internal network. This can be both the internal network inside the VMC SDDC, or it can be the internal network in an on-premises SDDC.
 

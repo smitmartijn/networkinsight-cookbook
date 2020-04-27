@@ -1,3 +1,4 @@
+{id: ch-application-migration-planning}
 # Application Migration Planning
 
 When the decision is made to migrate applications to Public Clouds, like AWS, Azure, or even VMware Cloud on AWS (VMC on AWS), a few critical considerations should be kept in mind. First and foremost, insight into your applications and application behavior is critical.
@@ -18,31 +19,32 @@ There are four steps in the application migration process:
 4. Migrate the selected applications.
 5. Validate application behavior, post-migration.
 
-vRealize Network Insight Cloud can help with step 1, 2, 3, and 5. [VMware HCX](https://cloud.vmware.com/vmware-hcx) -- workload migration tool extraordinaire, can help with step 3. This chapter focuses heavily on step 2, and 3 which are critical in the planning phase. For the scoop on step 1, refer back to the chapter about [Application Discovery]{.underline}.
+vRealize Network Insight Cloud can help with step 1, 2, 3, and 5. [VMware HCX](https://cloud.vmware.com/vmware-hcx) -- workload migration tool extraordinaire, can help with step 3. This chapter focuses heavily on step 2, and 3 which are critical in the planning phase. For the scoop on step 1, refer back to the chapter about [Application Discovery]{#ch-application-discovery}.
 
+{id: ch-application-discovery-assessment}
 ## Application Discovery & Assessment
 
-It's quite common to have an incomplete CMDB or to have multiple sources where applications and the associated workloads are documented. vRealize Network Insight can use a combination of sources (tags, naming conventions, CMDB input) to discover the applications from the infrastructure metadata. For more details on application discovery, refer back to the chapter about [Application Discovery]{.underline}.
+It's quite common to have an incomplete CMDB or to have multiple sources where applications and the associated workloads are documented. vRealize Network Insight can use a combination of sources (tags, naming conventions, CMDB input) to discover the applications from the infrastructure metadata. For more details on application discovery, refer back to the chapter about [Application Discovery]{#ch-application-discovery}.
 
-After getting the applications into Network Insight, there is a clear view of application dependencies and network requirements. Navigate to the Security Planner (refer back to [Analyzing Network Flows]{.underline} for a refresher) and group the donut by Applications.
+After getting the applications into Network Insight, there is a clear view of application dependencies and network requirements. Navigate to the Security Planner (refer back to [Analyzing Network Flows]{#ch-analyzing-network-flows} for a refresher) and group the donut by Applications.
 
-{caption: "Application Migration Planning -- Dependency mapping"}
+{caption: "Application Migration Planning -- Dependency mapping", id: "fig-application-migration-planning"}
 ![](images/image26.png)
 
 By hovering over a slice or using the search bar at the top right of the widget, you can find the application you want to map dependencies for. By clicking the slice, the details of that application are brought up.
 
-What you're doing here ([Figure 25]{.underline}), is called **Application Dependency Mapping**. Because it's really clear that the application CRM-Records has only incoming connections from 5 other applications, it can be concluded that CRM-Records does not have any dependencies on other applications, however it is used by 5 other applications, making CRM-Records a dependency for those other applications. This becomes important when you're planning a migration, as applications that are heavily dependent on each other, should be grouped together and migrated simultaneously, in order to prevent slowing down the connections between these applications.
+What you're doing here ([Figure: Dependency mapping]{#fig-application-migration-planning}), is called **Application Dependency Mapping**. Because it's really clear that the application CRM-Records has only incoming connections from 5 other applications, it can be concluded that CRM-Records does not have any dependencies on other applications, however it is used by 5 other applications, making CRM-Records a dependency for those other applications. This becomes important when you're planning a migration, as applications that are heavily dependent on each other, should be grouped together and migrated simultaneously, in order to prevent slowing down the connections between these applications.
 
-{caption: "Application Migration Planning -- Application Details"}
+{caption: "Application Migration Planning -- Application Details", id: "fig-application-details"}
 ![](images/image27.png)
 
-I've focused on the CRM-Records application here, which consists of a MySQL database server. You can see the other applications that are talking to this application in [Figure 25]{.underline}. When you zoom in on the application itself, the network requirements for this application present themselves ([Figure 26]{.underline}). By adding up the different Service Endpoints, you can determine that this application is using up **1.1MB** of total traffic, with a peak throughput of **343bps**. Service Endpoints is a way of classifying specific services, because multiple services can live on the same workload. Obviously, this example application isn't representable for an actual production application; except higher numbers in real life.
+I've focused on the CRM-Records application here, which consists of a MySQL database server. You can see the other applications that are talking to this application in [Figure: Dependency mapping]{#fig-application-migration-planning}. When you zoom in on the application itself, the network requirements for this application present themselves ([Figure: Application Details]{#fig-application-details}). By adding up the different Service Endpoints, you can determine that this application is using up **1.1MB** of total traffic, with a peak throughput of **343bps**. Service Endpoints is a way of classifying specific services, because multiple services can live on the same workload. Obviously, this example application isn't representable for an actual production application; except higher numbers in real life.
 
 When looking at this window, you can clearly see the types of network ports being used as service endpoints within this application. These network ports could also be involved in the decision whether or not to migrate this application to the cloud. Or determine to which cloud locations you are allowed to migrate it. There might be some service or network port that, for security reasons, your security policies would prevent from hosting outside the private data center. Databases with Personally Identifiable Information (PII) data, might fall under regional laws and these laws would prohibit the data to be hosted on another country or continent.
 
-While doing this exercise per application, it might turn out that the application is extremely bandwidth hungry towards the internal users. The **External Services Accessed** tab is where the dependent service endpoints for this application can be found. It provides the same view as in [Figure 26]{.underline}, only the other way around; from this application to other services in the infrastructure.
+While doing this exercise per application, it might turn out that the application is extremely bandwidth hungry towards the internal users. The **External Services Accessed** tab is where the dependent service endpoints for this application can be found. It provides the same view as in [Figure: Application Details]{#fig-application-details}, only the other way around; from this application to other services in the infrastructure.
 
-This same window can be used to implement security policies when migrating the application, as the [**Recommended Firewall Rules**]{.underline} tab shows the exact firewall rules that need to be implemented for this application.
+This same window can be used to implement security policies when migrating the application, as the [**Recommended Firewall Rules**]{#ch-recommended-firewall-rules} tab shows the exact firewall rules that need to be implemented for this application.
 
 ## Traffic Patterns
 
@@ -67,17 +69,17 @@ By not specifying a source or destination country, both egress and ingress traff
 
 `sum(bytes) of Flows where Source Application = 'CRM-Records' group by Destination Country`
 
-{caption: "Application Migration Planning -- Egress traffic per Country"}
+{caption: "Application Migration Planning -- Egress traffic per Country", id: "fig-egress-traffic-per-country"}
 ![](images/image29.png)
 
 This will paint a clear picture of how much egress network traffic this application is sending out, which would be leaving the public cloud, and which will be charged for. It's also possible to make it easier, by removing the group by statement like so:
 
 `sum(bytes) of Flows where Source Application = 'CRM-Records' and Flow Type = 'Destination is Internet'`
 
-{caption: "Application Migration Planning -- Egress traffic total"}
+{caption: "Application Migration Planning -- Egress traffic total", id: "fig-egress-traffic-total"}
 ![](images/image30.png)
 
-*Note: the results of search queries in* *[Figure 28]{.underline} and* *[Figure 29]{.underline} have been taken on different dates, which is why they differ in numbers.*
+B> Note: the results of search queries in [Figure "Egress traffic per Country"]{#fig-egress-traffic-per-country} and [Figure "Egress traffic total"]{#fig-egress-traffic-total} have been taken on different dates, which is why they differ in numbers.
 
 Keen observers will have noticed that I replaced group by Destination Country with Flow Type = 'Destination is Internet' in the last two examples. The reason for this is simple; when using the Country property in a search query, the results will automatically be internet flows, as those are the only ones that have a geolocation attached. When not looking for a location property, the results will include all network flows, including the flows that stay within the datacenter. By using the Flow Type filter, the results are limited to the flows going to the internet.
 
@@ -92,7 +94,7 @@ This process starts by getting a list of the applications that are the most band
 {caption: "Application Migration Planning -- All application traffic"}
 ![](images/image31.png)
 
-Focus on the top 10 applications and map out their dependencies, as we've talked about in the chapter [Application Discovery & Assessment]{.underline}. When going through that exercise, migration waves will automatically start to form, as the dependencies (applications) of the top 10 applications should be put in the same migration wave.
+Focus on the top 10 applications and map out their dependencies, as we've talked about in the chapter [Application Discovery & Assessment]{#ch-application-discovery-assessment}. When going through that exercise, migration waves will automatically start to form, as the dependencies (applications) of the top 10 applications should be put in the same migration wave.
 
 ## Creating Migration Waves
 
@@ -120,7 +122,7 @@ After assigning priorities, creation of the applications migration wave groups c
 
 While network requirements (number 1) are the most important to check; as it directly impacts application performance during or after migration, the rest of these questions can prevent the migration from finishing. If not checked properly and in advance, you might hit these limits while in the middle of the migration and need to halt the migration, or even reverse the migration. Unfortunately, this has happened to plenty organizations, costing them user-experience by causing downtime, extra time to either revert or changing the migration plan.
 
-To start answering these questions, create another application within Network Insight that's called "Migration Wave X" and place the applications that are in each migration wave inside. Essentially, you are creating nested applications. To know which applications should be in the same migration wave, map out application dependencies as I talked about in [Application Discovery & Assessment]{.underline}.
+To start answering these questions, create another application within Network Insight that's called "Migration Wave X" and place the applications that are in each migration wave inside. Essentially, you are creating nested applications. To know which applications should be in the same migration wave, map out application dependencies as I talked about in [Application Discovery & Assessment]{#ch-application-discovery-assessment}.
 
 After creating these applications, it is possible to scope the security planner on each migration wave and see its dependencies.
 
@@ -165,7 +167,7 @@ Uncovering the required information can be done by using the search engine. Let'
 {caption: "Application Migration Planning -- Internet Traffic of Migrate Wave 1"}
 ![](images/image34.png)
 
-To really understand the mechanics of this search, wait until you've reached the [Using the Search Engine]{.underline} chapter. For now, know that this result shows you the sum of the byte rate (network traffic), of network flows where Migration Wave 1 is the source, talking to the internet. While this example shows a lack of internet traffic (having a whopping 2bps at some point), it gives a clear picture of the internet traffic behavior, and therefor requirements.
+To really understand the mechanics of this search, wait until you've reached the [Using the Search Engine]{#ch-search} chapter. For now, know that this result shows you the sum of the byte rate (network traffic), of network flows where Migration Wave 1 is the source, talking to the internet. While this example shows a lack of internet traffic (having a whopping 2bps at some point), it gives a clear picture of the internet traffic behavior, and therefor requirements.
 
 The above search shows the internet traffic over a period of time (by default the last 24 hours). You should also get the maximum peak throughput of all historical flow data that Network Insight has stored. This is possible by adding the max() operator:
 

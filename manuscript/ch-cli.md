@@ -1,3 +1,4 @@
+{id: ch-cli}
 # Using the Command Line and Troubleshooting
 
 When Network Insight is set up and acting normally, you do not need the command line interface. Apart from the initial **setup** command, the command line is not used much. It's mostly used to troubleshoot the Platform or Collector appliances themselves and change settings, such as the networking configuration. There are a few commands and other tricks to call out though, which I'll do in this chapter.

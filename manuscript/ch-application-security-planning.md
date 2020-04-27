@@ -1,3 +1,4 @@
+{id: ch-application-security-planning}
 # Application Security Planning
 
 The Security Planner (or micro-segmentation planner) inside Network Insight is arguably the most used feature, for organizations just starting out. It is the least impactful and most easy feature to turn on for an infrastructure and results are almost instant. Point it towards the infrastructure and turn on network flow collection, and it will provide insights in 1 to 2 hours after installation.
@@ -12,7 +13,7 @@ Zero-trust is basically security turned on its head: we don't allow anything, un
 
 With a zero-trust architecture, using micro-segmentation, security policies (which are translated to basic firewall rules) lock down each workload, whether it be a virtual machine, container or a user, making sure that workloads can only access necessary network resources and nothing more. A simple example of this would be that your company blog based on WordPress, should never be allowed to talk to your CRM system.
 
-To learn more about VMware NSX and how it helps you to do micro-segmentation, have a look at the free eBooks named [VMware NSX® Micro-segmentation Day 1]{.underline} and [VMware NSX® Micro-segmentation Day 2]{.underline}.
+To learn more about VMware NSX and how it helps you to do micro-segmentation, have a look at the free eBooks named [VMware NSX® Micro-segmentation Day 1](https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/products/nsx/vmware-nsx-microsegmentation.pdf) and [VMware NSX® Micro-segmentation Day 2](https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/products/nsx/vmware-micro-segmentation-day-2.pdf).
 
 {caption: "Micro-Segmention; logical security boundaries between applications."}
 ![](images/image8.png)
@@ -63,7 +64,7 @@ An important note is that you cannot use sampling if you want to capture the rig
 
 While sFlow is supported, I generally would not recommend using it if you have the choice between NetFlow and sFlow. If you only have the option for sFlow, try to get a non-sampled data stream and be more vigilant in determining whether the recommended firewall rules are complete.
 
-More information on how Network Insight ingests and processes incoming network flows, is described in the chapter [Flow Processor]{.underline}, which is under [Architecture]{.underline}.
+More information on how Network Insight ingests and processes incoming network flows, is described in the chapter [Flow Processor]{#ch-flow-processor}, which is under [Architecture]{#ch-architecture}.
 
 ## Configuring Data Sources for NetFlow, IPFIX & sFlow
 
@@ -87,6 +88,7 @@ Ingesting and processing network flows is the most resource intensive a Collecto
 
 I> In order to receive NetFlow and/or sFlow from physical devices (not vCenter or NSX), you need a dedicated Collector appliance for that specific purpose. You will only be able to add a flow data source on a Collector that's not already used by other data sources.
 
+{id: ch-analyzing-network-flows}
 ## Analyzing Network Flows
 
 Let's get into the meat of the Micro-Segmentation Planner and how to use it. The network traffic flow data is presented from a very high-level for your entire infrastructure, to a per object level (per network, application, resource pool, these kind of objects) to a very granular per flow record level.
@@ -129,6 +131,7 @@ At the time of writing Network Insight does not run intelligence over the discov
 
 T> When working to micro-segment your environment, use the unprotected flow type to see your progress and use it to export the missing recommended firewall rules that you need to finish securing your applications.
 
+{id: ch-recommended-firewall-rules}
 ## Recommended Firewall Rules
 
 Behind every slice of the donut and every directional line (the line between slices) is a popup that displays a couple of things:
@@ -160,7 +163,7 @@ These Recommended Firewall Rules can be the basis for your micro-segmentation pr
 
 First thing which you should decide is how the source and destination groups will be determined. As you might recall, the source and destination groups are decided by the Group By option. Only by necessity should you use different groupings in different firewall rules, otherwise it will quickly get very confusing. So, first decide on what your micro-segmentation will be based on.
 
-This will also depend on what technology is used to do the actual micro-segmentation. VMware NSX Data Center would be a natural choice, but Network Insight is not biased in providing the right information (except for the NSX targeted export, more on that in [Export as XML]{.underline}). If you can group workloads into applications and effect firewall rules on that level, do so. Otherwise you can choose the lowest applicable grouping to get the rules that you can use in your security solution.
+This will also depend on what technology is used to do the actual micro-segmentation. VMware NSX Data Center would be a natural choice, but Network Insight is not biased in providing the right information (except for the NSX targeted export, more on that in [Export as XML]{#ch-export-as-xml}). If you can group workloads into applications and effect firewall rules on that level, do so. Otherwise you can choose the lowest applicable grouping to get the rules that you can use in your security solution.
 
 #### Export by 'Looking at it' ™
 
@@ -193,10 +196,11 @@ Keep in mind that the option to export as YAML, will only be enabled when the **
 
 There are different files per security policy, so it's easy to edit the security policies that you actually want to apply. There could be communication between services that should not have anything to do with each other. As as example, here's the recommended security policy that makes sure my yelb-ui service has access to the centralized DNS service:
 
-Because the files are split up per security policy, they are easy to read. It also helps that the Kubernetes network policy format is not that hard. Applying these security policies to Kubernetes is *really* simple; it's just one command. After making sure all the security policies are to be added, run this command: **kubectl apply -f \*.yaml**
+Because the files are split up per security policy, they are easy to read. It also helps that the Kubernetes network policy format is not that hard. Applying these security policies to Kubernetes is *really* simple; it's just one command. After making sure all the security policies are to be added, run this command: `kubectl apply -f *.yaml`
 
 Make sure kubectl is connected to the right cluster and it's selected the right namespace, of course. After applying the policies, Kubernetes will make sure they are applied to the services (or namespaces). This could be enforced by VMware NSX, or any of the other security tools that Kubernetes supports.
 
+{id: ch-export-as-xml}
 #### Export as XML
 
 Lastly, there's the option to export the rules in an XML format. This export function will provide you with a zip bundle that contains all needed configuration for VMware NSX for vSphere (NSX-v). XML is the format of choice when it comes to API calls for NSX-v. As Network Insight uses the 'proper' way of micro-segmenting within NSX-v, the contents of the zip bundle contain multiple XML files that contain API body to create certain things: security tags, security groups, security policies and the assignment of security tags to VMs.
@@ -263,6 +267,7 @@ The PCI Compliance Dashboard currently helps by displaying the following data be
 | 2.3 | *Encrypt all non-console administrative access using strong cryptography.* | Shows all network flows that are using known unencrypted protocols. |
 | 6.4 | *Follow change control processes and procedures for all changes to system components.* | Shows all security changes (firewall rules, security groups, tags & policies). |
 
+{id: ch-application-discovery}
 ## Application Discovery
 
 Micro-segmentation was first focused on the workloads themselves (VMs, containers), but it gradually shifted towards the application as a whole. Which makes sense, because the application is what's really important. That the application is powered by some VMs doesn't matter anymore; we just want the application to be available and secure.
@@ -271,6 +276,7 @@ There's been a shift towards application context inside Network Insight as well.
 
 To get to this application dashboard, we need to have so-called application constructs inside Network Insight.
 
+{id: ch-application-constructs}
 ### Application Constructs
 
 Inside Network Insight, there are application constructs which you can create. An application construct is pretty straightforward: it is a logical container with a name and tiers. These tiers define what components are associated with the application, by providing a virtual machine pattern (or simple the exact name), static IP addresses, Kubernetes objects; all workloads that have a specific network service running, or other vCenter or NSX objects (like resource pool, security tag, folders, you name it). You can also provide a custom search query which can determine which virtual machines are included.
@@ -425,7 +431,7 @@ I'm going to assume you have knowledge about ServiceNow and the jargon that come
 {caption: "Application Discovery -- ServiceNow Application Map"}
 ![](images/image24.png)
 
-It's focused on an Application Service called **3TierApp02**, which has an entry point of a load balancer listening on port 80 and 443. The load balancer is then [distributed by]{.underline} (also the relationship type) 3 Nginx web servers, which in turn [run on]{.underline} (also the relationship type) their respective VMware VMs. The Nginx web servers [depend on]{.underline} (relationship type) on 2 application services which [run on]{.underline} another 2 VMware VMs. Lastly, the application services [depend on]{.underline} a MySQL database service, which again [runs on]{.underline} a VMware VM.
+It's focused on an Application Service called **3TierApp02**, which has an entry point of a load balancer listening on port 80 and 443. The load balancer is then _distributed by_ (also the relationship type) 3 Nginx web servers, which in turn _run on_ (also the relationship type) their respective VMware VMs. The Nginx web servers _depend on_ (relationship type) on 2 application services which _run on_ another 2 VMware VMs. Lastly, the application services _depend on_ a MySQL database service, which again _runs on_ a VMware VM.
 
 I've underlined the relationship types in the above description, as it's important to have the right relationships in place in order for Network Insight to recognize them. Especially the service link to a workload is important, use any of these:
 

@@ -1,10 +1,11 @@
+{id: ch-architecture}
 # Architecture
 *...Or how things are put together.*
 
 Network Insight consists of two components;
 
-1)  the Platform,
-2)  the Collector (previously known as the Proxy).
+1) the Platform,
+2) the Collector (previously known as the Proxy).
 
 In simple terms; the Platform is where you connect your browser to use the product and retrieve information and view the pretty graphs. It also The Collector is what connects to the data sources and relays information to the Platform for processing.
 
@@ -17,9 +18,9 @@ There are a lot of things happening in both layers, which I'll go further into i
 
 ## Platform
 
-When you log into Network Insight via your browser and look at all the marvelous data that has been collected, you're looking at the interface of the Platform. It is the doorway into Network Insight and houses the data that is collected from your environment. Collection itself happens at the Collector layer, but the Platform keeps the data persistently, where the Collector only has temporary data.
+When you log into Network Insight via your browser and look at all the marvelous data that has been collected, you're looking at the interface of the Platform. It is the doorway into Network Insight and houses the data that is collected from your environment. Data collection happens at the Collector layer, but the Platform keeps the data persistently, where the Collector only has temporary data.
 
-There are a few options to vertically scale, meaning there's a t-shirt size to the resources that a single appliance will consume. At the time of this writing, you've got the option between **medium**, **large** or **extra-large**. You can also scale out the Platform layer horizontally to support storing more data, but more on that in chapter [Scalability and Availability (Clustering)]{.underline}**.** In any case, always consult the most recent [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/index.html) on which t-shirt size you need to pick and to determine whether you need to build a cluster to provide support for the size of the environment it's going to monitor.
+There are a few options to vertically scale, meaning there's a t-shirt size to the resources that a single appliance will consume. At the time of this writing, you've got the option between **medium**, **large** or **extra-large**. You can also scale out the Platform layer horizontally to support storing more data, but more on that in chapter [Scalability and Availability (Clustering)]{#ch-clustering}. In any case, always consult the most recent [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/index.html) on which t-shirt size you need to pick and to determine whether you need to build a cluster to provide support for the size of the environment it's going to monitor.
 
 The Platform layer can have multiple Collectors from which it receives data from. Communication between the Platform and Collector only happens one-way, from the Collector to the Platform. This means there does not have to be direct connectivity from the Platform towards the Collectors, which can be put behind a NAT boundary. As long as the Collector can reach the Platform, you're good to go.
 
@@ -34,14 +35,14 @@ Here is a representation of the service layers that live inside a Platform:
 
 The User-Interface (UI), REST API and Search Engine services are responsible for the presentation of data to the user, whether it via a browser or an API output. The function of the UI is pretty straightforward; present an interface to any browser that connects. In turn, the UI uses the API to retrieve data and configure any setting you're changing.
 
-The REST API is split up into two sections: a private API and a public API. More on the public API can be found in the chapter on [Automating Network Insight]{.underline} -- but the primary goal of the public API is to let you, or your automation and/or orchestration systems talk to Network Insight and retrieve data from it.
+The REST API is split up into two sections: a private API and a public API. More on the public API can be found in the chapter on [Automating Network Insight]{#ch-automating} -- but the primary goal of the public API is to let you, or your automation and/or orchestration systems talk to Network Insight and retrieve data from it.
 
 All UI interactions with data is done via the private API. As the name suggests, this part should be not used by any automation work that you would like to build. The format and output are likely to change throughout different versions.
 
 {caption: "Private API in action"}
 ![](images/image56.png)
 
-**Search Engine**
+### Search Engine
 
 While the search engine is worth a whole separate chapter, in this context is it worth explaining that the search engine drives all interactions. Anything that you do in the interface is a search command. This is also reflected in the search bar:
 
@@ -50,9 +51,7 @@ While the search engine is worth a whole separate chapter, in this context is it
 
 Talking to a backend powered by Elastic Search, it takes search queries in technical natural language. It searches through configuration data, events, performance stats and can do so in a time machine to get results for a specific time frame. Unlike the open source database backends, the search engine is a service entirely built by the Network Insight team.
 
-More details on the search engine (and how to use it) in chapter []{.underline}
-
-[Using the Search]{.underline} Engine.
+More details on the search engine (and how to use it) in chapter [Using the Search Engine]{#ch-search} Engine.
 
 ### Data Service Layer
 
@@ -97,6 +96,7 @@ The polling agents and Flow Processor are proprietary code, but there are severa
 {caption: "Collector VM internal architecture"}
 ![](images/image59.png)
 
+{id: ch-flow-processor}
 ### Flow Processor
 
 The Flow Processor is a custom service that runs on the Collector and it, surprisingly, processors incoming network flows from the NetFlow and sFlow sources and translates them into a data format Network Insight can use.
@@ -130,6 +130,7 @@ Once a flow gets to the Platform, it gets enriched with data from the rest of th
 
 This enrichment process also checks whether there have been any changes to this meta data (i.e. the virtual machine has vMotioned to another host) and updates it, if needed.
 
+{id: ch-bandwidth-requirements-for-flows}
 #### Bandwidth Requirements for Flows
 
 One of the most frequently asked questions is "how much bandwidth is this NetFlow thing going to use?" -- Which is a good question! It can help you with planning out the Network Insight topology and determining placing of the Collectors. It is, however, a tough question.
@@ -158,6 +159,7 @@ Keep in mind that these calculations are based on averages and could wildly diff
 
 So yeah, that's why the default answer for this question is; it depends.
 
+{id: ch-aws-azure-flow-processing}
 #### AWS & Azure Flow Processing
 
 While NetFlow and sFlow are protocols that push data to the Collector, the flow records in AWS & Azure is a different story. When enabled, there is a flow log (per AWS VPC and per Azure Network Security Group) that keeps all records of network flow inside and outside the public cloud environment. These flow logs are stored in either AWS CloudWatch, an AWS S3 storage bucket, or Azure storage account, and can be viewed via the AWS Console, the Azure Portal, or via their API.
@@ -260,6 +262,7 @@ You could use this experiment and get a (very) rough estimate on how long your o
 
 Again, this is a very rough estimate. The point of this entire chapter is that you should not worry about data loss when you're performing Platform upgrades or when the Platform is down for other reasons. You'd have plenty of time finishing up the upgrade or even restore a full backup, if the Platform goes belly up completely.
 
+{id: ch-hosted-architecture}
 ## Hosted Architecture (SaaS)
 
 If you're using Network Insight as-a-Service, the appliances used are exactly the same as the ones you would use on-premises. There are 2 notable differences:
@@ -271,9 +274,29 @@ Authentication is handled by the VMware Cloud Services Portal, which explains th
 
 Think of it like this; with Network Insight as-a-Service, VMware hosts and maintains the Platform, which means you only have to deploy the Collectors in your own environment. Data flow is also the same, which means the Collector talks unidirectional to the Platform. In this case the Platform is hosted on the internet, which means your Collectors need to have internet access for this to work.
 
-[Fun fact]{.underline}: The Platform appliance of Network Insight is multi-tenant capable out of the box. It currently takes a lot of effort (and it's not user-friendly and not supported) to get multiple tenants activated. I've tried and broke a few Platforms. VMware is using this multi-tenancy capability in the as-a-Service variant. I'm holding out hope that multi-tenancy will be activated in the on-premises variant as well.
+I> The Platform appliance of Network Insight is multi-tenant capable out of the box. It currently takes a lot of effort (and it's not user-friendly and not supported) to get multiple tenants activated. I've tried and broke a few Platforms. VMware is using this multi-tenancy capability in the as-a-Service variant. I'm holding out hope that multi-tenancy will be activated in the on-premises variant as well.
 
 {caption: "Architecture for Network Insight as a Service"}
 ![](images/image61.png)
 
 I> When using Network Insight as-a-Service, you only have to deploy the Collector in your environment. It requires connectivity to the Platform, which means internet connectivity is required for the Collector.
+
+
+{id: ch-clustering}
+## Scalability and Availability (Clustering)
+TODO!
+One Platform and Collector pair can collect a large amount of VM data and network flows; currently 10.000 VMs and 10.000.000 network flows total. However, if you need to go over these maximums, it is possible to create a cluster of Platform appliances to support the bigger environments.
+
+Note that I’ll be calling the appliances a so-called ‘brick’ – this is a term for a VM that’s a part of the Network Insight setup. Just in a house, the Network Insight setup can be built from multiple bricks of multiple sizes. These bricks can be Platforms or Collectors.
+
+Important to know is that a medium brick deployment can also be scaled vertically to become a large brick deployment. All you have to do is to shut the VM down, adjust the virtual hardware to match the large brick deployment specifications and tadaaa, it’s a large brick!
+
+<insert current maximum table here>
+
+If a single large brick Platform isn’t enough to sustain the amount of VMs or network flows you need to monitor, a horizontal scaling exercise can be done. Add multiple Platform bricks into a cluster and the number of VMs and network flows scale up.
+
+Currently, you can create a cluster of a maximum of 10 Platform bricks. Meaning you can monitor up to 100.000 VMs (10.000 per Platform * 10 Platforms) and XXX network flows (xxx per Platform * 10 Platforms) with the maximum size cluster.
+
+The Collectors cannot be clustered at this time, so the maximum amount of VMs and network flows coming from a single data source has a limit of the large Collector: 10.000 VMs and 10.000.000 network flows.
+
+Creating a cluster is pretty straight forward; first, you deploy the first Platform (which will be referred to as Platform1), set up its networking, license and then go to the Install & Something page in order to create a cluster.

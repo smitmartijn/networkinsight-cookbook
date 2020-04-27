@@ -1,4 +1,4 @@
-
+{id: ch-search}
 # Using the Search Engine
 **This chapter was authored by Rohit Reja, Senior Staff Engineer on Network Insight. He was part of the original ArkinNet team.**
 **Find Rohit here: <https://www.linkedin.com/in/rohit-reja-1b11335/>**
@@ -40,7 +40,7 @@ Find all applications that are talking to the application 3TierApp02 and display
 
 The cool part about the search engine is, is that all results and searches are reusable. You can create pinboards from different searches, personalizing these pinboards completely. You can also create search-based events and get alerts whenever the result of a search changes (get notified whenever firewall rule changes happen) or when there are no results (get notified when something is deleted).
 
-Search is also exposed via the public APIs for automation, making it possible to programmatically execute searches and get back the results for further processing. Considering all data inside Network Insight is available via the search, this means that you can export and process any and all information for your own purposes. Organizations have built automation processes around Network Insight to import data into Security Event & Information Management (SIEM) systems, Security Operation Centers (SOC) get notified on any firewall rule changes and verify them against the change management trackers, service providers pull network bandwidth calculations to use for billing purposes, the list goes on. More information on how to automate with Network Insight and examples in the chapter [Automating Network Insight.]{.underline}
+Search is also exposed via the public APIs for automation, making it possible to programmatically execute searches and get back the results for further processing. Considering all data inside Network Insight is available via the search, this means that you can export and process any and all information for your own purposes. Organizations have built automation processes around Network Insight to import data into Security Event & Information Management (SIEM) systems, Security Operation Centers (SOC) get notified on any firewall rule changes and verify them against the change management trackers, service providers pull network bandwidth calculations to use for billing purposes, the list goes on. More information on how to automate with Network Insight and examples in the chapter [Automating Network Insight]{#ch-automating}.
 
 ## Building Searches
 
@@ -55,11 +55,11 @@ Consider the following query:
 
 Let's break it down and align it with the query structure.
 
--   *"VMs"* is the entity type,
+- *"VMs"* is the entity type,
 
--   *"where ip address = 10.10.10.0/24"* is the filter clause,
+- *"where ip address = 10.10.10.0/24"* is the filter clause,
 
--   *"order by vCPUs"* is the order by clause (sorting).
+- *"order by vCPUs"* is the order by clause (sorting).
 
 ## Entity Types
 
@@ -96,8 +96,9 @@ To give you a few more examples of how to spot what the entity type is, the tabl
 |  `Flows where Source Application = CRM`                     | Flows |
 |  `Network Rate of Switch Ports order by Network Rate`       | Switch Ports |
 
-**Note**: The last example will become clearer when we go through the [Property]{.underline} explanation.
+**Note**: The last example will become clearer when we go through the [Property]{#ch-property} explanation.
 
+{id: ch-meta-entity-types}
 ## Meta Entity Types
 
 The meta entity type can refer to multiple concrete types. For example, VM refers to VMware VM, Azure VM, and AWS EC2 Instance. The same goes for Firewall Rule, which will include NSX Firewall Rules, AWS Firewall Rules, Palo Alto firewall rules, basically any firewall rules that Network Insight discovers. When searching for a meta entity type, the interface will show all included entity types. This allows you to filter on the exact firewall rules types you're searching for.
@@ -123,7 +124,7 @@ These are rather interesting. Objects inside Network Insight get correlated to o
 
 These reference properties will appear as a link when looking at an object. On the VM dashboard, or when looking at VM search results, you will notice that you can click on a bunch of properties and get taken to their dashboard. Those are reference properties.
 
-You can also use these reference properties in searches, but more on that in [Reference Traversal Queries]{.underline}.
+You can also use these reference properties in searches, but more on that in [Reference Traversal Queries]{#ch-reference-traversal-queries}.
 
 ### Metric Property
 
@@ -136,7 +137,7 @@ To get an idea of what metric properties are available for an entity type, head 
 
 ### Meta Property
 
-Remember the [Meta Entity Types]{.underline}? Meta properties are the same thing, only attached to another entity. This is a group of properties that's consolidated under a single property.
+Remember the [Meta Entity Types]{#ch-meta-entity-types}? Meta properties are the same thing, only attached to another entity. This is a group of properties that's consolidated under a single property.
 
 For example, the Flow entity has a meta property called VM. This refers to both Source VM and Destination VM. Here's an example:
 
@@ -198,6 +199,7 @@ Using the projection clause, you can bring up a specific property directly in th
 4. Aggregation
 5. Series
 
+{id: ch-property}
 ### Property
 
 If you search for an entity default set of properties are shown in the search results. If you want to see other properties (including metric properties), you can use property projection. For example, consider the following search query:
@@ -256,7 +258,7 @@ In this case, a list of Hypervisors is returned that host any VM that has a high
 
 The object inside the list operator needs to be directly associated with the object in the filter, and not indirectly associated. Meaning you can get a list of Hosts from VMs, Datastores from Hosts (and VMs), Switch Ports from Hosts, etc. However, you cannot get a list of Switch Ports from VMs, as the direct association of Switch Ports will be with Hosts.
 
-Alternatively, you can use reference queries, which can go deeper (and do indirect associations), but also have more overhead. More on that in the chapter [Reference Traversal Queries]{.underline}.
+Alternatively, you can use reference queries, which can go deeper (and do indirect associations), but also have more overhead. More on that in the chapter [Reference Traversal Queries]{#ch-reference-traversal-queries}.
 
 ### Aggregate Functions
 
@@ -374,6 +376,7 @@ When you order a search, sometimes you're only interested in the top 10 flows. O
 
 `Flows where Flow Type = \'Destination is Internet\' order by Bytes limit 10`
 
+{id: ch-reference-traversal-queries}
 ## Reference Traversal Queries
 
 Let's say you want to filter the search results based on a property that is not directly attached to the entity you're searching for. An example of this would be to filter on the CPU usage of the Host, while searching for VMs. In this case, reference traversal queries can be used to do refer to the property that you want to filter on.
@@ -426,10 +429,10 @@ For example, bytes of flows will show traffic for flows over a period of 24 hour
 
 This can be done from the time indicator that is on the right of the search query, inside the web interface. It can also be done from inside the search query itself.
 
-{caption: "Search; time control in the web interface"}
+{caption: "Search; time control in the web interface", id: "fig-time-control"}
 ![](images/image94.png)
 
-As shown in [Figure 90]{.underline} above, it's easy to jump from the current time to some most used points, such as **Yesterday**, **Last 3 Days**, etc. You can also use the **At** option to jump to a very specific time, used for getting to know the exact configuration at that time. Then there's the **Between** option, where you can specific a time range; mostly used for metrics to show graphs of a specific time period.
+As shown in the [figure 90]{#fig-time-control} above, it's easy to jump from the current time to some most used points, such as **Yesterday**, **Last 3 Days**, etc. You can also use the **At** option to jump to a very specific time, used for getting to know the exact configuration at that time. Then there's the **Between** option, where you can specific a time range; mostly used for metrics to show graphs of a specific time period.
 
 You can also specify the time control inside a search query, by using the following syntax:
 

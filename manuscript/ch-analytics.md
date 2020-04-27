@@ -1,3 +1,4 @@
+{id: ch-analytics}
 # Analytics
 
 Almost everything about Network Insight has something to do with analytics in some form. From correlating flows to infrastructure objects to creating network topologies from the available network devices; it's all analyzing the data that's coming in. I like to call these types of analytics, 'passive' analytics. Mostly because you need to go to a page, dashboard, or do a search query to look at the data. And you would be looking at something specific, like troubleshooting issues between 2 VMs or planning out security for a specific application.
@@ -102,7 +103,7 @@ Next, thresholds can be based on a few objects. The scope can be set to either *
 
 Besides the VM search, the scope can also be set to Flows. This allows you to search for flows, just as with the VM option. Meaning you can search for flows with a specific destination port (for example; all traffic going to DNS servers), destination country, incoming traffic from the internet, outgoing traffic to the internet; you name it. Combining conditions is also possible with the flow search, for example; incoming internet traffic coming from a specific country.
 
-Lastly, the scope can also be set to an **Application**. These are the applications that explained in the chapter [Application Constructs]{.underline}.
+Lastly, the scope can also be set to an **Application**. These are the applications that explained in the chapter [Application Constructs]{#application-constructs}.
 
 I> Typically, the Application scope setting is used to monitor workloads running specific applications. The Flow scope setting is mostly used in cases where specific network traffic has to be monitored (like internet traffic or inter-data center traffic).
 
@@ -146,6 +147,7 @@ I should note that the options in the aggregation option change per scope type. 
 
 So, with the Flow scope option, there is more choice to individualize the monitoring. Which makes sense, because flows have more context into the traffic and can separate service ports that run on the same workload.
 
+{id: ch-threshold-breach-value}
 ### Threshold Breach Value
 
 Moving on to the options that determine when the threshold will be breached. First, the **when** option determines whether it needs to watch the latest real-time value (option **any value**), or **the** **average** during a specified time window.
@@ -184,4 +186,4 @@ The baseline data is a so-called moving mean[^11] and standard deviation[^12] da
 
 Dynamic thresholds have the option to be configured with a **high**, **medium**, and **low** sensitivity. The **high** sensitivity uses a standard deviation value of **2**; meaning if the current network traffic value is **2** times as much or less than the average of the last 21 days, the threshold is triggered. The **medium** sensitivity uses the standard deviation value of **2.5**; meaning **2.5** times as much or less than the average of the last 21 days. The **low** sensitivity uses a standard deviation value of **3**; meaning, well, you get it.
 
-To make it a little more complicated, you can also select whether to use the average of the last 30 or 60 minutes or use the maximum or average of the last 5 minutes. This is the same concept as we saw in the INFO a few pages above, in the chapter [Threshold Breach Value]{.underline}.
+To make it a little more complicated, you can also select whether to use the average of the last 30 or 60 minutes or use the maximum or average of the last 5 minutes. This is the same concept as we saw in the INFO a few pages above, in the chapter [Threshold Breach Value]{#ch-threshold-breach-value}.
