@@ -87,17 +87,16 @@ A full list of entity types can be found inside Network Insight. Simply search f
 
 To give you a few more examples of how to spot what the entity type is, the table below lists a few.
 
-  Search query                                             Entity Type
-  -------------------------------------------------------- ------------------
-  Router Interface where IP Address like '192.168.10.\*'   Router Interface
-  Application where Problem = \'Threshold Event\'          Application
-  Datastore where Free Space Percent \< 10%                Datastore
-  Flows where Source Application = CRM                     Flows
-  Network Rate of Switch Ports order by Network Rate       Switch Ports
+{caption: "Search examples, mapping out entity types", column-widths: "70%,30%"}
+| Search query                                                | Entity Type |
+| :---                                                        | :--- |
+|  `Router Interface where IP Address like '192.168.10.*'`   | Router Interface |
+|  `Application where Problem = 'Threshold Event'`          | Application |
+|  `Datastore where Free Space Percent < 10%`                | Datastore |
+|  `Flows where Source Application = CRM`                     | Flows |
+|  `Network Rate of Switch Ports order by Network Rate`       | Switch Ports |
 
-[]{#_Toc35170260 .anchor}Table 4 -- Search examples, mapping out entity types
-
-**Note**: The last example will become more clear when we go through the [Property]{.underline} explanation.
+**Note**: The last example will become clearer when we go through the [Property]{.underline} explanation.
 
 ## Meta Entity Types
 
