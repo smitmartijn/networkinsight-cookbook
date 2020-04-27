@@ -112,18 +112,27 @@ This translates to, that by default, it will look at the network traffic rate on
 
 ### Monitored Metric
 
-First, the metric option can be set to 6 different metrics. I'll explain each of these in the table below.
+First, the metric option can be set to 6 different metrics. I'll explain each of these in the sections below.
 
-{caption: "Threshold metric options", column-widths: "35%,65%"}
-| Metric Option             | Description |
-| :---                      |  :---  |
-| network traffic rate      | Typical network traffic rate in Kbit per second. This is the last real-time value in the bandwidth graphs of a workload. |
-|  max network traffic rate | Network traffic rate in Kbit per second, aggregated over 24 hours and this maximum value represents the peak of that traffic. |
-|  total network traffic    | Network traffic rate in GB, aggregated over 24 hours and this value represents going over that amount of traffic in a day. |
-|  network packet count     | Number of packets. This can be useful to detect denial of service attacks that are based on a lot of smaller packets. The packet-count would go up, but not necessarily the bandwidth itself (these smaller packets can be 2-5% of regular traffic). |
-|  network packet drop      | Number of packets that are dropped. There are mechanisms in place (TCP has this built-in) to recover from dropped packets, and it's pretty common for packet drops to occur. Especially over the internet. Don't put the value at 1 -- you'll go crazy with alerts. |
-|  network packet drop percent | Number of packets that are dropped in percentage form. This is a better option for when looking at packet drops. When network traffic goes up, the packet drops do as well; they usually scale up with the amount of traffic. Packet drops over 5% will impact traffic significantly and between 1 and 2.5% is 'acceptable'. [^10] |
+#### network traffic rate
+Typical network traffic rate in Kbit per second. This is the last real-time value in the bandwidth graphs of a workload.
 
+#### max network traffic rate
+Network traffic rate in Kbit per second, aggregated over 24 hours and this maximum value represents the peak of that traffic.
+
+#### total network traffic
+Network traffic rate in GB, aggregated over 24 hours and this value represents going over that amount of traffic in a day.
+
+#### network packet count
+The number of packets. This can be useful to detect denial of service attacks that are based on a lot of smaller packets. The packet-count would go up, but not necessarily the bandwidth itself (these smaller packets can be 2-5% of regular traffic).
+
+#### network packet drop
+The number of packets that are dropped. There are mechanisms in place (TCP has this built-in) to recover from dropped packets, and it's pretty common for packet drops to occur. Especially over the internet. Don't put the value at 1 -- you'll go crazy with alerts.
+
+#### network packet drop percent
+The number of packets that are dropped in percentage form. This is a better option for when looking at packet drops. When network traffic goes up, the packet drops do as well; they usually scale up with the amount of traffic. Packet drops over 5% will impact traffic significantly and between 1 and 2.5% is 'acceptable'. [^10]
+
+[^10]: https://en.wikipedia.org/wiki/Packet_loss
 
 ### Aggregation
 
