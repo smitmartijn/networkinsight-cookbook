@@ -114,7 +114,7 @@ This translates to, that by default, it will look at the network traffic rate on
 
 First, the metric option can be set to 6 different metrics. I'll explain each of these in the table below.
 
-{column-widths: "35%,65%"}
+{caption: "Threshold metric options", column-widths: "35%,65%"}
 | Metric Option             | Description |
 | :---                      |  :---  |
 | network traffic rate      | Typical network traffic rate in Kbit per second. This is the last real-time value in the bandwidth graphs of a workload. |
@@ -124,7 +124,6 @@ First, the metric option can be set to 6 different metrics. I'll explain each of
 |  network packet drop      | Number of packets that are dropped. There are mechanisms in place (TCP has this built-in) to recover from dropped packets, and it's pretty common for packet drops to occur. Especially over the internet. Don't put the value at 1 -- you'll go crazy with alerts. |
 |  network packet drop percent | Number of packets that are dropped in percentage form. This is a better option for when looking at packet drops. When network traffic goes up, the packet drops do as well; they usually scale up with the amount of traffic. Packet drops over 5% will impact traffic significantly and between 1 and 2.5% is 'acceptable'. [^10] |
 
-[]{#_Toc35170259 .anchor}Table 3 -- Threshold metric options
 
 ### Aggregation
 
