@@ -89,15 +89,15 @@ The Platform only has a single command that is specific to it, and it's only app
 
 A Network Insight cluster can be moved between networks and change IP addresses, if needed. Let's say it was deployed in a testing environment first and after a while, you wanted to promote it and move it to the production environment. The consequence being that it needs to move to a network (typically a different VLAN) with a different IP range. As all appliances in a cluster talk to each other based on their IP address, they all would need to be informed of the network changes, using the command **update-IP-change**. Here's how the workflow looks like in a 3-node cluster:
 
-1.  Move Platform1 into the new network
-    a.  Update its IP address via the CLI using **change-network-settings**
-2.  Change the IP address of Platform1 on both Platform2 and Platform3 by using **update-IP-change \<old-Platform1-IP\> \<new-Platform1-IP\>**
-3.  Move Platform2 into the new network
-    a.  Update its IP address via the CLI using **change-network-settings**
-4.  Change the IP address of Platform2 on both Platform1 and Platform3 by using **update-IP-change \<old-Platform2-IP\> \<new-Platform2-IP\>**
-5.  Move Platform3 into the new network
-    a.  Update its IP address via the CLI using **change-network-settings**
-6.  Change the IP address of Platform3 on both Platform1 and Platform2 by using **update-IP-change \<old-Platform3-IP\> \<new-Platform3-IP\>**
+1. Move Platform1 into the new network
+ a. Update its IP address via the CLI using **change-network-settings**
+2. Change the IP address of Platform1 on both Platform2 and Platform3 by using **update-IP-change \<old-Platform1-IP\> \<new-Platform1-IP\>**
+3. Move Platform2 into the new network
+ a. Update its IP address via the CLI using **change-network-settings**
+4. Change the IP address of Platform2 on both Platform1 and Platform3 by using **update-IP-change \<old-Platform2-IP\> \<new-Platform2-IP\>**
+5. Move Platform3 into the new network
+ a. Update its IP address via the CLI using **change-network-settings**
+6. Change the IP address of Platform3 on both Platform1 and Platform2 by using **update-IP-change \<old-Platform3-IP\> \<new-Platform3-IP\>**
 
 After executing these steps on all Platform nodes in the cluster, it will continue normal operation. If you have a bigger cluster, such as with 5 or 10 nodes, the same steps apply; just multiply by the number of nodes are there.
 
@@ -115,29 +115,28 @@ There are only 2 commands that are specifically relevant to the Collector applia
 {caption: "Moving a Collector between Platforms"}
 ![](images/image71.png)
 
-First, generate a shared secret by adding a new Collector VM using the web interface, under **Settings** and **Install and Support** page. Copy and paste the newly generated shared secret to the set-proxy-shared-secret command to that it will be trusted by the new Platform. Then update the IP address or fully qualified domain name of the Platform that this Collector this be reporting to using **vrni-proxy set-platform \--ip-or-fqdn \<ip/fqdn\>**. After a few minutes, you will see the Collector show up in the web interface and it will be ready to use.
+First, generate a shared secret by adding a new Collector VM using the web interface, under **Settings** and **Install and Support** page. Copy and paste the newly generated shared secret to the set-proxy-shared-secret command to that it will be trusted by the new Platform. Then update the IP address or fully qualified domain name of the Platform that this Collector this be reporting to using **vrni-proxy set-platform --ip-or-fqdn <ip/fqdn>**. After a few minutes, you will see the Collector show up in the web interface and it will be ready to use.
 
-Command Reference
------------------
+## Command Reference
 
 Just for your convenience, here's a recap of the commands that come in handy when troubleshooting Network insight or commands that are good to know.
 
-  Appliance   Command                                          Description
-  ----------- ------------------------------------------------ -----------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Both        log-insight                                      Show, set, enable, disable or diagnose the vRealize Log Insight agent
-  Both        log-trace                                        Log files; follow them as they get filled up, grep inside them or display a specific log file
-  Both        modify-password                                  Change the password of the support and/or consoleuser users.
-  Both        nslookup, ping, ssh-server, telnet, traceroute   Handy troubleshooting commands.
-  Both        ntp                                              Show, set, manually sync or diagnose NTP configuration.
-  Both        services                                         Start, stop or restart services.
-  Collector   set-proxy-shared-secret                          Set a new shared secret on a Collector. Used when moving a Collector.
-  Both        show-connectivity-status                         Shows the network configuration and tests the connectivity to VMwares' upgrade and support tunnel services.
-  Both        show-service-status                              List the status of all services.
-  Both        support-bundle                                   Create, delete or copy a support bundle that contains all logs and configuration for VMware support to troubleshoot with.
-  Both        support-tunnel                                   Enables or disables the support tunnel. This initiates a tunnel to VMware support and lets them login to your system to have a look.
-  Both        telemetry                                        Enables or disables telemetry. This is performance data that is sent to VMware for analysis. VMware support might ask you to enable this when there's an issue.
-  Platform    update-IP-change                                 Update the IP address of another Platform appliance. Used when you have a Platform cluster.
-  Collector   vrni-proxy                                       Create a new Platform pairing. Used when moving a Collector.
-
+{caption: "Useful CLI commands", column-widths: "10%,30%,50%"}
+| Appliance | Command                                        | Description |
+| :----     | :---                                           | :--- |
+| Both      | log-insight                                    | Show, set, enable, disable or diagnose the vRealize Log Insight agent |
+| Both      | log-trace                                      | Log files; follow them as they get filled up, grep inside them or display a specific log file |
+| Both      | modify-password                                | Change the password of the support and/or consoleuser users. |
+| Both      | nslookup, ping, ssh-server, telnet, traceroute | Handy troubleshooting commands for networking issues. |
+| Both      | ntp                                            | Show, set, manually sync or diagnose NTP configuration. |
+| Both      | services                                       | Start, stop or restart services. |
+| Collector | set-proxy-shared-secret                        | Set a new shared secret on a Collector. Used when moving a Collector. |
+| Both      | show-connectivity-status                       | Shows the network configuration and tests the connectivity to VMwares' upgrade and support tunnel services. |
+| Both      | show-service-status                            | List the status of all services. |
+| Both      | support-bundle                                 | Create, delete or copy a support bundle that contains all logs and configuration for VMware support to troubleshoot with. |
+| Both      | support-tunnel                                 | Enables or disables the support tunnel. This initiates a tunnel to VMware support and lets them login to your system to have a look. |
+| Both      | telemetry                                      | Enables or disables telemetry. This is performance data that is sent to VMware for analysis. VMware support might ask you to enable this when there's an issue. |
+| Platform  | update-IP-change                               | Update the IP address of another Platform appliance. Used when you have a Platform cluster. |
+| Collector | vrni-proxy                                     | Create a new Platform pairing. Used when moving a Collector. |
 
 Want to see the options or sub-commands for the above commands? Just try the command and it will list the help text associated with it.

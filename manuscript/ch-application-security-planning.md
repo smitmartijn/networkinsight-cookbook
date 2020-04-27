@@ -133,13 +133,13 @@ T> When working to micro-segment your environment, use the unprotected flow type
 
 Behind every slice of the donut and every directional line (the line between slices) is a popup that displays a couple of things:
 
--   **Services in this group**: Port numbers of services inside this slice that are being used by external hosts. For example; port 443 as a webserver by users.
+- **Services in this group**: Port numbers of services inside this slice that are being used by external hosts. For example; port 443 as a webserver by users.
 
--   **External Services Accessed**: Port numbers of services that this slice is using. For example; port 123 for NTP synchronization.
+- **External Services Accessed**: Port numbers of services that this slice is using. For example; port 123 for NTP synchronization.
 
--   **Flows (Incoming and Outgoing)**: The raw network flows on which the rest of the data is based upon. It'll display a list of source & destination IP, protocol and port number and a nice bandwidth graph of that specific flow.
+- **Flows (Incoming and Outgoing)**: The raw network flows on which the rest of the data is based upon. It'll display a list of source & destination IP, protocol and port number and a nice bandwidth graph of that specific flow.
 
--   **Recommended Firewall Rules**: Based on the services inside the slice and the external services accessed data, Network Insight will provide a list of recommended firewall rules you should use to micro-segment the workloads in this slice.
+- **Recommended Firewall Rules**: Based on the services inside the slice and the external services accessed data, Network Insight will provide a list of recommended firewall rules you should use to micro-segment the workloads in this slice.
 
 While the Services tabs and Flow tab provides some great insight into what's running in a specific slice and you'd be able to use that information to quickly determine what services are running in it and what services it is consuming, the Recommended Firewall Rules are the real actionable results.
 
@@ -429,13 +429,13 @@ It's focused on an Application Service called **3TierApp02**, which has an entry
 
 I've underlined the relationship types in the above description, as it's important to have the right relationships in place in order for Network Insight to recognize them. Especially the service link to a workload is important, use any of these:
 
--   **Hosted on::Hosts**
+- **Hosted on::Hosts**
 
--   **Instantiates::Instantiated by**
+- **Instantiates::Instantiated by**
 
--   **Runs on::Runs**
+- **Runs on::Runs**
 
--   **Virtualized by::Virtualizes**
+- **Virtualized by::Virtualizes**
 
 All the VMware VMs in this example have been discovered from the virtual infrastructure by the ServiceNow Discovery module and MID Server, so they exist in the Network Insight inventory. You could also add these VMs to ServiceNow manually, the only thing that matters is that they actually exist somewhere in a vCenter that Network Insight has as a data source.
 

@@ -69,16 +69,16 @@ The entity type can be in singular and plural form; VM or VMs. The entity type i
 
 Some common entity types are:
 
--   VM (Virtual Machine)
--   Host (ESXi Host and other Hosts)
--   Datastore
--   Vxlan / Vlan
--   Pnics (Physical nics)
--   Vnics (VM nics)
--   VRF (Logical Routers)
--   Route
--   Application
--   Flow
+- VM (Virtual Machine)
+- Host (ESXi Host and other Hosts)
+- Datastore
+- Vxlan / Vlan
+- Pnics (Physical nics)
+- Vnics (VM nics)
+- VRF (Logical Routers)
+- Route
+- Application
+- Flow
 
 A full list of entity types can be found inside Network Insight. Simply search for 'help' or click the link "Learn more about supported properties" that is placed on the bottom of each search (see Figure 74).
 
@@ -192,11 +192,11 @@ A projection clause in a search query decides what fields must be displayed from
 
 Using the projection clause, you can bring up a specific property directly in the results. Projections are an optional clause. If the projection clause is not specified, then the default set of properties are shown for entities in the results. Projection clause may contain one or more of following items:
 
-a)  Property
-b)  Count
-c)  List
-d)  Aggregation
-e)  Series
+1. Property
+2. Count
+3. List
+4. Aggregation
+5. Series
 
 ### Property
 

@@ -24,14 +24,19 @@ On whether it's a good idea or not, just please make sure the homework and cost 
 
 There are a few native network monitoring and troubleshooting tools inside AWS:
 
--   **Mirror sessions**; essentially a port mirror that can be placed on an Elastic Network Interface (ENI). You do some advanced things here, like creating filters to only mirror specific traffic based on source, destination, protocol, and ports. The traffic is delivered to another ENI, meaning you have to run an EC2 instance where you then catch the traffic using something like Wireshark or tcpdump. Another cool fact about these mirror sessions, is that each session is encapsulated into a separate VXLAN network, meaning you can separate out the different mirror sessions by looking at the VXLAN ID on the target ENI.
+#### Mirror sessions
+Essentially a port mirror that can be placed on an Elastic Network Interface (ENI). You do some advanced things here, like creating filters to only mirror specific traffic based on source, destination, protocol, and ports. The traffic is delivered to another ENI, meaning you have to run an EC2 instance where you then catch the traffic using something like Wireshark or tcpdump. Another cool fact about these mirror sessions, is that each session is encapsulated into a separate VXLAN network, meaning you can separate out the different mirror sessions by looking at the VXLAN ID on the target ENI.
 
--   **Flow Logs**: the ability to log all IP traffic that is incoming and outgoing to network interfaces in a specific VPC. Think hit count logs, but only for all IP traffic. You can configure it only for the entire VPC and determine whether you want to only log accepted traffic, or also log rejected traffic by the security groups that are in place. These logs will be sent either to CloudWatch or an S3 bucket.
+#### Flow Logs
+The ability to log all IP traffic that is incoming and outgoing to network interfaces in a specific VPC. Think hit count logs, but only for all IP traffic. You can configure it only for the entire VPC and determine whether you want to only log accepted traffic, or also log rejected traffic by the security groups that are in place. These logs will be sent either to CloudWatch or an S3 bucket.
 
--   **Status Checks**: checks whether services are running, reachable, and performing. This is more on the application level, where the network is used to do these checks.
+#### Status Checks
+Checks whether services are running, reachable, and performing. This is more on the application level, where the network is used to do these checks.
 
--   **CloudWatch Logs**: you can send all kinds of logs and metrics to CloudWatch. It allows you to access, and correlate all this data, between different AWS services. It is comparable to something like Splunk or vRealize Log Insight.
+#### CloudWatch Logs
+You can send all kinds of logs and metrics to CloudWatch. It allows you to access, and correlate all this data, between different AWS services. It is comparable to something like Splunk or vRealize Log Insight.
 
+#### Point Solutions
 These tools are point solutions; solving 1 issue per tool. The mirror sessions are great for on demand troubleshooting but needs an EC2 instance to direct the traffic to (which you need to set up yourself). The Flow Logs can also serve their purpose but that has its scalability limits. It's literally structured logs with the following format:
 
 No friendly names of the account name or EC2 instance, just the IDs. You would need to find the EC2 instance, look at the network interface and grab its ID, before this would make sense.
@@ -169,21 +174,25 @@ I'm not going to repeat all the added value that Network Insight brings to Azure
 
 I'm pleasantly surprised by Microsoft in this case. Azure is a lot more network & security admin friendly then AWS is. It has a bunch of tools that are similar to what AWS but Azure certainly offers more elaborate and extensive tools. Here's a list of the most useful ones:
 
--   **Security Center**: advises on the 'secureness' of security rules. For example, it detects and alerts on 'allow any any' rules.
+#### Security Center
+Advises on the 'secureness' of security rules. For example, it detects and alerts on 'allow any any' rules.
 
--   **Network Watcher**: this is a suite of tools, such as:
+#### Network Watcher
+This is a suite of tools, such as:
 
-    -   **Packet capture**: start a capture of all network traffic and dump the logs in a storage account. No destination VM is needed, like with AWS, and there are options to filter the traffic based on IP source, destination, protocol, and ports.
+- **Packet capture**: start a capture of all network traffic and dump the logs in a storage account. No destination VM is needed, like with AWS, and there are options to filter the traffic based on IP source, destination, protocol, and ports.
 
-    -   **IP flow verify**: simulates whether a given network flow (you can input the IP source, destination, protocol, and port) will be allowed through the security policies. It'll display the exact security rule that is allowing or blocking the flow.
+- **IP flow verify**: simulates whether a given network flow (you can input the IP source, destination, protocol, and port) will be allowed through the security policies. It'll display the exact security rule that is allowing or blocking the flow.
 
-    -   **VPN troubleshoot**: does several health checks on a VPN connection and displays a possible cause for the VPN tunnel or the connectivity going over it being down.
+- **VPN troubleshoot**: does several health checks on a VPN connection and displays a possible cause for the VPN tunnel or the connectivity going over it being down.
 
-    -   **Traffic Analysis**: this comes close to what Network Insight does. Reports will be generated on the NSG flow logs (see below), which contains statistics like; top talkers, geographic traffic distribution, VPN utilization, and some cool network topology diagrams.
+- **Traffic Analysis**: this comes close to what Network Insight does. Reports will be generated on the NSG flow logs (see below), which contains statistics like; top talkers, geographic traffic distribution, VPN utilization, and some cool network topology diagrams.
 
--   **Network Security Group Flow logs**: this will log all traffic going over the NSG to a storage account. It's stored in a similar fashion as AWS, as in security rule hit logs.
+#### Network Security Group Flow Logs
+This will log all traffic going over the NSG to a storage account. It's stored in a similar fashion as AWS, as in security rule hit logs.
 
--   **Virtual Network Tap (vTAP)**: tech preview of distributed port mirroring for virtual networks. The traffic will be sent to a third-party appliance (Gigamon, Flowmon, Ixia, etc.) for analysis.
+#### Virtual Network Tap (vTAP)
+Tech preview of distributed port mirroring for virtual networks. The traffic will be sent to a third-party appliance (Gigamon, Flowmon, Ixia, etc.) for analysis.
 
 Although the network & security troubleshooting tooling is relatively complete, these are still point solutions for Azure. If your organization hosts everything on Azure, you can definitely get away with it. But chances are that not everything is there and there are hybrid applications. That's when you need a solution like Network Insight to not have to jump between interfaces and look at your entire network as a whole. Anyway, let's see how that looks!
 

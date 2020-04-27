@@ -4,19 +4,19 @@ When the decision is made to migrate applications to Public Clouds, like AWS, Az
 
 Questions to ask yourself are:
 
-1.  "Which components make up an application?"
-2.  "To what resources does it need access to function?"
-3.  "How much data is being shipped from and to that application?"
-4.  "What is the network throughput profile (packets per second, routed or switched traffic, throughput) of the application?"
-5.  "What components of the application are worth migrating?"
+1. "Which components make up an application?"
+2. "To what resources does it need access to function?"
+3. "How much data is being shipped from and to that application?"
+4. "What is the network throughput profile (packets per second, routed or switched traffic, throughput) of the application?"
+5. "What components of the application are worth migrating?"
 
 There are four steps in the application migration process:
 
-1.  Assess the current application landscape and get insight into the application blueprints.
-2.  Use this insight to determine suitable applications for migration, and create migration waves aka "Move Groups", which are groups of applications that are migrated together.
-3.  Bandwidth requirements and related cloud costs cannot be skipped. For internet-facing applications, these bandwidth requirements depend on the end-users, and where in the world they are coming from.
-4.  Migrate the selected applications.
-5.  Validate application behavior, post-migration.
+1. Assess the current application landscape and get insight into the application blueprints.
+2. Use this insight to determine suitable applications for migration, and create migration waves aka "Move Groups", which are groups of applications that are migrated together.
+3. Bandwidth requirements and related cloud costs cannot be skipped. For internet-facing applications, these bandwidth requirements depend on the end-users, and where in the world they are coming from.
+4. Migrate the selected applications.
+5. Validate application behavior, post-migration.
 
 vRealize Network Insight Cloud can help with step 1, 2, 3, and 5. [VMware HCX](https://cloud.vmware.com/vmware-hcx) -- workload migration tool extraordinaire, can help with step 3. This chapter focuses heavily on step 2, and 3 which are critical in the planning phase. For the scoop on step 1, refer back to the chapter about [Application Discovery]{.underline}.
 
@@ -106,17 +106,17 @@ Now, while I'm focusing on a per-application process (as most organizations tend
 
 After assigning priorities, creation of the applications migration wave groups can begin. While doing this, the following questions should to be considered:
 
-1.  What are the network requirements in order to move this migration wave?
-    1.  How much traffic will the migration wave create between the cloud and on-prem network?
-    2.  Have you sized the connection to the cloud to support this traffic?
-    3.  What ports and protocols do the applications need to communicate on, and will the network allow this communication?
-2.  Will there be any limits triggered on the destination cloud?
-    1.  Is there a limit for the number of VMs in a network?
-    2.  Is there a limit of the amount of throughput or packets per second?
-        1.  There might be a difference between the maximum throughput or packets per second for internal traffic and internet traffic.
-3.  Is a temporary layer-2 bridge necessary?
-    1.  If you are migrating on a per-application basis, it might be required to create a layer-2 bridge to allow the IP subnet to exist in both the on-prem infra as the cloud infra. VMware HCX can create these layer-2 extensions, but there will be a limit to how much throughput and the number of layer-2 extensions it can handle.
-    2.  Should proximity routing be enabled while the layer-2 extension is online?
+1. What are the network requirements in order to move this migration wave?
+  1. How much traffic will the migration wave create between the cloud and on-prem network?
+  2. Have you sized the connection to the cloud to support this traffic?
+  3. What ports and protocols do the applications need to communicate on, and will the network allow this communication?
+2. Will there be any limits triggered on the destination cloud?
+  1. Is there a limit for the number of VMs in a network?
+  2. Is there a limit of the amount of throughput or packets per second?
+      1.  There might be a difference between the maximum throughput or packets per second for internal traffic and internet traffic.
+3. Is a temporary layer-2 bridge necessary?
+  1. If you are migrating on a per-application basis, it might be required to create a layer-2 bridge to allow the IP subnet to exist in both the on-prem infra as the cloud infra. VMware HCX can create these layer-2 extensions, but there will be a limit to how much throughput and the number of layer-2 extensions it can handle.
+  2. Should proximity routing be enabled while the layer-2 extension is online?
 
 While network requirements (number 1) are the most important to check; as it directly impacts application performance during or after migration, the rest of these questions can prevent the migration from finishing. If not checked properly and in advance, you might hit these limits while in the middle of the migration and need to halt the migration, or even reverse the migration. Unfortunately, this has happened to plenty organizations, costing them user-experience by causing downtime, extra time to either revert or changing the migration plan.
 
@@ -207,9 +207,9 @@ After determining the minimum requirements for the network at the destination cl
 
 ## Migrating the Applications
 
-Now that the planning is done, the migrations itself can begin. I highly recommend [VMware HCX](https://cloud.vmware.com/vmware-hcx?int_cid=70134000001CaZ5&src=WWW_us_VMW_0cnHu1FmS2pidRE57WJU) for this task, and not only because it's one of VMware's products. It allows for cold and live migrations from and to different vSphere platforms, using already built-in tooling, such as vSphere replication. HCX can extend layer-2 networks to stretch an IP subnet between on-premises and VMC on AWS.
+Now that the planning is done, the migrations itself can begin. I highly recommend [VMware HCX](https://cloud.vmware.com/vmware-hcx) for this task, and not only because it's one of VMware's products. It allows for cold and live migrations from and to different vSphere platforms, using already built-in tooling, such as vSphere replication. HCX can extend layer-2 networks to stretch an IP subnet between on-premises and VMC on AWS.
 
-Learn more about [VMware HCX here](https://cloud.vmware.com/i-need-to/migrate-to-the-cloud?int_cid=70134000001CaZ5&src=WWW_us_VMW_0cnHu1FmS2pidRE57WJU).
+Learn more about [VMware HCX here](https://cloud.vmware.com/i-need-to/migrate-to-the-cloud).
 
 ## Validating Application Behavior
 

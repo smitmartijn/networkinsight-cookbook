@@ -87,13 +87,12 @@ Inside a Collector, there are several services running to make sure Data Sources
 
 The polling agents and Flow Processor are proprietary code, but there are several open-source services running:
 
--   PostgreSQL is used to store all collected data, before sending it on to the Platform.
+- **PostgreSQL** is used to store all collected data, before sending it on to the Platform.
 
--   NGINX to act as a transport to the Platform and receive incoming webhooks (just vRealize Log Insight for now).
+- **NGINX** to act as a transport to the Platform and receive incoming webhooks (just vRealize Log Insight for now).
 
--   Nfcapd and Sfcapd are used to receive NetFlow and sFlow (respectively) records and store them in native capd data files.
-
-    -   These are slightly modified to support IPFIX from the VDS and ignore information that Network Insight does not need, to improve performance.
+- **Nfcapd** and **Sfcapd** are used to receive NetFlow and sFlow (respectively) records and store them in native capd data files.
+ - These are slightly modified to support IPFIX from the VDS and ignore information that Network Insight does not need, to improve performance.
 
 {caption: "Collector VM internal architecture"}
 ![](images/image59.png)
@@ -265,8 +264,8 @@ Again, this is a very rough estimate. The point of this entire chapter is that y
 
 If you're using Network Insight as-a-Service, the appliances used are exactly the same as the ones you would use on-premises. There are 2 notable differences:
 
--   Authentication is handled by single-sign-on coupled with the VMware Cloud Services Portal,
--   There are a few user-interface changes, for example the styling colors have been changed to match the other VMware Cloud Services and a couple of settings are not available (LDAP, User Management & Mail Server)
+- Authentication is handled by single-sign-on coupled with the VMware Cloud Services Portal,
+- There are a few user-interface changes, for example the styling colors have been changed to match the other VMware Cloud Services and a couple of settings are not available (LDAP, User Management & Mail Server)
 
 Authentication is handled by the VMware Cloud Services Portal, which explains the missing authentication settings. VMware has its own mail servers in place for the service, so you don't have to configure a mail server.
 
