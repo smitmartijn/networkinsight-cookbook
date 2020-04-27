@@ -90,14 +90,11 @@ The Platform only has a single command that is specific to it, and it's only app
 
 A Network Insight cluster can be moved between networks and change IP addresses, if needed. Let's say it was deployed in a testing environment first and after a while, you wanted to promote it and move it to the production environment. The consequence being that it needs to move to a network (typically a different VLAN) with a different IP range. As all appliances in a cluster talk to each other based on their IP address, they all would need to be informed of the network changes, using the command **update-IP-change**. Here's how the workflow looks like in a 3-node cluster:
 
-1. Move Platform1 into the new network
- a. Update its IP address via the CLI using **change-network-settings**
+1. Move Platform1 into the new network and update its IP address via the CLI using **change-network-settings**
 2. Change the IP address of Platform1 on both Platform2 and Platform3 by using **update-IP-change \<old-Platform1-IP\> \<new-Platform1-IP\>**
-3. Move Platform2 into the new network
- a. Update its IP address via the CLI using **change-network-settings**
+3. Move Platform2 into the new network and update its IP address via the CLI using **change-network-settings**
 4. Change the IP address of Platform2 on both Platform1 and Platform3 by using **update-IP-change \<old-Platform2-IP\> \<new-Platform2-IP\>**
-5. Move Platform3 into the new network
- a. Update its IP address via the CLI using **change-network-settings**
+5. Move Platform3 into the new network and update its IP address via the CLI using **change-network-settings**
 6. Change the IP address of Platform3 on both Platform1 and Platform2 by using **update-IP-change \<old-Platform3-IP\> \<new-Platform3-IP\>**
 
 After executing these steps on all Platform nodes in the cluster, it will continue normal operation. If you have a bigger cluster, such as with 5 or 10 nodes, the same steps apply; just multiply by the number of nodes are there.
@@ -140,4 +137,4 @@ Just for your convenience, here's a recap of the commands that come in handy whe
 | Platform  | update-IP-change                               | Update the IP address of another Platform appliance. Used when you have a Platform cluster. |
 | Collector | vrni-proxy                                     | Create a new Platform pairing. Used when moving a Collector. |
 
-Want to see the options or sub-commands for the above commands? Just try the command and it will list the help text associated with it.
+Want to see the options or sub-commands for the above commands? Just try the command without any parameters, and it will list the help text associated with it.

@@ -51,7 +51,7 @@ As Network Insight understands application constructs and sees everything that h
 
 With a good understanding of the application map, it is much easier to retain application performance when doing migrations.
 
-A deep dive on this topic can be found in the chapter Application Migration Planning.
+A deep dive on this topic can be found in the chapter [Application Migration Planning](#ch-application-migration-planning).
 
 
 ## Use-Case -- Visibility for Containers
@@ -67,7 +67,7 @@ Network Insight comes in to provide clarity of the container environment, reduci
 
 Network Insight can also be used to plan out the security for these container workloads. Due to the tight integration with NSX Data Center for Containers, Network Insight gains the same network flow visibility as with VMs. This means the same security planner can be used to map out network connectivity between the different levels of the containerized application and the best part is that Network Insight can generate recommended firewall rules based on those real-time network flows. Oh, and it also allows these recommended firewall rules to be exported in a format that Kubernetes understands (YAML). Applying these rules is as simple as performance the export and using kubectl to apply them directly to a running application.
 
-More on how to do this in the chapter [Application Security Planning](#ch-application-security-planning)
+More on how to do this in the chapter [Application Security Planning](#ch-application-security-planning).
 
 ## vRealize Network Insight versus vRealize Network Insight Cloud (SaaS)
 
