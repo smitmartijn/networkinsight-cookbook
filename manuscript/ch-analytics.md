@@ -114,6 +114,7 @@ This translates to, that by default, it will look at the network traffic rate on
 
 First, the metric option can be set to 6 different metrics. I'll explain each of these in the table below.
 
+{column-widths: "35%,65%"}
 | Metric Option             | Description |
 | :---                      |  :---  |
 | network traffic rate      | Typical network traffic rate in Kbit per second. This is the last real-time value in the bandwidth graphs of a workload. |
