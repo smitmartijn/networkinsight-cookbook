@@ -104,7 +104,7 @@ I> Typically, the Application scope setting is used to monitor workloads running
 
 While select the scope, there's a handy reference (2) to see how many VMs and/or Physical IP addresses are seen in this scope. Physical IPs can show up in applications and or flow searches, VMs will show up in any of the scope options (if applicable, of course).
 
-When the scope is set, move on to the condition (3). This condition is written in a sentence format with a bunch of option embedded; that's to easier understand what you're actually configuring.
+When the scope is set, move on to the condition (3). This condition is written in a sentence format with a bunch of options embedded; that's to easier understand what you're actually configuring.
 
 Here's the default:
 
@@ -112,16 +112,16 @@ This translates to, that by default, it will look at the network traffic rate on
 
 ### Monitored Metric
 
-First, the metric option can be set to 6 different metrics. I'll explain each of them in the table below.
+First, the metric option can be set to 6 different metrics. I'll explain each of these in the table below.
 
-  Metric Option                 Description
-  ----------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  network traffic rate          Typical network traffic rate in Kbit per second. This is the last real-time value in the bandwidth graphs of a workload.
-  max network traffic rate      ?
-  total network traffic         ?
-  network packet count          Number of packets. This can be useful to detect denial of service attacks that are based on a lot of smaller packets. The packet count would go up, but not necessarily the bandwidth itself (these smaller packets can be 2-5% of regular traffic).
-  network packet drop           Number of packets that are dropped. There are mechanisms in place (TCP has this built in) to recover from dropped packets, and it's pretty common for packet drops to occur. Especially over the internet. Don't put the value at 1 -- you'll go crazy with alerts.
-  network packet drop percent   Number of packets that are dropped in percentage form. This is a better option for when looking at packet drops. When network traffic goes up, the packet drops do as well; they usually scale up with the amount of traffic. Packet drops over 5% will impact traffic significantly and between 1 and 2.5% is 'acceptable'. [^10]
+| Metric Option             | Description |
+| :---                      |  :---  |
+| network traffic rate      | Typical network traffic rate in Kbit per second. This is the last real-time value in the bandwidth graphs of a workload. |
+|  max network traffic rate | ? |
+|  total network traffic    | ? |
+|  network packet count     | Number of packets. This can be useful to detect denial of service attacks that are based on a lot of smaller packets. The packet-count would go up, but not necessarily the bandwidth itself (these smaller packets can be 2-5% of regular traffic). |
+|  network packet drop      | Number of packets that are dropped. There are mechanisms in place (TCP has this built-in) to recover from dropped packets, and it's pretty common for packet drops to occur. Especially over the internet. Don't put the value at 1 -- you'll go crazy with alerts.
+|  network packet drop percent | Number of packets that are dropped in percentage form. This is a better option for when looking at packet drops. When network traffic goes up, the packet drops do as well; they usually scale up with the amount of traffic. Packet drops over 5% will impact traffic significantly and between 1 and 2.5% is 'acceptable'. [^10] |
 
 []{#_Toc35170259 .anchor}Table 3 -- Threshold metric options
 

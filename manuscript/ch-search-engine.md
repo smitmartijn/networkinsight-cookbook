@@ -398,9 +398,7 @@ Find all VMs that are located on a cluster that does not have the NSX Distribute
 
 Take note of the DOT (.) in between the entity (Host or Cluster) that is directly attached to the entity that is being searched on (VM) and the property that is being filtered on. Because Network Insight only correlates and stores properties that are directly related to a specific entity, the VM entity does not have the CPU Usage Rate of the Host that it is on. The Host can change with a vMotion, so it doesn't make sense to directly relate to the Host CPU usage. However, using these reference traversal queries, you can still filter based on the properties of the Host (or Cluster, or anything else that comes up in the VM filters).
 
-  ------ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  INFO   Reference Traversal Queries are heavy on the database. Just like joined queries in relational databases, these queries will cause Network Insight to traverse through multiple database tables and compare records. Try to avoid using them often, and don't be surprised if they take a few seconds.
-  ------ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I> Reference Traversal Queries are heavy on the database. Just like joined queries in relational databases, these queries will cause Network Insight to traverse through multiple database tables and compare records. Try to avoid using them often, and don't be surprised if they take a few seconds.
 
 ## Nested Queries
 
