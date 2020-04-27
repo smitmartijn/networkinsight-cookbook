@@ -169,23 +169,22 @@ There's a lot possible with the filter conditions and comparison operators. Here
 
 It is possible to use multiple filter conditions in a single search and you can mix and match however you would like. To get a little more feeling with how these operators work and for examples on how they work, see the table below.
 
-  Operator     Description                          Example
-  ------------ ------------------------------------ -----------------------------------------------------------
-  AND          Multiple conditions need to be met   VM where Account = \'AWS\_xx\' and AWS VPC = 'My-VPC'
-  OR           Single condition should be met       Flow where Port = 80 OR Port = 443
-  LIKE         Wildcard search                      VM where name LIKE 'web'
-  =            Exact search                         VM where name = 'web01'
-  !=           Anything but                         VM where name != 'web01'
-  \<           Lower than                           Datastore where Free Space Percent \< 10%
-  \<=          Lower than or equal to               VMs where CPU Count \<= 2
-  \>           Higher than                          VMs where CPU Usage \> 80%
-  \>=          Higher than or equal to              VMs where Memory \>= 8GB
-  IN()         Values in this list                  Flows where Port IN(80, 443)
-  NOT IN()     Values not in this list              Datastore where Filesystem Type NOT IN(\'NFS\', \'VSAN\')
-  IS SET       Value has to be set                  Flow where Firewall Rule IS SET
-  IS NOT SET   Value has not to be set              VM where Security Group IS NOT SET
-
-[]{#_Toc35170261 .anchor}Table 5 -- Search filter condition examples
+{caption: "Search filter condition examples", column-widths: "10%,30%,50%"}
+| Operator   | Description                        | Example |
+| :---       | :---                               | :--- |
+| `AND`        | Multiple conditions need to be met | `VM where Account = 'AWS_xx' and AWS VPC = 'My-VPC'` |
+| `OR`         | Single condition should be met     | `Flow where Port = 80 OR Port = 443` |
+| `LIKE`       | Wildcard search                    | `VM where name LIKE 'web'` |
+| `=`          | Exact search                       | `VM where name = 'web01'` |
+| `!=`         | Anything but                       | `VM where name != 'web01'` |
+| `<`          | Lower than                         | `Datastore where Free Space Percent < 10%` |
+| `<=`         | Lower than or equal to             | `VMs where CPU Count <= 2` |
+| `>`          | Higher than                        | `VMs where CPU Usage > 80%` |
+| `>=`         | Higher than or equal to            | `VMs where Memory >= 8GB` |
+| `IN()`       | Values in this list                | `Flows where Port IN(80, 443)` |
+| `NOT IN()`   | Values not in this list            | `Datastore where Filesystem Type NOT IN('NFS', 'VSAN')` |
+| `IS SET`     | Value has to be set                | `Flow where Firewall Rule IS SET` |
+| `IS NOT SET` | Value has not to be set            | `VM where Security Group IS NOT SET` |
 
 ## Projections
 
