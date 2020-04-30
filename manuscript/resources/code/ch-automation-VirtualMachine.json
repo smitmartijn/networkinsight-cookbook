@@ -1,0 +1,26 @@
+"VirtualMachine": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/BaseVirtualMachine"
+      },
+      {
+        "properties": {
+          "cluster": {
+            "$ref": "#/definitions/Reference"
+          },
+          "resource_pool": {
+            "$ref": "#/definitions/Reference"
+          },
+          // ...snip...
+          "cpu_count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "memory": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    ]
+  }

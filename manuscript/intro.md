@@ -67,14 +67,14 @@ While I have tested and verified the information, examples, and external (and in
 
 This book wouldn't be possible without the amazing team behind Network Insight. From providing me with insights what's going on behind the scenes to putting up with my incessive stream of questions, these people stood by me and have credit in making this book happen. Let me introduce them:
 
-* Shiv Agarwal
-* Abhijit Sharma
-* Rohit Reja
-* Dave Overbeek
-* Manish Virat
-* Karthic Kumar
-* Naveen Chaudhary
-* Taruna Gandhi
+* [Shiv Agarwal](https://www.linkedin.com/in/agarwalshiv/)
+* [Abhijit Sharma](https://www.linkedin.com/in/abhijitsharma71/)
+* [Rohit Reja](https://www.linkedin.com/in/rohit-reja-1b11335/)
+* [Manish Virat](https://www.linkedin.com/in/manishvirat/)
+* [Karthic Kumar](https://www.linkedin.com/in/karthicobla/)
+* [Dave Overbeek](https://www.linkedin.com/in/david-overbeek-2a772a1/)
+* [Naveen Chaudhary](https://www.linkedin.com/in/naveen-chaudhary-6b5a2991/)
+* [Taruna Gandhi](https://www.linkedin.com/in/tarunagandhi/)
 
 Thank you for your support and putting up with my continuous stream of questions.
 

@@ -13,7 +13,7 @@ Now I hear you wondering, "What does that have to do with a troubleshooting & mo
 
 There are a few reasons to push data into Network Insight. They all have to do with providing more context or pushing in configuration data. Let's start with the context reason first.
 
-As you've learned in the chapter **Application Security Planning**, application context can be discovered from metadata straight from the infrastructures' inventory, or it can be created manually (or via the API). While application discovery works like a charm, it is also good to eliminate the (manual) discovery step by pushing the application construct into Network Insight directly from the infrastructure automation system that is provisioning the application onto the infrastructure. That way, you've got instant context for any newly deployed application.
+As you've learned in the chapter [Application Security Planning](#ch-application-security-planning), application context can be discovered from metadata straight from the infrastructures' inventory, or it can be created manually (or via the API). While application discovery works like a charm, it is also good to eliminate the (manual) discovery step by pushing the application construct into Network Insight directly from the infrastructure automation system that is provisioning the application onto the infrastructure. That way, you've got instant context for any newly deployed application.
 
 The other reason to push data into Network Insight is to keep configuration synchronized. Data sources is a good example of this configuration. If you have a lot of physical switches, routers or firewalls deployed in the infrastructure and new ones are added regularly, you could automate the creation of those devices in Network Insight when they are added to the network. That way, they will be instantly monitored and available for troubleshooting exercises, without having to add them manually.
 
@@ -55,11 +55,8 @@ As with many of the VMware products these days, Network Insight has an API Explo
 
 It can be found under the gear icon on the top right; API Documentation. There will be 2 tabs: API Reference and Documentation. The reference tab lists all API calls and their format and parameters (you'll use this one the most) and the documentation tab contains links to the API Guide and OpenAPI specification.
 
-  ------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------
-  ![](./media/image96.png){width="1.2012478127734034in" height="1.964601924759405in"}   ![](./media/image97.png){width="4.743362860892389in" height="2.584659886264217in"}
-  ------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------
-
-[]{#_Toc35170249 .anchor}Figure 91 -- Built in API Explorer
+{caption: "Built in API Explorer"}
+![](./resources/images/image96.png)
 
 ### Swagger / OpenAPI Specification
 
@@ -70,6 +67,9 @@ It can also be used to automatically generate code for client libraries, or othe
 The OpenAPI specification is a very good reference source when you're building automation that consumes the custom objects that the API provides. For instance, when retrieving information about entities (VMs, IP Sets, Hosts, all objects from your infrastructure), there will be an **entity\_type** field inside the returned object data. This **entity\_type** describes the schema of data that will be included in the result. By looking up the entity type inside the OpenAPI specification, you know what schema you can expect to be able to use.
 
 For example, here's a snippet of the "VirtualMachine" entity type:
+
+{format: json, caption: "'VirtualMachine' entity type definition"}
+![](./resources/code/ch-automation-VirtualMachine.json)
 
 These definitions can be nested, which the field **allOf** is referencing too. The **VirtualMachine** entity inherits everything from **BaseVirtualMachine**. Then we have the fields that are specific to a VM, like **cpu\_count** and **memory**, but also references to other entities.
 
