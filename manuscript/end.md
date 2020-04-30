@@ -1,18 +1,5 @@
 
-# Shout Outs
 
-This book wouldn't be possible without the amazing team behind Network Insight. From providing me with insights what's going on behind the scenes to putting up with my incessive stream of questions, these people stood by me and have credit in making this book happen. Let me introduce them:
-
-* Shiv Agarwal
-* Abhijit Sharma
-* Rohit Reja
-* Dave Overbeek
-* Manish Virat
-* Karthic Kumar
-* Naveen Chaudhary
-* Taruna Gandhi
-
-Thank you for your support and putting up with my continuous stream of questions.
 
 # Keyword Index
 

@@ -60,8 +60,26 @@ Search queries. I'll be showing search query examples a lot, this is how they wi
 VMs where vCenter = myvc
 ```
 
+## Comments and Questions
+While I have tested and verified the information, examples, and external (and internal) links within this book extensively, there is a chance that something has changed in Network Insight, making the instructions not match anymore. You might also find that something is broken. Please let me know of any errors you find, as well as your suggestions for making this book better, by contacting me on twitter [\@smitmartijn](https://twitter.com/smitmartijn) or on any of my other contact details that are listed on my blog at <https://lostdomain.org>
+
+## Acknowledgements
+
+This book wouldn't be possible without the amazing team behind Network Insight. From providing me with insights what's going on behind the scenes to putting up with my incessive stream of questions, these people stood by me and have credit in making this book happen. Let me introduce them:
+
+* Shiv Agarwal
+* Abhijit Sharma
+* Rohit Reja
+* Dave Overbeek
+* Manish Virat
+* Karthic Kumar
+* Naveen Chaudhary
+* Taruna Gandhi
+
+Thank you for your support and putting up with my continuous stream of questions.
+
 ## Respect the Author’s Rights
-This book is available on [Leanpub](https://leanpub.com/networkinsight) and is not restricted by Digital Rights Management (DRM). That means that you can buy once, and read it on any device and in any format that you'd like. It also means that, in theory, the book can be passed along to other people. To support further development of the book, I'll ask you to forward people to https://leanpub.com/networkinsight to buy their own copy. Help me help you, thanks!
+This book is available on [Leanpub](https://leanpub.com/networkinsight) and is not restricted by Digital Rights Management (DRM). That means that you can buy once, and read it on any device and in any format that you'd like. It also means that, in theory, the book can be passed along to other people. To support further development of the book, I'll ask you to forward people to <https://leanpub.com/networkinsight> to buy their own copy. Help me help you, thanks!
 
 # Disclaimer
 Even though I work on vRealize Network Insight at VMware, this book has been written on a personal title. Any opinions in here are my own and not per se the opinion of VMware.
