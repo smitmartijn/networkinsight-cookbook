@@ -151,6 +151,7 @@ An authorization token is valid for 5 hours after you've requested it. Usually A
 
 Then there's the **token** field. This base64 encoded string is to be used in any following API calls in the HTTP headers, like so:
 
+{format: console, line-numbers: false}
 ```
 Authorization: NetworkInsight 1rT7tm4riiACSfxrO2BvkA==
 Content-Type: application/json
@@ -166,7 +167,10 @@ CSP works with so-called refresh tokens as a way of authentication. When using t
 
 Refresh tokens are linked to an CSP account. To create one, log into <https://cloud.vmware.com> and go to your Console. Then open up your personalized menu (top right) and click **My Account**. Select the **API Tokens** tab and click **Generate a new API token** to get a refresh token. It'll have this format:
 
-```ax22ea9i-139b-344x-lif7-ex6856ce57fa```
+{line-numbers: false}
+```
+ax22ea9i-139b-344x-lif7-ex6856ce57fa
+```
 
 These refresh tokens are valid for 6 months, which you need to keep in mind when building automation based on these tokens.
 
