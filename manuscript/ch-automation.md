@@ -35,7 +35,7 @@ Automation makes it all possible.
 
 Now that we've covered why you would want to automate Network Insight, let's take a look at how. Network Insight has a private and public REST API hosted on the Platform appliance.
 
-Taking one step back, a REST API stands for Representational State Transfer Application Programming Interface. This has become an industry standard in the last few years, simply because it's so dead simple. You do extremely advanced automation with REST APIs but in the basics, it's just HTTP calls and you can use any HTTP client (like a browser or cURL) to call on these APIs. When testing with APIs, I recommend you use the [Postman](https://www.getpostman.com/) client, which is perfect for API development.
+Taking one step back, a REST API stands for [Representational State Transfer](https://en.wikipedia.org/wiki/Representational_state_transfer) [Application Programming Interface](https://en.wikipedia.org/wiki/Application_programming_interface). This has become an industry standard in the last few years, simply because it's so dead simple. You do extremely advanced automation with REST APIs but in the basics, it's just HTTP calls and you can use any HTTP client (like a browser or cURL) to call on these APIs. When testing with APIs, I recommend you use the [Postman](https://www.getpostman.com/) client, which is perfect for API development.
 
 Inside REST, there's a reference architecture that lets you do HTTP calls in different ways that have different effects. If that sounds fuzzy, here's a technical explanation:
 
@@ -158,13 +158,15 @@ Content-Type: application/json
 
 Save the authentication token to a variable that you can reuse inside the script or workflow that you are building.
 
-**Network Insight as a Service Authentication**
+**vRealize Network Insight Cloud Authentication**
 
 As you may remember from the chapter [Hosted Architecture (SaaS)](#ch-hosted-architecture)), there is a difference in authentication between the on-premises Network Insight and the one that's delivered in the VMware Cloud. There is a single-sign-on platform in place for all VMware Cloud Services (CSP) products, meaning there is no user management within Network Insight, and you'll need to go through CSP to get an authentication token to use in the Network Insight API calls.
 
 CSP works with so-called refresh tokens as a way of authentication. When using the API, you need to exchange a refresh token for an authentication token and use that when talking to the Network Insight API (or any other Cloud Service).
 
-Refresh tokens are linked to an CSP account. To create one, log into <https://cloud.vmware.com> and go to your Console. Then open up your personalized menu (top right) and click **My Account**. Select the **API Tokens** tab and click **Generate a new API token** to get a refresh token. It'll look something like this: ```ax22ea9i-139b-344x-lif7-ex6856ce57fa```
+Refresh tokens are linked to an CSP account. To create one, log into <https://cloud.vmware.com> and go to your Console. Then open up your personalized menu (top right) and click **My Account**. Select the **API Tokens** tab and click **Generate a new API token** to get a refresh token. It'll have this format:
+
+```ax22ea9i-139b-344x-lif7-ex6856ce57fa```
 
 These refresh tokens are valid for 6 months, which you need to keep in mind when building automation based on these tokens.
 
@@ -186,7 +188,7 @@ Executing this API call successfully, will give you a result like this:
 }
 ```
 
-The **access\_token** is the important field here, which you need to save and consider as the authentication token for the Network Insight API calls. There is, however, a slight difference in how you send this token across to the API. Instead of sending the **Authorization** header in your API call, you'll need to insert a header called **csp-auth-token** with the value of the authentication token that you've retrieved from the CSP API. Like so:
+The **access\_token** is the important field here, which you need to save and consider as the authentication token for the Network Insight API calls. There is, however, a slight difference in how you send this token across to the API. Instead of sending the **Authorization** header in your API call, you'll need to insert a header called **csp-auth-token** with the value of the authentication token that you've retrieved from the CSP API:
 
 ```
 csp-auth-token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9…verylongstring
@@ -303,18 +305,19 @@ There are two ways to get PowervRNI on your system: a manual and automated way.
 
 Using the built-in cmdlet **Install-Module** will download the module source files for you and place them somewhere where PowerShell knows to load them. Open up a PowerShell window and execute these commands:
 
+{format: console, line-numbers: false}
 ```
-PS > Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-PS > Install-Module PowervRNI
+PS C:\> Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+PS C:\> Install-Module PowervRNI
 ```
 
 The first command is to make the PowerShellGallery a trusted source. You'll only have to do this once and it prevents showing a notice that asks you for permission to download from the PowerShellGallery because it's an untrusted repository. You can still install the module without adding it to the trusted repositories, but it's just cleaner this way.
 
 After the installation has completed, load PowervRNI like this:
 
-{format: console}
+{format: console, line-numbers: false}
 ```
-PS > Import-Module PowervRNI
+PS C:\> Import-Module PowervRNI
 ```
 
 Notice that there's a slight difference in loading the PowervRNI module. When installing a module via **Install-Module**, you can load the modules from anywhere and you don't have to give the relative path to the module source files. It's also an added benefit that you can update the module with **Update-Module** as well. That's why I highly recommend doing it via the automagical way, if you have the option.
@@ -329,18 +332,18 @@ Get the module source files from here: <https://powervrni.github.io/>
 
 And then open up a PowerShell window, change directory to where you have put the module source files and load PowervRNI like this:
 
-{format: console}
+{format: console, line-numbers: false}
 ```
-PS > Import-Module PowervRNI.psd1
+PS C:\> Import-Module PowervRNI.psd1
 ```
 
 ##### Getting Familiar
 
 Now that PowervRNI is on your system and loaded, take a little time to explore the available cmdlets to see what's available and which ones you would like to try. Get a complete list of available cmdlets by executing **Get-Command**:
 
-{format: console}
+{format: console, line-numbers: false}
 ```
-PS > Get-Command -Module PowervRNI
+PS C:\> Get-Command -Module PowervRNI
 
 CommandType   Name                         Version    Source
 -----------   ----                         -------    ------
@@ -354,11 +357,11 @@ Function      Get-vRNIApplication          1.4.74     PowervRNI
 ...etc...
 ```
 
-Every cmdlet in PowervRNI is well-documented and has examples of its usage and you can get that documentation directly in your PowerShell prompt:
+Every cmdlet in PowervRNI is well-documented and has examples of its usage and you can get that documentation directly in your PowerShell console:
 
-{format: console}
+{format: console, line-numbers: false}
 ```
-PS > Get-Help Get-vRNIVM -Examples
+PS C:\> Get-Help Get-vRNIVM -Examples
 
 NAME
     Get-vRNIVM
@@ -383,9 +386,9 @@ There are two cmdlets to connect a Network Insight instance. There's **Connect-v
 
 **Connect-NIServer** is extremely simple to use and only required the Refresh Token that you have created in chapter [Authentication](#ch-authentication).
 
-{format: console}
+{format: console, line-numbers: false}
 ```
-PS > Connect-NIServer -RefreshToken 4b891k9e-9swd-43e1-bd93-06xxxa600d7
+PS C:\> Connect-NIServer -RefreshToken 4b891k9e-9swd-43e1-bd93-06xxxa600d7
 Server				CSPToken
 ------				------
 api.mgmt.cloud.vmware.com/ni	eyJhbXbi9iJSUzI1NiIsInR5cCI6k..verylongstrong
@@ -397,22 +400,23 @@ This exchanged the Refresh Token for an authentication token and that will be us
 
 There are two ways to handle the credentials. You can input the username and password when you connect (either pass them as parameters or be prompted on them) or you can create a [PSCredential](https://blog.kloud.com.au/2016/04/21/using-saved-credentials-securely-in-powershell-scripts/) file once and refer to that file when connecting. This would be the preferred way to connect if you're running a scheduled task. Remember, plain text passwords make babies cry.
 
-{format: console}
+{format: console, line-numbers: false}
 ```
-PS > Connect-vRNIServer -Server ni-platform.lab.lostdomain.local -User 'admin@local'
+PS C:\> Connect-vRNIServer -Server ni-platform.lab.lostdomain.local -User 'admin@local'
 
 PowerShell credential request
 vRealize Network Insight Platform Authentication
 Password for user admin@local: ********
 
 
-Server                           		AuthToken                		AuthTokenExpiry
-------				---------                			---------------
-ni-platform.lab.lostdomain.local 	SbX94W8aGCk7yzX3EpQU9A== 	02/02/2019 17:02:55
+Server                           AuthToken                AuthTokenExpiry
+------                           ---------                ---------------
+ni-platform.lab.lostdomain.local SbX94W8aGCk7yzX3EpQU9A== 02/02/2019 17:02:55
 ```
 
 If the connection was a success, you will see the authentication token being returned which is stored and used for subsequent API calls.
 
+{pagebreak}
 ## Automation Use Cases
 
 Now that we've covered the **how** of automation with Network Insight in the previous chapters, let's focus on the **why**.
@@ -445,6 +449,7 @@ Here's a graphical overview of how the process works, so you can translate it to
 {caption: "Push Applications from Automation workflow"}
 ![](images/image103.png)
 
+{pagebreak}
 ### Importing Applications from Configuration Management Databases
 
 Application Discovery is important to get the right application context in Network Insight. While you can natively integrate the ServiceNow CMDB, there are ways to integrate other CMDBs using the API. If you are not using ServiceNow for your CMDB needs, don't fret. I think it's pretty safe to say that all relevant CMDB systems have a way to export data from its systems and most will even have an API to talk to.
@@ -464,10 +469,9 @@ In the examples directory of PowervRNI, there is an example script that pulls ou
 
 As the script is just a bit too big to paste here, I'll leave you with a link to it:
 
-```
-https://github.com/PowervRNI/powervrni/blob/master/examples/cmdb-import-from-itop.ps1
-```
+<https://github.com/PowervRNI/powervrni/blob/master/examples/cmdb-import-from-itop.ps1>
 
+{pagebreak}
 ### Exporting Network Flows for Security Analytics
 
 Getting out of the application realm, let's focus on a security use case. As Network Insight gathers all network flows going through the network, it has visibility on what's actually happening with your applications. Is it behaving accordingly, sending and receiving traffic that it is supposed to? For instance, a web server should only send out connections that it needs to support its website (usually just HTTP\[S\]). If it starts sending out SSH traffic, it's probably compromised and is trying to compromise other systems.
@@ -482,9 +486,9 @@ Of course, you can customize this to your own requirements.
 
 Using PowervRNI, exporting flows and sending them to another system is fairly simple as there's a cmdlet needed to retrieve the network flows: **Get-vRNIFlow**. Here's an example:
 
-{format: console}
+{format: console, line-numbers: false}
 ```
-PS /> Get-vRNIFlow -Limit 1
+PS C:\> Get-vRNIFlow -Limit 1
 
 entity_id                   	: 17603:515:1298175574
 name                        	: 10.8.20.66(ns3.lostdomain.local) -> 31.3.105.98(NL) [port:53]
@@ -526,6 +530,7 @@ Flow records have a bunch of correlated information attached, as you can see in 
 | **destination\_\***  | Same as above, only for the destination (including context) |
 | **firewall\_action** | When integrated with VMware NSX Data Center, this can show flows which are blocked by the Distributed Firewall (DFW) |
 
+{pagebreak}
 ### Tenant Bandwidth Chargeback / Showback
 
 Using the network flow data in Network Insight, you can also make money. I used to work for a provider which had a range of services, like leasing out physical data center room and network connectivity to or simple virtual machines. All services had something in common; we charged for bandwidth. This is fairly common in provider land and everyone has their way of metering, we had a custom application (that I created) that listened on a mirror (span) port and looked at the actual traffic of our tenants. It saved the byte size of the packets linked to a source IP and saved that number to a database. At the end of every month, we generated reports from this database in order to invoice the customers for the amount of bandwidth they used, that month.
@@ -555,11 +560,12 @@ POST https://ni-platform.lab.lostdomain.local/api/ni/search/aggregation
 }
 ```
 
-Inside this call, the aggregations field is where we specify the operation the aggregation needs to perform. In this case, it's a **SUM** operation on the field **flow.totalBytes.delta.summantion.bytes**. This translates to "SUM(Bytes) of Flow" in the regular UI search bar, as the API search uses the internal naming convention of objects.
+Inside this call, the aggregations field is where we specify the operation the aggregation needs to perform. In this case, it's a **SUM** operation on the field
+**flow.totalBytes.delta.summantion.bytes**. This translates to "SUM(Bytes) of Flow" in the regular UI search bar, as the API search uses the internal naming convention of objects.
 
 Also take note of the filter, where the search condition is given. This can be a single condition as in the example above, but also multiple conditions. For example, if you don't care about splitting out download and upload and want a single number for all bandwidth combined, use:
 
-{format: json}
+{format: json, line-numbers: false}
 ```
 "filter": "source_ip.ip_address = '10.8.20.66' or destination_ip.ip_address = '10.8.20.66' "
 ```
