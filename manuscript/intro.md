@@ -38,7 +38,12 @@ To get notified whenever a new version of this book launches, I strongly recomme
 If you’re reading this on a Kindle, you can add your Kindle email address. That way, Leanpub will send new versions right to your Kindle.
 
 ## How to Use This Book
-As the book title suggests, this book acts like a cookbook for Network Insight. It will provide context and background information on the Network Insight features, and explain how to use them. There is a ton of technical information here, including automation code, call out tips and tricks, key points, and more. In order to make sure you get the most out of it, I'd like to cover a few conventions that are used in this book.
+As the book title suggests, this book acts like a cookbook for Network Insight. It will provide context and background information on the Network Insight features, and explain how to use them. My hope is that you can use it for 2 goals:
+
+1) Use the book to get you started with learning Network Insight, if you're new to the product.
+2) Use it as a reference guide while working with Network Insight in your day to day operations.
+
+There is a ton of technical information here, including automation code, call out tips and tricks, key points, and more. In order to make sure you get the most out of it, I'd like to cover a few conventions that are used in this book.
 
 **Bold**
 : Used for important bits of information that will come back in the following text, or that can be referenced in an image.
@@ -48,17 +53,36 @@ As the book title suggests, this book acts like a cookbook for Network Insight. 
 
 I> This is an call out box. It'll contain either a tip or trick based on the previous text, or an important call out to summarize the previous text. In any case, I'd like you to remember these call outs.
 
-K> This is a 'key tip' call out box. It'll contain a descriptive way to access a 'hidden' feature of Network Insight.
+W> This is a 'key tip' call out box. It'll contain a descriptive way to access a 'hidden' feature of Network Insight.
 
 Search queries. I'll be showing search query examples a lot, this is how they will look:
 ```
 VMs where vCenter = myvc
 ```
 
+## Respect the Author’s Rights
+This book is available on [Leanpub](https://leanpub.com/networkinsight) and is not restricted by Digital Rights Management (DRM). That means that you can buy once, and read it on any device and in any format that you'd like. It also means that, in theory, the book can be passed along to other people. To support further development of the book, I'll ask you to forward people to https://leanpub.com/networkinsight to buy their own copy. Help me help you, thanks!
 
-# Respect the Author’s Rights
-I appreciate you not sharing copies of this book online or in other ways. I’ve chosen a DRM-free format so that you can read your copy wherever and whenever you like; please don’t ruin that by handing out illegal copies. Forward folks to Leanpub.com/shell-of-an-idea to buy their own, and support this and other independent writing!
+# Disclaimer
+Even though I work on vRealize Network Insight at VMware, this book has been written on a personal title. Any opinions in here are my own and not per se the opinion of VMware.
 
+The publisher and the author are providing this book and its contents on an “as is” basis and make no representations or warranties of any kind with respect to this book or its contents. The publisher and the author disclaim all such representations and warranties, including but not limited to warranties of healthcare for a particular purpose. In addition, the publisher and the author assume no responsibility for errors, inaccuracies, omissions, or any other inconsistencies herein.
+
+This disclaimer is provided simply because someone, somewhere will ignore this disclaimer and if they do experience problems or a “resume generating event”, they have no one to blame but themselves. Don’t be that person!
+
+# Foreword by Shiv Agarwal
+
+*Founder of ArkinNet, currently Vice-President of vRealize Network Insight with VMware*
+
+VMware vRealize Network Insight (or vRNI, or Network Insight) has seen a massive adoption in VMware customer base helping our customers get end-to-end visibility and operational simplicity as they embrace a software defined approach to networking and security. Network Insight completes VMware's Virtual Cloud Network vision and story by providing seamlessly visibility and converged network operations across the data center (virtual and physical) and hybrid cloud as well as branch offices and remote sites (via SD-WAN integration).
+
+Jogging down the memory lane, Network Insight came into VMware through the Arkin (ArkinNet) acquisition. As it happens so often in Silicon Valley, my co-founder and I were at VMware before we went out and started Arkin (in 2013). We had joined VMware (in 2008) as part of the Blue Lane acquisition. At Blue Lane, we had built a virtual firewall which became the first-generation virtual firewall (VMware NSX DFW) inside VMware. During our first tenure at VMware (2008-2013), NSX was in its infancy. We saw enterprise customers struggling to operate their virtual networking stack. They were trying to use their existing legacy processes and toolset. Their people's mindset was geared and tuned to managing physical networks. Virtualization was new to the network operators. That's when my cofounder and I got the idea of starting Arkin. You start a company with a big vision, ours was to transform how networks are operated. Idea was to bring consumer grade simplicity to managing networks. We wanted to challenge the status quo. Our first set of use cases was to help customers implement micro-segmentation and operationalize NSX. NSX was becoming the dominant network virtualization stack and we betted on it. We got the first product out in 18 months with some of the marquee NSX customers using it in production and were acquired by VMware in 36 months. At VMware, it was like a match made in heaven. Thanks to the NSX sales team, the two products together (NSX and Network Insight) started flying off the shelf! It's been fun! I tell my team often that the acquisition by VMware was a mere pit stop in our journey, which, at the time of writing this foreword, is still continuing.
+
+We continue to build. Network Insights expanded charter and scope now includes end-to-end network operations - monitoring, troubleshooting and optimization. By combining the different types of network data (flows, packets, metrics, config, streaming, etc.), we have provided a unique platform for our customers to converge their traditionally silo-ed visibility and realize a multitude of use cases around next generation networking and security. We have also created a unique advantage for ourselves by adding a strong application context to network and security dataset. Applications are the lifeline of an enterprise and Network Insight's powerful application discovery and planning feature enables our customers to see their network and security data through the lens of their applications. We are thus elevating IT and empowering them to have a more business-oriented conversation with their line of businesses.
+
+Over the next few years, we see the operational silos breaking at a rapid pace and a lot of automation happening, ultimately leading to self-driving networks. That's the future. Silos create inefficiency and finger pointing. Our vision is to bring a high degree of efficiency in network operations through convergence, consumer grade experience and analytical insights. We continue to deliver upon our vision by investing in new areas. Recently, we acquired a company, Veriflow, which has pioneered the area of network verification in software. This technique is used in many mission critical industries where failure can be catastrophic such as airlines and space. Networking is mission critical for our customers. With this acquisition, we will be arming our customers with network modeling and prediction and significantly push the frontier of network operations in the enterprises.
+
+I am very happy and excited to be writing this foreword for Martijns book on VMware vRealize Network Insight. Martijn has been the technical face and flag bearer of Network Insight in the EMEA region for a long time. I hope the insights captured in his book will trigger in the mind of its readers a genuine thought about transforming their network and security operations.
 
 # About the Author
 
@@ -77,25 +101,6 @@ Back to this book; so, I have been dealing with the entire data center stack for
 Arkin was later acquired in June of 2016 by VMware and it is now known as vRealize Network Insight.
 
 Let's dive in!
-
-P.S: I've written this book on personal title, not as a VMware employee. Any opinions in here are my own and not per se the opinion of VMware.
-
-
-# Foreword by Shiv Agarwal
-
-*Founder of ArkinNet, currently Vice-President of Network Insight with VMware*
-
-VMware vRealize Network Insight (or vRNI, or Network Insight) has seen a massive adoption in VMware customer base helping our customers get end-to-end visibility and operational simplicity as they embrace a software defined approach to networking and security. Network Insight completes VMware's Virtual Cloud Network vision and story by providing seamlessly visibility and converged network operations across the data center (virtual and physical) and hybrid cloud as well as branch offices and remote sites (via SD-WAN integration).
-
-Jogging down the memory lane, Network Insight came into VMware through the Arkin (ArkinNet) acquisition. As it happens so often in Silicon Valley, my co-founder and I were at VMware before we went out and started Arkin (in 2013). We had joined VMware (in 2008) as part of the Blue Lane acquisition. At Blue Lane, we had built a virtual firewall which became the first-generation virtual firewall (VMware NSX DFW) inside VMware. During our first tenure at VMware (2008-2013), NSX was in its infancy. We saw enterprise customers struggling to operate their virtual networking stack. They were trying to use their existing legacy processes and toolset. Their people's mindset was geared and tuned to managing physical networks. Virtualization was new to the network operators. That's when my cofounder and I got the idea of starting Arkin. You start a company with a big vision, ours was to transform how networks are operated. Idea was to bring consumer grade simplicity to managing networks. We wanted to challenge the status quo. Our first set of use cases was to help customers implement micro-segmentation and operationalize NSX. NSX was becoming the dominant network virtualization stack and we betted on it. We got the first product out in 18 months with some of the marquee NSX customers using it in production and were acquired by VMware in 36 months. At VMware, it was like a match made in heaven. Thanks to the NSX sales team, the two products together (NSX and Network Insight) started flying off the shelf! It's been fun! I tell my team often that the acquisition by VMware was a mere pit stop in our journey, which, at the time of writing this foreword, is still continuing.
-
-We continue to build. Network Insights expanded charter and scope now includes end-to-end network operations - monitoring, troubleshooting and optimization. By combining the different types of network data (flows, packets, metrics, config, streaming, etc.), we have provided a unique platform for our customers to converge their traditionally silo-ed visibility and realize a multitude of use cases around next generation networking and security. We have also created a unique advantage for ourselves by adding a strong application context to network and security dataset. Applications are the lifeline of an enterprise and Network Insight's powerful application discovery and planning feature enables our customers to see their network and security data through the lens of their applications. We are thus elevating IT and empowering them to have a more business-oriented conversation with their line of businesses.
-
-Over the next few years, we see the operational silos breaking at a rapid pace and a lot of automation happening, ultimately leading to self-driving networks. That's the future. Silos create inefficiency and finger pointing. Our vision is to bring a high degree of efficiency in network operations through convergence, consumer grade experience and analytical insights. We continue to deliver upon our vision by investing in new areas. Recently, we acquired a company, Veriflow, which has pioneered the area of network verification in software. This technique is used in many mission critical industries where failure can be catastrophic such as airlines and space. Networking is mission critical for our customers. With this acquisition, we will be arming our customers with network modeling and prediction and significantly push the frontier of network operations in the enterprises.
-
-I am very happy and excited to be writing this foreword for Martijns book on VMware vRealize Network Insight. Martijn has been the technical face and flag bearer of Network Insight in the EMEA region for a long time. I hope the insights captured in his book will trigger in the mind of its readers a genuine thought about transforming their network and security operations.
-
-
 
 
 # Markau examples
@@ -143,7 +148,7 @@ A> This is a short aside.
 
 
 {aside}
-# A Note About Asides
+## A Note About Asides
 
 This is a longer aside.
 
