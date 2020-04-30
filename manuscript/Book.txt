@@ -7,4 +7,5 @@ ch-architecture.md
 ch-cli.md
 ch-analytics.md
 ch-search-engine.md
+ch-automation.md
 end.md

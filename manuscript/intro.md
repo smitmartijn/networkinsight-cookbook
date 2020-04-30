@@ -50,12 +50,14 @@ I> This is an call out box. It'll contain either a tip or trick based on the pre
 
 K> This is a 'key tip' call out box. It'll contain a descriptive way to access a 'hidden' feature of Network Insight.
 
-
 Search queries. I'll be showing search query examples a lot, this is how they will look:
 ```
 VMs where vCenter = myvc
-```elasticsearch
+```
 
+
+# Respect the Author’s Rights
+I appreciate you not sharing copies of this book online or in other ways. I’ve chosen a DRM-free format so that you can read your copy wherever and whenever you like; please don’t ruin that by handing out illegal copies. Forward folks to Leanpub.com/shell-of-an-idea to buy their own, and support this and other independent writing!
 
 
 # About the Author
