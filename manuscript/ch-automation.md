@@ -55,8 +55,8 @@ As with many of the VMware products these days, Network Insight has an API Explo
 
 It can be found under the gear icon on the top right; API Documentation. There will be 2 tabs: API Reference and Documentation. The reference tab lists all API calls and their format and parameters (you'll use this one the most) and the documentation tab contains links to the API Guide and OpenAPI specification.
 
-{caption: "Built in API Explorer"}
-![](./resources/images/image96.png)
+{caption: "Built-in API Explorer"}
+![](images/image96.png)
 
 ### Swagger / OpenAPI Specification
 
@@ -68,7 +68,7 @@ The OpenAPI specification is a very good reference source when you're building a
 
 For example, here's a snippet of the "VirtualMachine" entity type:
 
-{format: json, caption: "'VirtualMachine' entity type definition"}
+{format: json}
 ```
 "VirtualMachine": {
     "allOf": [
@@ -111,13 +111,50 @@ To get an authentication token, use the **/auth/token** API endpoint. This is th
 
 As we're sending data (the credentials) across, the /auth/token endpoint takes a POST request. Formatting the POST body is fairly straight forward using JSON:
 
+{format: json}
+```
+{
+  "username": "admin@vrni.com",
+  "password": "myPassword",
+  "domain": {
+    "domain_type": "LDAP",
+    "value": "example.com"
+  }
+}
+```
+
 This example uses a credentials that is tied to a LDAP directory with the domain name **example.com**. If you were to use credentials that are local to the Network Insight platform, you would use something like this:
 
+{format: json}
+```
+{
+  "username": "admin@local",
+  "password": "myPassword",
+  "domain": {
+    "domain_type": "local",
+    "value": "local"
+  }
+}
+```
+
 If the call is successful (right credentials, formatted correctly and the API or backend isn't on fire), you will receive a HTTP code 200 back and the response body will look something like this:
+
+{format: json}
+```
+{
+  "token": "1rT7tm4riiACSfxrO2BvkA==",
+  "expiry": 1509332642427
+}
+```
 
 An authorization token is valid for 5 hours after you've requested it. Usually API calls are done on demand, but if you're scheduling calls continuously; keep in mind to refresh the token at least every 5 hours. Otherwise it will expire, and your subsequent API calls will return a 401 (unauthorized). The **expiry** field is the exact time that the token will expire. It is really exact, as it is formatted as an epoch timestamp in milliseconds (epoch usually stands for the seconds from January 1^st^, 1970 at 00:00:00 GMT). You can use this timestamp to see if your token is due for a refresher.
 
 Then there's the **token** field. This base64 encoded string is to be used in any following API calls in the HTTP headers, like so:
+
+```
+Authorization: NetworkInsight 1rT7tm4riiACSfxrO2BvkA==
+Content-Type: application/json
+```
 
 Save the authentication token to a variable that you can reuse inside the script or workflow that you are building.
 
@@ -127,7 +164,7 @@ As you may remember from the chapter [Hosted Architecture (SaaS)](#ch-hosted-arc
 
 CSP works with so-called refresh tokens as a way of authentication. When using the API, you need to exchange a refresh token for an authentication token and use that when talking to the Network Insight API (or any other Cloud Service).
 
-Refresh tokens are linked to an CSP account. To create one, log into <https://cloud.vmware.com> and go to your Console. Then open up your personalized menu (top right) and click **My Account**. Select the **API Tokens** tab and click **Generate a new API token** to get a refresh token. It'll look something like this: **ax22ea9i-139b-344x-lif7-ex6856ce57fa**
+Refresh tokens are linked to an CSP account. To create one, log into <https://cloud.vmware.com> and go to your Console. Then open up your personalized menu (top right) and click **My Account**. Select the **API Tokens** tab and click **Generate a new API token** to get a refresh token. It'll look something like this: ```ax22ea9i-139b-344x-lif7-ex6856ce57fa```
 
 These refresh tokens are valid for 6 months, which you need to keep in mind when building automation based on these tokens.
 
@@ -137,9 +174,25 @@ After getting a refresh token, there's a single CSP API call you need to call to
 
 Executing this API call successfully, will give you a result like this:
 
+{format: json}
+```
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9…verylongstring",
+  "expires_in": 0,
+  "id_token": "string",
+  "refresh_token": "string",
+  "scope": "string",
+  "token_type": "string"
+}
+```
+
 The **access\_token** is the important field here, which you need to save and consider as the authentication token for the Network Insight API calls. There is, however, a slight difference in how you send this token across to the API. Instead of sending the **Authorization** header in your API call, you'll need to insert a header called **csp-auth-token** with the value of the authentication token that you've retrieved from the CSP API. Like so:
 
-As a final note, it is also worth noting that the URL for the Network Insight as-a-Service API is the same for all environments: <https://api.mgmt.cloud.vmware.com/ni/$api-endpoint>
+```
+csp-auth-token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9…verylongstring
+```
+
+As a final note, it is also worth noting that the URL for the Network Insight as-a-Service API is the same for all environments: <https://api.mgmt.cloud.vmware.com/ni/api-endpoint>
 
 Once you're authenticated, return to the API Explorer and find the API call that you need to retrieve or push the information you want.
 
@@ -154,20 +207,24 @@ Using Network Insight to get a list of VMs might be useful if you have a large e
 First, we need to find the right API call to get this list. Turn to the API Explorer and you will find a call to the endpoint **/entities/vms**. This has the description "List vms", so it's probably the one we're looking for. If you then look at the available parameters, this is what shows:
 
 {caption: "Parameters for API endpoint /entities/vms"}
-![](./media/image98.png)
+![](images/image98.png)
 
 For all the Entity endpoints, you'll see that the parameters are pretty much the same. There is a **size** parameter for the amount of results returned on a page, a **cursor** parameter to indicate from which page you want to start getting results and a **start\_time** and **end\_time**, which can be used to go back in time. Remember that there is a timeline to show historical data? Using **start\_time** and **end\_time** can get the list of VMs that existed a week ago, including the ones that have been deleted since.
 
 The **cursor** is important to get full results. By default, the results for returned entities are paged in pages of the indicated **size** (default 10 results) and with every returned page, there'll also be a next **cursor** value in there, which you can use to request the next page. Have a look at this example:
 
 {caption: "Using Postman to execute API endpoint /entities/vms"}
-![](./media/image99.png)
+![](images/image99.png)
 
 In this example, I'm using Postman to get a list of VMs, limited by 2 results. The first thing you'll notice is that there are actually any VM attributes listed in the results, just **entity\_id**s. This works the same with all entities; it returns a list of references to entities. You can take the **entity\_id** and get detailed information by using the specific entity type API endpoint. In the case of the first result this will be **/entities/vms/17603:1:1010454414**, but we'll get to that.
 
 Inside the result, the "results" array contains the resulting entities (thanks, captain obvious!). I'd like to get your attention to the other results. As said, there's a **cursor** value that indicates the next page, a **total\_count** with the amount of total results available (regardless the page limit) and the timeline values. The timeline is by default set to the current time, if you do not give a timeline yourself.
 
 We've got 2 results now and there are 109 in total, which makes this next API call:
+
+```
+https://ni-platform.lab.lostdomain.local/api/ni/entities/vms?size=2&cursor=Mg==
+```
 
 The result will be the next 2 VMs in the list and another cursor value. Continue on like this until you've got all 109 VMs returned. Do this inside a loop and dynamically look for the **total\_count** and the current count of results in order to determine to do another API call or be satisfied with the results. You could also look out for the **cursor** value. If there's no more pages, this cursor value will be empty.
 
@@ -180,7 +237,6 @@ If you want to get the right context for troubleshooting and monitoring, you nee
 There are two steps required to create an application container:
 
 1. Create the application itself
-
 2. Create a tier within the newly created application with a filter that points to workloads (using tags, VM names, folders, any logical object in the virtualization layer).
 
 In the API Explorer, there's an entire section devoted to application management. You'll quickly find the endpoints **/groups/applications** (POST) and **/groups/applications/{id}/tiers** (POST), which are needed to create an application.
@@ -188,7 +244,7 @@ In the API Explorer, there's an entire section devoted to application management
 Creating an application via /groups/application (POST) doesn't require much; just an application name. The result will contain the **entity\_id** that it has given the new application. Store that for the next call. Here's an example using the name **My-New-Application**. The top text area is the body that is being sent to the API and the bottom text area is the result that the API returns:
 
 {caption: "Using Postman to create an application via the API"}
-![](./media/image100.png)
+![](images/image100.png)
 
 You now have an empty application without any tiers. Let's add some!
 
@@ -197,7 +253,7 @@ Here's where the previously saved **entity\_id** comes in handy, as the API endp
 The body of this endpoint is a bit more elaborate though, as it needs not only a name but also a filter to determine which workloads will be added to this tier. The filter is basically a search query, so you can filter on any logical object (tags, VM names, folders, etc.) to get the right VMs in the tier. In this example, I'll use a simple search based on VM name. Here's the formatted API call:
 
 {caption: "Using Postman to create an application tier via the API"}
-![](./media/image101.png)
+![](images/image101.png)
 
 As you can see, there is a **name** field (which is the name the new tier is given) in the body and an array called **group\_membership\_criteria**. This is where you define the search query that looks for workloads to put into the tier.
 
@@ -243,6 +299,26 @@ My goal with PowervRNI was pretty straight forward: make it easy to get started 
 
 There are two ways to get PowervRNI on your system: a manual and automated way.
 
+##### Installing Automagically
+
+Using the built-in cmdlet **Install-Module** will download the module source files for you and place them somewhere where PowerShell knows to load them. Open up a PowerShell window and execute these commands:
+
+```
+PS > Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+PS > Install-Module PowervRNI
+```
+
+The first command is to make the PowerShellGallery a trusted source. You'll only have to do this once and it prevents showing a notice that asks you for permission to download from the PowerShellGallery because it's an untrusted repository. You can still install the module without adding it to the trusted repositories, but it's just cleaner this way.
+
+After the installation has completed, load PowervRNI like this:
+
+{format: console}
+```
+PS > Import-Module PowervRNI
+```
+
+Notice that there's a slight difference in loading the PowervRNI module. When installing a module via **Install-Module**, you can load the modules from anywhere and you don't have to give the relative path to the module source files. It's also an added benefit that you can update the module with **Update-Module** as well. That's why I highly recommend doing it via the automagical way, if you have the option.
+
 ##### Installing Manually
 
 Installing it manually can be a good option on systems where you don't have permissions to use the cmdlet **Install-Module**. Although the newer PowerShell versions have to ability to install modules just for yourself (parameter "*-Scope CurrentUser*"), it can still be locked down.
@@ -253,35 +329,87 @@ Get the module source files from here: <https://powervrni.github.io/>
 
 And then open up a PowerShell window, change directory to where you have put the module source files and load PowervRNI like this:
 
-##### Installing Automagically
-
-Using the built-in cmdlet **Install-Module** will download the module source files for you and place them somewhere where PowerShell knows to load them. Open up a PowerShell window and execute these commands:
-
-The first command is to make the PowerShellGallery a trusted source. You'll only have to do this once and it prevents showing a notice that asks you for permission to download from the PowerShellGallery because it's an untrusted repository. You can still install the module without adding it to the trusted repositories, but it's just cleaner this way.
-
-After the installation has completed, load PowervRNI like this:
-
-Notice that there's a slight difference in loading the PowervRNI module. When installing a module via **Install-Module**, you can load the modules from anywhere and you don't have to give the relative path to the module source files. That's why I recommend doing it via the automagical way, if you have the option.
+{format: console}
+```
+PS > Import-Module PowervRNI.psd1
+```
 
 ##### Getting Familiar
 
-Now that PowervRNI is on your system and loaded, take a little time to explore the available cmdlets to see what's available and which ones you would like to try. Get a complete list of available cmdlets by executing this:
+Now that PowervRNI is on your system and loaded, take a little time to explore the available cmdlets to see what's available and which ones you would like to try. Get a complete list of available cmdlets by executing **Get-Command**:
 
-Every cmdlet in PowervRNI is well-documented and has examples of its usage and you can get that documentation via PowerShell:
+{format: console}
+```
+PS > Get-Command -Module PowervRNI
+
+CommandType   Name                         Version    Source
+-----------   ----                         -------    ------
+Function      Connect-NIServer             1.4.74     PowervRNI
+Function      Connect-vRNIServer           1.4.74     PowervRNI
+Function      Disable-vRNIDataSource       1.4.74     PowervRNI
+Function      Disconnect-vRNIServer        1.4.74     PowervRNI
+Function      Enable-vRNIDataSource        1.4.74     PowervRNI
+Function      Get-vRNIAPIVersion           1.4.74     PowervRNI
+Function      Get-vRNIApplication          1.4.74     PowervRNI
+...etc...
+```
+
+Every cmdlet in PowervRNI is well-documented and has examples of its usage and you can get that documentation directly in your PowerShell prompt:
+
+{format: console}
+```
+PS > Get-Help Get-vRNIVM -Examples
+
+NAME
+    Get-vRNIVM
+
+SYNTAX
+    Get-vRNIVM [-Limit <Int32>] [[-Name] <String>] [-Connection <PSObject>] [<CommonParameters>]
+
+SYNOPSIS
+    Get virtual machines from vRealize Network Insight.
+
+    -------------------------- EXAMPLE 1 --------------------------
+    PS C:\> Get-vRNIVM
+
+    List all VMs in your vRNI environment (note: this may take a while if you have a lot of VMs)
+```
 
 ##### Connecting to Network Insight
 
 In the previous chapters, you've learned about the way Network Insight handles authentication (via authorization tokens). PowervRNI uses the authorization tokens for all API calls, which means you need to connect and authorize first.
 
-There are two cmdlets to connect a Network Insight instance. There's **Connect-vRNIServer** to connect to vRealize Network Insight (the on-prem variant) and there's **Connect-NIServer** to connect to the Network Insight as a Service variant.
+There are two cmdlets to connect a Network Insight instance. There's **Connect-vRNIServer** to connect to vRealize Network Insight (the on-prem variant) and there's **Connect-NIServer** to connect to the vRealize Network Insight Cloud variant.
 
 **Connect-NIServer** is extremely simple to use and only required the Refresh Token that you have created in chapter [Authentication](#ch-authentication).
+
+{format: console}
+```
+PS > Connect-NIServer -RefreshToken 4b891k9e-9swd-43e1-bd93-06xxxa600d7
+Server				CSPToken
+------				------
+api.mgmt.cloud.vmware.com/ni	eyJhbXbi9iJSUzI1NiIsInR5cCI6k..verylongstrong
+```
 
 This exchanged the Refresh Token for an authentication token and that will be used for subsequent API calls and you are now free to use the rest of the cmdlets inside PowervRNI.
 
 **Connect-vRNIServer** takes a few more parameters, as the on-premises instance would have more details like the IP or hostname of the Platform VM and the credentials to connect.
 
 There are two ways to handle the credentials. You can input the username and password when you connect (either pass them as parameters or be prompted on them) or you can create a [PSCredential](https://blog.kloud.com.au/2016/04/21/using-saved-credentials-securely-in-powershell-scripts/) file once and refer to that file when connecting. This would be the preferred way to connect if you're running a scheduled task. Remember, plain text passwords make babies cry.
+
+{format: console}
+```
+PS > Connect-vRNIServer -Server ni-platform.lab.lostdomain.local -User 'admin@local'
+
+PowerShell credential request
+vRealize Network Insight Platform Authentication
+Password for user admin@local: ********
+
+
+Server                           		AuthToken                		AuthTokenExpiry
+------				---------                			---------------
+ni-platform.lab.lostdomain.local 	SbX94W8aGCk7yzX3EpQU9A== 	02/02/2019 17:02:55
+```
 
 If the connection was a success, you will see the authentication token being returned which is stored and used for subsequent API calls.
 
@@ -304,7 +432,7 @@ vRealize Automation (vRA) is an infrastructure lifecycle management and automati
 As an example, I'll be using a 3-tiered application blueprint that contains a web server, application server, and database server tier. Of the web and application tiers, there can be multiple VMs deployed but there's just one database server. They are linked to vSphere templates which will be cloned when a deployment is requested.
 
 {caption: "Example vRealize Automation 3-tiered Application Blueprint"}
-![](./media/image102.png)
+![](images/image102.png)
 
 This blueprint design relates directly to an application construct within Network Insight, using the blueprint name as application name and the different types of machine deployments (Web, App, DB) as the names for the tiers. When this blueprint is deployed by someone, vRA will deploy the virtual machines, networks, storage and the software packages on the newly created virtual machines. After that work is done, we can insert a custom vRealize Orchestrator (vRO, the octopus' engine) workflow that will take this newly created application and creates the application context inside Network Insight.
 
@@ -315,7 +443,7 @@ I> The vRO workflow and a step by step guidance of how to install it, can be [fo
 Here's a graphical overview of how the process works, so you can translate it to your own system.
 
 {caption: "Push Applications from Automation workflow"}
-![](./media/image103.tiff)
+![](images/image103.png)
 
 ### Importing Applications from Configuration Management Databases
 
@@ -326,7 +454,7 @@ If it has an API; good! You can set up a periodical synchronization between the 
 Here's a visual representation of this workflow:
 
 {caption: "Import Applications from CMDB workflow"}
-![](./media/image104.tiff)
+![](images/image104.png)
 
 #### Example
 
@@ -335,6 +463,10 @@ Importing data from a CMDB can be easy when it has an API. iTop is an open sourc
 In the examples directory of PowervRNI, there is an example script that pulls out application items from iTop, traverses the relationship tree and discovers VMs that are attached to that application. Then it adds that application tree as an application construct into Network Insight.
 
 As the script is just a bit too big to paste here, I'll leave you with a link to it:
+
+```
+https://github.com/PowervRNI/powervrni/blob/master/examples/cmdb-import-from-itop.ps1
+```
 
 ### Exporting Network Flows for Security Analytics
 
@@ -350,14 +482,49 @@ Of course, you can customize this to your own requirements.
 
 Using PowervRNI, exporting flows and sending them to another system is fairly simple as there's a cmdlet needed to retrieve the network flows: **Get-vRNIFlow**. Here's an example:
 
+{format: console}
+```
+PS /> Get-vRNIFlow -Limit 1
+
+entity_id                   	: 17603:515:1298175574
+name                        	: 10.8.20.66(ns3.lostdomain.local) -> 31.3.105.98(NL) [port:53]
+entity_type                 	: Flow
+source_vm                   	: @{entity_id=17603:1:859119666; entity_type=VirtualMachine}
+source_vnic                 	: @{entity_id=17603:18:292970721; entity_type=Vnic}
+source_datacenter           	: @{entity_id=17603:105:88573490; entity_type=VCDatacenter}
+source_ip                   	: @{ip_address=10.8.20.66; netmask=255.255.255.255; …}
+destination_ip              	: @{ip_address=31.3.105.98; netmask=255.255.255.255; ...}
+source_l2_network           	: @{entity_id=17603:12:727099007; entity_type=VlanL2Network}
+port                        		: @{start=53; end=53; display=53; iana_name=dns; iana_port_display=53 [dns]}
+source_folders              	: {@{entity_id=17603:81:2131637277; entity_type=Folder}}
+destination_folders         	: {}
+source_resource_pool      	: @{entity_id=17603:79:876290838; entity_type=ResourcePool}
+source_cluster              	: @{entity_id=17603:66:694428497; entity_type=Cluster}
+protocol                    	: UDP
+source_ip_sets              	: {}
+destination_ip_sets         	: {}
+source_security_groups   	: {}
+destination_security_groups : {}
+traffic_type                	: INTERNET_TRAFFIC
+source_security_tags        	: {}
+destination_security_tags	: {}
+source_host                 	: @{entity_id=17603:4:208253188; entity_type=Host}
+source_vm_tags              	: {Tags:BackDatUp}
+destination_vm_tags       	: {}
+within_host                 	: False
+firewall_action             	: ALLOW
+flow_tag                    	: {INTERNET_TRAFFIC, SRC_IP_VM, DST_IP_INTERNET, DIFF_HOST...}
+```
+
 Flow records have a bunch of correlated information attached, as you can see in the example above. I'd like to highlight a few fields on which you could filter, which would be beneficial when looking for specific flows:
 
-  **Field**              **Description**
-  ---------------------- ----------------------------------------------------------------------------------------------------------------------
-  **traffic\_type**      Which way is the traffic going? **INTERNET\_TRAFFIC** or **EAST\_WEST\_TRAFFIC** are possibilities.
-  **source\_\***         Source of traffic; not only IP address, but also context like **vm**, **vnic**, **datacenter**, etc.
-  **destination\_\***    Same as above, only for the destination (including context)
-  **firewall\_action**   When integrated with VMware NSX Data Center, this can show flows which are blocked by the Distributed Firewall (DFW)
+{caption: "Interesting Flow properties"}
+| Field                | Description |
+| :---                 | :---        |
+| **traffic\_type**    | Which way is the traffic going? **INTERNET\_TRAFFIC** or **EAST\_WEST\_TRAFFIC** are possibilities. |
+| **source\_\***       | Source of traffic; not only IP address, but also context like **vm**, **vnic**, **datacenter**, etc. |
+| **destination\_\***  | Same as above, only for the destination (including context) |
+| **firewall\_action** | When integrated with VMware NSX Data Center, this can show flows which are blocked by the Distributed Firewall (DFW) |
 
 ### Tenant Bandwidth Chargeback / Showback
 
@@ -367,19 +534,55 @@ While we had our issues, this was a pretty clean approach. Other service provide
 
 This bandwidth data is available within Network Insight and there are ways to get a clean list of bandwidth usage per IP (source or destination) in several formats. Using the API is one of those formats. In the below example, I'll go through an extremely simple example on how to use the API and retrieve bandwidth usage per source IP address.
 
-####  Example
+#### Example
 
 There is an API endpoint called aggregation (_/api/ni/search/aggregation_), which can be used to fetch sums or averages of a specified metric. In this case, we'll be using the aggregation endpoint to retrieve the sum of flows coming and going to a specific IP address. To understand what's going on in that script, here's the API call:
+
+{format: json}
+```
+POST https://ni-platform.lab.lostdomain.local/api/ni/search/aggregation
+{
+    "entity_type": "Flow",
+    "aggregations": [
+    {
+        "aggregation_type": "SUM",
+        "field": "flow.totalBytes.delta.summation.bytes"
+    }
+    ],
+    "filter": "source_ip.ip_address = '10.8.20.66'",
+    "start_time": 1560589466,
+    "end_time": 1560675866
+}
+```
 
 Inside this call, the aggregations field is where we specify the operation the aggregation needs to perform. In this case, it's a **SUM** operation on the field **flow.totalBytes.delta.summantion.bytes**. This translates to "SUM(Bytes) of Flow" in the regular UI search bar, as the API search uses the internal naming convention of objects.
 
 Also take note of the filter, where the search condition is given. This can be a single condition as in the example above, but also multiple conditions. For example, if you don't care about splitting out download and upload and want a single number for all bandwidth combined, use:
+
+{format: json}
+```
+"filter": "source_ip.ip_address = '10.8.20.66' or destination_ip.ip_address = '10.8.20.66' "
+```
 
 You can modify the filter to use VMs or any other of the objects inside Network Insight. Get creative!
 
 Lastly, the **start\_time** and **end\_time** fields indicate the time window that the result should be based on.
 
 As a result of this API call, you will get a recap of the aggregation request and the value of the query:
+
+{format: json}
+```
+{
+  "aggregations": {
+    "field": "flow.totalbytes.delta.summation.bytes",
+    "aggregation_type": "SUM"
+    "value": 4978402
+  },
+  "total_count": 1,
+  "start_time": 1560589466,
+  "end_time": 1560675866
+}
+```
 
 The field **aggregations.value** is the number of bytes that matches the filter.
 
