@@ -194,6 +194,7 @@ Executing this API call successfully, will give you a result like this:
 
 The **access\_token** is the important field here, which you need to save and consider as the authentication token for the Network Insight API calls. There is, however, a slight difference in how you send this token across to the API. Instead of sending the **Authorization** header in your API call, you'll need to insert a header called **csp-auth-token** with the value of the authentication token that you've retrieved from the CSP API:
 
+{line-numbers: false}
 ```
 csp-auth-token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9…verylongstring
 ```
@@ -228,8 +229,9 @@ Inside the result, the "results" array contains the resulting entities (thanks, 
 
 We've got 2 results now and there are 109 in total, which makes this next API call:
 
+{line-numbers: false}
 ```
-https://ni-platform.lab.lostdomain.local/api/ni/entities/vms?size=2&cursor=Mg==
+https://ni-platform.lab.local/api/ni/entities/vms?size=2&cursor=Mg==
 ```
 
 The result will be the next 2 VMs in the list and another cursor value. Continue on like this until you've got all 109 VMs returned. Do this inside a loop and dynamically look for the **total\_count** and the current count of results in order to determine to do another API call or be satisfied with the results. You could also look out for the **cursor** value. If there's no more pages, this cursor value will be empty.
@@ -395,7 +397,7 @@ There are two cmdlets to connect a Network Insight instance. There's **Connect-v
 PS C:\> Connect-NIServer -RefreshToken 4b891k9e-9swd-43e1-bd93-06xxxa600d7
 Server				CSPToken
 ------				------
-api.mgmt.cloud.vmware.com/ni	eyJhbXbi9iJSUzI1NiIsInR5cCI6k..verylongstrong
+api.mgmt.cloud.vmware.com/ni	eyJhbXbi9iJSUzI1NiIsInR5cCI6k..verylongstring
 ```
 
 This exchanged the Refresh Token for an authentication token and that will be used for subsequent API calls and you are now free to use the rest of the cmdlets inside PowervRNI.
@@ -406,7 +408,7 @@ There are two ways to handle the credentials. You can input the username and pas
 
 {format: console, line-numbers: false}
 ```
-PS C:\> Connect-vRNIServer -Server ni-platform.lab.lostdomain.local -User 'admin@local'
+PS C:\> Connect-vRNIServer -Server ni-platform.lab.local -User 'admin@local'
 
 PowerShell credential request
 vRealize Network Insight Platform Authentication
@@ -415,12 +417,13 @@ Password for user admin@local: ********
 
 Server                           AuthToken                AuthTokenExpiry
 ------                           ---------                ---------------
-ni-platform.lab.lostdomain.local SbX94W8aGCk7yzX3EpQU9A== 02/02/2019 17:02:55
+ni-platform.lab.local SbX94W8aGCk7yzX3EpQU9A== 02/02/2019 17:02:55
 ```
 
 If the connection was a success, you will see the authentication token being returned which is stored and used for subsequent API calls.
 
 {pagebreak}
+
 ## Automation Use Cases
 
 Now that we've covered the **how** of automation with Network Insight in the previous chapters, let's focus on the **why**.
@@ -454,6 +457,7 @@ Here's a graphical overview of how the process works, so you can translate it to
 ![](images/image103.png)
 
 {pagebreak}
+
 ### Importing Applications from Configuration Management Databases
 
 Application Discovery is important to get the right application context in Network Insight. While you can natively integrate the ServiceNow CMDB, there are ways to integrate other CMDBs using the API. If you are not using ServiceNow for your CMDB needs, don't fret. I think it's pretty safe to say that all relevant CMDB systems have a way to export data from its systems and most will even have an API to talk to.
@@ -476,6 +480,7 @@ As the script is just a bit too big to paste here, I'll leave you with a link to
 <https://github.com/PowervRNI/powervrni/blob/master/examples/cmdb-import-from-itop.ps1>
 
 {pagebreak}
+
 ### Exporting Network Flows for Security Analytics
 
 Getting out of the application realm, let's focus on a security use case. As Network Insight gathers all network flows going through the network, it has visibility on what's actually happening with your applications. Is it behaving accordingly, sending and receiving traffic that it is supposed to? For instance, a web server should only send out connections that it needs to support its website (usually just HTTP\[S\]). If it starts sending out SSH traffic, it's probably compromised and is trying to compromise other systems.
@@ -535,6 +540,7 @@ Flow records have a bunch of correlated information attached, as you can see in 
 | **firewall\_action** | When integrated with VMware NSX Data Center, this can show flows which are blocked by the Distributed Firewall (DFW) |
 
 {pagebreak}
+
 ### Tenant Bandwidth Chargeback / Showback
 
 Using the network flow data in Network Insight, you can also make money. I used to work for a provider which had a range of services, like leasing out physical data center room and network connectivity to or simple virtual machines. All services had something in common; we charged for bandwidth. This is fairly common in provider land and everyone has their way of metering, we had a custom application (that I created) that listened on a mirror (span) port and looked at the actual traffic of our tenants. It saved the byte size of the packets linked to a source IP and saved that number to a database. At the end of every month, we generated reports from this database in order to invoice the customers for the amount of bandwidth they used, that month.
@@ -549,7 +555,7 @@ There is an API endpoint called aggregation (_/api/ni/search/aggregation_), whic
 
 {format: json}
 ```
-POST https://ni-platform.lab.lostdomain.local/api/ni/search/aggregation
+POST https://ni-platform.lab.local/api/ni/search/aggregation
 {
     "entity_type": "Flow",
     "aggregations": [
