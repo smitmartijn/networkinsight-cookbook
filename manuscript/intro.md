@@ -1,20 +1,64 @@
-# Abstract
+# Introduction
 
-If you are in any way affiliated with network and virtual infrastructure troubleshooting and monitoring, you're going to like this book. If you're driven crazy by having to overlap multiple tools to get the information needed to troubleshoot an issue in your environment, you're going to love this book.
+Thank you for purchasing the vRealize Network Insight Cookbook! This book is for people in jobs or interests related to networking and security in private, hybrid and/or public clouds. Managing these networks and security policies becomes a much easier job with Network Insight and this book will try to explain best how to go about managing those networks and how Network Insight itself is positioned to do so.
 
-As the title suggests, this book will give you a deep dive look at VMware's holistic networking and virtual infrastructure monitoring & troubleshooting product; vRealize Network Insight.
+Sometimes it's not all in the name. This is also true for vRealize Network Insight, as it gives you not just insight into your network, but your compute, storage and network layers.
 
-Network Insight is famous for a couple reasons:
+I> While the full product name is VMware vRealize® Network Insight™ and VMware vRealize® Network Insight™ Cloud for the Software-as-a-Service version; please note that I'll be using the shorthand 'Network Insight' from now on.
 
-1. It has the capability to kickstart your way to a secure segmented network by creating visibility into what actually happens on your network.
+With Network Insight, you can take the guesswork out of deploying micro-segmentation with comprehensive network flow analytics to map out real-time traffic and model security groups and firewall rules to successfully implement micro-segmentation security policies. It also helps to improve performance and availability of the infrastructure by combining and correlating virtual and physical compute, storage and networking components to provide a clear and full picture of the infrastructure.
 
-2. It sucks up all the operational and configuration data of your virtual (vSphere, Kubernetes, Bare metal), public cloud (AWS & Azure), SD-WAN, and physical network environment and allows you to overlay the two to create a holistic view of your entire environment and use that to significantly reduce time spent troubleshooting and gathering data from your environment.
+It does not discriminate between virtual machines or physical servers, provides detailed information about the smallest workloads (containers), has integrations with the VMware Virtual Cloud Network vision and everything that runs beneath the Virtual Cloud Network.
 
-3. Analytics that go over all the data that's pulled into Network Insight, provide a great deal of useful information; from "who is using my applications?", to "are there any abnormalities in the network behavior?", to all the way to "how much is this cloud egress bandwidth costing me?".
+Network Insight collects data from data sources like VMware vSphere, VMware NSX, Physical network devices (switches, routers, load balancers, and firewalls), Physical converged systems, IPAM systems and log collectors. All this information is put in a structured database, correlated and available via the intuitive user interface and API. The way this converged information is disclosed with the user interface is what makes Network Insight unique and such a pleasure to work with.
 
-You will be guided through the components and architecture of Network Insight and discover hidden gems and secrets throughout the platform. This book will take you from beginner to a vRealize Network Insight Samurai and we'll have some fun along the way!
+It's all about the fundamentals of the platform, as it's designed from the ground up to be as open as possible. This means you can retrieve any and all the data that is gathered and do all kinds of neat things with it like filtering, grouping, sorting and perform other modifiers on it (more on that in the chapter [Using the Search Engine](#ch-search).
 
-# Introduction -- About the Author
+Apart from configuration and operational data, you can also send real-time network flow (NetFlow or sFlow) data to Network Insight to map out which workloads in your environment talk to each other. Because all data is correlated, the network flow data is linked to the source or destination workload (virtual machine or physical host) and you can see the name of the workload related to the flow, instead of just seeing that **10.0.0.10** talks to **10.0.1.11** over port **80**.
+
+I> **Configuration data** is meant as the configuration of the data source (i.e. show running-configuration on a physical Cisco device and the inventory of a VMware vCenter, etc.). **Operational data** is meant as dynamic, changing data on data sources (i.e. the route and mac tables on a network device, IP addresses of virtual machines, etc.).
+
+This network flow data is typically generated by the vSphere Distributed Switch or a physical network device.
+
+Due to the technical and sometimes very specific nature of this book, it's advised to have a Network Insight instance ready to go while you are reading; so, you can try things out with data from your own infrastructure!
+
+The content of this book is based on Network Insight 5.0 (with some small nuggets on 5.1, because I took too long to write it). Considering the product team is an innovation engine and moves really quickly (delivers major features every 3 months), you need to doublecheck the details when you're using a newer version. This book also does not intend to replace the [official documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/index.html), but rather complement it. The specific technical details in this book will age, and rightly so.
+
+## Book Updates
+
+This is an so-called 'Agile' book. As Network Insight evolves and new features are added (and existing features are changed), this book will try to keep up with the release cycles. That's what so great about Leanpub, as you buy this book once and every time I push an update; you will get the updated version for free.
+
+To get notified whenever a new version of this book launches, I strongly recommend that you allow Leanpub to send you update emails. This is not turned on by default; please make sure you do this:
+
+1. Log into your [Leanpub](https://leanpub.com/login) account
+2. Select "Library" from your account menu (upper-right)
+3. Click on this book’s cover image
+4. Select "New Version Available" under "Email Settings"
+
+If you’re reading this on a Kindle, you can add your Kindle email address. That way, Leanpub will send new versions right to your Kindle.
+
+## How to Use This Book
+As the book title suggests, this book acts like a cookbook for Network Insight. It will provide context and background information on the Network Insight features, and explain how to use them. There is a ton of technical information here, including automation code, call out tips and tricks, key points, and more. In order to make sure you get the most out of it, I'd like to cover a few conventions that are used in this book.
+
+**Bold**
+: Used for important bits of information that will come back in the following text, or that can be referenced in an image.
+
+[Links](#)
+: Throughout this book, there will be links to external resources, but also internal links to other chapters. Although I've tried to keep each chapter standing on its own, there will be call outs to previous chapters to refresh your memory.
+
+I> This is an call out box. It'll contain either a tip or trick based on the previous text, or an important call out to summarize the previous text. In any case, I'd like you to remember these call outs.
+
+K> This is a 'key tip' call out box. It'll contain a descriptive way to access a 'hidden' feature of Network Insight.
+
+
+Search queries. I'll be showing search query examples a lot, this is how they will look:
+```
+VMs where vCenter = myvc
+```elasticsearch
+
+
+
+# About the Author
 
 As I'm sitting in the airport, waiting for my flight after a team building exercise with the Networking & Security Business Unit within VMware, the thought going through my head is: why? Why on earth are you starting another big project that's going to take up a ton of time? The reason is simple: Hi, I'm Martijn Smit and I'm an information sharing addict (echo's: "hi Martijn!").
 
@@ -34,12 +78,6 @@ Let's dive in!
 
 P.S: I've written this book on personal title, not as a VMware employee. Any opinions in here are my own and not per se the opinion of VMware.
 
-Syntax(?) to-do
-===============
-
-Underlines = links
-
-search query = which can be placed in the Network Insight search engine
 
 # Foreword by Shiv Agarwal
 
@@ -55,25 +93,10 @@ Over the next few years, we see the operational silos breaking at a rapid pace a
 
 I am very happy and excited to be writing this foreword for Martijns book on VMware vRealize Network Insight. Martijn has been the technical face and flag bearer of Network Insight in the EMEA region for a long time. I hope the insights captured in his book will trigger in the mind of its readers a genuine thought about transforming their network and security operations.
 
-# Pre-face
-
-This book is for people in jobs or interests related to networking and security in private, hybrid and/or public clouds. Managing these networks and security policies becomes a much easier job with Network Insight and this book will try to explain best how to go about managing those networks and how Network Insight itself is positioned to do so.
-
-Sometimes it's not all in the name. This is also true for Network Insight, as it gives you not just insight into your network, but your compute, storage and network layers.
-
-With Network Insight, you can take the guesswork out of deploying micro-segmentation with comprehensive network flow analytics to map out real-time traffic and model security groups and firewall rules to successfully implement micro-segmentation security policies. It also helps to improve performance and availability of the infrastructure by combining and correlating virtual and physical compute, storage and networking components to provide a clear and full picture of the infrastructure.
-
-It does not discriminate between virtual machines or physical servers, provides detailed information about the smallest workloads (containers), has integrations with the VMware Virtual Cloud Network vision and everything that runs beneath the Virtual Cloud Network.
-
-Network Insight collects data from data sources like VMware vSphere, VMware NSX, Physical network devices (switches, routers, load balancers, and firewalls), Physical converged systems, IPAM systems and log collectors. All this information is put in a structured database, correlated and available via the intuitive user interface and API. The way this converged information is disclosed with the user interface is what makes Network Insight unique and such a pleasure to work with.
-
-It\'s all about the fundamentals of the platform, as it's designed from the ground up to be as open as possible. This means you can retrieve any and all the data that is gathered and do all kinds of neat things with it like filtering, grouping, sorting and perform other modifiers on it (more on that in the chapter [Using the Search Engine](#ch-search).
-
-Apart from configuration and operational data, you can also send real-time network flow (NetFlow or sFlow) data to Network Insight to map out which workloads in your environment talk to each other. Because all data is correlated, the network flow data is linked to the source or destination workload (virtual machine or physical host) and you can see the name of the workload related to the flow, instead of just seeing that **10.0.0.10** talks to **10.0.1.11** over port **80**.
-
-I> **Configuration data** is meant as the configuration of the data source (i.e. show running-configuration on a physical Cisco device and the inventory of a VMware vCenter, etc.). **Operational data** is meant as dynamic, changing data on data sources (i.e. the route and mac tables on a network device, IP addresses of virtual machines, etc.).
 
 
+
+# Markau examples
 {class: discussion}
 B> This is a discussion blurb.
 
@@ -130,8 +153,3 @@ Multi-paragraph asides are more pleasant using this syntax.
 {/aside}
 
 
-This network flow data is typically generated by the vSphere Distributed Switch or a physical network device.
-
-Due to the technical and sometimes very specific nature of this book, it's advised to have a Network Insight instance ready to go while you are reading; so, you can try things out with data from your own infrastructure!
-
-The content of this book is based on Network Insight 5.0 (with some small nuggets on 5.1, because I took too long to write it). Considering the product team is an innovation engine and moves really quickly (delivers major features every 3 months), you need to doublecheck the details when you're using a newer version. This book also does not intend to replace the [official documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/index.html), but rather complement it. The specific technical details in this book will age, and rightly so.
