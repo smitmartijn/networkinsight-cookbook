@@ -69,7 +69,34 @@ The OpenAPI specification is a very good reference source when you're building a
 For example, here's a snippet of the "VirtualMachine" entity type:
 
 {format: json, caption: "'VirtualMachine' entity type definition"}
-![](./resources/code/ch-automation-VirtualMachine.json)
+```
+"VirtualMachine": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/BaseVirtualMachine"
+      },
+      {
+        "properties": {
+          "cluster": {
+            "$ref": "#/definitions/Reference"
+          },
+          "resource_pool": {
+            "$ref": "#/definitions/Reference"
+          },
+          // ...snip...
+          "cpu_count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "memory": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    ]
+  }
+```
 
 These definitions can be nested, which the field **allOf** is referencing too. The **VirtualMachine** entity inherits everything from **BaseVirtualMachine**. Then we have the fields that are specific to a VM, like **cpu\_count** and **memory**, but also references to other entities.
 
