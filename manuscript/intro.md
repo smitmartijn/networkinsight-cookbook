@@ -55,9 +55,29 @@ I> This is an call out box. It'll contain either a tip or trick based on the pre
 
 W> This is a 'key tip' call out box. It'll contain a descriptive way to access a 'hidden' feature of Network Insight.
 
-Search queries. I'll be showing search query examples a lot, this is how they will look:
+**Search queries**
+There will be a lot of search query examples throughout this book. This is how they will look:
 ```
 VMs where vCenter = myvc
+```
+
+**Command Prompt Output**
+Executing commands on Network Insight, or executing an automation script will have output. To show examples of this, there will be some command prompt outputs throughout this book. Here's an example:
+{format: console, line-numbers: false}
+```
+PS ~/> ./example.ps1
+Counting from 1 to 9 (in seconds):  1 2 3 4 5 6 7 8 9
+PS ~/>
+```
+
+**Code**
+Mostly confined to the [Automating Network Insight chapter](#ch-automating), there will also be example code. Here's how that will look:
+{format: python}
+```
+x = 1
+if x == 1:
+  # indented four spaces
+  print("x is 1.")
 ```
 
 ## Comments and Questions

@@ -499,34 +499,34 @@ Using PowervRNI, exporting flows and sending them to another system is fairly si
 ```
 PS C:\> Get-vRNIFlow -Limit 1
 
-entity_id                   	: 17603:515:1298175574
-name                        	: 10.8.20.66(ns3.lostdomain.local) -> 31.3.105.98(NL) [port:53]
-entity_type                 	: Flow
-source_vm                   	: @{entity_id=17603:1:859119666; entity_type=VirtualMachine}
-source_vnic                 	: @{entity_id=17603:18:292970721; entity_type=Vnic}
-source_datacenter           	: @{entity_id=17603:105:88573490; entity_type=VCDatacenter}
-source_ip                   	: @{ip_address=10.8.20.66; netmask=255.255.255.255; …}
-destination_ip              	: @{ip_address=31.3.105.98; netmask=255.255.255.255; ...}
-source_l2_network           	: @{entity_id=17603:12:727099007; entity_type=VlanL2Network}
-port                        		: @{start=53; end=53; display=53; iana_name=dns; iana_port_display=53 [dns]}
-source_folders              	: {@{entity_id=17603:81:2131637277; entity_type=Folder}}
-destination_folders         	: {}
-source_resource_pool      	: @{entity_id=17603:79:876290838; entity_type=ResourcePool}
-source_cluster              	: @{entity_id=17603:66:694428497; entity_type=Cluster}
-protocol                    	: UDP
-source_ip_sets              	: {}
-destination_ip_sets         	: {}
-source_security_groups   	: {}
-destination_security_groups : {}
-traffic_type                	: INTERNET_TRAFFIC
-source_security_tags        	: {}
-destination_security_tags	: {}
-source_host                 	: @{entity_id=17603:4:208253188; entity_type=Host}
-source_vm_tags              	: {Tags:BackDatUp}
-destination_vm_tags       	: {}
-within_host                 	: False
-firewall_action             	: ALLOW
-flow_tag                    	: {INTERNET_TRAFFIC, SRC_IP_VM, DST_IP_INTERNET, DIFF_HOST...}
+entity_id                  : 17603:515:1298175574
+name                       : 10.8.20.66(ns3.lostdomain.local) -> 31.3.105.98(NL) [port:53]
+entity_type                : Flow
+source_vm                  : @{entity_id=17603:1:859119666; entity_type=VirtualMachine}
+source_vnic                : @{entity_id=17603:18:292970721; entity_type=Vnic}
+source_datacenter          : @{entity_id=17603:105:88573490; entity_type=VCDatacenter}
+source_ip                  : @{ip_address=10.8.20.66; netmask=255.255.255.255; …}
+destination_ip             : @{ip_address=31.3.105.98; netmask=255.255.255.255; ...}
+source_l2_network          : @{entity_id=17603:12:727099007; entity_type=VlanL2Network}
+port                       : @{start=53; end=53; display=53; iana_name=dns; iana_port_display=53 [dns]}
+source_folders             : {@{entity_id=17603:81:2131637277; entity_type=Folder}}
+destination_folders        : {}
+source_resource_pool       : @{entity_id=17603:79:876290838; entity_type=ResourcePool}
+source_cluster             : @{entity_id=17603:66:694428497; entity_type=Cluster}
+protocol                   : UDP
+source_ip_sets             : {}
+destination_ip_sets        : {}
+source_security_groups     : {}
+destination_security_groups: {}
+traffic_type               : INTERNET_TRAFFIC
+source_security_tags       : {}
+destination_security_tags  : {}
+source_host                : @{entity_id=17603:4:208253188; entity_type=Host}
+source_vm_tags             : {Tags:BackDatUp}
+destination_vm_tags        : {}
+within_host                : False
+firewall_action            : ALLOW
+flow_tag                   : {INTERNET_TRAFFIC, SRC_IP_VM, DST_IP_INTERNET, DIFF_HOST...}
 ```
 
 Flow records have a bunch of correlated information attached, as you can see in the example above. I'd like to highlight a few fields on which you could filter, which would be beneficial when looking for specific flows:
