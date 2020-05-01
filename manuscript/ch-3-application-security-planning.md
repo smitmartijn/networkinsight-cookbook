@@ -15,7 +15,7 @@ With a zero-trust architecture, using micro-segmentation, security policies (whi
 
 To learn more about VMware NSX and how it helps you to do micro-segmentation, have a look at the free eBooks named [VMware NSX® Micro-segmentation Day 1](https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/products/nsx/vmware-nsx-microsegmentation.pdf) and [VMware NSX® Micro-segmentation Day 2](https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/products/nsx/vmware-micro-segmentation-day-2.pdf).
 
-{caption: "Micro-Segmention; logical security boundaries between applications."}
+{caption: "Micro-Segmention; logical security boundaries between applications.", width: "70%"}
 ![](images/image8.png)
 
 ## The Challenge of Micro-Segmentation
@@ -79,7 +79,7 @@ This process is the same for NSX data sources (both NSX-V and NSX-T) where you c
 
 Besides using the VDS and/or NSX to collect NetFlow data, you can also configure physical network devices to send NetFlow or sFlow to Network Insight. With this, you gain insight into the traffic flows between physical only hosts and not only see the flows where a virtual machine is involved. To prepare Network Insight to receive these flows from physical network devices, you need to add a "Physical Flow Collector" data source.
 
-{caption: "Adding a Physical Flow Collector data source"}
+{caption: "Adding a Physical Flow Collector data source", width: "80%"}
 ![](images/image10.png)
 
 This has to be a separate Collector VM and cannot be a Collector where other data sources have already been added. The decision to do so, is purely related to performance of the Collectors. The one that will be used for these physical flows is exactly the same as a Collector that's being used to gather data from vCenter and has exactly the same services running.
@@ -100,7 +100,7 @@ Starting from the high level; this is a good view to see what kind of behavior i
 
 On the left of the high-level overview is what I like to call the "donut of joy". You have to find joy in the little things of life and for me this is one of those things. This donut presents a very clear view of what network traffic flows are happening, grouped per object. By default, the slices are grouped by network (vCenter port group) and you can change the grouping to any available workload object, for example; application, VM, subnet, vCenter folder, NSX Security Tag or an AWS VPC.
 
-{caption: "Micro-Segmentation Planner; the donut of joy"}
+{caption: "Micro-Segmentation Planner; the donut of joy", width: "70%"}
 ![](images/image12.png)
 
 As with most of the Network Insight interface, you can click on any of the slices or connection lines and get the data that's behind the picture.
@@ -146,7 +146,7 @@ Behind every slice of the donut and every directional line (the line between sli
 
 While the Services tabs and Flow tab provides some great insight into what's running in a specific slice and you'd be able to use that information to quickly determine what services are running in it and what services it is consuming, the Recommended Firewall Rules are the real actionable results.
 
-{caption: "Recommended Firewall Rules grouped by Application"}
+{caption: "Recommended Firewall Rules grouped by Application", width: "70%"}
 ![](images/image13.png)
 
 These firewall rules are what you need to enable micro-segmentation for the workloads inside the slice.

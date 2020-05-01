@@ -276,7 +276,7 @@ Think of it like this; with Network Insight as-a-Service, VMware hosts and maint
 
 I> The Platform appliance of Network Insight is multi-tenant capable out of the box. It currently takes a lot of effort (and it's not user-friendly and not supported) to get multiple tenants activated. I've tried and broke a few Platforms. VMware is using this multi-tenancy capability in the as-a-Service variant. I'm holding out hope that multi-tenancy will be activated in the on-premises variant as well.
 
-{caption: "Architecture for Network Insight as a Service"}
+{caption: "Architecture for vRealize Network Insight Cloud"}
 ![](images/image61.png)
 
 I> When using Network Insight as-a-Service, you only have to deploy the Collector in your environment. It requires connectivity to the Platform, which means internet connectivity is required for the Collector.

@@ -28,7 +28,7 @@ It's quite common to have an incomplete CMDB or to have multiple sources where a
 
 After getting the applications into Network Insight, there is a clear view of application dependencies and network requirements. Navigate to the Security Planner (refer back to [Analyzing Network Flows(#ch-analyzing-network-flows) for a refresher) and group the donut by Applications.
 
-{caption: "Application Migration Planning -- Dependency mapping", id: "fig-application-migration-planning"}
+{caption: "Application Migration Planning -- Dependency mapping", id: "fig-application-migration-planning", width: "70%"}
 ![](images/image26.png)
 
 By hovering over a slice or using the search bar at the top right of the widget, you can find the application you want to map dependencies for. By clicking the slice, the details of that application are brought up.
@@ -69,7 +69,7 @@ By not specifying a source or destination country, both egress and ingress traff
 
 `sum(bytes) of Flows where Source Application = 'CRM-Records' group by Destination Country`
 
-{caption: "Application Migration Planning -- Egress traffic per Country", id: "fig-egress-traffic-per-country"}
+{caption: "Application Migration Planning -- Egress traffic per Country", id: "fig-egress-traffic-per-country", "width: 70%"}
 ![](images/image29.png)
 
 This will paint a clear picture of how much egress network traffic this application is sending out, which would be leaving the public cloud, and which will be charged for. It's also possible to make it easier, by removing the group by statement like so:
@@ -109,16 +109,16 @@ Now, while I'm focusing on a per-application process (as most organizations tend
 After assigning priorities, creation of the applications migration wave groups can begin. While doing this, the following questions should to be considered:
 
 1. What are the network requirements in order to move this migration wave?
-  1. How much traffic will the migration wave create between the cloud and on-prem network?
-  2. Have you sized the connection to the cloud to support this traffic?
-  3. What ports and protocols do the applications need to communicate on, and will the network allow this communication?
+   - How much traffic will the migration wave create between the cloud and on-prem network?
+   - Have you sized the connection to the cloud to support this traffic?
+   - What ports and protocols do the applications need to communicate on, and will the network allow this communication?
 2. Will there be any limits triggered on the destination cloud?
-  1. Is there a limit for the number of VMs in a network?
-  2. Is there a limit of the amount of throughput or packets per second?
-      1.  There might be a difference between the maximum throughput or packets per second for internal traffic and internet traffic.
+   - Is there a limit for the number of VMs in a network?
+   - Is there a limit of the amount of throughput or packets per second?
+      -  There might be a difference between the maximum throughput or packets per second for internal traffic and internet traffic.
 3. Is a temporary layer-2 bridge necessary?
-  1. If you are migrating on a per-application basis, it might be required to create a layer-2 bridge to allow the IP subnet to exist in both the on-prem infra as the cloud infra. VMware HCX can create these layer-2 extensions, but there will be a limit to how much throughput and the number of layer-2 extensions it can handle.
-  2. Should proximity routing be enabled while the layer-2 extension is online?
+   - If you are migrating on a per-application basis, it might be required to create a layer-2 bridge to allow the IP subnet to exist in both the on-prem infra as the cloud infra. VMware HCX can create these layer-2 extensions, but there will be a limit to how much throughput and the number of layer-2 extensions it can handle.
+   - Should proximity routing be enabled while the layer-2 extension is online?
 
 While network requirements (number 1) are the most important to check; as it directly impacts application performance during or after migration, the rest of these questions can prevent the migration from finishing. If not checked properly and in advance, you might hit these limits while in the middle of the migration and need to halt the migration, or even reverse the migration. Unfortunately, this has happened to plenty organizations, costing them user-experience by causing downtime, extra time to either revert or changing the migration plan.
 
@@ -128,7 +128,7 @@ After creating these applications, it is possible to scope the security planner 
 
 As an example, the below screenshot lists the security planner for Migration Wave 1, which is built with the previously used application CRM-Records. This migration wave 1 includes the CRM-Records app, and all of its dependents (Test-CRM, Webshop, SAP, VDI, and tanzu tees).
 
-{caption: "Application Migration Planning -- Migration Wave Dependency Mapping"}
+{caption: "Application Migration Planning -- Migration Wave Dependency Mapping", width: "70%"}
 ![](images/image32.png)
 
 Just like with the previous application dependency mapping exercise, zooming in (clicking) on each of these connections is possible. Make sure the requirements to move this migration wave are clear, by investigating all connections that flow to the remaining infrastructure (shared physical/virtual service slices) are not overly excessive. If it turns out the requirements between this migration wave and some physical service is something like 1Gbit per second, you might need to reexamine the migration wave.
@@ -149,7 +149,7 @@ Network Insight also has compute and storage data, which can be used to understa
 
 `sum(CPU Cores), sum(Memory Consumed) of VMs where application = 'Migration Wave 1'`
 
-{caption: "Application Migration Planning -- CPU & Memory requirements"}
+{caption: "Application Migration Planning -- CPU & Memory requirements", width: "70%"}
 ![](images/image33.png)
 
 While the same can be achieved for disk usage and make the picture complete; Network Insight is focused on the networking aspects of your applications, not the compute & storage. It's perfectly possible to get an overview of the current usage, but Network Insight should not be used for capacity management and prediction for compute and storage resources. [vRealize Operations](http://vmware.com/go/vrops) (vROps) is much better in getting that full picture.
@@ -173,7 +173,7 @@ The above search shows the internet traffic over a period of time (by default th
 
 `max(series(sum(byte rate),300)) of flow where Source Application = 'Migration Wave 1' and Flow Type = 'Destination is Internet'`
 
-{caption: "Application Migration Planning -- Peak internet Traffic of Migrate Wave 1"}
+{caption: "Application Migration Planning -- Peak internet Traffic of Migrate Wave 1", width: "50%"}
 ![](images/image35.png)
 
 This will show you the peak network throughput. If Network Insight has been running for 1 month, the maximum peak of traffic per second in that month, was **901.1 kbps**. This number can be used for sizing the internet gateway at the destination cloud.
@@ -182,7 +182,7 @@ This will show you the peak network throughput. If Network Insight has been runn
 
 Get these graphs and maximum values for a few different traffic types; internet, east-west, and within the migration wave. Splitting up the different types of traffic is easy; the **flow type** can be changed to view a bunch of different traffic types. From the Internet, to East-West, to Routed, to Switched, and a lot more. Have a look at the auto-completion and scroll through the options:
 
-{caption: "Application Migration Planning -- Flow Types"}
+{caption: "Application Migration Planning -- Flow Types", width: "60%"}
 ![](images/image36.png)
 
 There are over 50 different flow types, which all categorize different types of network behavior. Depending on what limitations the target cloud has, different flow types should be used to see the requirements.
@@ -193,7 +193,7 @@ Let's go through one more example with another metric. In most cases, there will
 
 `series(sum(flow.totalPackets.delta.summation.number),300) of flow where Source Application = 'Migration Wave 1' and Flow Type = 'Destination is Internet'`
 
-{caption: "Application Migration Planning -- Internet Packets p/s of Migrate Wave 1"}
+{caption: "Application Migration Planning -- Internet Packets p/s of Migrate Wave 1", width: "50%"}
 ![](images/image37.png)
 
 Make sure the packet per second rate is also sized properly, and use the max operator to get the maximum number of packets per second:

@@ -61,28 +61,3 @@ EC2 instance
 
 **Workload** Something that runs an application: VM, container, cloud instance or physical server.
 
-# References
-
-[^1]: <https://www.cncf.io/blog/2018/08/29/cncf-survey-use-of-cloud-native-technologies-in-production-has-grown-over-200-percent/>
-
-[^2]: <https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/support/product-lifecycle-matrix.pdf>
-
-[^3]: <https://en.wikipedia.org/wiki/Regular_expression>
-
-[^4]: In 2018, according to Gartner: <https://www.gartner.com/en/newsroom/press-releases/2019-07-29-gartner-says-worldwide-iaas-public-cloud-services-market-grew-31point3-percent-in-2018>
-
-[^5]: In 2018, according to Gartner: <https://www.gartner.com/en/newsroom/press-releases/2019-07-29-gartner-says-worldwide-iaas-public-cloud-services-market-grew-31point3-percent-in-2018>
-
-[^6]: Online Flow Size Prediction for Improved Network Routing: <https://cs.uwaterloo.ca/~pjaini/downloads/main.pdf>
-
-[^7]: This guide is currently not available publicly; ask your VMware representative for it.
-
-[^8]: <https://dictionary.cambridge.org/dictionary/english/outlier>
-
-[^9]: <https://en.wikipedia.org/wiki/Median_absolute_deviation>
-
-[^10]: <https://en.wikipedia.org/wiki/Packet_loss>
-
-[^11]: <https://en.wikipedia.org/wiki/Mean>
-
-[^12]: <https://en.wikipedia.org/wiki/Standard_deviation>

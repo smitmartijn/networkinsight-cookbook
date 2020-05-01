@@ -109,7 +109,7 @@ Once AWS has been added as a data source, the collector appliance will start col
 
 All computing, networking, and relevant administrative objects are pulled in. Things like the AWS account, EC2 instances, firewall rules, security groups, IP subnets, VPCs, and VPC peering connections are given their own dashboards. It'll be possible to use the Network Insight search to uncover the inventory of the AWS environments. This will list all AWS objects across all added AWS accounts; having everything in the same place. Just type in AWS, in order to see the options:
 
-{caption: "AWS Search options"}
+{caption: "AWS Search options", width: "50%"}
 ![](images/image43.png)
 
 During the inventory, the incoming data is correlated to each other. EC2 instances will have a direct link to its network interface, the applicable firewall rules, availability zone, region, network flows, all the way up to the AWS account. This means you can use all these linked entities to filter, for example; search for all EC2 instances that belong to a specific account or VPC.
@@ -226,7 +226,7 @@ Once Azure has been added to Network Insight, it will start collecting data ever
 
 All computing, networking, and relevant administrative objects are pulled in. Things like the Azure Data Sources (accounts), Azure VMs, Network Security Groups, Application Security Groups, Azure Subscriptions, Network Interfaces, Virtual Networks, and more, are given their own dashboards. It'll be possible to use the Network Insight search to uncover the inventory of the Azure environments. This will list all Azure objects across all added Azure subscriptions; having everything in the same place. Just type in Azure, in order to see the options:
 
-{caption: "Azure Search options"}
+{caption: "Azure Search options", width: "50%"}
 ![](images/image48.png)
 
 During the inventory, the incoming data is correlated to each other. The Azure VM dashboard will display all its network interfaces, VNets, Subnets, all applicable security rules (both from Application Security Groups and Network Security Groups), and all network flows.
