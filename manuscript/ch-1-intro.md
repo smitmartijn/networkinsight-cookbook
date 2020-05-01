@@ -57,6 +57,7 @@ W> This is a 'key tip' call out box. It'll contain a descriptive way to access a
 
 **Search queries**
 There will be a lot of search query examples throughout this book. This is how they will look:
+{line-numbers: false}
 ```
 VMs where vCenter = myvc
 ```

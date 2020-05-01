@@ -1,5 +1,5 @@
 # Introduction to Network Insight
-With all that data the actual use cases for Network Insight are limitless, but there are four main use cases that will help you get started to get an idea on what to use it for.
+Due to the vast amount of data that Network Insight has, and the range of that data (i.e. network flows, switchport metrics, VMs, AWS inventory, and much more), the actual use cases for Network Insight are limitless. But, there are four main use cases that will help you to get an idea of what to use Network Insight for. In the following chapters, I'll discuss the **why** of using Network Insight, most of the remainder of this book will be the **how** to use it.
 
 ## Use Case -- Application Security Planning (Micro-segmentation)
 
@@ -22,7 +22,7 @@ Besides using NetFlow data to provide insight into the traffic going through you
 When it comes to troubleshooting, that is where the gold is. Network Insight provides a holistic view of your entire environment, which means you can quickly and easy find root-causes to any issues you’re having.
 
 {caption: "Topology chart: gluing physical and virtual together"}
-![Topology chart: gluing physical and virtual together](./images/image3.png)
+![Topology chart: gluing physical and virtual together](images/image3.png)
 
 Using the network topology maps, you can quickly determine issues on a specific network path or using the search engine to look for network devices that are misbehaving or showing anomalies, your troubleshooting process can be much more efficient and quicker.
 
@@ -53,8 +53,7 @@ With a good understanding of the application map, it is much easier to retain ap
 
 A deep dive on this topic can be found in the chapter [Application Migration Planning](#ch-application-migration-planning).
 
-
-## Use-Case -- Visibility for Containers
+## Use-Case -- Visibility for Kubernetes
 
 According to results of a survey that the Cloud Native Containers Foundation did in 2018, the main concerns around moving containerized applications into production (and keeping them there & healthy) is around **Complexity**, **Monitoring**, **Networking** and **Security**.
 
@@ -106,7 +105,7 @@ Network Insight is at the center of these developments, integrating tightly with
 
 Network Insight is used for planning purposes to determine what dependencies there are in order to migrate applications between locations and determine what impact such an operation has on network performance. The same insights can be used to properly plan security policies for the applications living inside the network, making sure you can secure your applications -- where ever they might go.
 
-{caption: "VMware Virtual Cloud Network"}
+{caption: "VMware Virtual Cloud Network", width: "70%"}
 ![VMware Virtual Cloud Network](images/image7.png)
 
 Network Insight is the key to making the Virtual Cloud Network vision a reality. By broadening the insights to everything in and around the Virtual Cloud Network, it allows you to execute on this vision, while keeping it easy to operate and maintain.
