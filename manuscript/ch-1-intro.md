@@ -71,7 +71,7 @@ Counting from 1 to 9 (in seconds):  1 2 3 4 5 6 7 8 9
 PS ~/>
 ```
 
-**Code**
+**Code Examples**
 Mostly confined to the [Automating Network Insight chapter](#ch-automating), there will also be example code. Here's how that will look:
 {format: python}
 ```

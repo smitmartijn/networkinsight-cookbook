@@ -76,7 +76,7 @@ This will paint a clear picture of how much egress network traffic this applicat
 
 `sum(bytes) of Flows where Source Application = 'CRM-Records' and Flow Type = 'Destination is Internet'`
 
-{caption: "Application Migration Planning -- Egress traffic total", id: "fig-egress-traffic-total"}
+{caption: "Application Migration Planning -- Egress traffic total", id: "fig-egress-traffic-total", width: "80%"}
 ![](images/image30.png)
 
 B> Note: the results of search queries in [Figure "Egress traffic per Country"](#fig-egress-traffic-per-country) and [Figure "Egress traffic total"](#fig-egress-traffic-total) have been taken on different dates, which is why they differ in numbers.
@@ -173,7 +173,7 @@ The above search shows the internet traffic over a period of time (by default th
 
 `max(series(sum(byte rate),300)) of flow where Source Application = 'Migration Wave 1' and Flow Type = 'Destination is Internet'`
 
-{caption: "Application Migration Planning -- Peak internet Traffic of Migrate Wave 1", width: "50%"}
+{caption: "Application Migration Planning -- Peak internet Traffic of Migrate Wave 1", width: "30%"}
 ![](images/image35.png)
 
 This will show you the peak network throughput. If Network Insight has been running for 1 month, the maximum peak of traffic per second in that month, was **901.1 kbps**. This number can be used for sizing the internet gateway at the destination cloud.
@@ -193,14 +193,14 @@ Let's go through one more example with another metric. In most cases, there will
 
 `series(sum(flow.totalPackets.delta.summation.number),300) of flow where Source Application = 'Migration Wave 1' and Flow Type = 'Destination is Internet'`
 
-{caption: "Application Migration Planning -- Internet Packets p/s of Migrate Wave 1", width: "50%"}
+{caption: "Application Migration Planning -- Internet Packets p/s of Migrate Wave 1"}
 ![](images/image37.png)
 
 Make sure the packet per second rate is also sized properly, and use the max operator to get the maximum number of packets per second:
 
 `max(series(sum(flow.totalPackets.delta.summation.number),300)) of flow where source application = 'Migration Wave 1' and flow type = 'Destination is Internet'`
 
-{caption: "Application Migration Planning -- Peak internet packets p/s of Migrate Wave 1"}
+{caption: "Application Migration Planning -- Peak internet packets p/s of Migrate Wave 1", width: "30%"}
 ![](images/image38.png)
 
 Rinse and repeat this for other flow types, such as routed and switched traffic by changing the flow types. This will get all network data you need to determine the minimum requirements.

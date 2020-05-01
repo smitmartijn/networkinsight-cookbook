@@ -93,7 +93,7 @@ The polling agents and Flow Processor are proprietary code, but there are severa
 - **Nfcapd** and **Sfcapd** are used to receive NetFlow and sFlow (respectively) records and store them in native capd data files.
  - These are slightly modified to support IPFIX from the VDS and ignore information that Network Insight does not need, to improve performance.
 
-{caption: "Collector VM internal architecture"}
+{caption: "Collector VM internal architecture", width: "80%"}
 ![](images/image59.png)
 
 {id: ch-flow-processor}
@@ -265,21 +265,21 @@ Again, this is a very rough estimate. The point of this entire chapter is that y
 {id: ch-hosted-architecture}
 ## Hosted Architecture (SaaS)
 
-If you're using Network Insight as-a-Service, the appliances used are exactly the same as the ones you would use on-premises. There are 2 notable differences:
+If you're using vRealize Network Insight Cloud, the appliances used are exactly the same as the ones you would use on-premises. There are 2 notable differences:
 
 - Authentication is handled by single-sign-on coupled with the VMware Cloud Services Portal,
 - There are a few user-interface changes, for example the styling colors have been changed to match the other VMware Cloud Services and a couple of settings are not available (LDAP, User Management & Mail Server)
 
 Authentication is handled by the VMware Cloud Services Portal, which explains the missing authentication settings. VMware has its own mail servers in place for the service, so you don't have to configure a mail server.
 
-Think of it like this; with Network Insight as-a-Service, VMware hosts and maintains the Platform, which means you only have to deploy the Collectors in your own environment. Data flow is also the same, which means the Collector talks unidirectional to the Platform. In this case the Platform is hosted on the internet, which means your Collectors need to have internet access for this to work.
+Think of it like this; with vRealize Network Insight Cloud, VMware hosts and maintains the Platform, which means you only have to deploy the Collectors in your own environment. Data flow is also the same, which means the Collector talks unidirectional to the Platform. In this case the Platform is hosted on the internet, which means your Collectors need to have internet access for this to work.
 
-I> The Platform appliance of Network Insight is multi-tenant capable out of the box. It currently takes a lot of effort (and it's not user-friendly and not supported) to get multiple tenants activated. I've tried and broke a few Platforms. VMware is using this multi-tenancy capability in the as-a-Service variant. I'm holding out hope that multi-tenancy will be activated in the on-premises variant as well.
+I> The Platform appliance of Network Insight is multi-tenant capable out of the box. It currently takes a lot of effort (and it's not user-friendly and not supported) to get multiple tenants activated. I've tried and broke a few Platforms. VMware is using this multi-tenancy capability in the Cloud variant. I'm holding out hope that multi-tenancy will be activated in the on-premises variant as well.
 
 {caption: "Architecture for vRealize Network Insight Cloud"}
 ![](images/image61.png)
 
-I> When using Network Insight as-a-Service, you only have to deploy the Collector in your environment. It requires connectivity to the Platform, which means internet connectivity is required for the Collector.
+I> When using vRealize Network Insight Cloud, you only have to deploy the Collector in your environment. It requires connectivity to the Platform, which means internet connectivity is required for the Collector.
 
 
 {id: ch-clustering}

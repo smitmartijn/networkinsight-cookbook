@@ -103,7 +103,7 @@ To give you a few more examples of how to spot what the entity type is, the tabl
 
 The meta entity type can refer to multiple concrete types. For example, VM refers to VMware VM, Azure VM, and AWS EC2 Instance. The same goes for Firewall Rule, which will include NSX Firewall Rules, AWS Firewall Rules, Palo Alto firewall rules, basically any firewall rules that Network Insight discovers. When searching for a meta entity type, the interface will show all included entity types. This allows you to filter on the exact firewall rules types you're searching for.
 
-{caption: "Search for a meta entity type and get all included entity types", width: "50%"}
+{caption: "Search for a meta entity type and get all included entity types", width: "40%"}
 ![](images/image79.png)
 
 Meta types exist to make the experience holistic, transparent to you. Considering the vast amount of different configurations and entity types an infrastructure engineer deals with, it's almost necessary to allow you to search for firewall rule and let the underlaying tool figure out on which actual platform (whether it be NSX, a physical firewall, or the cloud (and then which cloud)) you need to be.
@@ -272,7 +272,7 @@ Get the highest value out of the search results. Consider the search will return
 
 Example: `max(vCPUs) of VMs`
 
-{caption: "Searching with a max operator", width: "50%"}
+{caption: "Searching with a max operator", width: "40%"}
 ![](images/image86.png)
 
 The above result indicates that out of 789 VMs, the highest number of vCPUs that those VMs have, is 16 vCPUs.
@@ -283,7 +283,7 @@ Sometimes humans keep it simple and straightforward. These aggregate functions a
 
 Example: `sum(Bytes) of Flow where Source Continent = 'Europe'`
 
-{caption: "Searching with a sum operator", width: "70%"}
+{caption: "Searching with a sum operator", width: "50%"}
 ![](images/image87.png)
 
 #### Min

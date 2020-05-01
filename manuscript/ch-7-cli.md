@@ -24,7 +24,7 @@ When something's wrong; it's DNS. Or NTP. Always. But just to be sure all bases 
 
 If the Network Insight appliance is misbehaving; the web interface is not responding, connections are timing out, the Platform is not seeing a Collector and is saying it's offline; any and all issues that have to do with connectivity or reachability, here's where you start.
 
-{caption: "Restarting services via CLI", width: "70%"}
+{caption: "Restarting services via CLI", width: "50%"}
 ![](images/image63.png)
 
 Start with **show-service-status**, which will give you an overview of all critical services and their respective status. If a service is not running, you can get more information on the reason why it's not running by running **show-service-status \--debug**. This command will reach out to the service and do a few extra checks on the service and its log files.
@@ -127,7 +127,7 @@ ERROR [2020-05-01 09:42:16,955] DPConnectionConfigUtils:[DPConnectionConfigUtils
 ERROR [2020-05-01 09:42:16,955] DPConnectionConfigUtils:[DPConnectionConfigUtils:getHost:78] - [dw-75059 - POST /resttosaasservlet] - No host found for dataSource:NSX, dsKey: NSX_URL, dsConfig: DataSourceConfiguration(dataSource:NSXCONTROLLER, keyValueList:[KeyValue(key:ENABLE_NSX_CONTROLLER, value:false), KeyValue(key:NSX_CONTROLLER_PWD, value:), KeyValue(key:_collectorId, value:IP8683G), KeyValue(key:nickName, value:NSXV-Controller), KeyValue(key:dpId, value:NSXCONTROLLER_wdcnsx-master.cmbu.local), KeyValue(key:dpState, value:ACTIVE), KeyValue(key:lastModifiedTimestamp, value:1532017949582), KeyValue(key:skip.certificate.validation, value:false), KeyValue(key:modelKey, value:10000:918:833398457), KeyValue(key:NSX_HOST, value:wdcnsx-master.cmbu.local), KeyValue(key:NSX_USER, value:admin), KeyValue(key:NSX_PWD, value:), KeyValue(key:ENCRYPTED_CONFIG, value:false), KeyValue(key:healthStatus, value:HEALTHY), KeyValue(key:healthError, value:SUCCEEDED), KeyValue(key:healthErrorCode, value:0), KeyValue(key:lastActivityTimestamp, value:1588325858037)])
 ```
 
-If you're still lost and have not found an indicator for what's causing your issue; it is now time to open a VMware support case and provide them with the support bundles and open up the support tunnel for them to have a looksie.
+If you're still lost and have not found an indicator for what's causing your issue; it is now time to open a VMware support case and provide them with the support bundles and open up the support tunnel for them to have a look.
 
 ## Configuring Syslog
 

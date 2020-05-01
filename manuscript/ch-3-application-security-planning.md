@@ -3,6 +3,8 @@
 
 The Security Planner (or micro-segmentation planner) inside Network Insight is arguably the most used feature, for organizations just starting out. It is the least impactful and most easy feature to turn on for an infrastructure and results are almost instant. Point it towards the infrastructure and turn on network flow collection, and it will provide insights in 1 to 2 hours after installation.
 
+After a couple of hours of data collection, Network Insight will start generating **recommended firewall rules** for any workload (VMs, Kubernetes services, Public Cloud instances, and physical servers) that it's monitoring. It's then easy to take those recommended firewall rules and plug them into VMware NSX Data Center for micro-segmentation.
+
 ## Micro-Segmentation?
 
 If you're never heard of micro-segmentation, you're succeeding in staying very, very far away from the networking and security world and probably not reading this book. ;-)
@@ -146,7 +148,7 @@ Behind every slice of the donut and every directional line (the line between sli
 
 While the Services tabs and Flow tab provides some great insight into what's running in a specific slice and you'd be able to use that information to quickly determine what services are running in it and what services it is consuming, the Recommended Firewall Rules are the real actionable results.
 
-{caption: "Recommended Firewall Rules grouped by Application", width: "70%"}
+{caption: "Recommended Firewall Rules grouped by Application", width: "90%"}
 ![](images/image13.png)
 
 These firewall rules are what you need to enable micro-segmentation for the workloads inside the slice.
@@ -229,7 +231,7 @@ I see you're still here; good! You've already protected the application from una
 
 Go ahead and use the Scope feature on the Security Planner to limit the view to the specific application you're working on. The default view that pops up is the view we need; grouped by Tier.
 
-{caption: "Recommended Firewall Rules grouped by Tier"}
+{caption: "Recommended Firewall Rules grouped by Tier", width: "70%"}
 ![](images/image15.png)
 
 From here, you have the option to look at intra-application communication flows, get the services running inside each tier and generate the recommended firewall rules based on the tiers. Meaning you'll get recommended firewall rules like "web needs port 80 and 443 from source any" and "web needs port 8443 to the app tier" -- etc. Take these rules and implement tier segmentation. After which, you'll have protected the tiers from each other; i.e. web servers can no longer talk to the database servers.
@@ -365,6 +367,8 @@ When you click the save button, the form to save the application to the system p
 
 Once you hit the Submit button, the application will be saved to the system and Network Insight will start correlating other objects (network flows, VMs, events, etc.) with it.
 
+{pagebreak}
+
 ### Naming Conventions
 
 When your infrastructure uses a naming convention that indicates which application a VM belongs to and what tier of the application the VM is a part of, you can use the naming convention discovery method.
@@ -377,7 +381,9 @@ Let's take a look at that regular expression first. According to Wikipedia, a re
 > expression) is a sequence of characters that define a search pattern.
 > Usually such patterns are used by string searching algorithms for
 > \"find\" or \"find and replace\" operations on strings, or for input
-> validation."* [^3]
+> validation."
+
+[^3]
 
 Regular expressions are used in scripting and programming languages to grab specific bits of text out of a large text. Ask one of your developer friends and they will most have used it, and there's a big chance they hate it (I do). The reason to hate it, is mostly because can be used to do really complex things. However, we can keep it pretty simple for the usage of application discovery. Here's an example:
 
@@ -421,6 +427,8 @@ The Pattern Builder is there to make your life a bit easier. I know what you're 
 
 I> Starting vRealize Network Insight 5.1, you can use different metadata as the discovery method for the application name and tier name. For example, you can extract the application name from a workload name and use the content of a tag as the tier name.
 I> Also, in version 5.1, is the ability to use **Security Groups** and **Security Tags** the same way as the naming conventions; extracting parts of the security group or tag to use as an application and/or tier name.
+
+{pagebreak}
 
 ### CMDB (ServiceNow)
 
