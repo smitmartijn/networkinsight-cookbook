@@ -1,7 +1,7 @@
 {id: ch-search}
 # Using the Search Engine
 **This chapter was authored by Rohit Reja, Senior Staff Engineer on Network Insight. He was part of the original ArkinNet team.**
-**Find Rohit here: <https://www.linkedin.com/in/rohit-reja-1b11335/>**
+**Contact Rohit here: <https://www.linkedin.com/in/rohit-reja-1b11335/>**
 
 Edited by: Martijn Smit
 
@@ -33,7 +33,7 @@ Find all virtual machines to whom VMs in VXLAN 5001 are talking to.
 
 Find all applications that are talking to the application 3TierApp02 and display how much traffic is being sent.
 
-`sum(bytes) of flow where Destination Application = \'3TierApp02\' group by Source Application`
+`sum(bytes) of flow where Destination Application = '3TierApp02' group by Source Application`
 
 {caption: "Search query & results example"}
 ![](images/image76.png)
@@ -147,7 +147,9 @@ Above search is equivalent to:
 
 `Flow where Source VM = 'my-vm' or Destination VM = 'my-vm'`
 
-Similarly: `Flow where IP Address = '192.168.10.0/24'`
+Similarly, this search:
+
+`Flow where IP Address = '192.168.10.0/24'`
 
 is equivalent to:
 
@@ -159,7 +161,9 @@ These meta properties make it easier to execute searches and optimize the amount
 
 A filter clause is used to filter search results. The condition in a filter clause consists of an entity property, comparison operator, and value. This is also where all previous discussed properties can be used to narrow down the results.
 
-Here's an example: `VMs where CPU Usage \> 80%`
+Here's an example:
+
+`VMs where CPU Usage > 80%`
 
 In this search query, VMs is the entity type and the filter is based on the metric property for CPU Usage. Using the comparison operator (**\>**) and value, the returned VM list is filtered on VMs that have a CPU Usage higher than 80%.
 
@@ -204,7 +208,7 @@ Using the projection clause, you can bring up a specific property directly in th
 
 If you search for an entity default set of properties are shown in the search results. If you want to see other properties (including metric properties), you can use property projection. For example, consider the following search query:
 
-OS, CPU Cores of VMs where Name = myvm
+`OS, CPU Cores of VMs where Name = myvm`
 
 The above search query will show the operating system and the number of CPU Cores of the VM named 'myvm', as shown below:
 
@@ -217,7 +221,7 @@ A projection clause can also include metric properties, combined with configurat
 
 Here's an example:
 
-CPU Cores, CPU Usage Rate of VMs where Name = myvm
+`CPU Cores, CPU Usage Rate of VMs where Name = myvm`
 
 {caption: "Searching with property projection, including metrics"}
 ![](images/image83.png)
@@ -232,24 +236,24 @@ Mostly used when building pinboards, the Count projection can return the sum the
 
 Here are a few examples:
 
-`count of VMs where Security Group = \'sg-1\' and CPU Usage Rate \> 60%`
+`count of VMs where Security Group = 'sg-1' and CPU Usage Rate > 60%`
 
 `count of Flows where Source IP = 10.152.30.208/24`
 
-`count of Switch Port where Total Packet Drops \> 100`
+`count of Switch Port where Total Packet Drops > 100`
 
-`count of Datastore where Write Latency \> 5ms`
+`count of Datastore where Write Latency > 5ms`
 
 {caption: "Searching with a count operator"}
 ![](images/image84.png)
 
-Considering the result will be a number, these search queries are perfect to put on an auto refreshing pinboard that is glued to the wall of your office.
+Considering the result will be a number, these search queries are perfect to put on an auto refreshing pinboard that is displayed on a monitor that's glued to the wall of your office.
 
 ### List
 
 This is another interesting one. The list operator should be used whenever the filter condition cannot be applied or if it is related to the object you want back. To make that a little more concrete, here's an example:
 
-`list(Host) of VMs where CPU Usage Rate \> 95%`
+`list(Host) of VMs where CPU Usage Rate > 95%`
 
 {caption: "Searching with a list operator"}
 ![](images/image85.png)
@@ -270,18 +274,22 @@ I'll go into the supported aggregate functions below.
 
 Get the highest value out of the search results. Consider the search will return vCPU numbers for your VMs, the max operator will be able to tell you what the highest number of vCPUs is.
 
-Example: `max(vCPUs) of VMs`
+Example:
+
+`max(vCPUs) of VMs`
 
 {caption: "Searching with a max operator", width: "40%"}
 ![](images/image86.png)
 
-The above result indicates that out of 789 VMs, the highest number of vCPUs that those VMs have, is 16 vCPUs.
+The above result indicates that out of 789 VMs, the VM with the highest number of vCPUs, has 16 vCPUs.
 
 #### Sum
 
 Sometimes humans keep it simple and straightforward. These aggregate functions are an example of this. The sum operation, well, returns the sum of the requested values. You can use this to get the number of VMs attached to a VLAN, the amount of memory in use by VMs on a specific host, the amount of traffic going towards the internet (or certain geographical regions), etc. The possibilities seem to be only limited by imagination.
 
-Example: `sum(Bytes) of Flow where Source Continent = 'Europe'`
+Example:
+
+`sum(Bytes) of Flow where Source Continent = 'Europe'`
 
 {caption: "Searching with a sum operator", width: "50%"}
 ![](images/image87.png)
@@ -294,7 +302,9 @@ The min operator is effectively the same as the max operation; it just gets the 
 
 Lastly, the avg operator can be used to get an average value from the search results. Just like the previously discussed operators, Network Insight will go through the results of the search query and return the average of those results. What is the average count of vCPUs or vMemory for VMs on a cluster, what is the average transfer bytes for a flow in your VDI cluster, compared to the production server cluster, etc.
 
-Here's an example: `avg(vCPUs) of VMs group by Host order by avg(vCPUs)`
+Here's an example:
+
+`avg(vCPUs) of VMs group by Host order by avg(vCPUs)`
 
 {caption: "Searching with an avg operator"}
 ![](images/image88.png)
@@ -313,14 +323,14 @@ It can combine metrics from multiple objects into a single line graph. For examp
 
 Here's an example, combining all internet traffic into a single line graph:
 
-`series(sum(Byte Rate)) of Flows where Flow Type = \'Destination is Internet\'`
+`series(sum(Byte Rate)) of Flows where Flow Type = 'Destination is Internet'`
 
 {caption: "Search; using the series() projection to combine metrics"}
 ![](images/image89.png)
 
 The metrics inside the series projection can be any of the metrics available in Network Insight. You can also request multiple series in the same search, to compare different metrics on the same time line. An example of this, might be looking for the averaged used CPU and Memory metrics for all servers with 'db' in their name:
 
-series(avg(CPU Usage)), series(avg(Memory Usage)) of VMs where Name like db
+`series(avg(CPU Usage)), series(avg(Memory Usage)) of VMs where Name like db`
 
 {caption: "Search; using multiple series() projections to combine metrics"}
 ![](images/image90.png)
@@ -337,7 +347,9 @@ Looking for the VMs with the most vCPUs? `Order by CPU Count`
 
 Looking for the VMs that use the least memory? `Order by Memory Usage asc`
 
-The web interface can also be used to define the **order by** clause, by using the Sort selection
+The web interface can also be used to define the **order by** clause, by using the Sort selection.
+
+T> When using the web interface to select the sort and/or filters, the search query that's displayed on the page will automatically change to reflect the selected options. You can then copy and paste the search query into the search bar.
 
 ## Grouping
 
@@ -356,14 +368,14 @@ It gets more interesting when you start combining grouping with the previously e
 
 Retrieving the amount of bandwidth that comes out of each L2 network:
 
-sum(Bytes) of Flows group by Source L2 Network
+`sum(Bytes) of Flows group by Source L2 Network`
 
 {caption: "Search; using the group by operator and aggregate functions for L2 traffic"}
 ![](images/image92.png)
 
 Retrieving the number of incoming firewall rules inside your AWS accounts, grouping by VPC. This will display the number of rules, and the number of security groups inside each AWS VPC:
 
-sum(Incoming Rule Count) of AWS Security Group group by AWS VPC
+`sum(Incoming Rule Count) of AWS Security Group group by AWS VPC`
 
 {caption: "Search; using the group by operator and aggregate functions for AWS rules"}
 ![](images/image93.png)
@@ -374,7 +386,7 @@ When you order a search, sometimes you're only interested in the top 10 flows. O
 
 `VMs order by CPU Cores limit 5`
 
-`Flows where Flow Type = \'Destination is Internet\' order by Bytes limit 10`
+`Flows where Flow Type = 'Destination is Internet' order by Bytes limit 10`
 
 {id: ch-reference-traversal-queries}
 ## Reference Traversal Queries
@@ -387,11 +399,11 @@ Let's look at a few examples, in order to give you a better understanding of how
 
 Find all VMs on hosts with a high CPU utilization:
 
-`VMs where Host.CPU Usage Rate \> 95%`
+`VMs where Host.CPU Usage Rate > 95%`
 
 Find all VMs on a specific compute blade:
 
-`VMs where Host.Blade = \'\[ucs-1.vrni.cmbu.local\]-\[sys/chassis-1/blade-7\]\'`
+`VMs where Host.Blade = '[ucs-1.vrni.cmbu.local]-[sys/chassis-1/blade-7]'`
 
 Find all VMs that are located on a cluster that does not have the NSX Distributed Firewall enabled:
 
@@ -409,11 +421,11 @@ To make this tangible, let's have a look at the examples of the previous chapter
 
 Find all VMs on hosts with a high CPU utilization:
 
-`VMs where Host in (Host where CPU Usage Rate \> 95%)`
+`VMs where Host in (Host where CPU Usage Rate > 95%)`
 
 Find all VMs on a specific compute blade:
 
-`VMs where Host in (Host where Blade = \'\[ucs-1.vrni.cmbu.local\]-\[sys/chassis-1/blade-7\]\')`
+`VMs where Host in (Host where Blade = '[ucs-1.vrni.cmbu.local]-[sys/chassis-1/blade-7]')`
 
 Find all VMs that are located on a cluster that does not have the NSX Distributed Firewall enabled:
 
@@ -432,13 +444,17 @@ This can be done from the time indicator that is on the right of the search quer
 {caption: "Search; time control in the web interface", id: "fig-time-control", width: "50%"}
 ![](images/image94.png)
 
-As shown in the [figure 90](#fig-time-control) above, it's easy to jump from the current time to some most used points, such as **Yesterday**, **Last 3 Days**, etc. You can also use the **At** option to jump to a very specific time, used for getting to know the exact configuration at that time. Then there's the **Between** option, where you can specific a time range; mostly used for metrics to show graphs of a specific time period.
+As shown in the [figure above](#fig-time-control), it's easy to jump from the current time to some most used points, such as **Yesterday**, **Last 3 Days**, etc. You can also use the **At** option to jump to a very specific time, used for getting to know the exact configuration at that time. Then there's the **Between** option, where you can specific a time range; mostly used for metrics to show graphs of a specific time period.
 
 You can also specify the time control inside a search query, by using the following syntax:
 
-`*search query* in last X (minutes\|hours\|days\|weeks\|months)`
+`*search query* in last X (minutes|hours|days|weeks|months)`
 
-Here's an example: `Flow in last 48 hours or something like: changes in last 3 hours`
+Here's two examples of a time controlled search:
+
+`Flow in last 48 hours`
+
+`changes in last 3 hours`
 
 The above example uses searches that return results (metrics or change events) in a time range. You can do something similar to search for configuration of a specific time in point, like this:
 
@@ -448,7 +464,7 @@ The above example will return all firewall rules that existed on November 5^th^ 
 
 When you start combining configuration and metric results, while using time control; it will pick the highest value of time. For some examples, see below.
 
-`VMs where CPU Usage \> 80%`
+`VMs where CPU Usage > 80%`
 
 The result of the above query will be all the VMs that have had a CPU usage higher than 80% in the last 24 hours.
 
@@ -456,6 +472,6 @@ The result of the above query will be all the VMs that have had a CPU usage high
 
 The result of the above query will show all VMs that currently have a CPU count of 4.
 
-`VMs where CPU Count = 4 and CPU Usage \> 80%`
+`VMs where CPU Count = 4 and CPU Usage > 80%`
 
 The result of the above query will be all the VMs that have had CPU usage higher than 80% and where the CPU count 4 in last 24 hours.

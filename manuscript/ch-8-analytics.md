@@ -25,6 +25,8 @@ The Cambridge dictionary defines outliers as the following:
 
 > *"a fact, figure, piece of data, etc. that is very different from all the others in a set and does not seem to fit the same pattern."* [^8]
 
+[^8]: <https://dictionary.cambridge.org/dictionary/english/outlier>
+
 That is exactly how it is meant inside Network Insight. Using self-defined groups of similar VMs, Kubernetes Pods or physical servers, Network Insight will start to monitor them and raise alerts whenever 1 of breaks the pattern that all of them have. As we grow into a more distributed and micro service type of infrastructures, more and more workloads only have 1 job and it is possible to predict its behaviour and say that it is always supposed to behave the same way as its brethren.
 
 This does not exclude traditional environments though, as those will have servers with the same functionality as well; think of DNS servers, Active Directory controllers, SQL Clusters, etc. Depending on how many roles these more traditional servers have (can't have too many different roles, otherwise behaviour would be too different), it also adds value to monitor these.
@@ -51,6 +53,8 @@ I> Another reason for selecting the ports, is that an outlier group currently su
 Lastly, the sensitivity (8) can be selected: low, medium or high. The high sensitivity will trigger more quickly, and the low sensitivity will trigger less quickly.
 
 Changing the sensitivity setting affects the outlier detection by changing something called the z-score for the median absolute deviation (MAD) algorithm [^9] that is used to detect outliers. Median absolute deviation is a mathematic process to get the median (average) value of a range of numbers. This process is applied to the metric numbers you've selected to monitor, such as network traffic.
+
+[^9]: Median Absolute Deviation: <https://en.wikipedia.org/wiki/Median_absolute_deviation>
 
 As a very simple example, consider this number range: 1, 3, 4, 6, 10. The median value is 4; not only because it's in the middle, but also because it's the closest to the average of the sum of this number range (4.8). Then the z-score comes in to determine what percentage above and below the median is considered to be an outlier.
 
@@ -162,7 +166,7 @@ Then, select whether you want to create the alert when the metric **exceeds** th
 
 Let's not forget to set an alert based on the threshold you're creating. Whenever a threshold is breached, an event will be created. This event will be visible in the open problems list and you can search for all threshold events using this search query:
 
-`events where name = \'AnalyticsThresholdEvent'`
+`events where name = 'AnalyticsThresholdEvent'`
 
 If the breach showing up in the web interface and you don't want an email or SNMP Trap when it gets breached; just select a severity (importance) and you're good to go and save the threshold. It will start monitoring and let you know in the interface when it breaches. This is fine for not-that-important workloads and breaches that you don't need to know right away. Always determine this on a per case basis, as you definitely don't want to overcrowd the email or SNMP Trap notifications. If there are too many, people stop paying attention.
 
@@ -183,6 +187,9 @@ I know I said the mathematics class was over, but I do want to give you some bac
 It does this by creating a baseline of network traffic behavior, for a minimum of 7 days and a maximum of 21 days. Before the 7 days of history is there, Network Insight will keep analyzing the network traffic, but it will not yet generate any alerts based on suspected threshold breaches. Data that is older than 21 days will be aged out of the dataset and not be used for the analytics. This is typically enough time to get a clear view of the intended behavior of a workload and alert when it goes out of bound.
 
 The baseline data is a so-called moving mean[^11] and standard deviation[^12] dataset. The mean (average) is calculated over the network traffic of the last 21 days. This mean value is then used as the benchmark to calculate the standard deviation. In somewhat plain English, the standard deviation is a measurement that quantifies the amount of variation within a dataset. There are examples in the Wikipedia article I linked in the footnote, but it gives a numbered value to compare a value with the average.
+
+[^11]: Moving Mean: <https://en.wikipedia.org/wiki/Mean>
+[^12]: Standard Deviation: <https://en.wikipedia.org/wiki/Standard_deviation>
 
 Dynamic thresholds have the option to be configured with a **high**, **medium**, and **low** sensitivity. The **high** sensitivity uses a standard deviation value of **2**; meaning if the current network traffic value is **2** times as much or less than the average of the last 21 days, the threshold is triggered. The **medium** sensitivity uses the standard deviation value of **2.5**; meaning **2.5** times as much or less than the average of the last 21 days. The **low** sensitivity uses a standard deviation value of **3**; meaning, well, you get it.
 

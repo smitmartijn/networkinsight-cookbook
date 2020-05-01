@@ -17,6 +17,8 @@ That last bit sounds very salesy, but basically it means this: network traffic f
 
 With 47.8%[^4] of the public cloud market in its pocket, Amazon Web Services is a clear leader. It pays to be the first, but it also helps that AWS has over 165 (and counting) different services. Ranging from infrastructure as-a-service, to database, analytics, application services, deployment management, mobile, developer tools and internet-of-things enablement services.
 
+[^4]: In 2018, according to Gartner: <https://www.gartner.com/en/newsroom/press-releases/2019-07-29-gartner-says-worldwide-iaas-public-cloud-services-market-grew-31point3-percent-in-2018>
+
 You're most likely most familiar with their Elastic Computing Cloud (EC2), the Simple Storage Service (S3), and the Relational Database Service (RDS). These services get used to most by organizations that are looking to the public cloud for workload placement, i.e. get some cheaper infrastructure. I'm not going to go into whether moving existing workloads (instead of refactoring them to take advantage of native public cloud services), is a good or bad idea, but how Network Insight helps you in managing the pain if your organization decides to go.
 
 On whether it's a good idea or not, just please make sure the homework and cost projections are done before you go.
@@ -57,7 +59,7 @@ When you have a larger organization that uses AWS, the chance is that separate a
 If you do have a master account you can add that to Network Insight, and it will discover all linked accounts under it (existing and new) and start collecting data from the network & compute resources that are under those linked accounts.
 
 {caption: "AWS Master account link diagram"}
-![](images/image40.tiff)
+![](images/image40.png)
 
 If you do not have a master account, simply add the standard account. If you have more than one account, simply add them all; there is no limit to the amount of added accounts.
 
@@ -136,7 +138,7 @@ EC2 instances are hosted on a subnet, subnets are connected using a routing tabl
 {caption: "AWS Network topology between two VMs in different VPCs"}
 ![](images/image45.png)
 
-We can also monitor these logical network components separately, and for example, monitor the connection from the EC2 instance to the subnet or routing table. Using routing algorithms, Network Insight constructs these topologies on demand, whenever you request a path, by searching for path from AWS EC2 xxx to AWS EC2 yyy.
+We can also monitor these logical network components separately, and for example, monitor the connection from the EC2 instance to the subnet or routing table. Using routing algorithms, Network Insight constructs these topologies on demand, whenever you request a path, by searching for *path from AWS EC2 xxx to AWS EC2 yyy*.
 
 You can request paths between EC2 instances, or between an EC2 instance and a vSphere VM that's either hosted on-premises or in VMware Cloud on AWS.
 
@@ -166,6 +168,8 @@ The second thing is that for each object in Network Insight, there's a timeline 
 ## Microsoft Azure
 
 Microsoft has been hammering on the road of their Azure public cloud offering for a while now. While they're not the first, they're making it pretty easy for Microsoft customers to consume Azure and place Windows workloads in their cloud. With about 15.5%[^5] of the public cloud market share, they are the number two cloud.
+
+[^5]: In 2018, according to Gartner: <https://www.gartner.com/en/newsroom/press-releases/2019-07-29-gartner-says-worldwide-iaas-public-cloud-services-market-grew-31point3-percent-in-2018>
 
 While I'll focus mostly on the Azure VM service and the services that support computing resources, Azure has an enormous portfolio of services. Ranging from infrastructure services, to databases, blockchain, identity, application development, and (not limited to) internet-of-things services. They claim they have over 600 services, but they also count sub-services like virtual networks (which I think is a part of the infrastructure/compute service), something which AWS does not count as a separate service.
 
@@ -321,7 +325,7 @@ In any case, you want to make sure the NetFlow does not go over the internet and
 
 While retrieving the networking configuration from NSX inside VMC, Network Insight also constructs a view of the network topologies that are available within AWS, and also any VPN connectivity that connects back to an on-premises (or any of the other platforms that is supported by Network Insight) infrastructure.
 
-I> Direct Connect is currently not supported as of version 5.0. Network Insight will get all the NSX networking & security configuration but will not be able to draw a network topology from VMC to on-premises via a Direct Connect.
+I> Connectivity via Direct Connect is supported as of version 5.2.
 
 VMware Cloud on AWS is hosted on AWS (duh), meaning we do not have full access to the actual hardware network appliances that are being used in their infrastructure. Network Insight will not be able to pull data from appliances like the top-of-rack switch, or core routers that connect your SDDC to the internet. However, everything inside the SDDC is fair game.
 
@@ -329,7 +333,7 @@ NSX provides the virtual networking & security stack for VMC, so we have insight
 
 Paths can be drawn from a VM inside VMC to the internet, showing the routing and firewall rules in between. More interestingly, paths can also be drawn between a VM on VMC and an EC2 instance in AWS, between a VM on VMC and an on-premises infrastructure, and between different VMs that are both hosted on VMC.
 
-The VMC to AWS or on-premises path depend on layer-3 VPN connectivity to another device that Network Insight supports and is reading out as a data source. For example, the NSX-v Edge, Palo Alto Firewalls, CheckPoint Firewalls, or terminated directly on an AWS Virtual Private Gateway.
+The VMC to AWS or on-premises path depend on layer-3 VPN connectivity, or Direct Connect connectivity to another device that Network Insight supports and is reading out as a data source. For example, the NSX-v Edge, Palo Alto Firewalls, CheckPoint Firewalls, or terminated directly on an AWS Virtual Private Gateway.
 
 Here's an example path between a VM hosted on VMC and an on-premises SDDC, which are connected via a VPN tunnel that terminates on an NSX-v Edge appliance:
 

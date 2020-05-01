@@ -12,7 +12,7 @@ In simple terms; the Platform is where you connect your browser to use the produ
 Here's how the architecture looks and how communication flows between the different components:
 
 {caption: "Platform Architecture Diagram"}
-![](images/image54.tiff)
+![](images/image54.png)
 
 There are a lot of things happening in both layers, which I'll go further into in the following chapters.
 
@@ -29,7 +29,7 @@ Inside the Platform, there are a few different layers which serve different purp
 Here is a representation of the service layers that live inside a Platform:
 
 {caption: "Platform VM Internal Architecture"}
-![](images/image55.tiff)
+![](images/image55.png)
 
 ### Presentation Service Layer
 
@@ -74,7 +74,7 @@ Collectors can be scaled out by using multiple appliances for your environment a
 You can strategically place the Collectors as well. It does a couple of things to the incoming data to compress it (more on that later) and allow it to be sent to the Platform more efficiently. Traffic between the Data Sources and the Collectors is heavier than between the Collectors and Platform appliances, which makes it more efficient to place Collectors in remote locations.
 
 {caption: "Platform & Collector relationships"}
-![](images/image58.tiff)
+![](images/image58.png)
 
 Networking management is usually as locked down as possible to protect the management interfaces of your network devices. It makes sense to provide access to Network Insight for people that do not have any business connecting directly to networking devices, so you would want to segment those. In this instance, you would put a Collector inside the networking management segment and only permit it to connect to the Platform. The Collector would connect directly to the Data Sources inside the secure segment and you don't have to allow incoming communication from outside the secure segment.
 
@@ -91,7 +91,7 @@ The polling agents and Flow Processor are proprietary code, but there are severa
 - **NGINX** to act as a transport to the Platform and receive incoming webhooks (just vRealize Log Insight for now).
 
 - **Nfcapd** and **Sfcapd** are used to receive NetFlow and sFlow (respectively) records and store them in native capd data files.
- - These are slightly modified to support IPFIX from the VDS and ignore information that Network Insight does not need, to improve performance.
+  - These are slightly modified to support IPFIX from the VDS and ignore information that Network Insight does not need, to improve performance.
 
 {caption: "Collector VM internal architecture", width: "80%"}
 ![](images/image59.png)
@@ -197,6 +197,8 @@ Generally, all that Network Insight needs is a read-only user on the data source
 This exception is the CheckPoint firewall integration. To get the gateway device interfaces and IP routes, Network Insight needs to run the **run-script** API call; which requires read-write permissions.
 
 Use the reference document called **vRealize Network Insight Data Source Integration Reference Guide** [^7] to get a list of all commands, SNMP OIDs and API calls that are executed by Network Insight. You can use that list to create a customized user that can only execute these commands and speed up the implementation by quickly getting the approval of your security department. There will be no discussion about what impact Network Insight could have on your devices, as it is crystal clear what it's doing.
+
+[^7]: This guide is currently not available publicly; ask your VMware representative for it.
 
 ### Connecting to the Platform
 

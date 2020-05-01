@@ -58,7 +58,9 @@ A deep dive on this topic can be found in the chapter [Application Migration Pla
 According to results of a survey that the Cloud Native Containers Foundation did in 2018, the main concerns around moving containerized applications into production (and keeping them there & healthy) is around **Complexity**, **Monitoring**, **Networking** and **Security**.
 
 {caption: "CNCF 2018 Survey results"}
-![CNCF 2018 Survey results](images/image5.png)
+![CNCF 2018 Survey results](images/image5.png) [^1]
+
+[^1]: <https://www.cncf.io/blog/2018/08/29/cncf-survey-use-of-cloud-native-technologies-in-production-has-grown-over-200-percent/>
 
 VMware has seen these challenges and is taking them on in several ways. One of those ways is through NSX Data Center for Containers, where network virtualization is delivering simplicity, flexibility and security up to the container level. Operations engineers can use the same security controls over containers as they can over VMs and make sure the applications are put into production safely -- whether the application is hosted on-premises or in the public cloud. That's **Networking** and **Security** covered.
 

@@ -27,9 +27,9 @@ If the Network Insight appliance is misbehaving; the web interface is not respon
 {caption: "Restarting services via CLI", width: "50%"}
 ![](images/image63.png)
 
-Start with **show-service-status**, which will give you an overview of all critical services and their respective status. If a service is not running, you can get more information on the reason why it's not running by running **show-service-status \--debug**. This command will reach out to the service and do a few extra checks on the service and its log files.
+Start with ```show-service-status```, which will give you an overview of all critical services and their respective status. If a service is not running, you can get more information on the reason why it's not running by running ```show-service-status --debug```. This command will reach out to the service and do a few extra checks on the service and its log files.
 
-Attempt to correct a not running service, by using **services start \<service-name\>** and see if the service stays online. If it does not, move on to checking the networking services of the appliance:
+Attempt to correct a not running service, by using ```services start <service-name>``` and see if the service stays online. If it does not, move on to checking the networking services of the appliance:
 
 {format: console, line-numbers: false}
 ```
@@ -57,13 +57,13 @@ Registration Certificate Validity: Apr 25 00:00:12 2021 GMT
 
 Running the show-connectivity-status command will take a few seconds, but it will save you time in the end because it combines a few other commands into a single command. It will show you the networking configuration, so you can check whether it's configured properly, NTP status (and if it's in sync or not), and it will test connectivity to the online upgrade and support services in VMwares' cloud. Basically, the entire networking stack is tested using this command.
 
-If any of the network settings are incorrect (and the above output gives an error), they can be corrected using the **change-network-settings** command. Be aware that the appliance will reboot after changing these settings, but you will be warned by the CLI as well.
+If any of the network settings are incorrect (and the above output gives an error), they can be corrected using the ```change-network-settings``` command. Be aware that the appliance will reboot after changing these settings, but you will be warned by the CLI as well.
 
-If NTP is not in sync, you can dive deeper into the reason by using **ntp diagnose**. This will go into a deep dive on all aspects of the NTP service, for instance; what the drift is, what time a sync last happened, it will actually do a port scan on the NTP server to see if it can reach it, and more.
+If NTP is not in sync, you can dive deeper into the reason by using ```ntp diagnose```. This will go into a deep dive on all aspects of the NTP service, for instance; what the drift is, what time a sync last happened, it will actually do a port scan on the NTP server to see if it can reach it, and more.
 
 ### Logs
 
-When the network settings and NTP checks out, it's time to dive into the logs. The command **log-trace** is available to view a list of different logs, search inside those logs, and monitor/follow them in real-time. You can also open up historical logs that have been rotated away. To make it a little bit easier, Network Insight allows you to look at the individual log files, but also the component (service) itself and it will figure out the latest available log file for that component. My advice is to look at the component level and not the actual log files, unless you're looking for an event at a specific date and time.
+When the network settings and NTP checks out, it's time to dive into the logs. The command ```log-trace``` is available to view a list of different logs, search inside those logs, and monitor/follow them in real-time. You can also open up historical logs that have been rotated away. To make it a little bit easier, Network Insight allows you to look at the individual log files, but also the component (service) itself and it will figure out the latest available log file for that component. My advice is to look at the component level and not the actual log files, unless you're looking for an event at a specific date and time.
 
 There are 2 relevant components you can look at, whilst doing your own troubleshooting: **saasservice** and **restapilayer**. These 2 services are pretty much the most important services in the Platform appliance. All data is received via the **saasservice** (the Collector sends updates via it) and the **restapilayer** is the internal API service that provides the web interface with data. If you're having issues with data collection or presentation, this is where I would start.
 
@@ -113,11 +113,11 @@ INFO [2020-05-01 10:58:49,374] grid.uploadHandler.UploadHandler:[UploadHandler:p
 ^C(cli)
 ```
 
-Using **log-trace list components**, a list of available components is presented, and you can use these components to **grep** from or **follow**. In the above screenshot, you can see the list of components on the Platform appliance and the beginning of a **follow** on the **saasservice** components. For those who know their way around Linux/Unix; **follow** is essentially a **tail -f** alias.
+Using ```log-trace list components```, a list of available components is presented, and you can use these components to **grep** from or **follow**. In the above screenshot, you can see the list of components on the Platform appliance and the beginning of a **follow** on the **saasservice** components. For those who know their way around Linux/Unix; **follow** is essentially a ```tail -f``` alias.
 
 You can see a bunch of errors in the above screenshot, related to a rogue Collector that is sending this Platform updates, whilst it's not registered with the Platform (meaning the Platform is ignoring its messages). As there are a lot of possible messages and I don't have to space to list them all; always look for something in the "ERROR" category and interpret the message to the best of your ability. The messages themselves are pretty self-explanatory, most of the time.
 
-If you're looking errors that might have occurred at a specific date and time, you can either open up the right log file using **log-trace display** and look for errors manually; or you can search the logs using **log-trace grep**:
+If you're looking errors that might have occurred at a specific date and time, you can either open up the right log file using ```log-trace display``` and look for errors manually; or you can search the logs using ```log-trace grep```:
 
 {format: console, line-numbers: false, caption: "Searching in logs"}
 ```
@@ -198,9 +198,9 @@ A Network Insight cluster can be moved between networks and change IP addresses,
 1. Move Platform1 into the new network and update its IP address via the CLI using ```change-network-settings```
 2. Change the IP address of Platform1 on both Platform2 and Platform3 by using ```update-IP-change <old-Platform1-IP> <new-Platform1-IP>```
 3. Move Platform2 into the new network and update its IP address via the CLI using ```change-network-settings```
-4. Change the IP address of Platform2 on both Platform1 and Platform3 by using ```update-IP-change \<old-Platform2-IP\> \<new-Platform2-IP\>```
+4. Change the IP address of Platform2 on both Platform1 and Platform3 by using ```update-IP-change <old-Platform2-IP> <new-Platform2-IP>```
 5. Move Platform3 into the new network and update its IP address via the CLI using ```change-network-settings```
-6. Change the IP address of Platform3 on both Platform1 and Platform2 by using ```update-IP-change \<old-Platform3-IP\> \<new-Platform3-IP\>```
+6. Change the IP address of Platform3 on both Platform1 and Platform2 by using ```update-IP-change <old-Platform3-IP> <new-Platform3-IP>```
 
 After executing these steps on all Platform nodes in the cluster, it will continue normal operation. If you have a bigger cluster, such as with 5 or 10 nodes, the same steps apply; just multiply by the number of nodes are there.
 
@@ -230,7 +230,7 @@ There are only 2 commands that are specifically relevant to the Collector applia
 {caption: "Moving a Collector between Platforms"}
 ![](images/image71.png)
 
-First, generate a shared secret by adding a new Collector VM using the web interface, under **Settings** and **Install and Support** page. Copy and paste the newly generated shared secret to the set-proxy-shared-secret command to that it will be trusted by the new Platform. Then update the IP address or fully qualified domain name of the Platform that this Collector this be reporting to using **vrni-proxy set-platform --ip-or-fqdn <ip/fqdn>**. After a few minutes, you will see the Collector show up in the web interface and it will be ready to use.
+First, generate a shared secret by adding a new Collector VM using the web interface, under **Settings** and **Install and Support** page. Copy and paste the newly generated shared secret to the set-proxy-shared-secret command to that it will be trusted by the new Platform. Then update the IP address or fully qualified domain name of the Platform that this Collector this be reporting to using ```vrni-proxy set-platform --ip-or-fqdn <ip/fqdn>```. After a few minutes, you will see the Collector show up in the web interface and it will be ready to use.
 
 ## Command Reference
 

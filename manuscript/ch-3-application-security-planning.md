@@ -17,7 +17,7 @@ With a zero-trust architecture, using micro-segmentation, security policies (whi
 
 To learn more about VMware NSX and how it helps you to do micro-segmentation, have a look at the free eBooks named [VMware NSX® Micro-segmentation Day 1](https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/products/nsx/vmware-nsx-microsegmentation.pdf) and [VMware NSX® Micro-segmentation Day 2](https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/products/nsx/vmware-micro-segmentation-day-2.pdf).
 
-{caption: "Micro-Segmention; logical security boundaries between applications.", width: "70%"}
+{caption: "Micro-Segmention; logical security boundaries between applications.", width: "80%"}
 ![](images/image8.png)
 
 ## The Challenge of Micro-Segmentation
@@ -54,7 +54,7 @@ In the basis, they listen to all network traffic sent over the network device an
 
 This list is then sent out to a collector for processing. In this case, Network Insight is the collector.
 
-NetFlow originated from Cisco in 1996 and can be used on a plethora of physical switches. Of course (most) of Cisco's own network devices, but also Juniper, Brocade, Palo Alto Networks and a bunch of other vendors support it. Network Insight supports NetFlow version 5 through version 9.
+NetFlow originated from Cisco in 1996 and can be used on a plethora of physical switches. Of course (most) of Cisco's own network devices, but also Juniper, Brocade, Palo Alto Networks and a bunch of other vendors support it. Network Insight supports NetFlow version 5 through version 10.
 
 IPFIX is a spinoff from NetFlow (version 10) where devices can put custom information into the headers. vSphere uses version this when it's enabled on the vSphere Distributed Switch (VDS). When you enable flows via the VMware vCenter registration when adding it as a Data Source, Network Insight will configure the VDS to send IPFIX to the Collector.
 
@@ -129,7 +129,7 @@ This means you can easily see any unprotected flows, which are not protected by 
 
 I> In order to see protected, unprotected and blocked flows, you need to enable IPFIX on the NSX Data Source.
 
-At the time of writing Network Insight does not run intelligence over the discovered firewall rules from either NSX or other virtual or physical firewall to determine whether a network flow 'could' hit a specific firewall. The flow output of NSX is the only that contains an actual firewall rule ID which the flow is hitting, making it definitive that it's using that specified rule. For other network flow sources, Network Insight would have to deduce which firewall rule would overlap with which firewall rule to say, 'it *might* be hitting rule x' as there's no definitive proof it's hitting those rules. The Network Insight has currently opted for certainty in this feature.
+At the time of writing Network Insight does not run intelligence over the discovered firewall rules from either NSX or other virtual or physical firewall to determine whether a network flow *could* hit a specific firewall. The flow output of NSX is the only flow output that contains an actual firewall rule ID which the flow is hitting, making it definitive that it's using that specified rule. For other network flow sources, Network Insight would have to deduce which firewall rule would overlap with which firewall rule to say, 'it *might* be hitting rule x' as there's no definitive proof it's hitting those rules. The Network Insight team has currently opted for certainty in this feature, and only shows the blocked network flows going through NSX.
 
 T> When working to micro-segment your environment, use the unprotected flow type to see your progress and use it to export the missing recommended firewall rules that you need to finish securing your applications.
 
@@ -207,7 +207,9 @@ Make sure kubectl is connected to the right cluster and it's selected the right 
 
 Lastly, there's the option to export the rules in an XML format. This export function will provide you with a zip bundle that contains all needed configuration for VMware NSX for vSphere (NSX-v). XML is the format of choice when it comes to API calls for NSX-v. As Network Insight uses the 'proper' way of micro-segmenting within NSX-v, the contents of the zip bundle contain multiple XML files that contain API body to create certain things: security tags, security groups, security policies and the assignment of security tags to VMs.
 
-You would only use this export to feed it into the NSX Importer Tool. This tool reads in the zip bundle, retrieves the XML files and feeds them to the NSX-v API. Because this is only based on NSX for vSphere, which has been announced to go end-of-support in 2023[^2]; I don't expect this format to be used anymore (and won't go into it here).
+You would only use this export to feed it into the NSX Importer Tool. This tool reads in the zip bundle, retrieves the XML files and feeds them to the NSX-v API. Because this is only based on NSX for vSphere, which has been announced to go end-of-support in 2023[^nsxveol]; I don't expect this format to be used anymore (and won't go into it here).
+
+[^nsxveol]: https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/support/product-lifecycle-matrix.pdf
 
 Because [VMware NSX Intelligence](https://www.vmware.com/products/nsx-intelligence-analytics-engine.html) in NSX-T 2.5 and above has the same feature, a direct import from Network Insight into NSX Security Policies doesn't make much sense. Network Insight has a broader view of the network and can recommend security policies on a much larger scale, taking physical servers, or physical zones (end-users, DMZ, test, etc.) into account, it remains to be the best way to implement security policies across the entire network. NSX Intelligence can take care of the micro-segmentation inside the NSX network fabric.
 
@@ -381,9 +383,9 @@ Let's take a look at that regular expression first. According to Wikipedia, a re
 > expression) is a sequence of characters that define a search pattern.
 > Usually such patterns are used by string searching algorithms for
 > \"find\" or \"find and replace\" operations on strings, or for input
-> validation."
+> validation." [^3]
 
-[^3]
+[^3]: <https://en.wikipedia.org/wiki/Regular_expression>
 
 Regular expressions are used in scripting and programming languages to grab specific bits of text out of a large text. Ask one of your developer friends and they will most have used it, and there's a big chance they hate it (I do). The reason to hate it, is mostly because can be used to do really complex things. However, we can keep it pretty simple for the usage of application discovery. Here's an example:
 

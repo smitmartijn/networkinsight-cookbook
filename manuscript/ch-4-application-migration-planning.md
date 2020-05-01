@@ -19,14 +19,14 @@ There are four steps in the application migration process:
 4. Migrate the selected applications.
 5. Validate application behavior, post-migration.
 
-vRealize Network Insight Cloud can help with step 1, 2, 3, and 5. [VMware HCX](https://cloud.vmware.com/vmware-hcx) -- workload migration tool extraordinaire, can help with step 3. This chapter focuses heavily on step 2, and 3 which are critical in the planning phase. For the scoop on step 1, refer back to the chapter about [Application Discovery](#ch-application-discovery).
+vRealize Network Insight Cloud can help with step 1, 2, 3, and 5. [VMware HCX](https://cloud.vmware.com/vmware-hcx) -- workload migration tool extraordinaire, can help with step 4. This chapter focuses heavily on step 2, and 3 which are critical in the planning phase. For the scoop on step 1, refer back to the chapter about [Application Discovery](#ch-application-discovery).
 
 {id: ch-application-discovery-assessment}
 ## Application Discovery & Assessment
 
 It's quite common to have an incomplete CMDB or to have multiple sources where applications and the associated workloads are documented. vRealize Network Insight can use a combination of sources (tags, naming conventions, CMDB input) to discover the applications from the infrastructure metadata. For more details on application discovery, refer back to the chapter about [Application Discovery](#ch-application-discovery).
 
-After getting the applications into Network Insight, there is a clear view of application dependencies and network requirements. Navigate to the Security Planner (refer back to [Analyzing Network Flows(#ch-analyzing-network-flows) for a refresher) and group the donut by Applications.
+After getting the applications into Network Insight, there is a clear view of application dependencies and network requirements. Navigate to the Security Planner (refer back to [Analyzing Network Flows](#ch-analyzing-network-flows) for a refresher) and group the donut by Applications.
 
 {caption: "Application Migration Planning -- Dependency mapping", id: "fig-application-migration-planning", width: "70%"}
 ![](images/image26.png)
@@ -44,7 +44,7 @@ When looking at this window, you can clearly see the types of network ports bein
 
 While doing this exercise per application, it might turn out that the application is extremely bandwidth hungry towards the internal users. The **External Services Accessed** tab is where the dependent service endpoints for this application can be found. It provides the same view as in [Figure: Application Details](#fig-application-details), only the other way around; from this application to other services in the infrastructure.
 
-This same window can be used to implement security policies when migrating the application, as the [**Recommended Firewall Rules**](#ch-recommended-firewall-rules) tab shows the exact firewall rules that need to be implemented for this application.
+This same window can be used to implement security policies when migrating the application, as the [Recommended Firewall Rules](#ch-recommended-firewall-rules) tab shows the exact firewall rules that need to be implemented for this application.
 
 ## Traffic Patterns
 
@@ -102,9 +102,9 @@ After gaining visibility into the existing applications and their behavior, it's
 
 Now, while I'm focusing on a per-application process (as most organizations tend to focus on applications), this same exercise can be done on a per-network (VLAN) basis; just change the grouping. If everything is being migrated, there's also a possibility that the migration waves are formed on a per-network basis. If the entire application landscape is to be migrated, it might even be easier to migrate on a per-network basis, as there is no need for complicated networking configurations during the migration (i.e. stretching the networks between the locations to keep the network of the workloads available).
 
-**Fun fact**: it is possible to get a list of applications that are on a network by executing the following search query:
-
-`Application where IP Endpoint.Network Interface.L2 Network = 'VLAN-10'`
+T> It is possible to get a list of applications that are on a network by executing the following search query:
+T>
+T> `Application where IP Endpoint.Network Interface.L2 Network = 'VLAN-10'`
 
 After assigning priorities, creation of the applications migration wave groups can begin. While doing this, the following questions should to be considered:
 
@@ -152,7 +152,7 @@ Network Insight also has compute and storage data, which can be used to understa
 {caption: "Application Migration Planning -- CPU & Memory requirements", width: "70%"}
 ![](images/image33.png)
 
-While the same can be achieved for disk usage and make the picture complete; Network Insight is focused on the networking aspects of your applications, not the compute & storage. It's perfectly possible to get an overview of the current usage, but Network Insight should not be used for capacity management and prediction for compute and storage resources. [vRealize Operations](http://vmware.com/go/vrops) (vROps) is much better in getting that full picture.
+While the same can be achieved for disk usage and make the picture complete; Network Insight is focused on the networking aspects of your applications, not the compute & storage. It's perfectly possible to get an overview of the current usage, but Network Insight should not be used for capacity management and prediction for compute and storage resources. [vRealize Operations](http://vmware.com/go/vrops) (vROps) is much better in getting that picture.
 
 Have vROps monitor your environment for a few weeks, and it will construct a dynamic picture of the compute and storage resources needed to host the applications; past, current, and future requirements. It also has a built-in [Migration Planning feature](https://docs.vmware.com/en/vRealize-Operations-Manager/8.0/com.vmware.vcom.core.doc/GUID-A0D6E8A5-58F9-43CC-BB29-AB0AFDBCE1A2.html), which will provide you with the resources needed for the migration (including future growth), and even provide the costs of hosting these resources in a number of different clouds (native AWS, VMware Cloud on AWS, IBM Cloud, Azure, Google Cloud).
 
