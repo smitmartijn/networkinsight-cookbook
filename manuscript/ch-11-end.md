@@ -1,63 +1,79 @@
-
-
-
 # Keyword Index
 
-**API Endpoint** URL of an API that calls a specific function (i.e. /api/ni/groups/applications)
+**API Endpoint**
+: URL of an API that calls a specific function (i.e. /api/ni/groups/applications)
 
-**Cloud** A collection of computers that are not your own. Typically paid for per usage.
+**Cloud**
+: A collection of computers that are not your own. Typically paid for per usage.
 
-**CMDB** Configuration Management DataBase
+**CMDB**
+: Configuration Management DataBase
 
-**CSP** Cloud Services Portal -- VMwares' management portal for their cloud services
+**CSP**
+: Cloud Services Portal -- VMwares' management portal for their cloud services
 
-**DBA** DataBase Administrator
+**DBA**
+: DataBase Administrator
 
-**DFW** VMware NSX Data Center -- Distributed Firewall
+**DFW**
+: VMware NSX Data Center -- Distributed Firewall
 
-**DMZ** De-Militarized Zone
+**DMZ**
+: De-Militarized Zone, mostly used for internet-facing workloads.
 
-**East-West** Network traffic that stays within the boundary of the data center.
+**East-West**
+: Network traffic that stays within the boundary of the data center.
 
-**EC2** Elastic Compute Cloud -- virtual machines in AWS.
+**EC2**
+: AWS Elastic Compute Cloud -- virtual machines in AWS.
 
-**ENI** Elastic Network Interface -- virtual network interface, typically attached to an
+**ENI**
+: AWS Elastic Network Interface -- virtual network interface, typically attached to an
 
-EC2 instance
+**REST API**
+: A REpresentational State Transfer API is an application program interface (API) that uses HTTP requests to GET, PUT, POST and DELETE data.
 
-**REST API** A REpresentational State Transfer API is an application program interface
+**JSON**
+: JavaScript Object Notation
 
-> (API) that uses HTTP requests to GET, PUT, POST and DELETE data.
+**PII**
+: Personally Identifiable Information
 
-**JSON** JavaScript Object Notation
+**S3**
+: AWS Simple Storage Service -- AWS object storage services. Delivered in buckets.
 
-**PII** Personally Identifiable Information
+**SDDC**
+: Software Defined Data Center
 
-**S3** Simple Storage Service -- AWS object storage services. Delivered in buckets.
+**SDK**
+: Software Development Kit
 
-**SDDC** Software Defined Data Center
+**SDN**
+: Software Defined Networking
 
-**SDK** Software Development Kit
+**SIEM**
+: Security Information and Event Management
 
-**SDN** Software Defined Networking
+**NI**
+: Network Insight
 
-**SIEM** Security Information and Event Management
+**North-South**
+: Network traffic that goes beyond the boundary of the data center. Usually internet traffic.
 
-**NI** Network Insight
+**VPC**
+: AWS Virtual Private Cloud -- AWS container for compute resources
 
-**North-South** Network traffic that goes beyond the boundary of the data center. Usually
+**vRA**
+: VMware vRealize Automation
 
-> internet traffic.
+**vRNI**
+: VMware vRealize Network Insight
 
-**VPC** Virtual Private Cloud -- AWS container for compute resources
+**vRO**
+: VMware vRealize Orchestrator
 
-**vRA** vRealize Automation
+**PKS**
+: Pivotal Container Service
 
-**vRNI** vRealize Network Insight
-
-**vRO** vRealize Orchestrator
-
-**PKS** Pivotal Container Service
-
-**Workload** Something that runs an application: VM, container, cloud instance or physical server.
-
+**Workload**
+: Something that runs an application: VM, container, cloud instance or physical server.
