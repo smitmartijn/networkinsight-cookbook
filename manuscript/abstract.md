@@ -4,7 +4,7 @@ If you are in any way affiliated with network and virtual infrastructure trouble
 
 As the title suggests, this book will give you a deep dive look at VMware's holistic networking and virtual infrastructure monitoring & troubleshooting product; vRealize Network Insight.
 
-Network Insight is famous for a couple reasons:
+vRealize Network Insight is famous for a couple reasons:
 
 1. It has the capability to kickstart your way to a secure segmented network by creating visibility into what actually happens on your network.
 

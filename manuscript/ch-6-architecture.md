@@ -317,18 +317,34 @@ T> The smallest deployment that I've been able to make work is: a Platform with 
 The disks can be thin provisioned, so there's no need to adjust the disk size after the medium brick deployment. The disks will grow according to the data usage and data retention settings. In a lab with just a few data sources and not much flows; disk usage typically doesn't go over 100-150GB for the Platform appliance and 70-80GB for the Collector appliance.
 
 ### Scaling out Beyond a single Brick
-If a single large brick Platform isn’t enough to sustain the amount of VMs or network flows you need to monitor, a horizontal scaling exercise can be done. Add multiple Platform bricks into a cluster and the number of VMs and network flows scale up.
+If a single large brick Platform isn’t enough to sustain the amount of VMs or network flows you need to monitor, a horizontal scaling exercise can be done. Add multiple Platform bricks into a cluster and the number of VMs and network flows scale up with it.
 
-Currently, you can create a cluster of a maximum of 10 Platform bricks. Meaning you can monitor up to 100.000 VMs (10.000 per Platform * 10 Platforms) and XXX network flows (xxx per Platform * 10 Platforms) with the maximum size cluster.
+Important to note is that the minimum number of Platform bricks for a cluster is 3 bricks, but you do not need to scale out onevenly. Typically, you want to have an oneven number of nodes in a cluster, so it can not encounter a split-brain scenario. This only applies on high available clusters, which the clustering with Network Insight [is not](#ch-availability-note); you only cluster to scale out. While the minimum is 3 Platform bricks, if you only need 4 to support your environment; that's perfectly fine.
 
-The Collectors cannot be clustered at this time, so the maximum amount of VMs and network flows coming from a single data source has a limit of the large Collector: 10.000 VMs and 10.000.000 network flows.
+Currently, you can create a cluster with a maximum of 10 Platform bricks. Meaning you can monitor up to 100k VMs (10k per Platform * 10 Platforms) and 55M network flows (5.5M per Platform * 10 Platforms) with the maximum size cluster. Due to the scale testing that VMware's Quality Assurance (QA) team does, the observed maximum numbers of VMs and flows do not scale out evenly with each added brick. This can be confusing when you look at the [Maximum Capacity](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/5.2/com.vmware.vrni.install.doc/GUID-F4F34425-C40D-457A-BA65-BDA12B3ABE45.html) table below.
+
+| Brick Size  | Cluster Size | Number of VMs | Flows per Day | Total Flows | VMware SD-WAN Edges |
+| :---        | :---         | :---          | :---          | :---        | :---                |
+| Large       | 3            | 10K           | 2M            | 8M          | 4K                  |
+| Extra Large | 3            | 18K           | 6M            | 24M         | 6K                  |
+| Extra Large | 5            | 30K           | 10M           | 40M         | 10K                 |
+| Extra Large | 10           | 100K          | 15M           | 55M         | 10K                 |
+
+I> When designing a Network Insight cluster, play it safe and take the lower example numbers, divide them by the number of bricks and use the outcome as the *per brick* number. For example, if you're looking to support 40K VMs, take the XL 5 brick example of 30K, divide 30K by 5, which is 6K per brick, meaning you need 7 XL bricks to support 40K VMs.
+
+Something else to consider, is that the Collectors cannot be clustered at this time. So, the maximum amount of VMs and network flows coming from a single vCenter data source has a limit of the large Collector: 10.000 VMs and 10.000.000 network flows. There is no listed maximum number of physical switches you can add to a single collector, but my experience has seen that a large Collector can handle around **100** physical switches as data sources, which reads out their configuration and metrics (no flows).
+
+To visualise the possibilities and the architecture when clustering Network Insight, check out this architecture:
+
+{caption: "Clustering Architecture"}
+![](images/ch-6/cluster-architecture.png)
 
 Creating a cluster is pretty straight forward; first, you deploy the first Platform (which will be referred to as Platform1), set up its networking, license and then go to the **Infrastructure & Support -> Overview and Updates** page in order to create a cluster.
 
+{caption: "Creating a new Platform Cluster"}
+![](images/ch-6/create-cluster.png)
 
-
-sfjsfnjsef
-
+{id: ch-availability-note}
 ### Availability Note
 Creating clustered Network Insight setups, is currently only about scaling up the maximums. There is no built-in high availability into the clustering mechanism; it's not meant to fail over to another Platform appliance, when one of them fails. For Network Insight to continue functioning, all platforms need to be online and available. If one Platform goes down, the data ingestion will fail and the web interface will not work properly.
 
