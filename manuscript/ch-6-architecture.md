@@ -339,10 +339,16 @@ To visualise the possibilities and the architecture when clustering Network Insi
 {caption: "Clustering Architecture"}
 ![](images/ch-6/cluster-architecture.png)
 
-Creating a cluster is pretty straight forward; first, you deploy the first Platform (which will be referred to as Platform1), set up its networking, license and then go to the **Infrastructure & Support -> Overview and Updates** page in order to create a cluster.
+Creating a cluster is pretty straight forward; first, you deploy the first Platform (which will be referred to as Platform1), configure it as you would normally, and then head over to the  **Infrastructure & Support -> Overview and Updates** page in order to create a cluster.
 
 {caption: "Creating a new Platform Cluster"}
 ![](images/ch-6/create-cluster.png)
+
+The details you'll be providing in the form above, have to be Platform appliances that have been deployed, but **not** configured yet. They should be waiting to be activated, and you should see the web interface asking for a license. When submitting the form, Platform1 will go out to the unconfigured Platforms and take control of them. This process will join the unconfigured Platform nodes to the cluster that Platform1 will control.
+
+
+TODO: Finish after getting the cluster setup
+
 
 {id: ch-availability-note}
 ### Availability Note
@@ -354,5 +360,3 @@ I> When protecting Network Insight with SRM, it is not supported to use the IP c
 I> My advise: stretch the IP subnet of Network Insight between the primary and disaster recovery location using VMware NSX or another network virtualization. That way, the IPs can be the same on both locations.
 
 How to set up the runbooks and configure SRM to properly protect Network Insight, is extensively covered in the [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/5.2/com.vmware.vrni.using.doc/GUID-16692E58-581E-4797-883D-4642C9021754.html), so I'm not going to give you a step by step here.
-
-
