@@ -286,15 +286,28 @@ I> When using vRealize Network Insight Cloud, you only have to deploy the Collec
 
 {id: ch-clustering}
 ## Scalability and Availability (Clustering)
-TODO!
 One Platform and Collector pair can collect a large amount of VM data and network flows; currently 10.000 VMs and 10.000.000 network flows total. However, if you need to go over these maximums, it is possible to create a cluster of Platform appliances to support the bigger environments.
 
-Note that I’ll be calling the appliances a so-called ‘brick’ – this is a term for a VM that’s a part of the Network Insight setup. Just in a house, the Network Insight setup can be built from multiple bricks of multiple sizes. These bricks can be Platforms or Collectors.
+Note that I’ll be calling the appliances a so-called ‘brick’ – this is a term for a VM that’s a part of the Network Insight setup. Just like a house, the Network Insight setup can be built from multiple bricks of multiple sizes. These bricks can be Platforms or Collectors.
 
 Important to know is that a medium brick deployment can also be scaled vertically to become a large brick deployment. All you have to do is to shut the VM down, adjust the virtual hardware to match the large brick deployment specifications and tadaaa, it’s a large brick!
 
-<insert current maximum table here>
+These are the current brick sizes for both the Platform and Collector:
 
+| Type      | Brick Size  | Cores on 2.1GHz | Cores on 2.3GHz | Cores on 2.6GHz | Memory | Disk |
+| Platform  | Medium      | 10              | 9               | 8               | 32GB   | 1 TB |
+| Platform  | Large       | 15              | 14              | 12              | 48GB   | 1 TB |
+| Platform  | Extra Large | 20              | 18              | 16              | 64GB   | 2 TB |
+| Collector | Medium      | 5               | 5               | 4               | 12GB   | 200 GB |
+| Collector | Large       | 10              | 9               | 8               | 16GB   | 200 GB |
+| Collector | Extra Large | 10              | 9               | 8               | 24GB   | 200 GB |
+| Collector |
+
+T> Always check the [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/5.2/com.vmware.vrni.install.doc/GUID-F4F34425-C40D-457A-BA65-BDA12B3ABE45.html) for the latest numbers.
+
+The CPU speed note is about getting the right amount of GHz available to the appliance. If you're deploying on CPUs with a different speed than listed above, simply make sure the appliance has the number of CPUs that cover the required GHz per appliance type. For example, that is 21GHz for a medium-sized Platform, or 42Ghz for an Extra Large Platform.
+
+### Scaling out Beyond a single Brick
 If a single large brick Platform isn’t enough to sustain the amount of VMs or network flows you need to monitor, a horizontal scaling exercise can be done. Add multiple Platform bricks into a cluster and the number of VMs and network flows scale up.
 
 Currently, you can create a cluster of a maximum of 10 Platform bricks. Meaning you can monitor up to 100.000 VMs (10.000 per Platform * 10 Platforms) and XXX network flows (xxx per Platform * 10 Platforms) with the maximum size cluster.
@@ -302,3 +315,21 @@ Currently, you can create a cluster of a maximum of 10 Platform bricks. Meaning 
 The Collectors cannot be clustered at this time, so the maximum amount of VMs and network flows coming from a single data source has a limit of the large Collector: 10.000 VMs and 10.000.000 network flows.
 
 Creating a cluster is pretty straight forward; first, you deploy the first Platform (which will be referred to as Platform1), set up its networking, license and then go to the Install & Something page in order to create a cluster.
+
+
+
+sfjsfnjsef
+
+### Availability Note
+Creating clustered Network Insight setups, is currently only about scaling up the maximums. There is no built-in high availability into the clustering mechanism; it's not meant to fail over to another Platform appliance, when one of them fails. For Network Insight to continue functioning, all platforms need to be online and available. If one Platform goes down, the data ingestion will fail and the web interface will not work properly.
+
+However, you can protect Network Insight with VMware's Site Recovery Manager (SRM) and replicate the appliances to another data center with vSphere Replication. SRM will take care of setting up the replication between the source data center and the destination data center, and recovering Network Insight during a catastrophic data center failure and can handled using the SRM runbooks.
+
+I> When protecting Network Insight with SRM, it is not supported to use the IP customization feature of SRM to re-IP the Network Insight appliances. As the Collector reports to a specific Platform IP and the Platforms might be clustered (talking to each other using their IPs); a manual IP change is required from the Network Insight CLI.
+I> My advise: stretch the IP subnet of Network Insight between the primary and disaster recovery location using VMware NSX or another network virtualization. That way, the IPs can be the same on both locations.
+
+How to set up the runbooks and configure SRM to properly protect Network Insight, is extensively covered in the [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/5.2/com.vmware.vrni.using.doc/GUID-16692E58-581E-4797-883D-4642C9021754.html), so I'm not going to give you a step by step here.
+
+
+
+## Lab Sizing
