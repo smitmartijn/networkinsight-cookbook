@@ -294,18 +294,27 @@ Important to know is that a medium brick deployment can also be scaled verticall
 
 These are the current brick sizes for both the Platform and Collector:
 
-| Type      | Brick Size  | Cores on 2.1GHz | Cores on 2.3GHz | Cores on 2.6GHz | Memory | Disk |
-| Platform  | Medium      | 10              | 9               | 8               | 32GB   | 1 TB |
-| Platform  | Large       | 15              | 14              | 12              | 48GB   | 1 TB |
-| Platform  | Extra Large | 20              | 18              | 16              | 64GB   | 2 TB |
-| Collector | Medium      | 5               | 5               | 4               | 12GB   | 200 GB |
-| Collector | Large       | 10              | 9               | 8               | 16GB   | 200 GB |
-| Collector | Extra Large | 10              | 9               | 8               | 24GB   | 200 GB |
-| Collector |
+| Type      | Brick Size  | Cores on 2.1GHz | Cores on 2.3GHz | Cores on 2.6GHz | RAM  | Disk |
+| :---      | :---        | :---            | :---            | :---            | :--- | :--- |
+| Platform  | Medium      | 10              | 9               | 8               | 32GB | 1TB |
+| Platform  | Large       | 15              | 14              | 12              | 48GB | 1TB |
+| Platform  | Extra Large | 20              | 18              | 16              | 64GB | 2TB |
+| Collector | Medium      | 5               | 5               | 4               | 12GB | 200GB |
+| Collector | Large       | 10              | 9               | 8               | 16GB | 200GB |
+| Collector | Extra Large | 10              | 9               | 8               | 24GB | 200GB |
 
 T> Always check the [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/5.2/com.vmware.vrni.install.doc/GUID-F4F34425-C40D-457A-BA65-BDA12B3ABE45.html) for the latest numbers.
 
 The CPU speed note is about getting the right amount of GHz available to the appliance. If you're deploying on CPUs with a different speed than listed above, simply make sure the appliance has the number of CPUs that cover the required GHz per appliance type. For example, that is 21GHz for a medium-sized Platform, or 42Ghz for an Extra Large Platform.
+
+### Lab Sizing
+The Network Insight appliances are rather large, resource-wise. Which makes sense, because the scale they can handle is pretty immense. But what about lab environments with only 1 or 2 vCenters, NSX Managers and just a few hosts? My home lab comes to mind.
+
+There is no *small* brick option to select when deploying the appliances. However, you can scale down the resources of the appliances, once they are deployed. To make it fit your home lab, or to have it take the least amount of resources in your lab, deploy the appliances as medium bricks and before you power them on; adjust the number of vCPUs and memory. Then power them on and watch the console for any failed services on startup. The failure messages on screen will mention the lack of memory of CPU to start the service. If you do see any of those messages; you've gone too far in minimizing the resources and you should scale up a little.
+
+T> The smallest deployment that I've been able to make work is: a Platform with 4 vCPUs (2.4GHz) and 14GB of memory, and a Collector with 2 vCPUs (2.4GHz) and 6GB of memory. This was for 2 vCenters, 2 NSX Managers, 4 switches, and around 2500 unique flows. If you have it, the Platform would function better & faster with 16GB of memory.
+
+The disks can be thin provisioned, so there's no need to adjust the disk size after the medium brick deployment. The disks will grow according to the data usage and data retention settings. In a lab with just a few data sources and not much flows; disk usage typically doesn't go over 100-150GB for the Platform appliance and 70-80GB for the Collector appliance.
 
 ### Scaling out Beyond a single Brick
 If a single large brick Platform isn’t enough to sustain the amount of VMs or network flows you need to monitor, a horizontal scaling exercise can be done. Add multiple Platform bricks into a cluster and the number of VMs and network flows scale up.
@@ -314,7 +323,7 @@ Currently, you can create a cluster of a maximum of 10 Platform bricks. Meaning 
 
 The Collectors cannot be clustered at this time, so the maximum amount of VMs and network flows coming from a single data source has a limit of the large Collector: 10.000 VMs and 10.000.000 network flows.
 
-Creating a cluster is pretty straight forward; first, you deploy the first Platform (which will be referred to as Platform1), set up its networking, license and then go to the Install & Something page in order to create a cluster.
+Creating a cluster is pretty straight forward; first, you deploy the first Platform (which will be referred to as Platform1), set up its networking, license and then go to the **Infrastructure & Support -> Overview and Updates** page in order to create a cluster.
 
 
 
@@ -331,5 +340,3 @@ I> My advise: stretch the IP subnet of Network Insight between the primary and d
 How to set up the runbooks and configure SRM to properly protect Network Insight, is extensively covered in the [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/5.2/com.vmware.vrni.using.doc/GUID-16692E58-581E-4797-883D-4642C9021754.html), so I'm not going to give you a step by step here.
 
 
-
-## Lab Sizing
