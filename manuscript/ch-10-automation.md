@@ -604,8 +604,8 @@ The field **aggregations.value** is the number of bytes that matches the filter.
 
 You can find the PowervRNI example script here: <https://github.com/PowervRNI/powervrni/blob/master/examples/get-bandwidth-usage-per-ip.ps1>
 
-## Automation Conclusion
+## Automation Summary
 
-I hope the examples in the previous pages have been helpful to get your imagination going on what is possible when you start automating Network Insight. These examples have just scraped the surface of what's possible, and there's a whole integration ecosystem possible that takes advantage of the data.
+I hope the examples in this chapter have been helpful to get your imagination going on what is possible when you start automating Network Insight. These examples have just scraped the surface of what's possible, and there's a whole integration ecosystem possible that takes advantage of the data.
 
-If you have any other use-cases that you are building -- please do reach out to me via any of my communication channels; I'd like to learn from you!
+If you have any other use-cases that you are building -- please do reach out to me via any of my communication channels; I'd like to learn from you. :-)

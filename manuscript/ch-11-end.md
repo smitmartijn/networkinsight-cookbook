@@ -1,3 +1,9 @@
+# Conclusion
+Congratulations, you have reach the end of this book! I hope that you have learned from this book and can my these ramblings to better make use of vRealize Network Insight.
+
+
+
+
 # Keyword Index
 
 **API Endpoint**
@@ -10,7 +16,7 @@
 : Configuration Management DataBase
 
 **CSP**
-: Cloud Services Portal -- VMwares' management portal for their cloud services
+: Cloud Services Portal -- VMware's management portal for their cloud services
 
 **DBA**
 : DataBase Administrator
