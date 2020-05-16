@@ -1,8 +1,11 @@
 # Conclusion
-Congratulations, you have reach the end of this book! I hope that you have learned from this book and can my these ramblings to better make use of vRealize Network Insight.
+I hope you have learned from this book and can use these ramblings to use vRealize Network Insight better. You have picked up valuable tips and tricks to solve networking productions quicker than you used to.
 
+Together we went through the use cases for Network Insight, how the product looks under the hood, how you can use it best, how to automate against it, and so much more. Practice makes perfect, so now that you have all the tools, go out there and use them.
 
-TODO
+Make sure to get notified when new content in this book is added, by following the steps in the chapter [Book Updates](#book-updates).
+
+Please feel free to contact me if you have any feedback on this book or unanswered questions about Network Insight. You can find me on twitter on [\@smitmartijn](https://twitter.com/smitmartijn) or my blog at <https://lostdomain.org>.
 
 # Keyword Index
 

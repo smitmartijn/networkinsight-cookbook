@@ -24,6 +24,7 @@ Due to the technical and sometimes very specific nature of this book, it's advis
 
 The content of this book is based on Network Insight 5.0 (with some small nuggets on 5.1 because I took too long to write it). Considering the product team is an innovation engine and moves really quickly (delivers major features every three months), you need to doublecheck the details when you're using a newer version. This book also does not intend to replace the [official documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/index.html), but rather complement it. The specific technical details in this book will age, and rightly so.
 
+{id: book-updates}
 ## Book Updates
 
 This is a so-called 'Agile' book. As Network Insight evolves and new features are added (and existing features are changed), this book will try to keep up with the release cycles. That's what so great about Leanpub, as you purchase this book once, and every time I push an update, you will get the updated version for free.
@@ -88,14 +89,29 @@ While I have tested and verified the information, examples, and external (and in
 
 This book wouldn't be possible without the amazing team behind Network Insight. From providing me with insights into what's going on behind the scenes to putting up with my excessive stream of questions, these people stood by me and have credit in making this book happen. Let me introduce them:
 
-* [Shiv Agarwal](https://www.linkedin.com/in/agarwalshiv/)
-* [Abhijit Sharma](https://www.linkedin.com/in/abhijitsharma71/)
-* [Rohit Reja](https://www.linkedin.com/in/rohit-reja-1b11335/)
-* [Manish Virat](https://www.linkedin.com/in/manishvirat/)
-* [Karthic Kumar](https://www.linkedin.com/in/karthicobla/)
-* [Dave Overbeek](https://www.linkedin.com/in/david-overbeek-2a772a1/)
-* [Naveen Chaudhary](https://www.linkedin.com/in/naveen-chaudhary-6b5a2991/)
-* [Taruna Gandhi](https://www.linkedin.com/in/tarunagandhi/)
+[Shiv Agarwal](https://www.linkedin.com/in/agarwalshiv/)
+: VP/GM at VMware for vRealize Network Insight, Co-founder ArkinNet. One of the most driven and collaborative persons I've met.
+
+[Abhijit Sharma](https://www.linkedin.com/in/abhijitsharma71/)
+: Senior Staff Engineer at VMware, Co-founder ArkinNet. One of the smartest persons I've met.
+
+[Rohit Reja](https://www.linkedin.com/in/rohit-reja-1b11335/)
+: Staff Engineer at VMware. Master of Search and API. Original ArkinNet crew.
+
+[Manish Virat](https://www.linkedin.com/in/manishvirat/)
+: VP of Engineering at Numerator. Used to be the ruler of the Collector and Data Sources.
+
+[Karthic Kumar](https://www.linkedin.com/in/karthicobla/)
+: Technical Product Manager at VMware. Karthic's picture is in the dictionary under *Customer Focused*.
+
+[Dave Overbeek](https://www.linkedin.com/in/david-overbeek-2a772a1/)
+: Director of Technical Marketing at VMware. Supporter extraordinaire always manages to push me in the right direction.
+
+[Naveen Chaudhary](https://www.linkedin.com/in/naveen-chaudhary-6b5a2991/)
+: Senior Technical Support at VMware. A real-life Network Insight dictionary.
+
+[Taruna Gandhi](https://www.linkedin.com/in/tarunagandhi/)
+: Director of Marketing at VMware. Idea generator extraordinaire.
 
 Thank you for your support and for putting up with my continuous stream of questions.
 
@@ -111,7 +127,7 @@ This disclaimer is provided simply because someone, somewhere, will ignore this 
 
 # Foreword by Shiv Agarwal
 
-*Founder of ArkinNet, currently Vice-President of vRealize Network Insight with VMware*
+*Founder of ArkinNet, currently VP and GM of vRealize Network Insight with VMware*
 
 VMware vRealize Network Insight (or vRNI, or Network Insight) has seen massive adoption in VMware's' customer base, helping our customers get end-to-end visibility and operational simplicity as they embrace a software-defined approach to networking and security. Network Insight completes VMware's Virtual Cloud Network vision and story by providing seamless visibility and converged network operations across the data center (virtual and physical) and hybrid cloud as well as branch offices and remote sites (via SD-WAN integration).
 
