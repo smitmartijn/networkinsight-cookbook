@@ -11,19 +11,19 @@ I leave you with Fred, the unofficial official mascot of Network Insight. There'
 
 Mostly appearing on stickers, Fred has had a few makeovers in the last few years.
 
-{caption: "2020", width: 25%}
+{caption: "2020", width: 25%, float: left}
 ![](images/ch-11/vrni-sticker-fred-baby-yoda-onesie-light-skinned.png)
 
 {caption: "2020", width: 25%}
 ![](images/ch-11/vrni-sticker-fred-baby-yoda-onesie-dark-skinned.png)
 
-{caption: "2019 - VMworld EMEA", width: 25%}
+{caption: "2019 - VMworld EMEA", width: 25%, float: right}
 ![](images/ch-11/vrni-sticker-samurai-vmworld-eu-2019.png)
 
-{caption: "2019 - VMworld US", width: 25%}
+{caption: "2019 - VMworld US", width: 25%, float: left}
 ![](images/ch-11/vrni-sticker-samurai-vmworld-2019.png)
 
-{caption: "2018", width: 25%}
+{caption: "2018", width: 25%, float: right}
 ![](images/ch-11/vrni-sticker-samurai.png)
 
 Let me know which one is your favorite, via twitter, and I'll send you some!
