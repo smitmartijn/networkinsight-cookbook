@@ -7,6 +7,27 @@ Make sure to get notified when new content in this book is added, by following t
 
 Please feel free to contact me if you have any feedback on this book or unanswered questions about Network Insight. You can find me on twitter on [\@smitmartijn](https://twitter.com/smitmartijn) or my blog at <https://lostdomain.org>.
 
+I leave you with Fred, the unofficial official mascot of Network Insight. There's a whole story about how the Samurai could see all things happening on the battlefield, but honestly, he just looks cool. ;-)
+
+Mostly appearing on stickers, Fred has had a few makeovers in the last few years.
+
+{caption: "2020", width: 25%}
+[![](images/ch-11/vrni-sticker-fred-baby-yoda-onesie-light-skinned.png)](https://lostdomain.org/wp-content/uploads/2020/05/vrni-sticker-fred-baby-yoda-onesie-light-skinned.png)
+
+{caption: "2020", width: 25%}
+[![](images/ch-11/vrni-sticker-fred-baby-yoda-onesie-dark-skinned.png)](https://lostdomain.org/wp-content/uploads/2020/05/vrni-sticker-fred-baby-yoda-onesie-dark-skinned.png)
+
+{caption: "2019 - VMworld EMEA", width: 25%}
+[![](images/ch-11/vrni-sticker-samurai-vmworld-eu-2019.png)](https://lostdomain.org/wp-content/uploads/2020/05/vrni-sticker-samurai-vmworld-eu-2019.png)
+
+{caption: "2019 - VMworld US", width: 25%}
+[![](images/ch-11/vrni-sticker-samurai-vmworld-2019.png)](https://lostdomain.org/wp-content/uploads/2020/05/vrni-sticker-samurai-vmworld-2019.png)
+
+{caption: "2018", width: 25%}
+[![](images/ch-11/vrni-sticker-samurai.png)](https://lostdomain.org/wp-content/uploads/2020/05/vrni-sticker-samurai.png)
+
+Let me know which one is your favorite, via twitter, and I'll send you some!
+
 # Keyword Index
 
 **API Endpoint**
