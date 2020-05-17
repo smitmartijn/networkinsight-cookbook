@@ -358,6 +358,10 @@ If your organization has everything in the cloud, there's a good chance you are 
 
 Here, the vRNI Cloud Collector appliance is placed in the *Compute* resource pool within VMC. Ensure the right firewall rules are in place, to allow the Collector to communicate over **HTTPS** (port 443) to both the **vCenter** and **NSX Manager**. Make sure that the Collector has outgoing internet connectivity over HTTPS so that it can connect with Network Insight Cloud. The Collector also receives incoming NetFlow traffic from the ESXi hosts, but by default, VMC allows the ESXi hosts to communicate to any VM.
 
+If you have multiple VMC SDDCs to monitor, the recommended deployment is to deploy a Collector per SDDC. To make deploying these Collector appliances a little bit easier and less manual, there is a [PowerShell Script to deploy the vRNI Cloud Collector OVA on VMC SDDC](https://code.vmware.com/samples/6764/powershell-script-to-deploy-vrnic-proxy-ova-on-vmc-sddc).
+
+I> While 1 Collector per SDDC is the recommendation, nothing is stopping you from deploying a Collector into a central SDDC and using the same Collector for multiple SDDCs. The only requirement is that the Collector has connectivity to the vCenters and NSX Managers of those SDDCs. While it saves some computing resources, it'll make your network more complex.
+
 When using Network Insight on-premises, the recommended deployment looks similar. The only change is that the traffic from the Collector to the Platform goes over the connectivity that connects the VMC SDDC towards the on-premises datacenter. The connectivity can be a VPN tunnel or an AWS Direct Connect.
 
 {caption: "VMware Cloud on AWS -- Collector Deployment for vRNI On-Premises", width: 80%}
