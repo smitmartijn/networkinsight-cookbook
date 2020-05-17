@@ -603,4 +603,3 @@ As a result of this API call, you will get a recap of the aggregation request an
 The field **aggregations.value** is the number of bytes that match the filter.
 
 You can find the PowervRNI example script here: <https://github.com/PowervRNI/powervrni/blob/master/examples/get-bandwidth-usage-per-ip.ps1>.
-

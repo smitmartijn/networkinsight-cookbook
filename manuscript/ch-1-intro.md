@@ -1,3 +1,21 @@
+
+
+
+
+
+
+
+
+
+![](vrni-sticker-fred-baby-yoda-onesie-light-skinned)
+
+
+
+
+
+
+
+
 # Introduction
 
 Thank you for purchasing the vRealize Network Insight Cookbook! This book is for people in jobs or interests related to networking and security in private, hybrid, and public clouds. Managing these networks and security policies becomes a much easier job with Network Insight, and this book will try to explain best how to go about managing those networks and how Network Insight itself is positioned to do so.
