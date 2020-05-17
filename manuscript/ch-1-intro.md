@@ -1,13 +1,6 @@
-* * *
-
-* * *
-
 {width: 50%, caption: "Meet Fred, the vRealize Network Insight Mascot"}
 ![](images/ch-1/vrni-sticker-fred-baby-yoda-onesie-light-skinned.png)
 
-* * *
-
-* * *
 
 # Introduction
 
