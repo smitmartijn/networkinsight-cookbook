@@ -347,6 +347,22 @@ With this refresh token, it is possible to converse with the CSP APIs. The refre
 
 In short, Network Insight talks to the CSP API in order to get network & security objects from VMC. However, that API is located on the NSX Manager that is hosted inside VMC. That means that the IP address or hostname can be the external IP address of the NSX Manager, or the internal IP address, as long as you have VPN or Direct Connect connectivity to the internal VMC SDDC network.
 
+#### Collector Deployment
+
+It is essential to deploy the Collector appliance close to the VMware Cloud on AWS SDDC(s), preferably even inside the SDDC. Network Insight collects data from VMC, meaning that there's egress network traffic. To minimize costs for egress network traffic, the Collectors should be deployed inside the VMC SDDC itself. That way, the API calls towards vCenter, and the incoming network flows that the NSX Distributed Firewall module on the ESXi hosts generate are kept local.
+
+If your organization has everything in the cloud, there's a good chance you are also using Network Insight Cloud, as opposed to the on-premises version. If that is indeed the case, this is how the deployment looks like:
+
+{caption: "VMware Cloud on AWS -- Collector Deployment for vRNI Cloud", width: 80%}
+![](images/ch-5/vmc-collector-deployment-vrnicloud.png)
+
+Here, the vRNI Cloud Collector appliance is placed in the *Compute* resource pool within VMC. Ensure the right firewall rules are in place, to allow the Collector to communicate over **HTTPS** (port 443) to both the **vCenter** and **NSX Manager**. Make sure that the Collector has outgoing internet connectivity over HTTPS so that it can connect with Network Insight Cloud. The Collector also receives incoming NetFlow traffic from the ESXi hosts, but by default, VMC allows the ESXi hosts to communicate to any VM.
+
+When using Network Insight on-premises, the recommended deployment looks similar. The only change is that the traffic from the Collector to the Platform goes over the connectivity that connects the VMC SDDC towards the on-premises datacenter. The connectivity can be a VPN tunnel or an AWS Direct Connect.
+
+{caption: "VMware Cloud on AWS -- Collector Deployment for vRNI On-Premises", width: 80%}
+![](images/ch-5/vmc-collector-deployment-onprem.png)
+
 ### Network Flows
 
 VMware NSX-T powers the virtual networking of VMware Cloud on AWS, and Network Insight uses the same method to ingest network flows from the VMC networks. The NSX-T Distributed Firewall generates NetFlow (IPFIX) and sends it to the Network Insight collector appliance. The flows that arrive at the collector get processed (correlated against objects like VMs, virtual network, geolocation, and more), and then get sent to the platform appliance **every 10 minutes**.
