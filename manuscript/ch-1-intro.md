@@ -7,7 +7,7 @@
 
 
 
-![](vrni-sticker-fred-baby-yoda-onesie-light-skinned)
+![](images/ch-1/vrni-sticker-fred-baby-yoda-onesie-light-skinned.png)
 
 
 
