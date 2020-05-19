@@ -11,8 +11,8 @@ In simple terms, the Platform is where you connect your browser to use the produ
 
 Here's how the architecture looks and how communication flows between the different components:
 
-{caption: "Platform Architecture Diagram"}
-![](images/image54.png)
+{caption: "vRealize Network Insight Architecture Diagram"}
+![](images/ch-6/vrni-architecture.png)
 
 Many things happen in both layers, which I'll go further into in the following chapters.
 
@@ -268,7 +268,7 @@ Again, this is a very rough estimate. The point of this entire chapter is that y
 {id: ch-hosted-architecture}
 ## Cloud Architecture (SaaS)
 
-If you're using vRealize Network Insight Cloud, the appliances used are the same as the ones you would use on-premises. There are 2 notable differences:
+If you're using vRealize Network Insight Cloud, the appliances used are the same as the ones you would use on-premises. There are two notable differences:
 
 - Authentication is handled by single-sign-on coupled with the VMware Cloud Services Portal,
 - There are a few user-interface changes, for example, the styling colors have been changed to match the other VMware Cloud Services, and a couple of settings are not available (LDAP, User Management & Mail Server)
@@ -277,16 +277,16 @@ Authentication is handled by the VMware Cloud Services Portal, which explains th
 
 Think of it like this; with vRealize Network Insight Cloud, VMware hosts and maintains the Platform, which means you only have to deploy the Collectors in your environment. Data flow is also the same, which means the Collector talks unidirectional to the Platform. The Platform lives on the internet, which means your Collectors need to have internet access for this to work.
 
-I> The Platform appliance of Network Insight is multi-tenant capable out of the box. It currently takes a lot of effort (and it's not user-friendly and not supported) to get multiple tenants activated. I've tried and broke a few Platforms. VMware is using this multi-tenancy capability in the Cloud variant. I'm holding out hope that multi-tenancy is activated in the on-premises variant in the future.
+I> The Platform appliance of Network Insight is multi-tenant capable out of the box. It currently takes a lot of effort (and it's not user-friendly and not supported) to get multiple tenants activated. I've tried and broke a few Platforms. VMware is using this multi-tenancy capability in the Cloud variant. I'm holding out hope that multi-tenancy is activated in the on-premises version in the future.
 
 {caption: "Architecture for vRealize Network Insight Cloud"}
-![](images/image61.png)
+![](images/ch-6/vrni-cloud-architecture.png)
 
 I> When using vRealize Network Insight Cloud, you only have to deploy the Collector in your environment. It requires connectivity to the Platform, which means internet connectivity is required for the Collector.
 
 {id: ch-clustering}
 ## Scalability and Availability (Clustering)
-One Platform and Collector pair can collect a large amount of VM data and network flows; currently, 10.000 VMs and 10.000.000 network flows total. However, if you need to go over these maximums, it is possible to create a cluster of Platform appliances to support the bigger environments.
+One Platform and Collector pair can collect a large amount of VM data and network flows; currently, 10.000 VMs and 10.000.000 network flows total. However, if you need to go over these maximums, it is possible to create a cluster of Platform appliances to support the larger environments.
 
 Note that I'll be calling the appliances a so-called 'brick' – this is a term for a VM that's a part of the Network Insight setup. Just like a house, the Network Insight setup can be built from multiple bricks of multiple sizes. These bricks can be Platforms or Collectors.
 
@@ -294,14 +294,16 @@ Important to know is that a medium brick deployment can also be scaled verticall
 
 These are the current brick sizes for both the Platform and Collector:
 
-| Type      | Brick Size  | Cores on 2.1GHz | Cores on 2.3GHz | Cores on 2.6GHz | RAM  | Disk |
-| :---      | :---        | :---            | :---            | :---            | :--- | :--- |
-| Platform  | Medium      | 10              | 9               | 8               | 32GB | 1TB |
-| Platform  | Large       | 15              | 14              | 12              | 48GB | 1TB |
-| Platform  | Extra Large | 20              | 18              | 16              | 64GB | 2TB |
-| Collector | Medium      | 5               | 5               | 4               | 12GB | 200GB |
-| Collector | Large       | 10              | 9               | 8               | 16GB | 200GB |
-| Collector | Extra Large | 10              | 9               | 8               | 24GB | 200GB |
+| Type      | Brick Size  | Cores on 2.1GHz | Cores on 2.3GHz | Cores on 2.6GHz | RAM  |
+| :---      | :---        | :---            | :---            | :---            | :--- |
+| Platform  | Medium      | 10              | 9               | 8               | 32GB |
+| Platform  | Large       | 15              | 14              | 12              | 48GB |
+| Platform  | Extra Large | 20              | 18              | 16              | 64GB |
+| Collector | Medium      | 5               | 5               | 4               | 12GB |
+| Collector | Large       | 10              | 9               | 8               | 16GB |
+| Collector | Extra Large | 10              | 9               | 8               | 24GB |
+
+In all cases, the Platform has a 1TB disk requirement, and the Collector has a 200GB disk requirement. It's recommended to use thin provisioning.
 
 T> Always check the [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/5.2/com.vmware.vrni.install.doc/GUID-F4F34425-C40D-457A-BA65-BDA12B3ABE45.html) for the latest numbers.
 
@@ -346,9 +348,9 @@ Creating a cluster is pretty straight forward; first, you deploy the first Platf
 
 The details you provide in the form above, have to be Platform appliances that have been deployed but **not** configured yet. They should be waiting to be activated, and you should see the web interface asking for a license. When submitting the form, Platform1 goes out to the unconfigured Platforms and take control of them. This process joins the unconfigured Platform nodes to the cluster that Platform1 controls.
 
+Platform 1 is where you connect, use the web interface, or use the public API. It's the conductor of the cluster. The Collectors connect to Platform 1 and data flows via Platform 1 into the Kafka data processing queue. Once the data is in the Kafka queue, the first platform to pick it up and process it, stores the data.
 
-TODO: Finish after getting the cluster setup
-
+There are no further tweaks, no load balancing to set up, there is nothing more to it than this. After setting up the cluster, go ahead and pair Collectors, and start collecting data.
 
 {id: ch-availability-note}
 ### Availability Note
