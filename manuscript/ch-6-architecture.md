@@ -29,7 +29,7 @@ Inside the Platform, there are a few different layers that serve different purpo
 Here is a representation of the service layers that live inside a Platform:
 
 {caption: "Platform VM Internal Architecture"}
-![](images/image55.png)
+![](images/ch-6/platform-internal.png)
 
 ### Presentation Service Layer
 
@@ -40,14 +40,14 @@ The REST API is split up into two sections: a private API and a public API. More
 All UI interactions with data use the private API to collect the data. As the name suggests, this part should not be used by any automation work that you would like to build. The format and output are likely to change throughout different versions.
 
 {caption: "Private API in action"}
-![](images/image56.png)
+![](images/ch-6/private-api.png)
 
 ### Search Engine
 
 While the search engine is worth a whole separate chapter, in this context, is it worth explaining that the search engine drives all interactions. Anything that you do in the interface is a search command. This also reflects in the search bar:
 
 {caption: "Searching your data center"}
-![](images/image57.png)
+![](images/ch-6/searching.png)
 
 Talking to a backend powered by Elastic Search, it takes search queries in technical natural language. It searches through configuration data, events, performance stats and can do so in a time machine to get results for a specific time frame. Unlike the open-source database backends, the search engine is a service entirely built by the Network Insight team.
 
@@ -94,7 +94,7 @@ The polling agents and Flow Processor are proprietary code, but several open-sou
   - These are slightly modified to support IPFIX from the VDS and ignore information that Network Insight does not need to improve performance.
 
 {caption: "Collector VM internal architecture", width: "80%"}
-![](images/image59.png)
+![](images/ch-6/collector-internal.png)
 
 {id: ch-flow-processor}
 ### Flow Processor
