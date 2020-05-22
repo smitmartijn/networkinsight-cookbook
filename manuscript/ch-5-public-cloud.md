@@ -34,7 +34,7 @@ Essentially a port mirror that can be placed on an Elastic Network Interface (EN
 This feature can log all incoming and outgoing network traffic in a specific VPC. Think hit count logs, but only for all traffic. You can configure it only for the entire VPC and determine whether you want only to log accepted traffic, or also log rejected traffic by the security groups that are in place. These logs are sent either to CloudWatch or an S3 bucket.
 
 #### Status Checks
-Checks whether services are running, reachable, and what the current latency. These status checks are more on the application level, which serves content via the network.
+Checks whether services are running, reachable, and what the current latency is. These status checks are more on the application level, which serves content via the network.
 
 #### CloudWatch Logs
 You can send all kinds of logs and metrics to CloudWatch. It allows you to access and correlate all this data between different AWS services, and it is comparable to something like Splunk or vRealize Log Insight.

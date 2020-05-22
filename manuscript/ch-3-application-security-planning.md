@@ -79,7 +79,7 @@ Because the VDS is the only virtual switch that supports sending NetFlow, it is 
 
 This process is the same for NSX data sources (both NSX-V and NSX-T), where you can configure NSX, so it starts sending NetFlow to the Collector, straight from the Network Insight interface.
 
-{caption: "Enabling Distributed Firewall IPFIX on NSX"}
+{caption: "Enabling Distributed Firewall IPFIX on NSX", width: "80%"}
 ![](images/ch-3/enabling-dfw-ipfix-on-nsx.png)
 
 Besides using the VDS, and NSX to collect NetFlow data, you can also configure physical network devices to send NetFlow or sFlow to Network Insight. With this, you gain insight into the traffic flows between physical only hosts and not only see the flows where a virtual machine is involved. To prepare Network Insight to receive these flows from physical network devices, you need to add a "Physical Flow Collector" data source.
