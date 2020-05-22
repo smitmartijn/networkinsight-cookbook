@@ -10,7 +10,7 @@ The hard part about micro-segmentation is where to get started. As a security pe
 
 Using the network flow data and workload information that is collected by Network Insight, it provides you with a jumping board to accelerate any micro-segmentation implementation. You'll get unobstructed views into the communication between workloads and applications, and you can export recommended security policies that you can import directly into VMware NSX.
 
-{caption: "Global numbers of Network Traffic movement"}
+{caption: "Network Traffic Behavior"}
 ![Network Traffic Behavior](images/image1.png)
 
 {caption: "Recommended Firewall Rules Grouped by Application"}
