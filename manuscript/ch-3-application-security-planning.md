@@ -18,7 +18,7 @@ With a zero-trust architecture, using micro-segmentation, security policies (whi
 To learn more about VMware NSX and how it helps you to do micro-segmentation, have a look at the free eBooks named [VMware NSX® Micro-segmentation Day 1](https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/products/nsx/vmware-nsx-microsegmentation.pdf) and [VMware NSX® Micro-segmentation Day 2](https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/products/nsx/vmware-micro-segmentation-day-2.pdf).
 
 {caption: "Micro-Segmention; logical security boundaries between applications.", width: "80%"}
-![](images/image8.png)
+![](images/ch-3/microsegmentation.png)
 
 ## The Challenge of Micro-Segmentation
 
@@ -73,7 +73,7 @@ More information on how Network Insight ingests and processes incoming network f
 To collect network flows from your environment, a flow data source has to be added to Network Insight. If you're running a vCenter data source, you can enable the IPFIX configuration straight from the data source configuration page. This option configures NetFlow on the vSphere Distributed Switch and have it send flows to the Collector. Incidentally, enabling NetFlow is the only write action that Network Insight does.
 
 {caption: "Enabling NetFlow on vCenter"}
-![](images/image9.png)
+![](images/ch-3/enabling-netflow-vcenter.png)
 
 Because the VDS is the only virtual switch that supports sending NetFlow, it is required to have your VMs run on the VDS and not a standard vSwitch.
 
@@ -85,7 +85,7 @@ This process is the same for NSX data sources (both NSX-V and NSX-T), where you 
 Besides using the VDS, and NSX to collect NetFlow data, you can also configure physical network devices to send NetFlow or sFlow to Network Insight. With this, you gain insight into the traffic flows between physical only hosts and not only see the flows where a virtual machine is involved. To prepare Network Insight to receive these flows from physical network devices, you need to add a "Physical Flow Collector" data source.
 
 {caption: "Adding a Physical Flow Collector data source", width: "80%"}
-![](images/image10.png)
+![](images/ch-3/adding-physical-netflow-collector.png)
 
 The Collector that receives the flows from the physical network devices has to be a separate Collector VM and cannot be a Collector where other data sources are present. The reasons for this are twofold:
 
@@ -101,13 +101,13 @@ Let's get into the meat of the Micro-Segmentation Planner and how to use it. The
 
 Starting from a high level, this is an excellent view to see what kind of behavior is happening inside your infrastructure. It shows how much of your traffic is North-South, East-West, VM to VM, and how much is routed versus switched traffic. It also gives a quick view of which network ports are used the most.
 
-{caption: "High level overview of network traffic behaviour"}
-![](images/image11.png)
+{caption: "High-level overview of network traffic behavior"}
+![](images/ch-3/high-level-network-traffic-behaviour.png)
 
 On the left of the high-level overview is what I like to call the *donut of joy*. You have to find joy in the little things of life, and for me, this is one of those things. This donut presents a user-friendly view of what network traffic flows are happening, grouped per object. By default, the slices are grouped by networks (vCenter port group), and you can change the grouping to any available workload object, for example, application, VM, subnet, vCenter folder, NSX Security Tag or an AWS VPC.
 
-{caption: "Micro-Segmentation Planner; the donut of joy", width: "70%"}
-![](images/image12.png)
+{caption: "Security Planner, Donut of Joy", width: "70%"}
+![](images/ch-3/security-planner.png)
 
 As with most of the Network Insight interface, you can click on any of the slices or connection lines and get the data that's behind the picture.
 
@@ -155,7 +155,7 @@ When you open up any of the donut slices, or a directional line (the line betwee
 The Services tabs and Flow tab provides some great insight into what's running in a specific slice, and you'd be able to use that information to quickly determine what services are running in it and what services it is consuming. However, the Recommended Firewall Rules are the real actionable results.
 
 {caption: "Recommended Firewall Rules grouped by Application", width: "90%"}
-![](images/image13.png)
+![](images/ch-3/recommended-fw-rules-per-application.png)
 
 These firewall rules are what you need to enable micro-segmentation for the workloads inside the slice.
 
@@ -200,7 +200,7 @@ When integrating Network Insight with VMware PKS (PKS stands for Pivotal Contain
 Keep in mind that the option to export as YAML is only enabled when the **Group By** setting is on to Kubernetes Namespace or Kubernetes Service. These are the only objects that can have security policies implemented. When exporting as YAML, Network Insight provides you with a zip file to download, which contains separate YAML files per network policy between different Kubernetes services.
 
 {caption: "Recommended Firewall Rules YAML export"}
-![](images/image14.png)
+![](images/ch-3/recommended-fw-rules-yaml.png)
 
 There are different files per security policy, so it's easy to edit the security policies that you actually want to apply. There could be communication between services that should not have anything to do with each other. As an example, here's the recommended security policy that makes sure my yelb-ui service has access to the centralized DNS service:
 
@@ -242,7 +242,7 @@ I see you're still here; good! You've already protected the application from una
 Go ahead and use the Scope feature on the Security Planner to limit the view to the specific application you're working on. The default view that pops up is the view we need, grouped by Tier.
 
 {caption: "Recommended Firewall Rules grouped by Tier", width: "70%"}
-![](images/image15.png)
+![](images/ch-3/recommended-fw-rules-per-tier.png)
 
 From here, you have the option to look at intra-application communication flows, get the services running inside each tier, and generate the recommended firewall rules based on the tiers. Meaning you'll get recommended firewall rules like "web needs port 80 and 443 from source any" and "web needs port 8443 to the app tier". Take these rules and implement tier segmentation. After this, you'll have protected the tiers from each other; i.e., web servers can no longer talk to the database servers.
 
@@ -296,7 +296,7 @@ Inside Network Insight, there are application constructs that you can create. An
 Here's an example with a simple 3 Tier Application. It exists out of a Web tier, App tier, and Database tier. All tiers have VMs in there which are responsible for serving as a web, application, or database server.
 
 {caption: "Example application construct"}
-![](images/image16.png)
+![](images/ch-3/application-construct-example.png)
 
 If you put the application context together with the data already in Network Insight, you get a full-stack view. You can then do application-specific tasks like micro-segmentation planning, monitoring, and troubleshooting.
 
@@ -325,12 +325,12 @@ Tags and custom attributes are going to be used intertwined in the upcoming para
 Inside vCenters' Tags & Custom Attributes page; you can define a custom attribute that exists of a key and value set. Both are free text; the key can be used to name the custom attribute, and the value can be set on each VM separately.
 
 {caption: "Application Construction Definition"}
-![](images/image17.png)
+![](images/ch-3/application-construct-definition.png)
 
 In the above screenshot, I have defined 2 custom attributes called **Application-Name** and **Application-Tier**. These attributes can then be placed on a VM and given a value. Here's an example of 2 VMs that are a part of 2 different applications and also 2 different tiers.
 
 {caption: "Custom Attributes on a VM"}
-![](images/image18.png)
+![](images/ch-3/vm-custom-attrib.png)
 
 These VMs are a part of 2 different 3-tiered applications consisting of a Web, App, and DB tier. As you might deduct from the screenshots, the left VM is a part of an application called **VMworld-3TA01** and resides in the **App** tier. The right VM is a part of the **VMworld-3TA02** application and is a part of the **Web** tier.
 
@@ -341,7 +341,7 @@ There are three discovery methods available, and each has its sub-tab: Tags, Ser
 You're presented with a brief wizard-like flow where you first can indicate a Scope. This scope is a way to limit the discovery to a specific section of the infrastructure. For example, you can select a vCenter, AWS VPC, Resource Pool, Subnet, any object that Network Insight can relate to a workload.
 
 {caption: "Application Discovery using Tags"}
-![](images/image19.png)
+![](images/ch-3/application-discovery-tags.png)
 
 After selecting the scope, it'll ask you for the name of the tag for the application name. In the case of this example, I've selected **Application-Name** as the custom attribute that it will be using to discover the application names. You can also limit the tag value discovery by changing the "and Any value" that's to the right of the tag name. Scoping allows you to limit the discovery to specific application names and ignore the rest.
 
@@ -362,7 +362,7 @@ This scope will effectively only discover VMs that are not already part of an ex
 Once you're done filling out the wizard, hit the **Discover** button. This takes you to the results page, with a beautiful way of displaying the discovered applications.
 
 {caption: "Application Discovery Results"}
-![](images/image20.png)
+![](images/ch-3/application-discovery-results.png)
 
 Using this honeycomb widget, the discovered applications displayed in such a way that you can quickly go through them and focus on the ones that you're looking for or filter out the ones you do not want.
 
@@ -375,7 +375,7 @@ Note: the save button is hidden on the screenshot (Figure 19) but appears when y
 When you click the save button, the form to save the application to the system pops up -- already filled out with the application structure and ready for you to double-check and save:
 
 {caption: "Application Discovery Results - Form"}
-![](images/image21.png)
+![](images/ch-3/application-discovery-form.png)
 
 Once you hit the Submit button, the application is saved to the system, and Network Insight starts correlating other objects (network flows, VMs, events, and more) with it.
 
@@ -430,14 +430,14 @@ Then you fill out the regular expression that grabs the application name. As you
 Have a look at the **Found x Applications** and **Unclassified VMs** lists to see if your results are as you expect. If so, move on to the tier regular expression and rinse and repeat the steps you made on the application.
 
 {caption: "Application Discovery with a Naming Convention"}
-![](images/image22.png)
+![](images/ch-3/application-discovery-naming-convention.png)
 
 Looking at regular expressions can do a few things to a person. They can comprehend it perfectly and become a wizard, they can understand it and get away with googling the syntax they need, or they can start to ask existential questions about life itself and go on strike. If you're not a wizard, there's something inside Network Insight that can help you build the right regular expression to use called the Pattern Builder.
 
 To the right of the input for the regular expression is a button to open it. Once you do, a new screen opens up where you can search for an example workload (or just type the name of a workload) and build a regular expression to match on it, just by clicking the positions or groupings you want to match.
 
 {caption: "Application Discovery -- Pattern Builder"}
-![](images/image23.png)
+![](images/ch-3/application-discovery-pattern-builder.png)
 
 In the example above, I've selected the first group as the match, and you can see the regular expression building dynamically, just above the big workload name. It automatically recognizes groups based on the available separators, but you can also select specific character positions (remember the curly brackets?).
 
@@ -455,7 +455,7 @@ Lastly, we've arrived at the last (and probably most boring) application discove
 I'm going to assume you know ServiceNow and the jargon that comes with it. I'm not going into how to create the applications and relations between the application, services, and virtual machines attached to those services. Instead, let's have a look at a 3-tiered application relationship map:
 
 {caption: "Application Discovery -- ServiceNow Application Map"}
-![](images/image24.png)
+![](images/ch-3/application-discovery-servicenow.png)
 
 It's focused on an Application Service called **3TierApp02**, which has an entry point of a load balancer listening on port 80 and 443. The load balancer is then _distributed by_ (also the relationship type) 3 Nginx web servers, which in turn _run on_ (also the relationship type) their respective VMware VMs. The Nginx web servers _depend on_ (relationship type) on 2 application services, which _run on_ another 2 VMware VMs. Lastly, the application services _depend on_ a MySQL database service, which again _runs on_ a VMware VM.
 
@@ -471,4 +471,4 @@ All the VMware VMs in this example have been discovered from the virtual infrast
 Once you've got the application maps and relationships towards workloads configured inside ServiceNow, they start showing up in Network Insight, ready to be saved.
 
 {caption: "Application Discovery -- ServiceNow Result"}
-![](images/image25.png)
+![](images/ch-3/application-discovery-servicenow-result.png)
