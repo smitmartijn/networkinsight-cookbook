@@ -11,10 +11,10 @@ The hard part about micro-segmentation is where to get started. As a security pe
 Using the network flow data and workload information that is collected by Network Insight, it provides you with a jumping board to accelerate any micro-segmentation implementation. You'll get unobstructed views into the communication between workloads and applications, and you can export recommended security policies that you can import directly into VMware NSX.
 
 {caption: "Network Traffic Behavior"}
-![Network Traffic Behavior](images/image1.png)
+![Network Traffic Behavior](images/ch-2/network-traffic-behavior.png)
 
 {caption: "Recommended Firewall Rules Grouped by Application"}
-![Recommended Firewall Rules Grouped by Application](images/image2.png)
+![Recommended Firewall Rules Grouped by Application](images/ch-2/recommended-fw-rules.png)
 
 ## Use-Case -- Getting actual visibility into your environment
 
@@ -23,7 +23,7 @@ Besides using NetFlow data to provide insight into the traffic going through you
 When it comes to troubleshooting, that is where the gold is. Network Insight provides a holistic view of your entire environment, which means you can quickly and easily find root-causes to any issues you're having.
 
 {caption: "Topology: Physical and Virtual Together"}
-![Topology: Physical and Virtual Together](images/image3.png)
+![Topology: Physical and Virtual Together](images/ch-2/topology-physical-virtual.png)
 
 Using the network topology maps, you can quickly determine issues on a specific network path or using the search engine to look for network devices that are misbehaving or showing anomalies, and your troubleshooting process can be much more efficient and quicker.
 
@@ -34,7 +34,7 @@ After getting all of this data from your virtual and physical environment, Netwo
 These problems have severities: Critical, Moderate, Warning & Info and example might be that it has discovered an MTU mismatch (essential when using an overlay) on the physical networking equipment or if high availability on an NSX Edge is not enabled. You're at risk for downtime when the NSX Edge needs a failover, which is why Network Insight raises events for this.
 
 {caption: "Health Check and Health Alerts"}
-![Health Check and Health Alerts](images/image4.png)
+![Health Check and Health Alerts](images/ch-2/health-checks-alerts.png)
 
 These health checks are an excellent way to keep your environment in check and configured as per the latest best practices.
 
@@ -59,7 +59,7 @@ You can find a deep dive on this topic in the chapter [Application Migration Pla
 According to results of a survey that the Cloud Native Containers Foundation did in 2018, the main concerns around moving containerized applications into production (and keeping them there & healthy) is around **Complexity**, **Monitoring**, **Networking** and **Security**.
 
 {caption: "CNCF 2018 Survey results"}
-![CNCF 2018 Survey results](images/image5.png) [^1]
+![CNCF 2018 Survey results](images/ch-2/cncf-2018.png ) [^1]
 
 [^1]: <https://www.cncf.io/blog/2018/08/29/cncf-survey-use-of-cloud-native-technologies-in-production-has-grown-over-200-percent/>
 
@@ -100,7 +100,7 @@ Networking itself is not new to VMware. They have been doing virtual networking 
 Since then, NSX has turned into a platform for networking & security that extends throughout the entire enterprise network. NSX Data Center provides services for applications hosted in the data center. NSX Cloud integrates natively into public clouds to allow the same security policies everywhere (instead of point-solutions per cloud). NSX SD-WAN by VeloCloud bridges the gap between branch locations and the data centers and clouds. AppDefense enables zero-trust application security on the operating system level. NSX Hybrid Connect (HCX) makes it possible to migrate workloads between the different places where these workloads can live. It's a complete and rich portfolio.
 
 {caption: "VMware NSX Portfolio"}
-![VMware NSX Portfolio](images/image6.png)
+![VMware NSX Portfolio](images/ch-2/nsx-portfolio.png)
 
 This portfolio translates to uniform networking & security policies and services that can be delivered anyplace that can run applications (so, everywhere). As application workloads keep spreading out from the data center towards more locations to be either close to their data and operating spaces (IoT is becoming a thing). Locations now have specialized services (AI/ML as a Server, Function as a Service, things like that). Using NSX, we can keep the same network & security policies in place, we can deliver the required networking services on all locations, and we can do that without having to learn the platform-specific networking components.
 
