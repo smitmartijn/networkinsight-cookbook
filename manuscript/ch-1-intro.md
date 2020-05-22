@@ -104,7 +104,7 @@ This book wouldn't be possible without the amazing team behind Network Insight. 
 : Staff Engineer at VMware. Master of Search and API. Original ArkinNet crew.
 
 [Manish Virat](https://www.linkedin.com/in/manishvirat/)
-: VP of Engineering at Numerator. Used to be the ruler of the Collector and Data Sources.
+: VP of Engineering at Numerator. Previously the ruler of the Collector and Data Sources.
 
 [Karthic Kumar](https://www.linkedin.com/in/karthicobla/)
 : Technical Product Manager at VMware. Karthic's picture is in the dictionary under *Customer Focused*.

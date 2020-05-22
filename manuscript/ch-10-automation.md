@@ -424,6 +424,7 @@ If the connection is a success, you see the authentication token being returned,
 
 {pagebreak}
 
+{id: ch-automation-use-cases}
 ## Automation Use Cases
 
 Now that we've covered the **how** of automation with Network Insight, let's focus on the **why**.

@@ -122,6 +122,7 @@ When the scope is set, move on to the condition (3). This condition is written i
 
 Here's the default:
 
+{format: console, line-numbers: false}
 ```
 For metric network traffic rate aggregated over virtual machine when any value exceeds threshold
 Upper bound: ZZZ Kbps

@@ -338,7 +338,7 @@ Something else to consider is that the Collectors cannot be clustered at this ti
 
 To visualize the possibilities and the architecture when clustering Network Insight, check out this architecture:
 
-{caption: "Clustering Architecture"}
+{caption: "Clustering Architecture", width: 80%}
 ![](images/ch-6/cluster-architecture.png)
 
 Creating a cluster is pretty straight forward; first, you deploy the first Platform (which is referred to as Platform1), configure it as you would normally, and then head over to the  **Infrastructure & Support -> Overview and Updates** page in order to create a cluster.

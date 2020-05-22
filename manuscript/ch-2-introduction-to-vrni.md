@@ -11,7 +11,7 @@ The hard part about micro-segmentation is where to get started. As a security pe
 Using the network flow data and workload information that is collected by Network Insight, it provides you with a jumping board to accelerate any micro-segmentation implementation. You'll get unobstructed views into the communication between workloads and applications, and you can export recommended security policies that you can import directly into VMware NSX.
 
 {caption: "Global numbers of Network Traffic movement"}
-![Global numbers of Network Traffic movement](images/image1.png)
+![Network Traffic Behavior](images/image1.png)
 
 {caption: "Recommended Firewall Rules Grouped by Application"}
 ![Recommended Firewall Rules Grouped by Application](images/image2.png)
@@ -22,8 +22,8 @@ Besides using NetFlow data to provide insight into the traffic going through you
 
 When it comes to troubleshooting, that is where the gold is. Network Insight provides a holistic view of your entire environment, which means you can quickly and easily find root-causes to any issues you're having.
 
-{caption: "Topology chart: gluing physical and virtual together"}
-![Topology chart: gluing physical and virtual together](images/image3.png)
+{caption: "Topology: Physical and Virtual Together"}
+![Topology: Physical and Virtual Together](images/image3.png)
 
 Using the network topology maps, you can quickly determine issues on a specific network path or using the search engine to look for network devices that are misbehaving or showing anomalies, and your troubleshooting process can be much more efficient and quicker.
 

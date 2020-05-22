@@ -216,6 +216,19 @@ With the application registration, you can determine which resources it has acce
 
 More information on the application registration process can be found in the [Azure documentation](https://docs.microsoft.com/en-us/graph/auth-register-app-v2). In any case, make sure the application registration has the following permissions:
 
+{format: console, line-numbers: false}
+```
+Microsoft.Resources/subscriptions/read
+Microsoft.Compute/virtualMachines/read
+Microsoft.Network/virtualNetworks/read
+Microsoft.Network/networkSecurityGroups/read
+Microsoft.Network/networkInterfaces/read
+Microsoft.Network/applicationSecurityGroups/read
+Microsoft.Storage/storageAccounts/read
+Microsoft.Storage/storageAccounts/listkeys/action
+Microsoft.Network/networkWatchers/queryFlowLogStatus/action
+```
+
 Alternatively, you can also use the built-in roles: **Storage Account Key Operator Service** **Role**, **Network Contributor**, and **Reader**.
 
 Once your application registration is done, you'll have an **Application ID**, **Directory (tenant) ID**, and an **Application Secret Key** to show for it. In order to complete the registration inside Network Insight, you also need the Subscription ID. This ID can be retrieved by looking at the Subscriptions page in the Azure portal.
@@ -260,33 +273,33 @@ The JSON file, which holds the actual network flows, is also really structured a
 {format: json, line-numbers: false}
 ```
 {
-    "time":"2019-11-14T06:00:07.2527031Z",
-    "systemId":"8f76562a-cc70-462e-85b9-857918375ef8",
-    "macAddress":"000D3A101B95",
-    "category":"NetworkSecurityGroupFlowEvent",
-    "resourceId":"/SUBSCRIPTIONS/D65E18A1-2055-45C9-B81A-6F18C663C394/RESOURCEGROUPS/VRNI-01/PROVIDERS/MICROSOFT.NETWORK/NETWORKSECURITYGROUPS/VRNI-01-NSG",
-    "operationName":"NetworkSecurityGroupFlowEvents",
-    "properties":
-    {
-        "Version":2,
+  "time":"2019-11-14T06:00:07.2527031Z",
+  "systemId":"8f76562a-cc70-462e-85b9-857918375ef8",
+  "macAddress":"000D3A101B95",
+  "category":"NetworkSecurityGroupFlowEvent",
+  "resourceId":"/SUBSCRIPTIONS/D65E18A1-2055-45C9-B81A-6F18C663C394/RESOURCEGROUPS/VRNI-01/PROVIDERS/MICROSOFT.NETWORK/NETWORKSECURITYGROUPS/VRNI-01-NSG",
+  "operationName":"NetworkSecurityGroupFlowEvents",
+  "properties":
+  {
+    "Version":2,
+    "flows":
+    [
+      {
+        "rule":"DefaultRule_DenyAllInBound",
         "flows":
         [
-            {
-                "rule":"DefaultRule_DenyAllInBound",
-                "flows":
-                [
-                    {
-                        "mac":"000D3A101B95","flowTuples":
-                        [
-                            "1573711155,209.17.96.234,10.2.0.6,64386,6001,T,I,D,B,,,,",
-                            "1573711179,125.161.136.91,10.2.0.6,14628,445,T,I,D,B,,,,",
-                            "1573711182,45.82.153.35,10.2.0.6,42644,10922,T,I,D,B,,,,"
-                        ]
-                    }
-                ]
-            }
+          {
+            "mac":"000D3A101B95","flowTuples":
+            [
+              "1573711155,209.17.96.234,10.2.0.6,64386,6001,T,I,D,B,,,,",
+              "1573711179,125.161.136.91,10.2.0.6,14628,445,T,I,D,B,,,,",
+              "1573711182,45.82.153.35,10.2.0.6,42644,10922,T,I,D,B,,,,"
+            ]
+          }
         ]
-    }
+      }
+    ]
+  }
 }
 ```
 

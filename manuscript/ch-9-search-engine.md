@@ -431,7 +431,7 @@ Find all VMs that are located on a cluster that does not have the NSX Distribute
 
 `VMs where Cluster in (Cluster where Firewall Feature Enabled = false)`
 
-As you can see, it's a bit more text -- but to me, this is more readable.
+As you can see, it's a bit more text than using reference traversal queries, but to me, this is more readable.
 
 ## Time Control
 

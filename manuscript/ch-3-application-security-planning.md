@@ -24,7 +24,7 @@ To learn more about VMware NSX and how it helps you to do micro-segmentation, ha
 
 When you start treating all your applications in a zero-trust way, there's usually one big question that arises: "Do I actually have to put in work to achieve zero-trust? Can't I just click a button?"
 
-Achieving zero-trust, while never unachievable, definitely needs work. When you start treating your applications as if they are all in a separate DMZ, security policies need to be designed for it to work, and those security policies need to contain all network connectivity that an application needs. Forget to include a critical port in the security policy, and the application simply doesn't work.
+Achieving zero-trust, while never unachievable, definitely requires you to do the work. When you start treating your applications as if they are all in a separate DMZ, security policies need to be designed for it to work, and those security policies need to contain all network connectivity that an application needs. Forget to include a critical port in the security policy, and the application simply doesn't work.
 
 If you put in the work, the rewards of securing your applications are worth it. Organizations around the world are doing it. Micro-Segmentation is real progress towards a more secure infrastructure, or at least it helps in limiting the blast radius of any incident.
 
@@ -42,7 +42,7 @@ It provides you with a starting point for micro-segmentation. After collecting n
 
 ## How does it work?
 
-Network Insight ingests metadata from real-time network traffic and relates that to other data it already sees from the infrastructure. This way, it can determine which network flows belong to which virtual machine, container, or application. It knows which network flows are currently in use by the application, shows this in a very presentable way, and makes recommendations on the required firewall rules needed to micro-segment an application.
+Network Insight takes in metadata from real-time network traffic and relates that to other data it already sees from the infrastructure. This way, it can determine which network flows belong to which virtual machine, container, or application. It knows which network flows are currently in use by the application, shows this in a very presentable way, and makes recommendations on the required firewall rules needed to micro-segment an application.
 
 It is also keenly aware of the VMware NSX dynamic security policies. It uses Security Groups and Security Policies to group VMs, networks, applications (or whatever fits the best scope) to make sure the number of firewall rules is minimized to the bare minimum. Hence, it creates the best manageable configuration.
 
@@ -301,7 +301,7 @@ Well, you're right. Don't do it manually because each time you execute a repetit
 
 Now, these application constructs can be added in a few ways; manually, via the API, and they can be discovered directly from the infrastructure metadata or be fetched from a Configuration and Management Database (CMDB) like ServiceNow (just ServiceNow, at the time of this writing).
 
-You can automate the creation of these application constructs by using the API and have your infrastructure automation tool (such as vRealize Automation) call Network Insights API to create it when there's an automated application deployment happening. I've got an example doing so in the chapter **Automation Use Cases**. You can also use a pretty simple script to import a list of application constructs and get them in that way. Those methods depend on either having an automation tool or a complete list of your applications, which is not always the case. That's why Network Insight also does application discovery using metadata from the infrastructure itself. It can use tags, vCenter custom attributes, public cloud tags, Kubernetes labels, any tag that is attached to a workload. There's also the option to detect applications from a naming convention, or it can match up workloads listed in the ServiceNow CMDB and pull the information from there.
+You can automate the creation of these application constructs by using the API and have your infrastructure automation tool (such as vRealize Automation) call Network Insights API to create it when there's an automated application deployment happening. I've got an example doing so in the chapter [Automation Use Cases](#ch-automation-use-cases). You can also use a pretty simple script to import a list of application constructs and get them in that way. Those methods depend on either having an automation tool or a complete list of your applications, which is not always the case. That's why Network Insight also does application discovery using metadata from the infrastructure itself. It can use tags, vCenter custom attributes, public cloud tags, Kubernetes labels, any tag that is attached to a workload. There's also the option to detect applications from a naming convention, or it can match up workloads listed in the ServiceNow CMDB and pull the information from there.
 
 Important to note is that these discovery methods work independently from each other and can be run multiple times with different values. If you have multiple naming conventions in the infrastructure, just run the discovery multiple times, using different expressions for the right naming convention.
 
@@ -392,25 +392,19 @@ Let's take a look at that regular expression first. According to Wikipedia, a re
 
 Regular expressions are used in scripting and programming languages to grab specific bits of text out of a large text. Ask one of your developer friends, they are most likely familiar with it, and there's a big chance they hate it (I do). The reason to hate it is because it can be used to do extremely complex things, making regular expressions complex themselves. However, we can keep it pretty simple for the usage of application discovery. Here's an example:
 
-```
-(.*)-.*-.*
-```
+`(.*)-.*-.*`
 
 This example matches **APP-TIER-VM01**, using "**-"** as a separator and grabs **APP** as the application name. There are a few things to know about this example. First; "**.\***" represents a wildcard, any type of text is matched here. The "**-**" is the separator used in the workload naming convention. And lastly, the round brackets indicate that we want to grab the bit of text that matches the expression in between those brackets. This is what we're effectively saying with this expression: match workloads that are named **SOMETHING-ANYTHING-EVERYTHING** and grab **SOMETHING** as the application name.
 
 We can get creative with the expression and demand that there are only numbers in the last section of the name, which would result in this expression:
 
-```
-.*_(.*)_[0-9]+
-```
+`.*_(.*)_[0-9]+`
 
 This expression would match workloads named **SOMETHING\_ANYTHING\_01234** and grab **ANYTHING** as the result. The brackets at the end indicate that it matches anything that is in between those brackets. In this case, anything between 0 and 9 (so 0, 1, 2, etc.). The plus at the end indicates that you're allowing multiple of the characters inside the brackets, so multiple numbers.
 
 There's one more example I'd like to go through before I move on: a naming convention without separators. It happens that someone decides to name their workloads something along the lines of **APPTIERVM01**, where the **APP** and **TIER** are fixed sizes; 3 or 4 characters each. In this case, we can't use the previous regular expressions as they depend on separators. In case, we have to use a fixed size regular expression, something like this:
 
-```
-([a-zA-Z]{3})[a-zA-Z]{4}.*
-```
+`([a-zA-Z]{3})[a-zA-Z]{4}.*`
 
 Taking what we've learned earlier and the fact that the curly brackets indicate how long the characters between the straight brackets should be. Then you'll see that the first bit (which we are grabbing as the result) is matching on characters between a-z and A-Z, both lower- and upper-case letters, and the 3 characters that match it. The second bit looks for letters again, for 4 characters. Then there's a wildcard that allows anything after the first 7 letters.
 
