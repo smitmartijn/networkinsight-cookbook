@@ -36,7 +36,7 @@ Find all applications that are talking to the application 3TierApp02 and display
 `sum(bytes) of flow where Destination Application = '3TierApp02' group by Source Application`
 
 {caption: "Search query & results example"}
-![](images/image76.png)
+![](images/ch-9/search-example.png)
 
 The cool part about the search engine is, is that all results and searches are reusable. You can create pinboards from different searches, personalizing these pinboards completely. You can also create search-based events and get alerts whenever the result of a search changes (get notified whenever firewall rule changes happen) or when there are no results (get notified when something is deleted).
 
@@ -47,7 +47,7 @@ Search is also exposed via the public APIs for automation, making it possible to
 vRealize Network Insight provides a structured query with components illustrated in the below diagram. I'll explain the different components in this chapter.
 
 {caption: "Search query structure"}
-![](images/image77.jpeg)
+![](images/ch-9/search-structure.jpeg)
 
 Consider the following query:
 
@@ -85,7 +85,7 @@ Some common entity types are:
 A full list of entity types can be found inside Network Insight. Simply search for 'help' or click the link "Learn more about supported properties" that is placed on the bottom of each search (see Figure 74).
 
 {caption: "Search help: find all supported properties", width: "50%"}
-![](images/image78.png)
+![](images/ch-9/search-help.png)
 
 To give you a few more examples of how to spot what the entity type is, the table below lists a few.
 
@@ -106,7 +106,7 @@ To give you a few more examples of how to spot what the entity type is, the tabl
 The meta entity type can refer to multiple concrete types. For example, VM refers to VMware VM, Azure VM, and AWS EC2 Instance. The same goes for Firewall Rule, which includes NSX Firewall Rules, AWS Firewall Rules, Palo Alto firewall rules, basically any firewall rules that Network Insight discovers. When searching for a meta entity type, the interface shows all included entity types. This allows you to filter on the exact firewall rules types you're searching for.
 
 {caption: "Search for a meta entity type and get all included entity types", width: "40%"}
-![](images/image79.png)
+![](images/ch-9/meta-entity.png)
 
 Meta types exist to make the experience holistic, transparent to you. The infrastructure engineer deals with a vast amount of different configurations and entity types. It's almost necessary to allow you to search for firewall rule and let the underlaying tool figure out on which actual platform (whether it be NSX, a physical firewall, or the cloud (and then which cloud)) you need to be. The Network Insight team designed the meta entity types to make your life easier.
 
@@ -135,7 +135,7 @@ Metrics are properties that do change a lot and have a time-series attached to i
 To get an idea of what metric properties are available for an entity type, head to its dashboard, and look at the Metrics heading. The screenshot below gives an example of the metric properties on a switch port.
 
 {caption: "Search Metric Properties: example on switch port"}
-![](images/image80.png)
+![](images/ch-9/metric-properties.png)
 
 ### Meta Property
 
@@ -172,7 +172,7 @@ In this search query, the VM is the entity type, and the filter is based on the 
 There's a lot possible with the filter conditions and comparison operators. Here is a graphical overview of the syntax:
 
 {caption: "Search filters; condition and comparison operators"}
-![](images/image81.jpeg)
+![](images/ch-9/search-filters.jpeg)
 
 It is possible to use multiple filter conditions in a single search, and you can mix and match, however you would like. To get a little more feeling with how these operators work and for examples on how they work, see the table below.
 
@@ -215,7 +215,7 @@ If you search for an entity, a default set of properties are shown in the search
 The above search query shows the operating system and the number of CPU Cores of the VM named 'myvm', as shown below:
 
 {caption: "Searching with property projection"}
-![](images/image82.png)
+![](images/ch-9/property-projection.png)
 
 As you can see, the requested properties are now shown first, in a highlighted fashion.
 
@@ -226,7 +226,7 @@ Here's an example:
 `CPU Cores, CPU Usage Rate of VMs where Name = myvm`
 
 {caption: "Searching with property projection, including metrics"}
-![](images/image83.png)
+![](images/ch-9/property-projection-metrics.png)
 
 The above example can be done on any object, whether it be a VM, flow, datastore, switch port, and on. You can also add multiple metrics to the search query, making multiple line graphs appear in the results. A good use case for that would be to search for network rate and packet loss on switch ports.
 
@@ -247,7 +247,7 @@ Here are a few examples:
 `count of Datastore where Write Latency > 5ms`
 
 {caption: "Searching with a count operator"}
-![](images/image84.png)
+![](images/ch-9/count.png)
 
 Considering the results of these search queries is a number, these search queries are perfect to put on an automatically refreshing pinboard that is displayed on a monitor that's glued to the wall of your office.
 
@@ -258,7 +258,7 @@ This is another interesting one. The list operator should be used whenever the f
 `list(Host) of VMs where CPU Usage Rate > 95%`
 
 {caption: "Searching with a list operator"}
-![](images/image85.png)
+![](images/ch-9/list.png)
 
 In this case, a list of Hypervisors is returned that hosts any VM that has a higher CPU usage of 95%.
 
@@ -281,7 +281,7 @@ Example:
 `max(vCPUs) of VMs`
 
 {caption: "Searching with a max operator", width: "40%"}
-![](images/image86.png)
+![](images/ch-9/max.png)
 
 The above result indicates that out of 789 VMs, the VM with the highest number of vCPUs has 16 vCPUs.
 
@@ -294,7 +294,7 @@ Example:
 `sum(Bytes) of Flow where Source Continent = 'Europe'`
 
 {caption: "Searching with a sum operator", width: "50%"}
-![](images/image87.png)
+![](images/ch-9/sum.png)
 
 #### Min
 
@@ -309,7 +309,7 @@ Here's an example:
 `avg(vCPUs) of VMs group by Host order by avg(vCPUs)`
 
 {caption: "Searching with an avg operator"}
-![](images/image88.png)
+![](images/ch-9/avg.png)
 
 The above example returns the average count of vCPUs of VMs on each host.
 
@@ -328,7 +328,7 @@ Here's an example, combining all internet traffic into a single line graph:
 `series(sum(Byte Rate)) of Flows where Flow Type = 'Destination is Internet'`
 
 {caption: "Search; using the series() projection to combine metrics"}
-![](images/image89.png)
+![](images/ch-9/series.png)
 
 The metrics inside the series projection can be any of the metrics available in Network Insight. You can also request multiple series in the same search, to compare different metrics on the same timeline. An example of this is to look for the average used Memory and Network Rate metrics for all servers with 'Web' in their name:
 
@@ -364,7 +364,7 @@ Here's an example that lists the number of VMs in each security group:
 `VMs group by Security Group`
 
 {caption: "Search; using the group by operator"}
-![](images/image91.png)
+![](images/ch-9/group-by.png)
 
 It gets more interesting when you start combining grouping with the previously explained Aggregate Functions. By combining these two, you can retrieve the sum, maximum, minimum, or average of a property while grouping it on another property. Let's look at a few examples below.
 
@@ -373,14 +373,14 @@ Retrieving the amount of bandwidth that comes out of each L2 network:
 `sum(Bytes) of Flows group by Source L2 Network`
 
 {caption: "Search; using the group by operator and aggregate functions for L2 traffic"}
-![](images/image92.png)
+![](images/ch-9/group-by-aggregate-l2-traffic.png)
 
 Retrieving the number of incoming firewall rules inside your AWS accounts, grouping by VPC. This displays the number of rules and the number of security groups inside each AWS VPC:
 
 `sum(Incoming Rule Count) of AWS Security Group group by AWS VPC`
 
 {caption: "Search; using the group by operator and aggregate functions for AWS rules"}
-![](images/image93.png)
+![](images/ch-9/group-by-aggregate-aws-rules.png)
 
 ## Limiting
 
@@ -444,7 +444,7 @@ For example, *bytes of flow* shows traffic for flows over a period of 24 hours, 
 You can change the time span using the time indicator that is on the right of the search query, inside the web interface. It can also be done from inside the search query itself.
 
 {caption: "Search; time control in the web interface", id: "fig-time-control", width: "50%"}
-![](images/image94.png)
+![](images/ch-9/time-control.png)
 
 As you can see in the [figure above](#fig-time-control), it's easy to jump from the current time to some most used points, such as **Yesterday**, **Last 3 Days**, and on. You can also use the **At** option to jump to a particular time, used for getting to know the exact configuration at that time. Then there's the **Between** option, where you can specify a time range, mostly used for metrics to show graphs of a specific time period.
 
