@@ -328,12 +328,12 @@ Here's an example, combining all internet traffic into a single line graph:
 {caption: "Search; using the series() projection to combine metrics"}
 ![](images/image89.png)
 
-The metrics inside the series projection can be any of the metrics available in Network Insight. You can also request multiple series in the same search, to compare different metrics on the same timeline. An example of this is to look for the average used CPU and Memory metrics for all servers with 'DB' in their name:
+The metrics inside the series projection can be any of the metrics available in Network Insight. You can also request multiple series in the same search, to compare different metrics on the same timeline. An example of this is to look for the average used Memory and Network Rate metrics for all servers with 'Web' in their name:
 
-`series(avg(CPU Usage)), series(avg(Memory Usage)) of VMs where Name like DB`
+`series(avg(Memory Usage)), series(avg(Network Rate)) of VMs where Name like Web`
 
 {caption: "Search; using multiple series() projections to combine metrics"}
-![](images/image90.png)
+![](images/ch-9/multiple-series.png)
 
 ## Ordering
 

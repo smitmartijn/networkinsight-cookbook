@@ -325,7 +325,7 @@ Although Azure does a good job of presenting the applicable firewall rules on th
 
 VMware and AWS have partnered to provide solutions that help organizations adopt hybrid cloud to increase flexibility and reduce cost while leveraging their existing IT investments and expertise. Due to the nature of VMware Cloud on AWS (VMC), managing workloads in the hybrid cloud is not that different from managing them on-premises. Existing tools can be used to manage, monitor, and troubleshoot the workloads, and there's not an entire re-education needed of the persons that end up managing it.
 
-{caption: "VMware Cloud on AWS -- spanning networking & security across clouds"}
+{caption: "VMware Cloud on AWS -- spanning networking & security across clouds", width: 80%}
 ![](images/image50.png)
 
 When you have on-premises infrastructure and want to offload the workloads to a cloud provider, in order not to have to manage a data center anymore, VMware Cloud on AWS (VMC) is one of the most natural options. As VMC is essentially a VMware Software-Defined Data Center (SDDC) with all infrastructure components that you would have on-premises (vSphere, vSAN, and NSX), it is not that different to operate. VMC also runs the same Virtual Machine format as on-premises vSphere runs, so it's easy to migrate existing VMs from on-premises to VMC.
