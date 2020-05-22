@@ -74,7 +74,7 @@ Collectors can be scaled out by using multiple appliances for your environment, 
 You can strategically place the Collectors as well. It does a couple of things to the incoming data to compress it (more on that later) and allow it to be sent to the Platform more efficiently. Traffic between the Data Sources and the Collectors is more substantial than between the Collectors and Platform appliances, which makes it more efficient to place Collectors in remote locations.
 
 {caption: "Platform & Collector relationships"}
-![](images/image58.png)
+![](images/ch-6/platform-collector-relation.png)
 
 Networking management is typically as locked down as possible to protect the management interfaces of your network devices. It makes sense to provide access to Network Insight for people that do not have any business connecting directly to networking devices, so you would want to segment those. In this instance, you would put a Collector inside the networking management segment and only permit it to connect to the Platform. The Collector would connect directly to the Data Sources inside the secure segment, and you don't have to allow incoming communication from outside the secure segment.
 
