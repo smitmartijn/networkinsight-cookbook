@@ -105,8 +105,8 @@ On the Collector, two services are running for the incoming NetFlow (including I
 
 By now, you should have configured a data source that's sending flow data to a Collector, whether it be vCenter, NSX, or a physical network device; here's what happens with those flows:
 
-{caption: "Collector NetFlow processing"}
-![](images/image60.png)
+{caption: "Collector NetFlow Processing"}
+![](images/ch-6/collector-netflow-processing.png)
 
 The service nfcapd receives the NetFlow records from the reporting devices and saves them to memory. **Every minute**, it flushes the memory contents into nfcapd data files. This process is the same for sFlow records received by sfcapd, except that the output is, surprise, sfcapd data files.
 
