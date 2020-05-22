@@ -56,7 +56,7 @@ Documentation is essential, and Network Insight has an API Explorer built into t
 It can be found under the gear icon on the top right; API Documentation. There are three tabs: API Reference, Documentation, and Related Code Samples. The reference tab lists all API calls and their format and parameters (you'll use this one the most), and the documentation tab contains links to the API Guide and OpenAPI specification. When you're connected to the internet with your browser, the Related Code Samples tab also appears. This tab is especially cool because it retrieves example scripts from the [VMware Sample Exchange](https://code.vmware.com/samples?categories=Sample&keywords=&tags=vRealize%20Network%20Insight&groups=&filters=&sort=dateDesc&page=). If you need to get some inspiration on use cases, or just want to consume the scripts -- there are some excellent examples there.
 
 {caption: "Built-in API Explorer"}
-![](images/image96.png)
+![](images/ch-10/api-explorer.png)
 
 ### Swagger / OpenAPI Specification
 
@@ -214,14 +214,14 @@ Using Network Insight to get a list of VMs might be useful if you have a large e
 First, we need to find the right API call to get this list. Turn to the API Explorer, and you find a call to the endpoint **/entities/vms**. This has the description "List VMs", so it's probably the one we need. If you then look at the available parameters, this is what shows:
 
 {caption: "Parameters for API endpoint /entities/vms"}
-![](images/image98.png)
+![](images/ch-10/vms-endpoint-parameters.png)
 
 For all the Entity endpoints, you'll see that the parameters are pretty much the same. There is a **size** parameter for the number of results returned on a page, a **cursor** parameter to indicate from which page you want to start getting results, and a **start\_time** and **end\_time**, which can be used to go back in time. Remember that there is a timeline to show historical data? Using **start\_time** and **end\_time** can get the list of VMs that existed a week ago, including the ones that have been deleted since.
 
 The **cursor** is important to get full results. By default, the results for returned entities are paged in pages of the indicated **size** (default 10 results), and with every returned page, there'll also be a next **cursor** value in there, which you can use to request the next page. Have a look at this example:
 
 {caption: "Using Postman to execute API endpoint /entities/vms"}
-![](images/image99.png)
+![](images/ch-10/postman-example.png)
 
 In this example, I'm using Postman to get a list of VMs, limited by 2 results. The first thing you'll notice is that there are actually any VM attributes listed in the results, just **entity\_id**s. This works the same with all entities; it returns a list of references to entities. You can take the **entity\_id** and get detailed information by using the specific entity type API endpoint. In the case of the first result, this is **/entities/vms/17603:1:1010454414**, but we'll get to that.
 
@@ -252,7 +252,7 @@ In the API Explorer, there's an entire section devoted to application management
 Creating an application via /groups/application (POST) doesn't require much; just an application name. The result contains the **entity\_id** that it has given the newly created application construct. Store that for the next call. Here's an example using the name **My-New-Application**. The top text area is the body that is being sent to the API, and the bottom text area is the result that the API returns:
 
 {caption: "Using Postman to create an application via the API"}
-![](images/image100.png)
+![](images/ch-10/postman-create-application.png)
 
 You now have an empty application without any tiers. Let's add some!
 
@@ -261,7 +261,7 @@ Here's where the previously saved **entity\_id** comes in handy, as the API endp
 The body of this endpoint is a bit more elaborate, though, as it needs not only a name but also a filter to determine which workloads are added to this tier. The filter is basically a search query, so you can filter on any logical object (tags, VM names, folders, and more) to get the right VMs in the tier. In this example, I'll use a simple search based on a VM's name. Here's the formatted API call:
 
 {caption: "Using Postman to create an application tier via the API"}
-![](images/image101.png)
+![](images/ch-10/postman-create-tier.png)
 
 As you can see, there is a **name** field (which is the name the new tier is given) in the body, and an array called **group\_membership\_criteria**. This is where you define the search query that looks for workloads to put into the tier.
 
@@ -444,7 +444,7 @@ vRealize Automation (vRA) is an infrastructure lifecycle management and automati
 As an example, I'll be using a 3-tiered application blueprint that contains a web server, application server, and database server tier. Of the web and application tiers, there can be multiple VMs deployed, but there's just one database server. They are linked to vSphere templates, which are cloned when a deployment is requested.
 
 {caption: "Example vRealize Automation 3-tiered Application Blueprint"}
-![](images/image102.png)
+![](images/ch-10/vra-application-blueprint.png)
 
 This blueprint design relates directly to an application construct within Network Insight, using the blueprint name as the application name and the different types of machine deployments (Web, App, DB) as the names for the tiers. When this blueprint is deployed by someone, vRA deploys the virtual machines, networks, storage, and software packages on the newly created virtual machines. After that work is done, we can insert a custom vRealize Orchestrator (vRO, the octopus' engine) workflow that takes this newly created application and creates the application context inside Network Insight.
 
@@ -455,7 +455,7 @@ I> The vRO workflow and a step by step guidance of how to install it can be [fou
 Here's a graphical overview of how the process works so that you can translate it to your system.
 
 {caption: "Push Applications from Automation workflow"}
-![](images/image103.png)
+![](images/ch-10/applications-automation-workflow.png)
 
 {pagebreak}
 
@@ -468,7 +468,7 @@ If the CMDB has an API, excellent! You can set up a periodical synchronization b
 Here's a visual representation of this workflow:
 
 {caption: "Import Applications from CMDB workflow"}
-![](images/image104.png)
+![](images/ch-10/import-applications-from-cmdb.png)
 
 #### Example
 
