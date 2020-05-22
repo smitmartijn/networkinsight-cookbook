@@ -61,7 +61,7 @@ Let's break it down and align it with the query structure.
 
 - *"order by vCPUs"* is the order by clause (sorting).
 
-I> Perhaps you noticed that there is a subnet in the filter clause. As a general tip: Network Insight is subnet aware. So, you can search for anything with an IP address in a certain subnet range. In the above example, the results come from all VMs that have an IP address inside 10.10.10.0/24.
+I> Perhaps you noticed that there is a subnet in the filter clause. As a general tip: Network Insight is subnet aware. So, you can search for anything with an IP address in a specific subnet range. In the above example, the results come from all VMs that have an IP address inside 10.10.10.0/24.
 
 ## Entity Types
 

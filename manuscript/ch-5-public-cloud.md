@@ -411,6 +411,6 @@ The VMC to AWS or on-premises path depends on layer-3 VPN connectivity or Direct
 Here's an example path between a VM hosted on VMC and an on-premises SDDC, which are connected via a VPN tunnel that terminates on an NSX-v Edge appliance:
 
 {caption: "VMware Cloud on AWS -- Hybrid Path"}
-![](images/image53.png)
+![](images/ch-5/vmc-hybrid-path.png)
 
-Just like with AWS, there is not much room for customization on the network topology and connectivity for VMware Cloud on AWS. The defaults suffice for most customers. This is a good thing, as you don't have to worry about setting up the network topology. Because of this approach, there are not many requirements that Network Insight has when it comes to showing VM to VM paths inside VMC or between different locations. Just have the layer-3 VPN in place and make sure all networking devices are added as a data source, and Network Insight starts discovering the VMC network topologies.
+Just like with AWS, there is not much room for customization on the network topology and connectivity for VMware Cloud on AWS. The defaults suffice for most customers. This is a good thing, as you don't have to worry about setting up the network topology. Because of this approach, there are not many requirements that Network Insight has when it comes to showing VM to VM paths inside VMC or between different locations. Just have the layer-3 VPN, or Direct Connect in place and make sure all networking devices are added as a data source, and Network Insight starts discovering the VMC network topologies.
