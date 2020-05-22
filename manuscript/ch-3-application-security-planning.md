@@ -122,7 +122,7 @@ The donut can also be limited to a **Scope**. Put in a specific parent object (v
 
 When grouped by application, the donut displays connections between applications and the outside world (physical servers and the internet). When grouped by VM and scoped for a specific application, the donut reveals all connections between VMs inside that application, making it easy to determine how the application is structured.
 
-### Flow Type (NSX Flows)
+### Flow Type
 
 There is also a **Flow Type** select box, where the integration with VMware NSX comes in to play. When you have enabled IPFIX on the NSX Data Source, the Distributed Firewall of NSX also starts sending IPFIX to Network Insight. The added value of doing so is that NSX also sends flows that blocked from going on the network by the Distributed Firewall. It also flags allowed flows with a matching firewall rule ID (if any), which makes it possible for Network Insight to correlate flows to existing firewall rules.
 
@@ -133,6 +133,8 @@ I> To see protected, unprotected, and blocked flows, you need to enable IPFIX on
 At the time of writing, Network Insight does not run intelligence over the discovered firewall rules from either NSX or other virtual or physical firewall to determine whether a network flow *could* hit a specific firewall. The flow records from NSX are the only flows that contain an actual firewall rule ID, which the flow is hitting, making it definitive that it's using that specified rule. For other network flow sources, Network Insight would have to deduce which firewall rule would overlap with which firewall rule to say, 'it *might* be hitting rule x' as there's no definitive proof it's hitting those rules. The Network Insight team has currently opted for certainty in this feature and only shows the blocked network flows going through NSX.
 
 T> When working to micro-segment your environment, use the unprotected flow type to see your progress and use it to export the missing recommended firewall rules that you need to finish securing your applications.
+
+VMware NSX is not the only source that records blocked flows. Microsoft Azure flow logs also log the flows that get blocked by the Azure security policies. Only when you select the **Dropped Flows** option, Azure flows will also turn up.
 
 {id: ch-recommended-firewall-rules}
 ## Recommended Firewall Rules
