@@ -72,12 +72,15 @@ More information on how Network Insight ingests and processes incoming network f
 
 To collect network flows from your environment, a flow data source has to be added to Network Insight. If you're running a vCenter data source, you can enable the IPFIX configuration straight from the data source configuration page. This option configures NetFlow on the vSphere Distributed Switch and have it send flows to the Collector. Incidentally, enabling NetFlow is the only write action that Network Insight does.
 
-{caption: "Enabling NetFlow on a vCenter data source"}
+{caption: "Enabling NetFlow on vCenter"}
 ![](images/image9.png)
 
 Because the VDS is the only virtual switch that supports sending NetFlow, it is required to have your VMs run on the VDS and not a standard vSwitch.
 
 This process is the same for NSX data sources (both NSX-V and NSX-T), where you can configure NSX, so it starts sending NetFlow to the Collector, straight from the Network Insight interface.
+
+{caption: "Enabling Distributed Firewall IPFIX on NSX"}
+![](images/ch-3/enabling-dfw-ipfix-on-nsx.png)
 
 Besides using the VDS, and NSX to collect NetFlow data, you can also configure physical network devices to send NetFlow or sFlow to Network Insight. With this, you gain insight into the traffic flows between physical only hosts and not only see the flows where a virtual machine is involved. To prepare Network Insight to receive these flows from physical network devices, you need to add a "Physical Flow Collector" data source.
 
