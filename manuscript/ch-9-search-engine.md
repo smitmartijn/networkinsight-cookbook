@@ -61,6 +61,8 @@ Let's break it down and align it with the query structure.
 
 - *"order by vCPUs"* is the order by clause (sorting).
 
+I> Perhaps you noticed that there is a subnet in the filter clause. As a general tip: Network Insight is subnet aware. So, you can search for anything with an IP address in a certain subnet range. In the above example, the results come from all VMs that have an IP address inside 10.10.10.0/24.
+
 ## Entity Types
 
 An entity type represents the type of object that we want to search. The entity is the base for the results that come back and is the starting point for the filter. In the above example, VMs is the entity type on which the results are based on. Then it goes on and filters the results based on a property (*IP Address*) that is attached to that base entity.
