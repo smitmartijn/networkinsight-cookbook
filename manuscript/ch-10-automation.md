@@ -399,7 +399,7 @@ There are two cmdlets to connect a Network Insight instance. There's **Connect-v
 PS C:\> Connect-NIServer -RefreshToken 4b8xx-xx-xx-xx-xx600d7
 Server                        CSPToken
 ------                        ------
-api.mgmt.cloud.vmware.com/ni	eyJhbXbi9iJSUzIsInR5cCI6k..
+api.mgmt.cloud.vmware.com/ni  eyJhbXbi9iJSUzIsInR5cCI6k..
 ```
 
 This function exchanged the Refresh Token for an authentication token, and that is used for subsequent API calls, and you are now free to use the rest of the cmdlets inside PowervRNI.
