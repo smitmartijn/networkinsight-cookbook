@@ -243,7 +243,7 @@ It depends on how much flows the Collector is receiving, but the offline cache f
 
 Each Collector has this network flow cache directory, so do these calculations based on the usage of the individual Collector, not your entire environment.
 
-You can find this cache directory here: **/var/flows/vds/nfcapd** -- This directory stores raw nfcapd files, which could be read using the nfdump utility.
+You can find this cache directory here: **/var/flows/vds/nfcapd**. This directory stores raw nfcapd files, which could be read using the nfdump utility.
 
 ##### Polled Data Cache
 
@@ -294,14 +294,14 @@ Important to know is that a medium brick deployment can also be scaled verticall
 
 These are the current brick sizes for both the Platform and Collector:
 
-| Type      | Brick Size  | Cores on 2.1GHz | Cores on 2.3GHz | Cores on 2.6GHz | RAM  |
-| :---      | :---        | :---            | :---            | :---            | :--- |
-| Platform  | Medium      | 10              | 9               | 8               | 32GB |
-| Platform  | Large       | 15              | 14              | 12              | 48GB |
-| Platform  | Extra Large | 20              | 18              | 16              | 64GB |
-| Collector | Medium      | 5               | 5               | 4               | 12GB |
-| Collector | Large       | 10              | 9               | 8               | 16GB |
-| Collector | Extra Large | 10              | 9               | 8               | 24GB |
+| Type      | Brick Size  | Cores on 2.1GHz | Cores on 2.6GHz | RAM  |
+| :---      | :---        | :---            | :---            | :--- |
+| Platform  | Medium      | 10              | 8               | 32GB |
+| Platform  | Large       | 15              | 12              | 48GB |
+| Platform  | Extra Large | 20              | 16              | 64GB |
+| Collector | Medium      | 5               | 4               | 12GB |
+| Collector | Large       | 10              | 8               | 16GB |
+| Collector | Extra Large | 10              | 8               | 24GB |
 
 In all cases, the Platform has a 1TB disk requirement, and the Collector has a 200GB disk requirement. It's recommended to use thin provisioning.
 
@@ -325,7 +325,7 @@ Important to note is that the minimum number of Platform bricks for a cluster is
 
 Currently, you can create a cluster with a maximum of 10 Platform bricks. Meaning you can monitor up to 100k VMs (10k per Platform * 10 Platforms) and 55M network flows (5.5M per Platform * 10 Platforms) with the maximum size cluster. Due to the scale testing that VMware's Quality Assurance (QA) team does, the observed maximum numbers of VMs and flows do not scale out evenly with each added brick. This can be confusing when you look at the [Maximum Capacity](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/5.2/com.vmware.vrni.install.doc/GUID-F4F34425-C40D-457A-BA65-BDA12B3ABE45.html) table below.
 
-| Brick Size  | Cluster Size | Number of VMs | Flows per Day | Total Flows | VMware SD-WAN Edges |
+| Brick Size  | Cluster Size | Number of VMs | Flows per Day | Total Flows | SD-WAN Edges |
 | :---        | :---         | :---          | :---          | :---        | :---                |
 | Large       | 3            | 10K           | 2M            | 8M          | 4K                  |
 | Extra Large | 3            | 18K           | 6M            | 24M         | 6K                  |
@@ -338,7 +338,7 @@ Something else to consider is that the Collectors cannot be clustered at this ti
 
 To visualize the possibilities and the architecture when clustering Network Insight, check out this architecture:
 
-{caption: "Clustering Architecture", width: 80%}
+{caption: "Clustering Architecture"}
 ![](images/ch-6/cluster-architecture.png)
 
 Creating a cluster is pretty straight forward; first, you deploy the first Platform (which is referred to as Platform1), configure it as you would normally, and then head over to the  **Infrastructure & Support -> Overview and Updates** page in order to create a cluster.

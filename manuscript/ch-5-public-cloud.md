@@ -366,7 +366,7 @@ It is essential to deploy the Collector appliance close to the VMware Cloud on A
 
 If your organization has everything in the cloud, there's a good chance you are also using Network Insight Cloud, as opposed to the on-premises version. If that is indeed the case, this is how the deployment looks like:
 
-{caption: "VMware Cloud on AWS -- Collector Deployment for vRNI Cloud", width: 80%}
+{caption: "VMware Cloud on AWS -- Collector Deployment for vRNI Cloud"}
 ![](images/ch-5/vmc-collector-deployment-vrnicloud.png)
 
 Here, the vRNI Cloud Collector appliance is placed in the *Compute* resource pool within VMC. Ensure the right firewall rules are in place, to allow the Collector to communicate over **HTTPS** (port 443) to both the **vCenter** and **NSX Manager**. Make sure that the Collector has outgoing internet connectivity over HTTPS so that it can connect with Network Insight Cloud. The Collector also receives incoming NetFlow traffic from the ESXi hosts, but by default, VMC allows the ESXi hosts to communicate to any VM.
@@ -377,7 +377,7 @@ I> While 1 Collector per SDDC is the recommendation, nothing is stopping you fro
 
 When using Network Insight on-premises, the recommended deployment looks similar. The only change is that the traffic from the Collector to the Platform goes over the connectivity that connects the VMC SDDC towards the on-premises datacenter. The connectivity can be a VPN tunnel or an AWS Direct Connect.
 
-{caption: "VMware Cloud on AWS -- Collector Deployment for vRNI On-Premises", width: 80%}
+{caption: "VMware Cloud on AWS -- Collector Deployment for vRNI On-Premises"}
 ![](images/ch-5/vmc-collector-deployment-onprem.png)
 
 ### Network Flows

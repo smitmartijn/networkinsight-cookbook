@@ -2,7 +2,7 @@
 
 Due to the vast amount of data that Network Insight has, and the range of that data (i.e., network flows, switch port metrics, VMs, AWS inventory, and much more), the actual use cases for Network Insight are limitless. Four main use cases help you to get an idea of what to use Network Insight for. In the following chapters, I'll discuss the **why** of using Network Insight. Most of the remainder of this book is the **how** to use it.
 
-## Use Case -- Application Security Planning (Micro-segmentation)
+## Application Security Planning (Micro-segmentation)
 
 Security in the data center is evolving, and micro-segmentation is a technique that is used more and more. You can write an entire book about the technique and technology behind it, but I'll give you a quick summary in chapter Application Security Planning when we go into the depths of the micro-segmentation planner.
 
@@ -16,7 +16,7 @@ Using the network flow data and workload information that is collected by Networ
 {caption: "Recommended Firewall Rules Grouped by Application"}
 ![Recommended Firewall Rules Grouped by Application](images/ch-2/recommended-fw-rules.png)
 
-## Use-Case -- Getting actual visibility into your environment
+## Getting actual visibility into your environment
 
 Besides using NetFlow data to provide insight into the traffic going through your network, Network Insight also gathers data from your private cloud running on vSphere, public cloud on AWS, and physical equipment that helps run those environments. It uses all that data to paint a complete picture of your workloads, from a virtual machine to the physical wire between 2 routers to the public cloud instance where your web server is running.
 
@@ -27,7 +27,7 @@ When it comes to troubleshooting, that is where the gold is. Network Insight pro
 
 Using the network topology maps, you can quickly determine issues on a specific network path or using the search engine to look for network devices that are misbehaving or showing anomalies, and your troubleshooting process can be much more efficient and quicker.
 
-## Use-Case -- Doing the Health Check Boogie
+## Doing the Health Check Boogie
 
 After getting all of this data from your virtual and physical environment, Network Insight checks the configuration of virtual and physical devices against the VMware Knowledge Base (KB) and best practices. It provides you with a list of problems in the configuration and ways on how to fix them.
 
@@ -38,7 +38,7 @@ These problems have severities: Critical, Moderate, Warning & Info and example m
 
 These health checks are an excellent way to keep your environment in check and configured as per the latest best practices.
 
-## Use-Case -- Migrating to the Cloud (or anywhere)
+## Migrating to the Cloud (or anywhere)
 
 These days, it's not surprising to have a cloud-first strategy when it comes to developing and deploying new applications. Public Clouds like Amazon Web Services (AWS), Microsoft Azure, or Google Cloud Platform have extensive services that save you a lot of trouble having to build your own. Solidified services like Infrastructure- (workloads), Database-, Storage- and CDN-as-a-Service are making way for services that we are using to kickstart application development. Things like Artificial Intelligence & Machine Learning, Containers, IoT management, facial recognition, forecasting, serverless, are all available as-a-Service so developers can focus on their actual business requirements and churning out code for that purpose. Not be side-tracked by creating their own generic (but mandatory) services that they only need to support their applications and isn't core business.
 
@@ -54,7 +54,7 @@ With a good understanding of the application map, it is much easier to retain ap
 
 You can find a deep dive on this topic in the chapter [Application Migration Planning](#ch-application-migration-planning).
 
-## Use-Case -- Visibility for Kubernetes
+## Visibility for Kubernetes
 
 According to results of a survey that the Cloud Native Containers Foundation did in 2018, the main concerns around moving containerized applications into production (and keeping them there & healthy) is around **Complexity**, **Monitoring**, **Networking** and **Security**.
 

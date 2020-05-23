@@ -59,7 +59,7 @@ Registration Certificate Validity: Apr 25 00:00:12 2021 GMT
 
 Running the `show-connectivity-status` command takes a few seconds, but it saves you time in the end because it combines a few other commands into a single command. It shows you the networking configuration, so you can check whether it's appropriately configured, NTP status (and if it's in sync or not), and it tests connectivity to the online upgrade and support services in VMware's' cloud. The entire networking stack is tested using this command.
 
-If any of the network settings are incorrect (and the above output gives an error), they can be corrected using the `change-network-settings` command. Be aware that the appliance reboots after changing these settings, but you are warned by the CLI as well.
+If any of the network settings are incorrect (and the above output gives an error), they can be corrected using `change-network-settings`. Be aware that the appliance reboots after changing these settings, but you are warned by the CLI as well.
 
 If NTP is not in sync, you can dive deeper into the reason by using `ntp diagnose`. This goes into a deep dive into all aspects of the NTP service, for instance, what the drift is, what time the synchronization last happened, it also does a port scan on the NTP server to see if it can reach it, and more.
 
@@ -197,12 +197,18 @@ The Platform only has a single command that is specific to it, and it's only app
 
 A Network Insight cluster can be moved between networks and change IP addresses if needed. Let's say it was deployed in a testing environment first, and after a while, you wanted to promote it and move it to the production environment. The consequence can be that it needs to move to a network (typically a different VLAN) with a different IP range. As all appliances in a cluster talk to each other based on their IP address, they all would need to be informed of the network changes, using the command **update-IP-change**. Here's how the workflow looks like in a 3-node cluster:
 
-1. Move Platform1 into the new network and update its IP address via the CLI using `change-network-settings`
-2. Change the IP address of Platform1 on both Platform2 and Platform3 by using `update-IP-change <old-Platform1-IP> <new-Platform1-IP>`
-3. Move Platform2 into the new network and update its IP address via the CLI using `change-network-settings`
-4. Change the IP address of Platform2 on both Platform1 and Platform3 by using `update-IP-change <old-Platform2-IP> <new-Platform2-IP>`
-5. Move Platform3 into the new network and update its IP address via the CLI using `change-network-settings`
-6. Change the IP address of Platform3 on both Platform1 and Platform2 by using `update-IP-change <old-Platform3-IP> <new-Platform3-IP>`
+1. Move Platform1 into the new network and update its IP address via the CLI using:
+   - `change-network-settings`
+2. Change the IP address of Platform1 on both Platform2 and Platform3 by using:
+   - `update-IP-change <old-Platform1-IP> <new-Platform1-IP>`
+3. Move Platform2 into the new network and update its IP address via the CLI using:
+   - `change-network-settings`
+4. Change the IP address of Platform2 on both Platform1 and Platform3 by using:
+   - `update-IP-change <old-Platform2-IP> <new-Platform2-IP>`
+5. Move Platform3 into the new network and update its IP address via the CLI using:
+   - `change-network-settings`
+6. Change the IP address of Platform3 on both Platform1 and Platform2 by using:
+   - `update-IP-change <old-Platform3-IP> <new-Platform3-IP>`
 
 After executing these steps on all Platform nodes in the cluster, it continues regular operation. If you have a more significant cluster, such as with 5 or 10 nodes, the same steps apply; just multiply by the number of nodes are there.
 

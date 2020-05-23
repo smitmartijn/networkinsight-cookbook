@@ -389,11 +389,7 @@ This discovery method takes a regular expression that you put together and appli
 
 Let's take a look at that regular expression first. According to Wikipedia, a regular expression is the following:
 
-> *"A regular expression, regex or regexp (sometimes called a rational
-> expression) is a sequence of characters that define a search pattern.
-> Usually such patterns are used by string searching algorithms for
-> \"find\" or \"find and replace\" operations on strings, or for input
-> validation." [^3]
+> *"A regular expression, regex or regexp (sometimes called a rational expression) is a sequence of characters that define a search pattern. Usually such patterns are used by string searching algorithms for \"find\" or \"find and replace\" operations on strings, or for input validation." [^3]
 
 [^3]: <https://en.wikipedia.org/wiki/Regular_expression>
 
@@ -419,9 +415,9 @@ This expression matches workloads called **APPTIERVM01** and grabs **APP** as th
 
 Armed with these examples, you should be able to make your way through any naming convention that is out there. However, if you do have a different convention, there's little that regular expressions cannot match.
 
-If you would like to learn much more about regular expressions and all possibilities, there's a lot out there. Ask your developer friends, and they'll have some examples. The implementation that Network Insight uses is the Elastic Search Regexp Query, and you can learn all about its syntax here: <https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html#regexp-syntax>
+If you would like to learn much more about regular expressions and all possibilities, there's a lot out there. Ask your developer friends, and they'll have some examples. The implementation that Network Insight uses is the Elastic Search Regexp Query, and you can learn all about its syntax in the [Elastic Search documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html#regexp-syntax)
 
-Another excellent resource is the website <https://regex101com> -- which can help you learn regex and test out your knowledge.
+Another excellent resource is the website <https://regex101com> -- which helps you learn regex and test out your knowledge.
 
 Going through the naming convention wizard should be pretty familiar. When you go to the **Name** tab on the **Discovered** **Applications** page, you are presented with a wizard. It asks you to scope the discovery and limit the results to a specific vCenter, Resource Pool, and more.
 

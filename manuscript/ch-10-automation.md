@@ -183,7 +183,7 @@ Executing this API call successfully, will give you a result like this:
 {format: json}
 ```
 {
-  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9…verylongstring",
+  "access_token": "eyJhbGciOiJSVCJ9…verylongstring",
   "expires_in": 0,
   "id_token": "string",
   "refresh_token": "string",
@@ -196,7 +196,7 @@ The **access\_token** is the important field here, which you need to save and co
 
 {line-numbers: false}
 ```
-csp-auth-token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9…verylongstring
+csp-auth-token: eyJhbGciOiJSVCJ9…verylongstring
 ```
 
 As a final note, it is also worth noting that the URL for the Network Insight as-a-Service API is the same for all environments: <https://api.mgmt.cloud.vmware.com/ni/api-endpoint>.
@@ -247,7 +247,7 @@ There are two steps required to create an application container:
 1. Create the application itself
 2. Create a tier within the newly created application with a filter that points to workloads (using tags, VM names, folders, any logical object in the virtualization layer).
 
-In the API Explorer, there's an entire section devoted to application management. You'll quickly find the endpoints **/groups/applications** (POST) and **/groups/applications/{id}/tiers** (POST), which are needed to create an application.
+In the API Explorer, there's an entire section devoted to application management. You'll quickly find the endpoints **/groups/applications** (POST) and **/groups/applications/id/tiers** (POST), which are needed to create an application.
 
 Creating an application via /groups/application (POST) doesn't require much; just an application name. The result contains the **entity\_id** that it has given the newly created application construct. Store that for the next call. Here's an example using the name **My-New-Application**. The top text area is the body that is being sent to the API, and the bottom text area is the result that the API returns:
 
@@ -256,7 +256,9 @@ Creating an application via /groups/application (POST) doesn't require much; jus
 
 You now have an empty application without any tiers. Let's add some!
 
-Here's where the previously saved **entity\_id** comes in handy, as the API endpoint looks like this: **/groups/applications/17603:561:840848559/tiers**
+Here's where the previously saved **entity\_id** comes in handy, as the API endpoint looks like this:
+
+`/groups/applications/17603:561:840848559/tiers`
 
 The body of this endpoint is a bit more elaborate, though, as it needs not only a name but also a filter to determine which workloads are added to this tier. The filter is basically a search query, so you can filter on any logical object (tags, VM names, folders, and more) to get the right VMs in the tier. In this example, I'll use a simple search based on a VM's name. Here's the formatted API call:
 
@@ -552,7 +554,7 @@ This bandwidth data is available within Network Insight, and there are ways to g
 
 #### Example
 
-There is an API endpoint called aggregation (_/api/ni/search/aggregation_), which can be used to fetch sums or averages of a specified metric. In this case, we'll be using the aggregation endpoint to retrieve the sum of flows coming and going to a specific IP address. To understand what's going on in that script, here's the API call:
+There is an API endpoint called aggregation (see below), which can be used to fetch sums or averages of a specified metric. In this case, we'll be using the aggregation endpoint to retrieve the sum of flows coming and going to a specific IP address. To understand what's going on in that script, here's the API call:
 
 {format: json}
 ```
