@@ -534,7 +534,7 @@ flow_tag                   : {INTERNET_TRAFFIC, SRC_IP_VM, DST_IP_INTERNET, DIFF
 
 Flow records have a bunch of correlated information attached, as you can see in the example above. I'd like to highlight a few fields on which you could filter, which would be beneficial when looking for specific flows:
 
-{caption: "Interesting Flow properties"}
+{caption: "Interesting Flow properties", width: 100%}
 | Field                | Description |
 | :---                 | :---        |
 | **traffic\_type**    | Which way is the traffic going? **INTERNET\_TRAFFIC** or **EAST\_WEST\_TRAFFIC** are possibilities. |

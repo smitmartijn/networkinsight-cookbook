@@ -268,7 +268,7 @@ As audits do not only cover technical configurations, this data is not going to 
 
 The PCI Compliance Dashboard currently helps by displaying the following data behind these PCI sections:
 
-{caption: "PCI Dashboard; PCI sections explained"}
+{caption: "PCI Dashboard; PCI sections explained", width: 100%}
 | PCI Section |  Description | How Network Insight Helps |
 | :--- | :--- | :--- |
 | 1.1.1 | *A formal process for approving and testing all network connections and changes to the firewall and router configurations.* | Shows all firewall rules applicable, network config changes, and network flows. |

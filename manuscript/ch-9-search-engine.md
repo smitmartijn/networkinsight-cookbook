@@ -87,7 +87,7 @@ A full list of entity types can be found inside Network Insight. Simply search f
 
 To give you a few more examples of how to spot what the entity type is, the table below lists a few.
 
-{caption: "Search examples, mapping out entity types", column-widths: "70%,30%"}
+{caption: "Search examples, mapping out entity types", column-widths: "70%,30%", width: 100%}
 | Search query                                                | Entity Type |
 | :---                                                        | :--- |
 |  `Router Interface where IP Address like '192.168.10.*'`   | Router Interface |
@@ -174,7 +174,7 @@ There's a lot possible with the filter conditions and comparison operators. Here
 
 It is possible to use multiple filter conditions in a single search, and you can mix and match, however you would like. To get a little more feeling with how these operators work and for examples on how they work, see the table below.
 
-{caption: "Search filter condition examples", column-widths: "10%,30%,50%"}
+{caption: "Search filter condition examples", column-widths: "10%,30%,50%", width: 100%}
 | Operator   | Description                        | Example |
 | :---       | :---                               | :--- |
 | `AND`        | Multiple conditions need to be met | `VM where Account = 'AWS_xx' and AWS VPC = 'My-VPC'` |

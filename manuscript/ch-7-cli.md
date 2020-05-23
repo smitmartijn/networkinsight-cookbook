@@ -244,7 +244,7 @@ First, generate a shared secret by adding a new Collector VM using the web inter
 
 Just for your convenience, here's a recap of the commands that come in handy when troubleshooting Network insight or commands that are good to know.
 
-{caption: "Useful CLI commands", column-widths: "10%,30%,50%"}
+{caption: "Useful CLI commands", column-widths: "10%,30%,50%", width: 100%}
 | Appliance | Command                                        | Description |
 | :----     | :---                                           | :--- |
 | Both      | log-insight                                    | Show, set, enable, disable or diagnose the vRealize Log Insight agent |

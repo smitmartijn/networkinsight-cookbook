@@ -294,6 +294,7 @@ Important to know is that a medium brick deployment can also be scaled verticall
 
 These are the current brick sizes for both the Platform and Collector:
 
+{width: 100%}
 | Type      | Brick Size  | Cores on 2.1GHz | Cores on 2.6GHz | RAM  |
 | :---      | :---        | :---            | :---            | :--- |
 | Platform  | Medium      | 10              | 8               | 32GB |
@@ -325,6 +326,7 @@ Important to note is that the minimum number of Platform bricks for a cluster is
 
 Currently, you can create a cluster with a maximum of 10 Platform bricks. Meaning you can monitor up to 100k VMs (10k per Platform * 10 Platforms) and 55M network flows (5.5M per Platform * 10 Platforms) with the maximum size cluster. Due to the scale testing that VMware's Quality Assurance (QA) team does, the observed maximum numbers of VMs and flows do not scale out evenly with each added brick. This can be confusing when you look at the [Maximum Capacity](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/5.2/com.vmware.vrni.install.doc/GUID-F4F34425-C40D-457A-BA65-BDA12B3ABE45.html) table below.
 
+{width: 100%}
 | Brick Size  | Cluster Size | Number of VMs | Flows per Day | Total Flows | SD-WAN Edges |
 | :---        | :---         | :---          | :---          | :---        | :---                |
 | Large       | 3            | 10K           | 2M            | 8M          | 4K                  |
