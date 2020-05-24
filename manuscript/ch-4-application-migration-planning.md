@@ -191,14 +191,14 @@ There are over 50 different flow types, which all categorize different types of 
 
 Let's go through one more example with another metric. In most cases, there is a limit of packets per second at the destination cloud. To make sure there are no surprises, get the packets per second as well. All you have to do is to change the focus property in the search query, like this:
 
-`series(sum(flow.totalPackets.delta.summation.number),300) of flow where Source Application = 'Migration Wave 1' and Flow Type = 'Destination is Internet'`
+`series(sum(flow.totalPackets.delta.summation.number), 300) of flow where Source Application = 'Migration Wave 1' and Flow Type = 'Destination is Internet'`
 
 {caption: "Application Migration Planning -- Internet Packets p/s of Migrate Wave 1"}
 ![](images/ch-4/migration-wave-1-internet-packets.png)
 
 Make sure the packet per second rate is also sized properly, and use the max operator to get the maximum number of packets per second:
 
-`max(series(sum(flow.totalPackets.delta.summation.number),300)) of flow where source application = 'Migration Wave 1' and flow type = 'Destination is Internet'`
+`max(series(sum(flow.totalPackets.delta.summation.number), 300)) of flow where source application = 'Migration Wave 1' and flow type = 'Destination is Internet'`
 
 {caption: "Application Migration Planning -- Peak internet packets p/s of Migrate Wave 1", width: "30%"}
 ![](images/ch-4/migration-wave-1-peak-internet-packets.png)

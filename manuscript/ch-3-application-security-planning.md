@@ -217,7 +217,7 @@ Lastly, there's the option to export the rules in an XML format. This export fun
 
 You would only use this export to feed it into the NSX Importer Tool. This tool reads in the zip bundle, retrieves the XML files, and feeds them to the NSX-v API. Because this is only available for NSX for vSphere, which is going to go end-of-support in 2023[^nsxveol], I don't expect this format to be used anymore (and won't go into it here).
 
-[^nsxveol]: https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/support/product-lifecycle-matrix.pdf
+[^nsxveol]: http://tiny.cc/vmw-lifecycle-matrix
 
 Because [VMware NSX Intelligence](https://www.vmware.com/products/nsx-intelligence-analytics-engine.html) in NSX-T 2.5 and above has the same feature, a direct import from the interface of Network Insight into NSX Security Policies is not going to happen. Network Insight has a broader view of the network, though. It can recommend security policies on a much larger scale, taking physical servers, or physical zones (end-users, DMZ, test, and more) into account. It remains to be the best way to implement security policies across the entire network. NSX Intelligence can take care of the micro-segmentation inside the NSX network fabric.
 

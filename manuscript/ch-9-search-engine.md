@@ -425,7 +425,11 @@ Find all VMs on hosts with a high CPU utilization:
 
 Find all VMs on a specific compute blade:
 
-`VMs where Host in (Host where Blade = '[ucs.local]-[sys/chassis-1/blade-7]')`
+{format: console, line-numbers: false}
+```
+VMs where Host in
+(Host where Blade ='[ucs.local]-[sys/chassis-1/blade-7]')
+```
 
 Find all VMs that are located on a cluster that does not have the NSX Distributed Firewall enabled:
 
