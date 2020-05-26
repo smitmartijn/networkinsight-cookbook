@@ -38,6 +38,20 @@ The content of this book is based on Network Insight 5.0 (with some small nugget
 
 {pagebreak}
 
+{id: book-updates}
+## Book Updates
+
+This is a so-called 'Agile' book. As Network Insight evolves and new features are added (and existing features are changed), this book will try to keep up with the release cycles. That's what so great about Leanpub, as you purchase this book once, and every time I push an update, you will get the updated version for free.
+
+To get notified whenever a new version of this book launches, I strongly recommend that you allow Leanpub to send you update emails. These notifications are not turned on by default; please make sure you do this:
+
+1. Log into your [Leanpub](https://leanpub.com/login) account
+2. Select "Library" from your account menu (upper-right)
+3. Click on this book’s cover image
+4. Select "New Version Available" under "Email Settings"
+
+If you’re reading this on a Kindle, you can add your Kindle email address. That way, Leanpub will send new versions right to your Kindle.
+
 ## How to Use This Book
 As the book title suggests, this book acts as a cookbook for Network Insight. It will provide context and background information on the Network Insight features, and explain how to use them. I hope that you can use it for two goals:
 
@@ -113,7 +127,10 @@ This book wouldn't be possible without the amazing team behind Network Insight. 
 [Taruna Gandhi](https://www.linkedin.com/in/tarunagandhi/)
 : Director of Marketing at VMware. Idea generator extraordinaire.
 
-Thank you for your support and for putting up with my continuous stream of questions.
+This is not everybody; the entire vRealize Network Insight team had a hand in this work. Thank you for your support and for putting up with my continuous stream of questions.
+
+## Respect the Author’s Rights
+This book is available on [Leanpub](https://leanpub.com/networkinsight) and is not restricted by Digital Rights Management (DRM). That means that you can buy once and read it on any device and in any format that you'd like. It also means that, in theory, the book can be passed along to other people. To support further development of the book, I'll ask you to forward people to <https://leanpub.com/networkinsight> to buy their own copy. Help me help you, thanks!
 
 # Foreword by Shiv Agarwal
 
