@@ -1,6 +1,6 @@
 {id: ch-search}
 # Using the Search Engine
-**This chapter was authored by Rohit Reja, Senior Staff Engineer on Network Insight. He was part of the original ArkinNet team.**
+**This chapter was authored by Rohit Reja, Senior Staff Engineer on Network Insight.**
 Edited by: Martijn Smit
 
 vRealize Network Insight provides a datacenter semantics aware search engine to find objects of interest based on their configuration quickly. This search engine sits on top of a highly scalable Elastic Search cluster, and it can provide rich insights into sophisticated virtual and physical data center compute and network fabric.
@@ -425,7 +425,11 @@ Find all VMs on hosts with a high CPU utilization:
 
 Find all VMs on a specific compute blade:
 
-`VMs where Host in (Host where Blade = '[ucs.local]-[sys/chassis-1/blade-7]')`
+{format: console, line-numbers: false}
+```
+VMs where Host in
+(Host where Blade ='[ucs.local]-[sys/chassis-1/blade-7]')
+```
 
 Find all VMs that are located on a cluster that does not have the NSX Distributed Firewall enabled:
 

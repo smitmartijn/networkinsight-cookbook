@@ -380,7 +380,7 @@ SYNTAX
 SYNOPSIS
     Get virtual machines from vRealize Network Insight.
 
-    -------------------------- EXAMPLE 1 --------------------------
+    ------------------------ EXAMPLE 1 ------------------------
     PS C:\> Get-vRNIVM
 
     List all VMs in your vRNI environment (note: this may take a while if you have a lot of VMs)
@@ -396,10 +396,10 @@ There are two cmdlets to connect a Network Insight instance. There's **Connect-v
 
 {format: console, line-numbers: false}
 ```
-PS C:\> Connect-NIServer -RefreshToken 4b891k9e-9swd-43e1-bd93-06xxxa600d7
-Server				CSPToken
-------				------
-api.mgmt.cloud.vmware.com/ni	eyJhbXbi9iJSUzI1NiIsInR5cCI6k..verylongstring
+PS C:\> Connect-NIServer -RefreshToken 4b8xx-xx-xx-xx-xx600d7
+Server                        CSPToken
+------                        ------
+api.mgmt.cloud.vmware.com/ni  eyJhbXbi9iJSUzIsInR5cCI6k..
 ```
 
 This function exchanged the Refresh Token for an authentication token, and that is used for subsequent API calls, and you are now free to use the rest of the cmdlets inside PowervRNI.
@@ -417,8 +417,8 @@ vRealize Network Insight Platform Authentication
 Password for user admin@local: ********
 
 
-Server                           AuthToken                AuthTokenExpiry
-------                           ---------                ---------------
+Server                AuthToken                AuthTokenExpiry
+------                ---------                ---------------
 ni-platform.lab.local SbX94W8aGCk7yzX3EpQU9A== 02/02/2019 17:02:55
 ```
 
@@ -513,23 +513,16 @@ destination_ip             : @{ip_address=31.3.105.98; netmask=255.255.255.255; 
 source_l2_network          : @{entity_id=17603:12:727099007; entity_type=VlanL2Network}
 port                       : @{start=53; end=53; display=53; iana_name=dns; iana_port_display=53 [dns]}
 source_folders             : {@{entity_id=17603:81:2131637277; entity_type=Folder}}
-destination_folders        : {}
 source_resource_pool       : @{entity_id=17603:79:876290838; entity_type=ResourcePool}
 source_cluster             : @{entity_id=17603:66:694428497; entity_type=Cluster}
 protocol                   : UDP
-source_ip_sets             : {}
-destination_ip_sets        : {}
-source_security_groups     : {}
-destination_security_groups: {}
 traffic_type               : INTERNET_TRAFFIC
-source_security_tags       : {}
-destination_security_tags  : {}
 source_host                : @{entity_id=17603:4:208253188; entity_type=Host}
-source_vm_tags             : {Tags:BackDatUp}
-destination_vm_tags        : {}
+source_vm_tags             : {Tags:BackItUp}
 within_host                : False
 firewall_action            : ALLOW
 flow_tag                   : {INTERNET_TRAFFIC, SRC_IP_VM, DST_IP_INTERNET, DIFF_HOST...}
+...
 ```
 
 Flow records have a bunch of correlated information attached, as you can see in the example above. I'd like to highlight a few fields on which you could filter, which would be beneficial when looking for specific flows:

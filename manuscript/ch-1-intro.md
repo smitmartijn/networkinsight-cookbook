@@ -1,7 +1,9 @@
-{width: 40%, caption: "Meet Fred, the vRealize Network Insight Mascot"}
-![](images/ch-1/vrni-sticker-fred-baby-yoda-onesie-light-skinned.png)
+# Disclaimer
+Even though I work on vRealize Network Insight at VMware, this book has been written on a personal title. Any opinions expressed here are my own and not per se the opinion of VMware.
 
-{pagebreak}
+The publisher and the author are providing this book and its contents on an "as is" basis and make no representations or warranties of any kind with respect to this book or its contents. The publisher and the author disclaim all such representations and warranties, including but not limited to warranties of healthcare for a particular purpose. In addition, the publisher and the author assume no responsibility for errors, inaccuracies, omissions, or any other inconsistencies herein.
+
+This disclaimer is provided simply because someone, somewhere, will ignore this disclaimer. If they then do experience problems or a "resume generating event", they have no one to blame but themselves. Don’t be that person!
 
 # Introduction
 
@@ -29,19 +31,12 @@ Due to the technical and sometimes very specific nature of this book, it's advis
 
 The content of this book is based on Network Insight 5.0 (with some small nuggets on 5.1 because I took too long to write it). Considering the product team is an innovation engine and moves really quickly (delivers major features every three months), you need to doublecheck the details when you're using a newer version. This book also does not intend to replace the [official documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/index.html), but rather complement it. The specific technical details in this book will age, and rightly so.
 
-{id: book-updates}
-## Book Updates
+{pagebreak}
 
-This is a so-called 'Agile' book. As Network Insight evolves and new features are added (and existing features are changed), this book will try to keep up with the release cycles. That's what so great about Leanpub, as you purchase this book once, and every time I push an update, you will get the updated version for free.
+{width: 40%, caption: "Meet Fred, the vRealize Network Insight Mascot"}
+![](images/ch-1/vrni-sticker-fred-baby-yoda-onesie-light-skinned.png)
 
-To get notified whenever a new version of this book launches, I strongly recommend that you allow Leanpub to send you update emails. These notifications are not turned on by default; please make sure you do this:
-
-1. Log into your [Leanpub](https://leanpub.com/login) account
-2. Select "Library" from your account menu (upper-right)
-3. Click on this book’s cover image
-4. Select "New Version Available" under "Email Settings"
-
-If you’re reading this on a Kindle, you can add your Kindle email address. That way, Leanpub will send new versions right to your Kindle.
+{pagebreak}
 
 ## How to Use This Book
 As the book title suggests, this book acts as a cookbook for Network Insight. It will provide context and background information on the Network Insight features, and explain how to use them. I hope that you can use it for two goals:
@@ -120,16 +115,6 @@ This book wouldn't be possible without the amazing team behind Network Insight. 
 
 Thank you for your support and for putting up with my continuous stream of questions.
 
-## Respect the Author’s Rights
-This book is available on [Leanpub](https://leanpub.com/networkinsight) and is not restricted by Digital Rights Management (DRM). That means that you can buy once and read it on any device and in any format that you'd like. It also means that, in theory, the book can be passed along to other people. To support further development of the book, I'll ask you to forward people to <https://leanpub.com/networkinsight> to buy their own copy. Help me help you, thanks!
-
-# Disclaimer
-Even though I work on vRealize Network Insight at VMware, this book has been written on a personal title. Any opinions expressed here are my own and not per se the opinion of VMware.
-
-The publisher and the author are providing this book and its contents on an "as is" basis and make no representations or warranties of any kind with respect to this book or its contents. The publisher and the author disclaim all such representations and warranties, including but not limited to warranties of healthcare for a particular purpose. In addition, the publisher and the author assume no responsibility for errors, inaccuracies, omissions, or any other inconsistencies herein.
-
-This disclaimer is provided simply because someone, somewhere, will ignore this disclaimer. If they then do experience problems or a "resume generating event", they have no one to blame but themselves. Don’t be that person!
-
 # Foreword by Shiv Agarwal
 
 *Founder of ArkinNet, currently VP and GM of vRealize Network Insight with VMware*
@@ -161,3 +146,5 @@ Apart from my passion for technology, I believe in a healthy balance and taking 
 Back to this book; so, I have been dealing with the entire data center stack for years. One of the things that always annoyed me was that there was no right solution to troubleshoot and monitor that entire stack; it was still separate solutions for each layer. In 2014, I came across a company called ArkinNet, which had a fantastic product which could collect data from multiple layers (storage, compute, and networking) and holistically present it. After doing some due diligence, I immediately included Arkin into our product portfolio, and I've been in love with the product ever since.
 
 ArkinNet was later acquired in June of 2016 by VMware, and it is now known as vRealize Network Insight.
+
+Let's dive in!

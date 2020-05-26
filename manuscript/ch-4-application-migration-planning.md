@@ -38,7 +38,7 @@ What you're doing here ([Figure: Dependency mapping](#fig-application-migration-
 {caption: "Application Migration Planning -- Application Details", id: "fig-application-details"}
 ![](images/ch-4/application-details.png)
 
-I've focused on the CRM-Records application here, which consists of a MySQL database server. You can see the other applications that are talking to this application in [Figure: Dependency mapping](#fig-application-migration-planning). When you zoom in on the application itself, the network requirements for this application present themselves ([Figure: Application Details](#fig-application-details)). By adding up the different Service Endpoints, you can determine that this application is using up **1.1MB** of total traffic, with a peak throughput of **343bps**. Service Endpoints is a way of classifying specific services because multiple services can live on the same workload. Obvio1usly, this example application isn't representative of an actual production application, expect higher numbers in real life.
+I've focused on the CRM-Records application here, which consists of a MySQL database server. You can see the other applications that are talking to this application in [Figure: Dependency mapping](#fig-application-migration-planning). When you zoom in on the application itself, the network requirements for this application present themselves ([Figure: Application Details](#fig-application-details)). By adding up the different Service Endpoints, you can determine that this application is using up **1.1MB** of total traffic, with a peak throughput of **343bps**. Service Endpoints is a way of classifying specific services because multiple services can live on the same workload. Obviously, this example application isn't representative of an actual production application, expect higher numbers in real life.
 
 When looking at this window, you can see the types of network ports being used as service endpoints within this application. These network ports could impact the decision whether or not to migrate this application to the cloud. Or determine to which cloud locations you are allowed to migrate it. There might be some service or network port that, for security reasons, your security policies would prevent from hosting outside the private data center. Databases with Personally Identifiable Information (PII) data might fall under regional laws, and these laws would prohibit the data from being hosted on another country or continent.
 
@@ -191,14 +191,14 @@ There are over 50 different flow types, which all categorize different types of 
 
 Let's go through one more example with another metric. In most cases, there is a limit of packets per second at the destination cloud. To make sure there are no surprises, get the packets per second as well. All you have to do is to change the focus property in the search query, like this:
 
-`series(sum(flow.totalPackets.delta.summation.number),300) of flow where Source Application = 'Migration Wave 1' and Flow Type = 'Destination is Internet'`
+`series(sum(flow.totalPackets.delta.summation.number), 300) of flow where Source Application = 'Migration Wave 1' and Flow Type = 'Destination is Internet'`
 
 {caption: "Application Migration Planning -- Internet Packets p/s of Migrate Wave 1"}
 ![](images/ch-4/migration-wave-1-internet-packets.png)
 
 Make sure the packet per second rate is also sized properly, and use the max operator to get the maximum number of packets per second:
 
-`max(series(sum(flow.totalPackets.delta.summation.number),300)) of flow where source application = 'Migration Wave 1' and flow type = 'Destination is Internet'`
+`max(series(sum(flow.totalPackets.delta.summation.number), 300)) of flow where source application = 'Migration Wave 1' and flow type = 'Destination is Internet'`
 
 {caption: "Application Migration Planning -- Peak internet packets p/s of Migrate Wave 1", width: "30%"}
 ![](images/ch-4/migration-wave-1-peak-internet-packets.png)

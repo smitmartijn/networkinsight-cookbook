@@ -15,6 +15,8 @@ Zero-trust is security turned on its head: we don't allow anything unless specif
 
 With a zero-trust architecture, using micro-segmentation, security policies (which are translated to basic firewall rules) secure each workload individually. Whether it be a virtual machine, container, or a user, making sure that workloads can only access necessary network resources and nothing more. A simple example of this would be that your company blog based on WordPress should never be allowed to talk to your CRM system.
 
+{pagebreak}
+
 To learn more about VMware NSX and how it helps you to do micro-segmentation, have a look at the free eBooks named [VMware NSX® Micro-segmentation Day 1](https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/products/nsx/vmware-nsx-microsegmentation.pdf) and [VMware NSX® Micro-segmentation Day 2](https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/products/nsx/vmware-micro-segmentation-day-2.pdf).
 
 {caption: "Micro-Segmention; logical security boundaries between applications.", width: "80%"}
@@ -215,7 +217,7 @@ Lastly, there's the option to export the rules in an XML format. This export fun
 
 You would only use this export to feed it into the NSX Importer Tool. This tool reads in the zip bundle, retrieves the XML files, and feeds them to the NSX-v API. Because this is only available for NSX for vSphere, which is going to go end-of-support in 2023[^nsxveol], I don't expect this format to be used anymore (and won't go into it here).
 
-[^nsxveol]: https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/support/product-lifecycle-matrix.pdf
+[^nsxveol]: http://tiny.cc/vmw-lifecycle-matrix
 
 Because [VMware NSX Intelligence](https://www.vmware.com/products/nsx-intelligence-analytics-engine.html) in NSX-T 2.5 and above has the same feature, a direct import from the interface of Network Insight into NSX Security Policies is not going to happen. Network Insight has a broader view of the network, though. It can recommend security policies on a much larger scale, taking physical servers, or physical zones (end-users, DMZ, test, and more) into account. It remains to be the best way to implement security policies across the entire network. NSX Intelligence can take care of the micro-segmentation inside the NSX network fabric.
 
