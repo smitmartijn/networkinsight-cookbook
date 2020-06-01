@@ -1,3 +1,4 @@
+{sample: true}
 # Introduction to Network Insight
 
 Due to the vast amount of data that Network Insight has, and the range of that data (i.e., network flows, switch port metrics, VMs, AWS inventory, and much more), the actual use cases for Network Insight are limitless. Four main use cases help you to get an idea of what to use Network Insight for. In the following chapters, I'll discuss the **why** of using Network Insight. Most of the remainder of this book is the **how** to use it.

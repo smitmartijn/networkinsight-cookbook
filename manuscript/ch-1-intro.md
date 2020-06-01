@@ -52,6 +52,7 @@ To get notified whenever a new version of this book launches, I strongly recomme
 
 If you’re reading this on a Kindle, you can add your Kindle email address. That way, Leanpub will send new versions right to your Kindle.
 
+{sample: true}
 ## How to Use This Book
 As the book title suggests, this book acts as a cookbook for Network Insight. It will provide context and background information on the Network Insight features, and explain how to use them. I hope that you can use it for two goals:
 
@@ -96,9 +97,11 @@ if x == 1:
   print("x is 1.")
 ```
 
+{sample: false}
 ## Comments and Questions
 While I have tested and verified the information, examples, and external (and internal) links within this book extensively, there is a chance that something has changed in Network Insight, making the instructions not match anymore. You might also find that something is broken. Please let me know of any errors you find, as well as your suggestions for making this book better, by contacting me on twitter [\@smitmartijn](https://twitter.com/smitmartijn). There are also more of my other contact details that are on my blog at <https://lostdomain.org>
 
+{sample: false}
 ## Acknowledgements
 
 This book wouldn't be possible without the amazing team behind Network Insight. From providing me with insights into what's going on behind the scenes to putting up with my excessive stream of questions, these people stood by me and have credit in making this book happen. Let me introduce them:
@@ -129,9 +132,11 @@ This book wouldn't be possible without the amazing team behind Network Insight. 
 
 This is not everybody; the entire vRealize Network Insight team had a hand in this work. Thank you for your support and for putting up with my continuous stream of questions.
 
+{sample: false}
 ## Respect the Author’s Rights
 This book is available on [Leanpub](https://leanpub.com/networkinsight) and is not restricted by Digital Rights Management (DRM). That means that you can buy once and read it on any device and in any format that you'd like. It also means that, in theory, the book can be passed along to other people. To support further development of the book, I'll ask you to forward people to <https://leanpub.com/networkinsight> to buy their own copy. Help me help you, thanks!
 
+{sample: true}
 # Foreword by Shiv Agarwal
 
 *Founder of ArkinNet, currently VP and GM of vRealize Network Insight with VMware*
@@ -150,6 +155,7 @@ Over the next few years, we see the operational silos breaking at a rapid pace a
 
 I am thrilled and excited to be writing this foreword for Martijn's book on VMware vRealize Network Insight. Martijn has been the technical face and flag bearer of Network Insight in the EMEA region for a long time, even since before the acquisition. I hope the insights captured in this book triggers a genuine thought about transforming their network and security operations in the mind of its readers.
 
+{sample: false}
 # About the Author
 
 The first thought going through my head, after decided to write this book, is: why? Why on earth are you starting another big project that's going to take up a ton of time? The reason is simple: Hi, I'm Martijn Smit, and I'm an information-sharing addict (echo's: "hi Martijn!").
