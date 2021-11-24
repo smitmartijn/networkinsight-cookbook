@@ -202,6 +202,7 @@ Using the projection clause, you can bring up a specific property directly in th
 3. List
 4. Aggregation
 5. Series
+6. Percentile
 
 {id: ch-property}
 ### Property
@@ -333,7 +334,22 @@ The metrics inside the series projection can be any of the metrics available in 
 `series(avg(Memory Usage)), series(avg(Network Rate)) of VMs where Name like Web`
 
 {caption: "Search; using multiple series() projections to combine metrics"}
-![](images/ch-9/multiple-series.png)
+![](resources/images/ch-9/multiple-series.png)
+
+### Percentile
+
+Percentiles usually point out a value that falls below a specified percentage. In the context of networks, it's typically used by Internet Service Providers to bill bandwidth usage. By looking at a percentile of data, you can cut out any big spikes that are not common. Let's say a server continuously does 100Mbit per second and suddenly has a spike of 1Gbit per second for a few seconds. If the ISP uses a 95-percentile to charge for the traffic, that spike will not ruin you financially. Financial use cases are not the only use case for percentiles, just the most common. You can also use it for network design to determine the average traffic or packets per second load required for a device.
+
+The `percentile($percentile, $metrics)` function takes two parameters: the `$percentile` number of the `$metrics` that you're referencing. The percentile number can be 1 to 99 (providing 0 or 100 doesn't make sense). The metrics data is a whole thing and uses the `series()` function. If you think about it, the percentile function is calculating percentiles on a set of data. That data has to be a series (pun intended) data points. To make it make sense, here's an example:
+
+`percentile(95, series(sum(byte rate))) of flow where flow type = 'Destination is Internet'`
+
+Using this search will get you the 95-percentile number of the byte rate (throughput in bytes per second) of the flows going towards the internet. Percentile() can calculate percentiles of flows, SD-WAN Edges, and SD-WAN Applications.
+
+{caption: "Search; using percentile() to calculate percentiles"}
+![](resources/images/ch-9/percentile.png)
+
+I> Percentile() is available from vRNI 6.1, and as of this writing, it does not show up in the autocomplete of the search.
 
 ## Ordering
 
@@ -389,6 +405,7 @@ When you order a search, sometimes you're only interested in the top 10 flows. O
 `Flows where Flow Type = 'Destination is Internet' order by Bytes limit 10`
 
 {id: ch-reference-traversal-queries}
+
 ## Reference Traversal Queries
 
 Let's say you want to filter the search results based on a property that is not directly attached to the entity you're searching for. An example of this would be to filter on the CPU usage of the Host while searching for VMs. In this case, reference traversal queries can be used to refer to the property that you want to filter.
