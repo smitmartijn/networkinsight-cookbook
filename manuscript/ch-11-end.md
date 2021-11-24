@@ -17,6 +17,6 @@ I leave you with Fred, the unofficial official mascot of Network Insight. There'
 
 Mostly appearing on stickers, Fred has had a few makeovers in the last few years.
 
-![](images/ch-11/vrni-stickers-fred.png)
+![](resources/images/ch-11/vrni-stickers-fred.png)
 
 Let me know which one is your favorite, [via twitter](https://twitter.com/smitmartijn), and I'll send you some!

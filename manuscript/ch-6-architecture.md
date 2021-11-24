@@ -12,7 +12,7 @@ In simple terms, the Platform is where you connect your browser to use the produ
 Here's how the architecture looks and how communication flows between the different components:
 
 {caption: "vRealize Network Insight Architecture Diagram"}
-![](images/ch-6/vrni-architecture.png)
+![](resources/images/ch-6/vrni-architecture.png)
 
 Many things happen in both layers, which I'll go further into in the following chapters.
 
@@ -29,7 +29,7 @@ Inside the Platform, there are a few different layers that serve different purpo
 Here is a representation of the service layers that live inside a Platform:
 
 {caption: "Platform VM Internal Architecture"}
-![](images/ch-6/platform-internal.png)
+![](resources/images/ch-6/platform-internal.png)
 
 ### Presentation Service Layer
 
@@ -40,14 +40,14 @@ The REST API is split up into two sections: a private API and a public API. More
 All UI interactions with data use the private API to collect the data. As the name suggests, this part should not be used by any automation work that you would like to build. The format and output are likely to change throughout different versions.
 
 {caption: "Private API in action"}
-![](images/ch-6/private-api.png)
+![](resources/images/ch-6/private-api.png)
 
 ### Search Engine
 
 While the search engine is worth a whole separate chapter, in this context, is it worth explaining that the search engine drives all interactions. Anything that you do in the interface is a search command. This also reflects in the search bar:
 
 {caption: "Searching your data center"}
-![](images/ch-6/searching.png)
+![](resources/images/ch-6/searching.png)
 
 Talking to a backend powered by Elastic Search, it takes search queries in technical natural language. It searches through configuration data, events, performance stats and can do so in a time machine to get results for a specific time frame. Unlike the open-source database backends, the search engine is a service entirely built by the Network Insight team.
 
@@ -74,7 +74,7 @@ Collectors can be scaled out by using multiple appliances for your environment, 
 You can strategically place the Collectors as well. It does a couple of things to the incoming data to compress it (more on that later) and allow it to be sent to the Platform more efficiently. Traffic between the Data Sources and the Collectors is more substantial than between the Collectors and Platform appliances, which makes it more efficient to place Collectors in remote locations.
 
 {caption: "Platform & Collector relationships"}
-![](images/ch-6/platform-collector-relation.png)
+![](resources/images/ch-6/platform-collector-relation.png)
 
 Networking management is typically as locked down as possible to protect the management interfaces of your network devices. It makes sense to provide access to Network Insight for people that do not have any business connecting directly to networking devices, so you would want to segment those. In this instance, you would put a Collector inside the networking management segment and only permit it to connect to the Platform. The Collector would connect directly to the Data Sources inside the secure segment, and you don't have to allow incoming communication from outside the secure segment.
 
@@ -94,7 +94,7 @@ The polling agents and Flow Processor are proprietary code, but several open-sou
   - These are slightly modified to support IPFIX from the VDS and ignore information that Network Insight does not need to improve performance.
 
 {caption: "Collector VM internal architecture", width: "80%"}
-![](images/ch-6/collector-internal.png)
+![](resources/images/ch-6/collector-internal.png)
 
 {id: ch-flow-processor}
 ### Flow Processor
@@ -106,7 +106,7 @@ On the Collector, two services are running for the incoming NetFlow (including I
 By now, you should have configured a data source that's sending flow data to a Collector, whether it be vCenter, NSX, or a physical network device; here's what happens with those flows:
 
 {caption: "Collector NetFlow Processing"}
-![](images/ch-6/collector-netflow-processing.png)
+![](resources/images/ch-6/collector-netflow-processing.png)
 
 The service nfcapd receives the NetFlow records from the reporting devices and saves them to memory. **Every minute**, it flushes the memory contents into nfcapd data files. This process is the same for sFlow records received by sfcapd, except that the output is, surprise, sfcapd data files.
 
@@ -280,7 +280,7 @@ Think of it like this; with vRealize Network Insight Cloud, VMware hosts and mai
 I> The Platform appliance of Network Insight is multi-tenant capable out of the box. It currently takes a lot of effort (and it's not user-friendly and not supported) to get multiple tenants activated. I've tried and broke a few Platforms. VMware is using this multi-tenancy capability in the Cloud variant. I'm holding out hope that multi-tenancy is activated in the on-premises version in the future.
 
 {caption: "Architecture for vRealize Network Insight Cloud"}
-![](images/ch-6/vrni-cloud-architecture.png)
+![](resources/images/ch-6/vrni-cloud-architecture.png)
 
 I> When using vRealize Network Insight Cloud, you only have to deploy the Collector in your environment. It requires connectivity to the Platform, which means internet connectivity is required for the Collector.
 
@@ -341,12 +341,12 @@ Something else to consider is that the Collectors cannot be clustered at this ti
 To visualize the possibilities and the architecture when clustering Network Insight, check out this architecture:
 
 {caption: "Clustering Architecture"}
-![](images/ch-6/cluster-architecture.png)
+![](resources/images/ch-6/cluster-architecture.png)
 
 Creating a cluster is pretty straight forward; first, you deploy the first Platform (which is referred to as Platform1), configure it as you would normally, and then head over to the  **Infrastructure & Support -> Overview and Updates** page in order to create a cluster.
 
 {caption: "Creating a new Platform Cluster"}
-![](images/ch-6/create-cluster.png)
+![](resources/images/ch-6/create-cluster.png)
 
 The details you provide in the form above, have to be Platform appliances that have been deployed but **not** configured yet. They should be waiting to be activated, and you should see the web interface asking for a license. When submitting the form, Platform1 goes out to the unconfigured Platforms and take control of them. This process joins the unconfigured Platform nodes to the cluster that Platform1 controls.
 

@@ -34,7 +34,7 @@ The content of this book is based on Network Insight 5.0 (with some small nugget
 {pagebreak}
 
 {width: 40%, caption: "Meet Fred, the vRealize Network Insight Mascot"}
-![](images/ch-1/vrni-sticker-fred-baby-yoda-onesie-light-skinned.png)
+![](resources/images/ch-1/vrni-sticker-fred-baby-yoda-onesie-light-skinned.png)
 
 {pagebreak}
 
