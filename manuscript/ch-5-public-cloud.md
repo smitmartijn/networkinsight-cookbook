@@ -70,7 +70,7 @@ If you do not have a master account, simply add the standard account. If you hav
 
 #### Requirements
 
-There are not many. Firstly, an account with read-only access on the account, EC2 instances, and the log repository (to get the flow logs). For a full account policy template, check out the [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/5.0/com.vmware.vrni.using.doc/GUID-122546CC-FB0F-4D8F-B4E8-225B372CDC31.html).
+There are not many. Firstly, an account with read-only access on the account, EC2 instances, and the log repository (to get the flow logs). For a full account policy template, check out the [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/6.4/com.vmware.vrni.using.doc/GUID-122546CC-FB0F-4D8F-B4E8-225B372CDC31.html).
 
 Secondly, the collector appliance, which polls AWS, needs to be able to access the AWS API over the internet (so, open up the firewall). If you're using vRealize Network Insight Cloud, the connection goes from the VMware Cloud to the AWS API; no local connections needed.
 

@@ -301,7 +301,7 @@ Most of the VMware related PowerShell modules, official and community-developed,
 
 When Network Insight 3.6 with the first version of the public API came out in November 2017, the PowerShell module to make use of this API was already in the making, as it was highly requested amongst the companies I was working with. The module was named [PowervRNI](https://github.com/PowervRNI/powervrni), to conform to the unofficial naming convention.
 
-It currently has 67 functions and around 95% of API coverage.
+It currently has 86 functions and around 95% of API coverage.
 
 My goal with PowervRNI was pretty straight forward: make it easy to get started with the Network Insight public API and make it easy to integrate with other systems. I'm proud to say that it has been used to solve a breadth of use cases involving data sharing issues between multiple systems. From security use-cases where extra data around network traffic flows and infrastructure info is sent to a SIEM system to better collation, to importing a large amount of data sources (usually physical network devices) into Network Insight during the initial set up, to integrations with CMDB systems to synchronize the CMDB inventory with the real-life situation. I'll take you through a few example use cases in the upcoming chapters, but up-to-date examples are found [on my blog](http://lostdomain.org/tag/powervrni/).
 
@@ -355,13 +355,13 @@ PS C:\> Get-Command -Module PowervRNI
 
 CommandType   Name                         Version    Source
 -----------   ----                         -------    ------
-Function      Connect-NIServer             1.4.74     PowervRNI
-Function      Connect-vRNIServer           1.4.74     PowervRNI
-Function      Disable-vRNIDataSource       1.4.74     PowervRNI
-Function      Disconnect-vRNIServer        1.4.74     PowervRNI
-Function      Enable-vRNIDataSource        1.4.74     PowervRNI
-Function      Get-vRNIAPIVersion           1.4.74     PowervRNI
-Function      Get-vRNIApplication          1.4.74     PowervRNI
+Function      Connect-NIServer             2.0.173    PowervRNI
+Function      Connect-vRNIServer           2.0.173    PowervRNI
+Function      Disable-vRNIDataSource       2.0.173    PowervRNI
+Function      Disconnect-vRNIServer        2.0.173    PowervRNI
+Function      Enable-vRNIDataSource        2.0.173    PowervRNI
+Function      Get-vRNIAPIVersion           2.0.173    PowervRNI
+Function      Get-vRNIApplication          2.0.173    PowervRNI
 ...etc...
 ```
 
