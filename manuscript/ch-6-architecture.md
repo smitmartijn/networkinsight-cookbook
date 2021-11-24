@@ -49,7 +49,7 @@ While the search engine is worth a whole separate chapter, in this context, is i
 {caption: "Searching your data center"}
 ![](resources/images/ch-6/searching.png)
 
-Talking to a backend powered by Elastic Search, it takes search queries in technical natural language. It searches through configuration data, events, performance stats and can do so in a time machine to get results for a specific time frame. Unlike the open-source database backends, the search engine is a service entirely built by the Network Insight team.
+Talking to a backend powered by [Elastic Search](https://www.elastic.co/), it takes search queries in technical natural language. It searches through configuration data, events, performance stats and can do so in a time machine to get results for a specific time frame. Unlike the open-source database backends, the search engine is a service entirely built by the Network Insight team.
 
 You can find more details on the search engine, and how to use it, in the chapter [Using the Search Engine](#ch-search).
 
@@ -57,9 +57,11 @@ You can find more details on the search engine, and how to use it, in the chapte
 
 Everything about your environment is stored inside the data service layer. Configuration data, events, and performance stats are all stored as efficiently as possible. This means that there are multiple database systems present.
 
-Searching works against an Elastic Search database which holds indexed configuration data that points to a PostgreSQL and HBASE database where metrics and configurations are held in a timestamped format. Using Elastic Search and having it index the other databases, speeds up any search operation and improves the user experience via the web interface.
+Searching works against an Elastic Search database which holds indexed configuration data that points to a [FoundationDB](https://www.foundationdb.org/) and [HBASE](https://hbase.apache.org/) database where metrics and configurations are held in a timestamped format. Using Elastic Search and having it index the other databases, speeds up any search operation and improves the user experience via the web interface.
 
-Configuration data is stored in PostgreSQL, and each configuration is timestamped with a time & date when this configuration was detected. Because of these timestamps, this is also where changes in configuration are held. Virtual Machines, Networks, Firewall rules are examples of the data available in this PostgreSQL database.
+Configuration data is stored in FoundationDB, and each configuration is timestamped with a time & date when this configuration was detected. Because of these timestamps, this is also where changes in configuration are held. Virtual Machines, Networks, Firewall rules are examples of the data available in this FoundationDB database.
+
+I> FoundationDB was introduced in version 5.1, replacing PostgreSQL. If you're upgrading from 5.0 or below to a newer version, the update process will automatically migrate data from PostgreSQL to FoundationDB.
 
 The results from the Elastic Search database also contain index pointers that link to metrics located in another database; HBASE. For example, a switch port object would have a link to the HBASE database where the bandwidth usage metrics are stored. That combination makes that the switch port configuration (port type, which VLANs, and more) is presented along with its bandwidth usage graph.
 
@@ -78,7 +80,7 @@ You can strategically place the Collectors as well. It does a couple of things t
 
 Networking management is typically as locked down as possible to protect the management interfaces of your network devices. It makes sense to provide access to Network Insight for people that do not have any business connecting directly to networking devices, so you would want to segment those. In this instance, you would put a Collector inside the networking management segment and only permit it to connect to the Platform. The Collector would connect directly to the Data Sources inside the secure segment, and you don't have to allow incoming communication from outside the secure segment.
 
-I> You can have multiple Collectors reporting up to a single Platform. Data Sources cannot be shared and have a one-on-one mapping to a Collector.
+I> You can have multiple Collectors reporting up to a single Platform. Data Sources cannot be shared between collectors and have a one-on-one mapping to a Collector.
 
 ### Collector Services
 

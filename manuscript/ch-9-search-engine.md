@@ -5,7 +5,7 @@ Edited by: Martijn Smit
 
 vRealize Network Insight provides a datacenter semantics aware search engine to find objects of interest based on their configuration quickly. This search engine sits on top of a highly scalable Elastic Search cluster, and it can provide rich insights into sophisticated virtual and physical data center compute and network fabric.
 
-The search engine is powered by an Elastic Search cluster, which is the first service that gets addressed when a search is requested. Elastic Search can point to other databases from where Network Insight pulls its data. For example, index pointers for metric refer to the HBase database, while configuration items (like VM properties) get referred to PostgreSQL. Indexing happens continuously; each time an object is updated in any database, Elastic Search updates its index.
+The search engine is powered by an Elastic Search cluster, which is the first service that gets addressed when a search is requested. Elastic Search can point to other databases from where Network Insight pulls its data. For example, index pointers for metric refer to the HBase database, while configuration items (like VM properties) get referred to FoundationDB. Indexing happens continuously; each time an object is updated in any database, Elastic Search updates its index.
 
 This indexing process can lag a few seconds, causing old data to show up still or new data not to show up yet. That's why you can monitor the indexer lag from the **Install and Support** page in the **Settings**.
 

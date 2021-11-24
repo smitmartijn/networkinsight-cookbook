@@ -221,7 +221,7 @@ You would only use this export to feed it into the NSX Importer Tool. This tool 
 
 Because [VMware NSX Intelligence](https://www.vmware.com/products/nsx-intelligence-analytics-engine.html) in NSX-T 2.5 and above has the same feature, a direct import from the interface of Network Insight into NSX Security Policies is not going to happen. Network Insight has a broader view of the network, though. It can recommend security policies on a much larger scale, taking physical servers, or physical zones (end-users, DMZ, test, and more) into account. It remains to be the best way to implement security policies across the entire network. NSX Intelligence can take care of the micro-segmentation inside the NSX network fabric.
 
-I> There is another import tool that takes this XML output and imports it into the NSX Policy Manager that runs VMware Cloud on AWS. It also imports directly into NSX-T, in case NSX Intelligence is now present. This effort is an open-source Python script and [is available here](https://vrealize.vmware.com/sample-exchange/vrealize-network-insight-sample-exchange/7136).
+I> There is another import tool that takes this XML output and imports it into the NSX Policy Manager that runs VMware Cloud on AWS. It also imports directly into NSX-T, in case NSX Intelligence is not present. This effort is an open-source Python script and [is available here](https://vrealize.vmware.com/sample-exchange/vrealize-network-insight-sample-exchange/7136).
 
 ## Using the Recommended Firewall Rules
 
