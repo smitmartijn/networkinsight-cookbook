@@ -14,7 +14,7 @@ Then there's the support username. This one brings you straight to the underlyin
 I'll be focusing on the vRNI CLI functionality, which has a fair amount of commands:
 
 {caption: "Command line list of commands"}
-![](images/ch-7/command-list.png)
+![](resources/images/ch-7/command-list.png)
 
 While the same commands exist on both of the appliances, some specific commands only apply to the Collector. Run those on the Platform, and it merely outputs that these only work on the Collector. For now, let's focus on the commands that work on both the Platform and the Collector.
 
@@ -27,7 +27,7 @@ But just to be sure all bases are covered, here are a few steps to troubleshoot 
 If the Network Insight appliance is misbehaving, the web interface is not responding, and connections are timing out, the Platform is not seeing a Collector and is saying it's offline, any issues that have to do with connectivity or reachability, here's where you start.
 
 {caption: "Restarting services via CLI", width: "50%"}
-![](images/ch-7/restarting-services.png)
+![](resources/images/ch-7/restarting-services.png)
 
 Start with ```show-service-status```, which gives you an overview of all critical services and their respective status. If a service is not running, you can get more information on the reason why it's not running by running ```show-service-status --debug```. This command reaches out to the service and does a few extra checks on the service and its log files.
 
@@ -227,7 +227,7 @@ I> Warning: the update-IP-change command does not check whether the new IP addre
 There are only 2 commands that are specifically relevant to the Collector appliance: **set-proxy-shared-secret** and **vrni-proxy**. You may have to move a collector between different Platform appliances, or if the Platform appliance went belly up for some reason (got deleted and needed to be redeployed). You can move an existing collector that had a previous relationship to a Platform, to another Platform using these commands:
 
 {caption: "Moving a Collector between Platforms"}
-![](images/ch-7/moving-collector-between-platforms.png)
+![](resources/images/ch-7/moving-collector-between-platforms.png)
 
 First, generate a shared secret by adding a new Collector VM using the web interface, under **Settings** and **Install and Support** page. Copy and paste the newly generated shared secret to the set-proxy-shared-secret command to that it is trusted by the new Platform. Then update the IP address or fully qualified domain name of the Platform that this Collector this be reporting to using `vrni-proxy set-platform --ip-or-fqdn <ip/fqdn>`. After a few minutes, you see the Collector show up in the web interface, and it is ready to use.
 

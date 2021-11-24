@@ -34,7 +34,7 @@ Traditional environments are exclude, though, as those have servers with the sam
 You start by configuring an outlier configuration that has all the aspects of the group of workloads that is monitored. You also need to select the metrics that the monitoring happens on. In the example below, I'll create an outlier group for 5 DNS servers. First, start by giving it a name (1). In this case, **DNS Servers**.
 
 {caption: "Outlier configuration options"}
-![](images/ch-8/outlier-config.png)
+![](resources/images/ch-8/outlier-config.png)
 
 Grouping (2 & 3) is done based on application tiers or security groups. The security groups can be NSX-v, NSX-T, VMware Cloud on AWS, or native AWS security groups, anything that has the security group concept. While security groups can be used to indicate tiers in an application, they are typically used for wildly different purposes as well. Security groups can be used to segment tenants or departments from each other, or segmentation between different applications, and so on. That's why I prefer the use of application tiers for outlier groups. Your application constructs should already exist inside Network Insight for the application dashboard, security planning, and more.
 
@@ -76,14 +76,14 @@ When everything is filled out, you get a preview of the outlier graphs. The grap
 Once saved, the outlier configuration is available under the Outlier pages, and it starts monitoring and generating events when outliers are detected. Jumping to a specific outlier group is accessible by doing this search query: `Analytics Outlier Configuration 'DNS Servers'`
 
 {caption: "Outlier detection result"}
-![](images/ch-8/outlier-result.png)
+![](resources/images/ch-8/outlier-result.png)
 
 Above is the result of the DNS Server outlier detection. It's clear that two of the DNS servers (**cmbu-sc2dc-01** and **cmbu-wdcdc-01**) are behaving entirely different than the others. That is why they are marked as an outlier.
 
 Once the outlier configuration is in place, Network Insight starts to generate events (alerts) whenever an outlier is detected. The cool part about these events that the evidence graph is included:
 
 {caption: "Outlier detection event"}
-![](images/ch-8/outlier-event.png)
+![](resources/images/ch-8/outlier-event.png)
 
 Getting alerts from the outliers is a bit trickier than expected. In order to get either emails or SNMP traps when an outlier is detected, you have to set up a user-defined alert from the **outlier events** search query. Do so using the alarm bell icon at the top right, and you can choose between getting emails, and SNMP traps when there's a new outlier detected. Out-of-the-box alerts for outliers are currently not there, so this is a work-around.
 
@@ -104,7 +104,7 @@ For these use cases, thresholds can be configured. Thresholds can be found under
 The main page of the thresholds lists all configured thresholds and the related events (threshold breaches) along with options to modify and remove them. Let's go through the creation of a threshold.
 
 {caption: "Creating a threshold"}
-![](images/ch-8/create-threshold.png)
+![](resources/images/ch-8/create-threshold.png)
 
 A lot is going on on that page; let's take it step-by-step. Your attention in the screenshot will probably go straight to the preview (5). But to get there, first fill out a name for the threshold (1) -- something to recognize it by when it triggers an event, and an alert is sent out.
 
@@ -135,21 +135,27 @@ This text translates to that by default, it looks at the network traffic rate on
 First, the metric option can be set to 6 different metrics. I'll explain each of these in the sections below.
 
 #### network traffic rate
+
 This is the network traffic rate in Kbit per second. This is the last real-time value in the bandwidth graphs of a workload.
 
 #### max network traffic rate
+
 Network traffic rate in Kbit per second, aggregated over 24 hours, and this maximum value represents the peak of that traffic.
 
 #### total network traffic
+
 Network traffic rate in GB aggregated over 24 hours, and this value represents going over that amount of traffic in a day.
 
 #### network packet count
+
 The number of packets. This can be useful to detect denial of service attacks that are based on a lot of smaller packets. The packet-count would go up, but not necessarily the bandwidth itself (these smaller packets can be 2-5% of regular traffic).
 
 #### network packet drop
+
 The number of packets that are dropped. There are mechanisms in place (TCP has this built-in) to recover from dropped packets, and it's pretty standard for packet drops to occur. Especially over the internet. Don't put the value at 1 -- you'll go crazy with alerts.
 
 #### network packet drop percent
+
 The number of packets that are dropped in percentage form. This is a better option when looking at packet drops. When network traffic goes up, the packet drops do as well; they usually scale up with the amount of traffic. Typically, packet drops over 5% impacts traffic significantly, and between 1 and 2.5% is 'acceptable'. [^packetloss-reference]
 
 [^packetloss-reference]: https://en.wikipedia.org/wiki/Packet_loss

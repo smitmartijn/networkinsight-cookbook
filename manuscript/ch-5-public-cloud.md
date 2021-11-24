@@ -64,13 +64,13 @@ When you have a larger organization that uses AWS, the chance is that separate a
 If you do have a master account, you can add that to Network Insight, and it discovers all linked accounts under it (existing and new) and starts collecting data from the network & compute resources that are under those linked accounts.
 
 {caption: "AWS Master account link diagram"}
-![](images/ch-5/aws-master-account-links.png)
+![](resources/images/ch-5/aws-master-account-links.png)
 
 If you do not have a master account, simply add the standard account. If you have more than one account, simply add them all; there is no limit to the amount of added accounts.
 
 #### Requirements
 
-There are not many. Firstly, an account with read-only access on the account, EC2 instances, and the log repository (to get the flow logs). For a full account policy template, check out the [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/5.0/com.vmware.vrni.using.doc/GUID-122546CC-FB0F-4D8F-B4E8-225B372CDC31.html).
+There are not many. Firstly, an account with read-only access on the account, EC2 instances, and the log repository (to get the flow logs). For a full account policy template, check out the [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/6.4/com.vmware.vrni.using.doc/GUID-122546CC-FB0F-4D8F-B4E8-225B372CDC31.html).
 
 Secondly, the collector appliance, which polls AWS, needs to be able to access the AWS API over the internet (so, open up the firewall). If you're using vRealize Network Insight Cloud, the connection goes from the VMware Cloud to the AWS API; no local connections needed.
 
@@ -81,7 +81,7 @@ I> When adding an AWS account for Network Insight, make sure it has programmatic
 Before Network Insight can collect network flow logs from AWS, Flow Logs have to be configured first. Flow Logs is an option per VPC, meaning you need to enable in inside the AWS console on a per-VPC basis. To do so, create a Log Group inside CloudWatch where the logs go, and configure these settings on the VPC:
 
 {caption: "AWS: Setting up VPC Flow Logs"}
-![](images/ch-5/aws-setup-vpc-flow-logs.png)
+![](resources/images/ch-5/aws-setup-vpc-flow-logs.png)
 
 Set the **Filter** option to **All**. The filter determines to log both allowed network flows, and the blocked network flows by any security group rules that are in place. Currently, Network Insight only grabs the allowed flows, but that might change in the future.
 
@@ -96,7 +96,7 @@ In that case, you might want to have different instances of Network Insight, to 
 During the process of adding the AWS master access as a data source, you can specify from which AWS regions Network Insight is allowed to collect information. It leaves the unselected regions alone.
 
 {caption: "Adding AWS Account", id: "fig-adding-aws-account"}
-![](images/ch-5/aws-adding-account.png)
+![](resources/images/ch-5/aws-adding-account.png)
 
 The above [Figure "Adding AWS Account"](#fig-adding-aws-account) depicts the screen that allows you to add an AWS account. Select a collector appliance that will connect to the AWS API (over the internet), supply the access key and secret access key, and hit the Validate button. The collector now goes out to the AWS API and validates the credentials. If it succeeds, the rest of the options are made available.
 
@@ -117,7 +117,7 @@ Once AWS has been added as a data source, the collector appliance starts collect
 All computing, networking, and relevant administrative objects are pulled in. Things like the AWS account, EC2 instances, firewall rules, security groups, IP subnets, VPCs, and VPC peering connections have dashboards to troubleshoot these objects. It's possible to use the Network Insight search to uncover the inventory of the AWS environments. All searches and dashboards list all AWS objects across all added AWS accounts, having everything in the same place. Just type in AWS, to see the options:
 
 {caption: "AWS Search options", width: "50%"}
-![](images/ch-5/aws-search.png)
+![](resources/images/ch-5/aws-search.png)
 
 During the inventory, the incoming data is correlated to each other. EC2 instances have a direct link to its network interface, the applicable firewall rules, availability zone, region, network flows, all the way up to the AWS account. Correlation means you can use all these linked entities to filter, for example, search for all EC2 instances that belong to a specific account or VPC.
 
@@ -126,7 +126,7 @@ During the inventory, the incoming data is correlated to each other. EC2 instanc
 When flow logging is configured on a VPC to log towards CloudWatch, the network flows can be seen from the CloudWatch console. The log streams are grouped by elastic network interface and the action taken by the AWS Security Rule (accept or deny). The data in this view is the same data that Network Insight retrieves using the AWS API.
 
 {caption: "AWS CloudWatch listing network flow logs"}
-![](images/ch-5/aws-cloudwatch-logs.png)
+![](resources/images/ch-5/aws-cloudwatch-logs.png)
 
 What Network Insight does with the flow logs and how they are processed, is similar for both AWS and Azure -- and it is described in the chapter [AWS & Azure Flow Processing](#ch-aws-azure-flow-processing), which is located in the chapter about the [Architecture](#ch-architecture).
 
@@ -141,14 +141,14 @@ While Amazon does not allow you insights into the actual physical equipment that
 EC2 instances live on a subnet, subnets are connected using a routing table, their internet connectivity goes over an internet gateway, VPN connections over a virtual private gateway, and different VPCs can be connected via a VPC peering connection. Network Insight can construct a logical network topology based on all those components.
 
 {caption: "AWS Network topology between two VMs in different VPCs"}
-![](images/ch-5/aws-network-topology-vps.png)
+![](resources/images/ch-5/aws-network-topology-vps.png)
 
 We can also monitor these logical network components separately, and for example, monitor the connection from the EC2 instance to the subnet or routing table. Using routing algorithms, Network Insight constructs these topologies on demand, whenever you request a path, by searching for *path from AWS EC2 xxx to AWS EC2 yyy*.
 
 You can request paths between EC2 instances or between an EC2 instance and a vSphere VM that's either hosted on-premises or in VMware Cloud on AWS.
 
 {caption: "AWS Network topology between on-premises and an AWS VPC"}
-![](images/ch-5/aws-network-topology-onprem.png)
+![](resources/images/ch-5/aws-network-topology-onprem.png)
 
 The above Figure 43 shows a network topology coming from an on-premises vSphere VM behind VMware NSX for vSphere, with an NSX Edge connecting with a layer-3 VPN to a Virtual Private Gateway on AWS.
 
@@ -236,7 +236,7 @@ Once your application registration is done, you'll have an **Application ID**, *
 All IDs will look something like this: *77fb6532-da95-4a50-b00f-190ae836b2d8*
 
 {caption: "Adding an Azure data source"}
-![](images/ch-5/azure-add-account.png)
+![](resources/images/ch-5/azure-add-account.png)
 
 Just like with AWS, the collector appliance which is selected needs internet connectivity to go to the Azure API and collect data. Make sure the firewall(s) are opened up to allow it to connect to the Azure Portal. When using vRealize Network Insight Cloud, the collector used for Azure, is the cloud-based collector -- in which case you do not have to deploy one yourself.
 
@@ -249,7 +249,7 @@ Once Azure has been added to Network Insight, it starts collecting data every **
 All computing, networking, and relevant administrative objects are pulled in. Things like the Azure Data Sources (accounts), Azure VMs, Network Security Groups, Application Security Groups, Azure Subscriptions, Network Interfaces, Virtual Networks, and more, are given their own dashboards. It'll be possible to use the Network Insight search to uncover the inventory of the Azure environments. This lists all Azure objects across all added Azure subscriptions, having everything in the same place. Just type in Azure, to see all the possibilities:
 
 {caption: "Azure Search options", width: "50%"}
-![](images/ch-5/azure-seach.png)
+![](resources/images/ch-5/azure-seach.png)
 
 During the inventory, the incoming data is correlated to each other. The Azure VM dashboard displays all its network interfaces, VNets, Subnets, all applicable security rules (both from Application Security Groups and Network Security Groups), and all network flows.
 
@@ -264,7 +264,7 @@ On each NSG, there's also a target **Storage Account**. The flow logs are stored
 Before enabling NSG flow logging, make sure you have storage accounts that are located in the same regions as your NSGs are located, to avoid inter-region traffic costs.
 
 {caption: "Azure flow logs structure"}
-![](images/ch-5/azure-flow-logs.png)
+![](resources/images/ch-5/azure-flow-logs.png)
 
 The structure of the NSG flow logs is *really* elaborate. When you browse to the blobs of the target storage account, you find a large folder structure. This structure holds a folder per subscription, resource group, virtual network, NSG name, and a folder per date & time, separating by the year, month, day hour, and even minute in a separate folder. The lowest folder is for the MAC address of the Azure VM that is receiving or transmitting the network flows. Getting to the actual flow logs requires a dive into 15 levels (!!) of this folder structure. In any case, you can't say it's not organized!
 
@@ -326,7 +326,7 @@ Although Azure does a good job of presenting the applicable firewall rules on th
 VMware and AWS have partnered to provide solutions that help organizations adopt hybrid cloud to increase flexibility and reduce cost while leveraging their existing IT investments and expertise. Due to the nature of VMware Cloud on AWS (VMC), managing workloads in the hybrid cloud is not that different from managing them on-premises. Existing tools can be used to manage, monitor, and troubleshoot the workloads, and there's not an entire re-education needed of the persons that end up managing it.
 
 {caption: "VMware Cloud on AWS -- spanning networking & security across clouds", width: 80%}
-![](images/ch-5/vmc-spanning-high-level.png)
+![](resources/images/ch-5/vmc-spanning-high-level.png)
 
 When you have on-premises infrastructure and want to offload the workloads to a cloud provider, in order not to have to manage a data center anymore, VMware Cloud on AWS (VMC) is one of the most natural options. As VMC is essentially a VMware Software-Defined Data Center (SDDC) with all infrastructure components that you would have on-premises (vSphere, vSAN, and NSX), it is not that different to operate. VMC also runs the same Virtual Machine format as on-premises vSphere runs, so it's easy to migrate existing VMs from on-premises to VMC.
 
@@ -347,7 +347,7 @@ Just like with a regular vCenter and NSX Manager, there's an order in which to a
 Adding the vCenter is simple; all you need is the IP address or hostname and credentials for read-only access and read the inventory. The IP address or hostname can be the external facing connection to the vCenter or the internal IP address -- provided you have connectivity to the internal network of the SDDC via VPN or Direct Connect.
 
 {caption: "VMware Cloud on AWS -- Adding the vCenter"}
-![](images/ch-5/vmc-add-vcenter.png)
+![](resources/images/ch-5/vmc-add-vcenter.png)
 
 After adding the vCenter, it's the turn of the NSX Manager, which is a bit more involved. Although VMC runs NSX as an on-premises SDDC would run it, customers only get selective permissions. For instance, you cannot log into the NSX Manager directly and have to go through the Cloud Services Portal (CSP) website to manage the networking & security configuration in VMC. Customers cannot manage the backend configuration, like the overlay network settings, uplink port bindings, edge nodes, and more. It makes sense because VMware manages that for you; just focus on what the VMs & applications inside the SDDC need -- simply network connectivity, security policies, and maybe a load balancer.
 
@@ -356,7 +356,7 @@ Adding Network Insight into the mix does not change the permission level. When N
 With this refresh token, it is possible to converse with the CSP APIs. The refresh token is tied to a specific user account inside CSP and can be created with limited permissions and a limited lifespan. You can create multiple refresh tokens, and I suggest you create one for each separate purpose -- so you know which token is used by what (and can revoke it if needed). More information on how to create the CSP Refresh Token, check out the [VMware documentation](https://docs.vmware.com/en/Management-Packs-for-vRealize-Operations-Manager/1.0/vmc/GUID-3B8C8821-FB07-412F-A2E4-C5CA34D8A473.html).
 
 {caption: "VMware Cloud on AWS -- Adding the NSX Manager"}
-![](images/ch-5/vmc-add-nsx.png)
+![](resources/images/ch-5/vmc-add-nsx.png)
 
 In short, Network Insight talks to the CSP API in order to get network & security objects from VMC. However, that API is located on the NSX Manager that is hosted inside VMC. That means that the IP address or hostname can be the external IP address of the NSX Manager, or the internal IP address, as long as you have VPN or Direct Connect connectivity to the internal VMC SDDC network.
 
@@ -367,7 +367,7 @@ It is essential to deploy the Collector appliance close to the VMware Cloud on A
 If your organization has everything in the cloud, there's a good chance you are also using Network Insight Cloud, as opposed to the on-premises version. If that is indeed the case, this is how the deployment looks like:
 
 {caption: "VMware Cloud on AWS -- Collector Deployment for vRNI Cloud"}
-![](images/ch-5/vmc-collector-deployment-vrnicloud.png)
+![](resources/images/ch-5/vmc-collector-deployment-vrnicloud.png)
 
 Here, the vRNI Cloud Collector appliance is placed in the *Compute* resource pool within VMC. Ensure the right firewall rules are in place, to allow the Collector to communicate over **HTTPS** (port 443) to both the **vCenter** and **NSX Manager**. Make sure that the Collector has outgoing internet connectivity over HTTPS so that it can connect with Network Insight Cloud. The Collector also receives incoming NetFlow traffic from the ESXi hosts, but by default, VMC allows the ESXi hosts to communicate to any VM.
 
@@ -378,7 +378,7 @@ I> While 1 Collector per SDDC is the recommendation, nothing is stopping you fro
 When using Network Insight on-premises, the recommended deployment looks similar. The only change is that the traffic from the Collector to the Platform goes over the connectivity that connects the VMC SDDC towards the on-premises datacenter. The connectivity can be a VPN tunnel or an AWS Direct Connect.
 
 {caption: "VMware Cloud on AWS -- Collector Deployment for vRNI On-Premises"}
-![](images/ch-5/vmc-collector-deployment-onprem.png)
+![](resources/images/ch-5/vmc-collector-deployment-onprem.png)
 
 ### Network Flows
 
@@ -411,6 +411,6 @@ The VMC to AWS or on-premises path depends on layer-3 VPN connectivity or Direct
 Here's an example path between a VM hosted on VMC and an on-premises SDDC, which are connected via a VPN tunnel that terminates on an NSX-v Edge appliance:
 
 {caption: "VMware Cloud on AWS -- Hybrid Path"}
-![](images/ch-5/vmc-hybrid-path.png)
+![](resources/images/ch-5/vmc-hybrid-path.png)
 
 Just like with AWS, there is not much room for customization on the network topology and connectivity for VMware Cloud on AWS. The defaults suffice for most customers. This is a good thing, as you don't have to worry about setting up the network topology. Because of this approach, there are not many requirements that Network Insight has when it comes to showing VM to VM paths inside VMC or between different locations. Just have the layer-3 VPN, or Direct Connect in place and make sure all networking devices are added as a data source, and Network Insight starts discovering the VMC network topologies.

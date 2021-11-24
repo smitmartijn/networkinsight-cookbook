@@ -12,7 +12,7 @@ In simple terms, the Platform is where you connect your browser to use the produ
 Here's how the architecture looks and how communication flows between the different components:
 
 {caption: "vRealize Network Insight Architecture Diagram"}
-![](images/ch-6/vrni-architecture.png)
+![](resources/images/ch-6/vrni-architecture.png)
 
 Many things happen in both layers, which I'll go further into in the following chapters.
 
@@ -29,7 +29,7 @@ Inside the Platform, there are a few different layers that serve different purpo
 Here is a representation of the service layers that live inside a Platform:
 
 {caption: "Platform VM Internal Architecture"}
-![](images/ch-6/platform-internal.png)
+![](resources/images/ch-6/platform-internal.png)
 
 ### Presentation Service Layer
 
@@ -40,16 +40,16 @@ The REST API is split up into two sections: a private API and a public API. More
 All UI interactions with data use the private API to collect the data. As the name suggests, this part should not be used by any automation work that you would like to build. The format and output are likely to change throughout different versions.
 
 {caption: "Private API in action"}
-![](images/ch-6/private-api.png)
+![](resources/images/ch-6/private-api.png)
 
 ### Search Engine
 
 While the search engine is worth a whole separate chapter, in this context, is it worth explaining that the search engine drives all interactions. Anything that you do in the interface is a search command. This also reflects in the search bar:
 
 {caption: "Searching your data center"}
-![](images/ch-6/searching.png)
+![](resources/images/ch-6/searching.png)
 
-Talking to a backend powered by Elastic Search, it takes search queries in technical natural language. It searches through configuration data, events, performance stats and can do so in a time machine to get results for a specific time frame. Unlike the open-source database backends, the search engine is a service entirely built by the Network Insight team.
+Talking to a backend powered by [Elastic Search](https://www.elastic.co/), it takes search queries in technical natural language. It searches through configuration data, events, performance stats and can do so in a time machine to get results for a specific time frame. Unlike the open-source database backends, the search engine is a service entirely built by the Network Insight team.
 
 You can find more details on the search engine, and how to use it, in the chapter [Using the Search Engine](#ch-search).
 
@@ -57,9 +57,11 @@ You can find more details on the search engine, and how to use it, in the chapte
 
 Everything about your environment is stored inside the data service layer. Configuration data, events, and performance stats are all stored as efficiently as possible. This means that there are multiple database systems present.
 
-Searching works against an Elastic Search database which holds indexed configuration data that points to a PostgreSQL and HBASE database where metrics and configurations are held in a timestamped format. Using Elastic Search and having it index the other databases, speeds up any search operation and improves the user experience via the web interface.
+Searching works against an Elastic Search database which holds indexed configuration data that points to a [FoundationDB](https://www.foundationdb.org/) and [HBASE](https://hbase.apache.org/) database where metrics and configurations are held in a timestamped format. Using Elastic Search and having it index the other databases, speeds up any search operation and improves the user experience via the web interface.
 
-Configuration data is stored in PostgreSQL, and each configuration is timestamped with a time & date when this configuration was detected. Because of these timestamps, this is also where changes in configuration are held. Virtual Machines, Networks, Firewall rules are examples of the data available in this PostgreSQL database.
+Configuration data is stored in FoundationDB, and each configuration is timestamped with a time & date when this configuration was detected. Because of these timestamps, this is also where changes in configuration are held. Virtual Machines, Networks, Firewall rules are examples of the data available in this FoundationDB database.
+
+I> FoundationDB was introduced in version 5.1, replacing PostgreSQL. If you're upgrading from 5.0 or below to a newer version, the update process will automatically migrate data from PostgreSQL to FoundationDB.
 
 The results from the Elastic Search database also contain index pointers that link to metrics located in another database; HBASE. For example, a switch port object would have a link to the HBASE database where the bandwidth usage metrics are stored. That combination makes that the switch port configuration (port type, which VLANs, and more) is presented along with its bandwidth usage graph.
 
@@ -74,11 +76,11 @@ Collectors can be scaled out by using multiple appliances for your environment, 
 You can strategically place the Collectors as well. It does a couple of things to the incoming data to compress it (more on that later) and allow it to be sent to the Platform more efficiently. Traffic between the Data Sources and the Collectors is more substantial than between the Collectors and Platform appliances, which makes it more efficient to place Collectors in remote locations.
 
 {caption: "Platform & Collector relationships"}
-![](images/ch-6/platform-collector-relation.png)
+![](resources/images/ch-6/platform-collector-relation.png)
 
 Networking management is typically as locked down as possible to protect the management interfaces of your network devices. It makes sense to provide access to Network Insight for people that do not have any business connecting directly to networking devices, so you would want to segment those. In this instance, you would put a Collector inside the networking management segment and only permit it to connect to the Platform. The Collector would connect directly to the Data Sources inside the secure segment, and you don't have to allow incoming communication from outside the secure segment.
 
-I> You can have multiple Collectors reporting up to a single Platform. Data Sources cannot be shared and have a one-on-one mapping to a Collector.
+I> You can have multiple Collectors reporting up to a single Platform. Data Sources cannot be shared between collectors and have a one-on-one mapping to a Collector.
 
 ### Collector Services
 
@@ -94,7 +96,7 @@ The polling agents and Flow Processor are proprietary code, but several open-sou
   - These are slightly modified to support IPFIX from the VDS and ignore information that Network Insight does not need to improve performance.
 
 {caption: "Collector VM internal architecture", width: "80%"}
-![](images/ch-6/collector-internal.png)
+![](resources/images/ch-6/collector-internal.png)
 
 {id: ch-flow-processor}
 ### Flow Processor
@@ -106,7 +108,7 @@ On the Collector, two services are running for the incoming NetFlow (including I
 By now, you should have configured a data source that's sending flow data to a Collector, whether it be vCenter, NSX, or a physical network device; here's what happens with those flows:
 
 {caption: "Collector NetFlow Processing"}
-![](images/ch-6/collector-netflow-processing.png)
+![](resources/images/ch-6/collector-netflow-processing.png)
 
 The service nfcapd receives the NetFlow records from the reporting devices and saves them to memory. **Every minute**, it flushes the memory contents into nfcapd data files. This process is the same for sFlow records received by sfcapd, except that the output is, surprise, sfcapd data files.
 
@@ -181,9 +183,12 @@ Data sources are the virtual and physical devices that are added to Network Insi
 This means the Collector has to have management access to the devices that are added to it. Be sure to open up any firewalls for connections from the Collector to these devices over ports 22 (TCP, SSH), 161 (UDP, SNMP), and 80 and 443 (TCP, HTTP(s)) so that it can actually connect. Connectivity to these types of devices (i.e., network switches) are mostly closed, and rightly so. I've seen too many implementations where people were sidetracked because there was no connectivity allowed between the Collector and network devices. Except for incoming network flows via NetFlow or sFlow, all connections are outbound from the Collector.
 
 #### Monitoring Intervals
+
 Polling happens at an interval between **5 and 15** minutes, depending on the type of data source. Most polling happens every 10 minutes, except for Brocade VDX (every **15** minutes) and VMware NSX (every **3** minutes for security events, **5** minutes for regular events, and **10** minutes for other configuration items). Every other data source is polled every **10** minutes.
 
-SNMP polling happens every **5** minutes on every data source. Of course, these intervals can change when a new Network Insight version is released; always double-check in the documentation for the exact intervals. These numbers are here, just to give you an idea.
+With **version 6.3** and above, you can configure custom configuration polling intervals for network devices (routers, switches, firewalls, load balancers). The minimum is 10 minutes and the maximum is every 7 days. A longer polling interval can be used for devices that have relatively static configuration.
+
+SNMP polling happens every **5** minutes on every data source (even if you have a custom config polling interval). Of course, these intervals can change when a new Network Insight version is released; always double-check in the documentation for the exact intervals. These numbers are here, just to give you an idea.
 
 I> Polling happens independently per data source and on an interval timer. There is no persistent connection being left open to the data sources; there is no permanent SSH connection. It reconnects each time.
 
@@ -280,12 +285,13 @@ Think of it like this; with vRealize Network Insight Cloud, VMware hosts and mai
 I> The Platform appliance of Network Insight is multi-tenant capable out of the box. It currently takes a lot of effort (and it's not user-friendly and not supported) to get multiple tenants activated. I've tried and broke a few Platforms. VMware is using this multi-tenancy capability in the Cloud variant. I'm holding out hope that multi-tenancy is activated in the on-premises version in the future.
 
 {caption: "Architecture for vRealize Network Insight Cloud"}
-![](images/ch-6/vrni-cloud-architecture.png)
+![](resources/images/ch-6/vrni-cloud-architecture.png)
 
 I> When using vRealize Network Insight Cloud, you only have to deploy the Collector in your environment. It requires connectivity to the Platform, which means internet connectivity is required for the Collector.
 
 {id: ch-clustering}
 ## Scalability and Availability (Clustering)
+
 One Platform and Collector pair can collect a large amount of VM data and network flows; currently, 10.000 VMs and 10.000.000 network flows total. However, if you need to go over these maximums, it is possible to create a cluster of Platform appliances to support the larger environments.
 
 Note that I'll be calling the appliances a so-called 'brick' – this is a term for a VM that's a part of the Network Insight setup. Just like a house, the Network Insight setup can be built from multiple bricks of multiple sizes. These bricks can be Platforms or Collectors.
@@ -304,13 +310,14 @@ These are the current brick sizes for both the Platform and Collector:
 | Collector | Large       | 10              | 8               | 16GB |
 | Collector | Extra Large | 10              | 8               | 24GB |
 
-In all cases, the Platform has a 1TB disk requirement, and the Collector has a 200GB disk requirement. It's recommended to use thin provisioning.
+The Platform has a 1TB disk requirement for Medium, Large, and has a 2TB disk requirement for Extra Large. Don't worry, it's supported (and advised!) to thin provision the disk. The Collector has a 200GB disk requirement. It's recommended to use thin provisioning for the Collector as well.
 
-T> Always check the [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/5.2/com.vmware.vrni.install.doc/GUID-F4F34425-C40D-457A-BA65-BDA12B3ABE45.html) for the latest numbers.
+T> Always check the [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/6.4/com.vmware.vrni.install.doc/GUID-F4F34425-C40D-457A-BA65-BDA12B3ABE45.html) for the latest numbers.
 
 The CPU speed note is about getting the right amount of GHz available to the appliance. If you're deploying on CPUs with a different speed than listed above, simply make sure the appliance has the number of CPUs that cover the required GHz per appliance type. For example, that is 21GHz for a medium-sized Platform or 42Ghz for an Extra Large Platform.
 
 ### Lab Sizing
+
 The Network Insight appliances are rather large, resource-wise, which makes sense because the scale they can handle is pretty immense. But what about lab environments with only 1 or 2 vCenters, NSX Managers, and just a few hosts? My home lab comes to mind.
 
 There is no *small* brick option to select when deploying the appliances. However, you can scale down the resources of the appliances once they are deployed. To make it fit your home lab or to have it take the least amount of resources in your lab, deploy the appliances as medium bricks and before you power them on, adjust the number of vCPUs and memory. Then power them on and watch the console for any failed services on startup. The failure messages on the console will mention the lack of memory of CPU to start the service. If you do see any of those messages, you've gone too far in minimizing the resources, and you should scale up a little.
@@ -320,33 +327,34 @@ T> The smallest deployment that I've been able to make work is: a Platform with 
 The disks can be thin provisioned, so there's no need to adjust the disk size after the medium brick deployment. The disks grow according to the data usage and data retention settings. In a lab with just a few data sources and not many flows, disk usage typically doesn't go over 100-150GB for the Platform appliance and 70-80GB for the Collector appliance.
 
 ### Scaling out Beyond a single Brick
+
 If a single large brick Platform isn't enough to sustain the amount of VMs or network flows you need to monitor, a horizontal scaling exercise can be done. Add multiple Platform bricks into a cluster, and the number of VMs and network flows scale up with it.
 
 Important to note is that the minimum number of Platform bricks for a cluster is 3 bricks, but you do not need to scale out unevenly. Typically, you want to have an uneven number of nodes in a cluster, so it can not encounter a split-brain scenario. This only applies to high available clusters, which the clustering with Network Insight [is not](#ch-availability-note); you only cluster to scale out. While the minimum is 3 Platform bricks, if you only need 4 to support your environment, that's perfectly fine.
 
-Currently, you can create a cluster with a maximum of 10 Platform bricks. Meaning you can monitor up to 100k VMs (10k per Platform * 10 Platforms) and 55M network flows (5.5M per Platform * 10 Platforms) with the maximum size cluster. Due to the scale testing that VMware's Quality Assurance (QA) team does, the observed maximum numbers of VMs and flows do not scale out evenly with each added brick. This can be confusing when you look at the [Maximum Capacity](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/5.2/com.vmware.vrni.install.doc/GUID-F4F34425-C40D-457A-BA65-BDA12B3ABE45.html) table below.
+Currently, you can create a cluster with a maximum of 15 Platform bricks, and you can monitor up to 150k VMs (10k per Platform * 15 Platforms) and 80M network flows with the maximum size cluster. Due to the scale testing that VMware's Quality Assurance (QA) team does, the observed maximum numbers of VMs and flows do not scale out evenly with each added brick. This can be confusing when you look at the [Maximum Capacity](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/6.4/com.vmware.vrni.install.doc/GUID-F4F34425-C40D-457A-BA65-BDA12B3ABE45.html) table below.
 
 {width: 100%}
 | Brick Size  | Cluster Size | Number of VMs | Flows per Day | Total Flows | SD-WAN Edges |
 | :---        | :---         | :---          | :---          | :---        | :---                |
 | Large       | 3            | 10K           | 2M            | 8M          | 4K                  |
-| Extra Large | 3            | 18K           | 6M            | 24M         | 6K                  |
-| Extra Large | 5            | 30K           | 10M           | 40M         | 10K                 |
-| Extra Large | 10           | 100K          | 15M           | 55M         | 10K                 |
+| Extra Large | 7            | 58K           | 12M           | 48M         | 10K                 |
+| Extra Large | 10           | 100K          | 15M           | 60M         | 10K                 |
+| Extra Large | 15           | 150K          | 20M           | 80M         | 10K                 |
 
 I> When designing a Network Insight cluster, play it safe and take the lower example numbers, divide them by the number of bricks and use the outcome as the *per brick* number. For example, if you're looking to support 40K VMs, take the XL 5 brick example of 30K, divide 30K by 5, which is 6K per brick, meaning you need 7 XL bricks to support 40K VMs.
 
-Something else to consider is that the Collectors cannot be clustered at this time. So, the maximum amount of VMs and network flows coming from a single vCenter data source has a limit of the large Collector: 10.000 VMs and 10.000.000 network flows. There is no listed maximum number of physical switches you can add to a single collector. Still, my experience has seen that a large Collector can handle around **100** physical switches as data sources, which reads out their configuration and metrics (no flows).
+Something else to consider is that the Collectors cannot be clustered at this time. So, the maximum amount of VMs and network flows coming from a single vCenter data source has a limit of the large Collector: 35.000 VMs and 10.000.000 network flows. There is no listed maximum number of physical switches you can add to a single collector. Still, my experience has seen that a large Collector can handle around **100** physical switches as data sources, which reads out their configuration and metrics (no flows).
 
 To visualize the possibilities and the architecture when clustering Network Insight, check out this architecture:
 
 {caption: "Clustering Architecture"}
-![](images/ch-6/cluster-architecture.png)
+![](resources/images/ch-6/cluster-architecture.png)
 
 Creating a cluster is pretty straight forward; first, you deploy the first Platform (which is referred to as Platform1), configure it as you would normally, and then head over to the  **Infrastructure & Support -> Overview and Updates** page in order to create a cluster.
 
 {caption: "Creating a new Platform Cluster"}
-![](images/ch-6/create-cluster.png)
+![](resources/images/ch-6/create-cluster.png)
 
 The details you provide in the form above, have to be Platform appliances that have been deployed but **not** configured yet. They should be waiting to be activated, and you should see the web interface asking for a license. When submitting the form, Platform1 goes out to the unconfigured Platforms and take control of them. This process joins the unconfigured Platform nodes to the cluster that Platform1 controls.
 
@@ -356,6 +364,7 @@ There are no further tweaks, no load balancing to set up, there is nothing more 
 
 {id: ch-availability-note}
 ### Availability Note
+
 Creating clustered Network Insight setups is currently only about scaling up the maximums. There is no built-in high availability into the clustering mechanism; it's not meant to failover to another Platform appliance when one of them fails. For Network Insight to continue functioning, all platforms need to be online and available. If one Platform goes down, the data ingestion fails, and the web interface does not work properly.
 
 However, you can protect Network Insight with VMware's Site Recovery Manager (SRM) and replicate the appliances to another data center with vSphere Replication. SRM takes care of setting up the replication between the source data center and the destination data center and recovering Network Insight during a catastrophic data center failure and can be handled using the SRM runbooks.
@@ -363,4 +372,4 @@ However, you can protect Network Insight with VMware's Site Recovery Manager (SR
 I> When protecting Network Insight with SRM, it is not supported to use the IP customization feature of SRM to re-IP the Network Insight appliances. As the Collector reports to a specific Platform IP and the Platforms might be clustered (talking to each other using their IPs), a manual IP change is required from the Network Insight CLI.
 I> My advice: stretch the IP subnet of Network Insight between the primary and disaster recovery location using VMware NSX or another network virtualization. That way, the IPs can be the same in both locations.
 
-How to set up the runbooks and configure SRM to protect Network Insight adequately, is extensively covered in the [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/5.2/com.vmware.vrni.using.doc/GUID-16692E58-581E-4797-883D-4642C9021754.html), so I'm not going to give you a step by step here.
+How to set up the runbooks and configure SRM to protect Network Insight adequately, is extensively covered in the [documentation](https://docs.vmware.com/en/VMware-vRealize-Network-Insight/6.4/com.vmware.vrni.using.doc/GUID-16692E58-581E-4797-883D-4642C9021754.html), so I'm not going to give you a step by step here.

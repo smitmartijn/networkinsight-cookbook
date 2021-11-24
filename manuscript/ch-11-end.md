@@ -3,6 +3,7 @@
 {pagebreak}
 
 # Conclusion
+
 I hope you have learned from this book and can use these ramblings to use vRealize Network Insight better, and that you have picked up valuable tips and tricks to solve networking productions quicker than you used to.
 
 Together we went through the use cases for Network Insight, how the product looks under the hood, how you can use it best, how to automate against it, and so much more. Practice makes perfect, so now that you have all the tools, go out there and use them.
@@ -17,6 +18,6 @@ I leave you with Fred, the unofficial official mascot of Network Insight. There'
 
 Mostly appearing on stickers, Fred has had a few makeovers in the last few years.
 
-![](images/ch-11/vrni-stickers-fred.png)
+![](resources/images/ch-11/vrni-stickers-fred.png)
 
 Let me know which one is your favorite, [via twitter](https://twitter.com/smitmartijn), and I'll send you some!

@@ -29,14 +29,14 @@ It's quite common to have an incomplete CMDB or to have multiple sources where a
 After getting the applications into Network Insight, there is a clear view of application dependencies and network requirements. Navigate to the Security Planner (refer back to [Analyzing Network Flows](#ch-analyzing-network-flows) for a refresher) and group the donut by Applications.
 
 {caption: "Application Migration Planning -- Dependency mapping", id: "fig-application-migration-planning", width: "70%"}
-![](images/ch-4/dependency-mapping.png)
+![](resources/images/ch-4/dependency-mapping.png)
 
 By hovering over a slice or using the search bar at the top right of the widget, you can find the application you want to map dependencies for. By clicking the slice, you get the details of that application.
 
 What you're doing here ([Figure: Dependency mapping](#fig-application-migration-planning)), is called **Application Dependency Mapping**. Because it's evident that the application CRM-Records has only incoming connections from 5 other applications, it can be concluded that CRM-Records does not have any dependencies on other applications. However, it is used by 5 other applications, making CRM-Records a dependency for those other applications. This becomes important when you're planning a migration, as applications that are heavily dependent on each other should be grouped and migrated simultaneously, to prevent slowing down the connections between these applications.
 
 {caption: "Application Migration Planning -- Application Details", id: "fig-application-details"}
-![](images/ch-4/application-details.png)
+![](resources/images/ch-4/application-details.png)
 
 I've focused on the CRM-Records application here, which consists of a MySQL database server. You can see the other applications that are talking to this application in [Figure: Dependency mapping](#fig-application-migration-planning). When you zoom in on the application itself, the network requirements for this application present themselves ([Figure: Application Details](#fig-application-details)). By adding up the different Service Endpoints, you can determine that this application is using up **1.1MB** of total traffic, with a peak throughput of **343bps**. Service Endpoints is a way of classifying specific services because multiple services can live on the same workload. Obviously, this example application isn't representative of an actual production application, expect higher numbers in real life.
 
@@ -59,7 +59,7 @@ In this case, the application called **CRM-Records** is one of the applications 
 `sum(bytes) of Flows where Application = 'CRM-Records' group by Country`
 
 {caption: "Application Migration Planning -- Traffic per Country"}
-![](images/ch-4/traffic-per-country.png)
+![](resources/images/ch-4/traffic-per-country.png)
 
 The above search query gives the amount of traffic for the **CRM-Records** application, grouped by country. As you can see, most of the traffic is coming from Northern Europe. To optimize the user experience, the application should be migrated to London (which is currently the most prominent, central, and connected location in Northern Europe).
 
@@ -70,14 +70,14 @@ By not specifying a source or destination country, both egress and ingress traff
 `sum(bytes) of Flows where Source Application = 'CRM-Records' group by Destination Country`
 
 {caption: "Application Migration Planning -- Egress traffic per Country", id: "fig-egress-traffic-per-country", "width: 70%"}
-![](images/ch-4/egress-traffic-per-country.png)
+![](resources/images/ch-4/egress-traffic-per-country.png)
 
 This output paints a clear picture of how much egress network traffic this application is sending out, which would be leaving the public cloud, and which is billed by the provider. It's also possible to make it easier, by removing the group by statement like so:
 
 `sum(bytes) of Flows where Source Application = 'CRM-Records' and Flow Type = 'Destination is Internet'`
 
 {caption: "Application Migration Planning -- Egress traffic total", id: "fig-egress-traffic-total", width: "80%"}
-![](images/ch-4/egress-traffic-total.png)
+![](resources/images/ch-4/egress-traffic-total.png)
 
 B> Note: the results of search queries in [Figure "Egress traffic per Country"](#fig-egress-traffic-per-country) and [Figure "Egress traffic total"](#fig-egress-traffic-total) have been taken on different dates, which is why they differ in numbers.
 
@@ -92,7 +92,7 @@ This process starts by getting a list of the applications that are the most band
 `sum(bytes) of Flows where Source Application = 'CRM-Records' and Flow Type = 'Destination is Internet'`
 
 {caption: "Application Migration Planning -- All application traffic"}
-![](images/ch-4/all-application-traffic.png)
+![](resources/images/ch-4/all-application-traffic.png)
 
 Focus on the top 10 applications and map out their dependencies, as we've talked about in the chapter [Application Discovery & Assessment](#ch-application-discovery-assessment). When going through that exercise, migration waves automatically starts to form, as the dependencies (applications) of the top 10 applications should be put in the same migration wave.
 
@@ -129,7 +129,7 @@ After creating these applications, it is possible to scope the security planner 
 As an example, the below screenshot lists the security planner for Migration Wave 1, which is built with the previously used application CRM-Records. This migration wave 1 includes the CRM-Records app, and all of its dependents (Test-CRM, Webshop, SAP, VDI, and Tanzu tees).
 
 {caption: "Application Migration Planning -- Migration Wave Dependency Mapping", width: "70%"}
-![](images/ch-4/migration-wave-dependency-mapping.png)
+![](resources/images/ch-4/migration-wave-dependency-mapping.png)
 
 Just like with the previous application dependency mapping exercise, zooming in (clicking) on each of these connections is possible. Make sure the requirements to move this migration wave are clear, by investigating all connections that flow to the remaining infrastructure (shared physical/virtual service slices) are not overly excessive. If it turns out the requirements between this migration wave and some physical service is something like 1Gbit per second, you might need to reexamine the migration wave.
 
@@ -150,11 +150,11 @@ Network Insight also has compute and storage data, which can be used to understa
 `sum(CPU Cores), sum(Memory Consumed) of VMs where application = 'Migration Wave 1'`
 
 {caption: "Application Migration Planning -- CPU & Memory requirements", width: "70%"}
-![](images/ch-4/cpu-memory-requirements.png)
+![](resources/images/ch-4/cpu-memory-requirements.png)
 
 While the same can be achieved for disk usage and make the picture complete, Network Insight is focused on the networking aspects of your applications, not the compute & storage. It's entirely possible to get an overview of the current usage, but Network Insight should not be used for capacity management and prediction for compute and storage resources. [vRealize Operations](http://vmware.com/go/vrops) (vROps) is much better in getting that picture.
 
-Have vROps monitor your environment for a few weeks, and it constructs a dynamic picture of the compute and storage resources needed to host the applications; past, current, and future requirements. It also has a built-in [Migration Planning feature](https://docs.vmware.com/en/vRealize-Operations-Manager/8.0/com.vmware.vcom.core.doc/GUID-A0D6E8A5-58F9-43CC-BB29-AB0AFDBCE1A2.html), which provides you with the resources needed for the migration (including future growth). It even provides the costs of hosting these resources in several different clouds (native AWS, VMware Cloud on AWS, IBM Cloud, Azure, Google Cloud).
+Have vROps monitor your environment for a few weeks, and it constructs a dynamic picture of the compute and storage resources needed to host the applications; past, current, and future requirements. It also has a built-in [Migration Planning feature](https://docs.vmware.com/en/vRealize-Operations-Manager/8.4/com.vmware.vcom.core.doc/GUID-A0D6E8A5-58F9-43CC-BB29-AB0AFDBCE1A2.html), which provides you with the resources needed for the migration (including future growth). It even provides the costs of hosting these resources in several different clouds (native AWS, VMware Cloud on AWS, IBM Cloud, Azure, Google Cloud).
 
 ### Network
 
@@ -165,7 +165,7 @@ Uncovering the required information can be done by using the search engine. Let'
 `series(sum(byte rate),300) of flow where source application = 'Migration Wave 1' and flow type = 'Destination is Internet'`
 
 {caption: "Application Migration Planning -- Internet Traffic of Migrate Wave 1"}
-![](images/ch-4/migration-wave-1-internet-traffic.png)
+![](resources/images/ch-4/migration-wave-1-internet-traffic.png)
 
 To deeply understand the mechanics of this search, wait until you've reached the [Using the Search Engine](#ch-search) chapter. For now, know that this result shows you the sum of the byte rate (network traffic), of network flows where Migration Wave 1 is the source, talking to the internet. While this example shows a lack of internet traffic (having a whopping 2bps at some point), it gives a clear picture of the internet traffic behavior, and therefore requirements.
 
@@ -174,7 +174,7 @@ The above search shows the internet traffic over a period of time (by default, t
 `max(series(sum(byte rate),300)) of flow where Source Application = 'Migration Wave 1' and Flow Type = 'Destination is Internet'`
 
 {caption: "Application Migration Planning -- Peak internet Traffic of Migrate Wave 1", width: "30%"}
-![](images/ch-4/migration-wave-1-peak-internet-traffic.png)
+![](resources/images/ch-4/migration-wave-1-peak-internet-traffic.png)
 
 This search shows you the peak network throughput. If Network Insight has been running for 1 month, the maximum peak of traffic per second in that month, was **901.1 kbps**. This number can be used for sizing the internet gateway at the destination cloud.
 
@@ -183,7 +183,7 @@ This search shows you the peak network throughput. If Network Insight has been r
 Get these graphs and maximum values for a few different traffic types; internet, east-west, and within the migration wave. Splitting up the different types of traffic is easy; the **flow type** can be changed to view a bunch of different traffic types. From the Internet to East-West, to Routed, to Switched, and a lot more. Have a look at the auto-completion and scroll through the options:
 
 {caption: "Application Migration Planning -- Flow Types", width: "60%"}
-![](images/ch-4/flow-types.png)
+![](resources/images/ch-4/flow-types.png)
 
 There are over 50 different flow types, which all categorize different types of network behavior. Depending on what limitations the target cloud has, different flow types should be used to see the requirements.
 
@@ -194,14 +194,14 @@ Let's go through one more example with another metric. In most cases, there is a
 `series(sum(flow.totalPackets.delta.summation.number), 300) of flow where Source Application = 'Migration Wave 1' and Flow Type = 'Destination is Internet'`
 
 {caption: "Application Migration Planning -- Internet Packets p/s of Migrate Wave 1"}
-![](images/ch-4/migration-wave-1-internet-packets.png)
+![](resources/images/ch-4/migration-wave-1-internet-packets.png)
 
 Make sure the packet per second rate is also sized properly, and use the max operator to get the maximum number of packets per second:
 
 `max(series(sum(flow.totalPackets.delta.summation.number), 300)) of flow where source application = 'Migration Wave 1' and flow type = 'Destination is Internet'`
 
 {caption: "Application Migration Planning -- Peak internet packets p/s of Migrate Wave 1", width: "30%"}
-![](images/ch-4/migration-wave-1-peak-internet-packets.png)
+![](resources/images/ch-4/migration-wave-1-peak-internet-packets.png)
 
 Rinse and repeat this for other flow types, such as routed and switched traffic by changing the flow types. Using these searches gets you all network data you need to determine the minimum requirements.
 
@@ -218,7 +218,7 @@ Learn more about [VMware HCX here](https://cloud.vmware.com/i-need-to/migrate-to
 After migrating an application, you can validate its behavior by using the security planner. Check the application connectivity from before the application was migrated and after. You can do this by using the built-in time machine on every page:
 
 {caption: "Application Migration Planning -- Validate Application with the Time Machine"}
-![](images/ch-4/validation-time-machine.png)
+![](resources/images/ch-4/validation-time-machine.png)
 
 There are more ways to validate application behavior. For example, the Application Dashboard shows a topology of the application, all metrics that relate to it, and all events that might cause problems.
 
