@@ -1,5 +1,17 @@
-# This is the default new book content
+# vRealize Network Insight Cookbook
 
-Please note that the manuscript folder is actually something which needs to live in your repository.
+Welcome to the repository that contains the text and images for the vRealize Network Insight Cookbook.
 
-So, you **paste the manuscript folder itself** into your repository, not just the contents of the manuscript folder.
+This book is available for purchase on [Leanpub](https://leanpub.com/networkinsight) (digital version) and [Amazon](https://amzn.to/2XS4IEa) (paperback). I encourage you to purchase a copy, as all royalty proceeds go to charity. I've open sourced this book to make it possible for everyone to read it.
+
+More information about this book can be found here: [https://networkinsightcookbook.com](https://networkinsightcookbook.com)
+
+Reach out to me directly on [twitter.com/smitmartijn](https://twitter.com/smitmartijn).
+
+## Requesting Chapters
+
+One of the reasons why I've open sourced the Cookbook is to make it easy to keep track of feature requests for the book. If you have any topics that you would like to see covered, please head over to the [Issues](https://github.com/smitmartijn/networkinsight-cookbook/issues) page and submit a request.
+
+## Contributing
+
+Another reason for open sourcing this book, is to accept outside contributions. If you have anything that you'd like to write about, please don't hesitate to contribute! Submit an [Issue](https://github.com/smitmartijn/networkinsight-cookbook/issues) to indicate you're working on something, or assign an existing issue to yourself. Follow GitHub's [Best Practices](https://www.datree.io/resources/github-best-practices) and submit a PR for review.
