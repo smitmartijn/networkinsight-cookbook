@@ -39,6 +39,14 @@ The cool part about the search engine is, is that all results and searches are r
 
 Search is also exposed via the public APIs for automation, making it possible to programmatically execute searches and get back the results for further processing. Considering all data inside Network Insight is available via the search, this means that you can export and process any information for your purposes. Organizations have built automation processes around Network Insight to import data into Security Event & Information Management (SIEM) systems, Security Operation Centers (SOC) get notified on any firewall rule changes and verify them against the change management trackers, service providers pull network bandwidth calculations to use for billing purposes, the list goes on. More information on how to automate with Network Insight and examples in the chapter [Automating Network Insight](#ch-automating).
 
+## Search Exchange
+
+Before I get into the weeds of the search syntax, I wanted to briefly touch on the existance of the [vRealize Network Insight Search Exchange](https://vrealize.vmware.com/sample-exchange/vrealize-network-insight-search-exchange/categories). As the name suggests, this is a website where you find and and share searches for specific use cases. VMware built this exchange to provide a ton of example searches, which can be copied and pasted into the search. There are currently over 300 searches available and they are categorized to make finding the right search easier.
+
+![](resources/images/ch-9/search-exchange-overview.png)
+
+There's a search to search the searches, categories that make searches easier to find to your specific use case. You can also submit your own searches by using the submission form. It's linked to the MyVMware login system, all you need is a MyVMware account. At the time of this writing, VMware is handing out socks to anyone that submits searches, so it's worth your while. :-)
+
 ## Building Searches
 
 vRealize Network Insight provides a structured query with components illustrated in the below diagram. I'll explain the different components in this chapter.
