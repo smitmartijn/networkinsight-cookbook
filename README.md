@@ -15,3 +15,9 @@ One of the reasons why I've open sourced the Cookbook is to make it easy to keep
 ## Contributing
 
 Another reason for open sourcing this book, is to accept outside contributions. If you have anything that you'd like to write about, please don't hesitate to contribute! Submit an [Issue](https://github.com/smitmartijn/networkinsight-cookbook/issues) to indicate you're working on something, or assign an existing issue to yourself. Follow GitHub's [Best Practices](https://www.datree.io/resources/github-best-practices) and submit a PR for review.
+
+## License
+
+This work is licensed under the Creative Commons Legal Code. More information in [LICENSE](https://github.com/smitmartijn/networkinsight-cookbook/blob/master/LICENSE).
+
+Copyright © 2021 Martijn Smit
